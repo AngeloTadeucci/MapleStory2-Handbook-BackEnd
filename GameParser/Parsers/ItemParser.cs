@@ -26,8 +26,17 @@ public static class ItemParser {
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.ItemParser parser = new(Paths.XmlReader, "en");
 
-        foreach ((int id, string? name, ItemData? data) in parser.Parse()) {
-            Console.WriteLine($"Parsing item {id} - {name}");
+        var items = parser.Parse().ToList();
+        int total = items.Count;
+        int current = 0;
+
+        Console.WriteLine($"Parsing {total} items...");
+
+        foreach ((int id, string? name, ItemData? data) in items) {
+            current++;
+            if (current % 100 == 0 || current == total) {
+                Console.WriteLine($"Parsing items: {current}/{total}");
+            }
             Limit? limit = data.limit;
             Skill? skill = data.skill;
             Fusion? fusion = data.fusion;

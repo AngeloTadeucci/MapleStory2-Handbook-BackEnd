@@ -15,7 +15,18 @@ public class QuestParser {
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.QuestParser parser = new(Paths.XmlReader, "en");
 
-        foreach ((int Id, string Name, QuestData Data) in parser.Parse()) {
+        var quests = parser.Parse().ToList();
+        int total = quests.Count;
+        int current = 0;
+
+        Console.WriteLine($"Parsing {total} quests...");
+
+        foreach ((int Id, string Name, QuestData Data) in quests) {
+            current++;
+            if (current % 100 == 0 || current == total) {
+                Console.WriteLine($"Parsing quests: {current}/{total}");
+            }
+
             QuestNameParser.QuestNames.TryGetValue(Id, out QuestNameParser.QuestDescription? questDescription);
             string name = Helper.FixDescription(Name) ?? "";
             if (questDescription is not null) {
@@ -24,8 +35,6 @@ public class QuestParser {
             string description = questDescription?.Description ?? "";
             string manualDescription = questDescription?.Manual ?? "";
             string completeDescription = questDescription?.Complete ?? "";
-
-            Console.WriteLine($"Parsing quest {Id} - {name}");
 
             QueryManager.QueryFactory.Query("quests").Insert(new {
                 id = Id,

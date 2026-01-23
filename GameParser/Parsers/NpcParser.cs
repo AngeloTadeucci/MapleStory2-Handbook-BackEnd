@@ -29,7 +29,19 @@ public static class NpcParser {
     public static void Parse() {
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.NpcParser parser = new(Paths.XmlReader, "en");
-        foreach ((int id, string? name, NpcData? data, List<EffectDummy> dummy) in parser.Parse()) {
+
+        var npcs = parser.Parse().ToList();
+        int total = npcs.Count;
+        int current = 0;
+
+        Console.WriteLine($"Parsing {total} NPCs...");
+
+        foreach ((int id, string? name, NpcData? data, List<EffectDummy> dummy) in npcs) {
+            current++;
+            if (current % 100 == 0 || current == total) {
+                Console.WriteLine($"Parsing NPCs: {current}/{total}");
+            }
+
             // Build tag lookup for mobs
             NpcTagLookup.AddNpc(id, data.basic.mainTags);
 
@@ -43,8 +55,6 @@ public static class NpcParser {
 
                 npcName = petName;
             }
-
-            Console.WriteLine($"Parsing NPC {id} - {npcName}");
 
             string kfm = data.model.kfm.ToLower();
 

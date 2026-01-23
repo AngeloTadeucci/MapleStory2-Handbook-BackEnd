@@ -19,8 +19,18 @@ public static class MapNameParser {
     public static void Parse() {
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.MapParser parser = new(Paths.XmlReader, "en");
-        foreach ((int id, string? name, MapData data) in parser.Parse()) {
-            Console.WriteLine($"Parsing Map {id} - {name}");
+
+        var maps = parser.Parse().ToList();
+        int total = maps.Count;
+        int current = 0;
+
+        Console.WriteLine($"Parsing {total} maps...");
+
+        foreach ((int id, string? name, MapData data) in maps) {
+            current++;
+            if (current % 100 == 0 || current == total) {
+                Console.WriteLine($"Parsing maps: {current}/{total}");
+            }
             string xblock = data.xblock.name.ToLower();
             MapImagesParser.MapsImages.TryGetValue(xblock, out (string minimap, string icon, string bg) images);
 

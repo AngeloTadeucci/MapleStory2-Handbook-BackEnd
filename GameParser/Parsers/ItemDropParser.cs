@@ -7,6 +7,28 @@ namespace GameParser.Parsers;
 
 public static class ItemDropParser {
     public static void Parse() {
+        int total = 0;
+        int current = 0;
+
+        // First count total boxes
+        foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
+            if (!entry.Name.StartsWith("table/individualitemdrop") && !entry.Name.StartsWith("table/na/individualitemdrop")) {
+                continue;
+            }
+
+            XmlDocument? document = Paths.XmlReader.GetXmlDocument(entry);
+            XmlNodeList individualBoxItems = document.SelectNodes("/ms2/individualDropBox")!;
+            foreach (XmlNode node in individualBoxItems) {
+                string locale = node.Attributes!["locale"]?.Value ?? "";
+                if (locale != "NA" && locale != "") {
+                    continue;
+                }
+                total++;
+            }
+        }
+
+        Console.WriteLine($"Parsing {total} item boxes...");
+
         foreach (PackFileEntry? entry in Paths.XmlReader.Files) {
             if (!entry.Name.StartsWith("table/individualitemdrop") && !entry.Name.StartsWith("table/na/individualitemdrop")) {
                 continue;
@@ -21,6 +43,11 @@ public static class ItemDropParser {
                     continue;
                 }
 
+                current++;
+                if (current % 100 == 0 || current == total) {
+                    Console.WriteLine($"Parsing item boxes: {current}/{total}");
+                }
+
                 int boxId = int.Parse(node.Attributes["individualDropBoxID"]!.Value);
                 float minAmount = float.Parse(node.Attributes["minCount"]!.Value);
                 float maxAmount = float.Parse(node.Attributes["maxCount"]!.Value);
@@ -32,7 +59,6 @@ public static class ItemDropParser {
                     rarity = 1;
                 }
 
-                Console.WriteLine("Parsing box " + boxId);
                 QueryManager.QueryFactory.Query("item_boxes").Insert(new {
                     box_id = boxId,
                     item_id = int.Parse(node.Attributes["item"]!.Value),

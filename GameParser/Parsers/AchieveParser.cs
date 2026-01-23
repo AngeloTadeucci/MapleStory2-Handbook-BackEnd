@@ -18,15 +18,25 @@ public static class AchieveParser {
 
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.AchieveParser parser = new(Paths.XmlReader);
-        foreach ((int id, string? name, AchieveData data) in parser.Parse()) {
+
+        var achieves = parser.Parse().ToList();
+        int total = achieves.Count;
+        int current = 0;
+
+        Console.WriteLine($"Parsing {total} achievements...");
+
+        foreach ((int id, string? name, AchieveData data) in achieves) {
+            current++;
+            if (current % 100 == 0 || current == total) {
+                Console.WriteLine($"Parsing achievements: {current}/{total}");
+            }
+
             string fixedName = name ?? "";
             if (name is not null) {
                 fixedName = Helper.FixDescription(name);
             }
 
             AchieveNames[id] = fixedName;
-
-            Console.WriteLine($"Achieve {id} - {fixedName}");
 
             bool descriptionExists = descriptions.TryGetValue(id, out (string description, string complete_description) value);
 

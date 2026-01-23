@@ -12,14 +12,27 @@ public static class AdditionalEffectParser {
         Filter.Load(Paths.XmlReader, "NA", "Live");
         Maple2.File.Parser.AdditionalEffectParser parser = new(Paths.XmlReader);
 
-        foreach ((int id, IList<AdditionalEffectData> Data) in parser.Parse()) {
+        var effects = parser.Parse().ToList();
+        int total = effects.Count;
+        int current = 0;
+        int processed = 0;
+
+        Console.WriteLine($"Parsing additional effects...");
+
+        foreach ((int id, IList<AdditionalEffectData> Data) in effects) {
+            current++;
+
             AdditionalEffectDescriptionParser.additionalEffectNames.TryGetValue(id, out List<(int level, string name, string tooltipDescription)>? list);
             if (list == null) {
                 continue;
             }
 
+            processed++;
+            if (processed % 50 == 0) {
+                Console.WriteLine($"Parsing additional effects: {processed} parsed ({current}/{total} processed)");
+            }
+
             string name = list.First().name;
-            Console.WriteLine($"Parsing additional effect {id} - {name}");
 
             short[] levels = Data.Select(x => x.BasicProperty.level).ToArray();
             string description = CombineDescriptionsWithDifferences(list.Select(x => x.tooltipDescription).ToList());
@@ -32,6 +45,8 @@ public static class AdditionalEffectParser {
                 levels = JsonSerializer.Serialize(levels),
             });
         }
+
+        Console.WriteLine($"Completed parsing {processed} additional effects");
     }
 
     // I liked when chatgpt came and gipity gopity all over the place
