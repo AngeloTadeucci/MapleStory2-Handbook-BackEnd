@@ -9,6 +9,7 @@ using System.Text.Json;
 using GameParser.Tools;
 
 namespace GameParser.Parsers;
+
 public static class AchieveParser {
     public static Dictionary<int, string> AchieveNames { get; private set; } = new Dictionary<int, string>();
 

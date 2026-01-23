@@ -24,7 +24,7 @@ public static class ItemParser {
         Dictionary<int, (string tooltip, string guide, string main)> descriptions = ParseItemDescriptions();
 
         Filter.Load(Paths.XmlReader, "NA", "Live");
-        Maple2.File.Parser.ItemParser parser = new(Paths.XmlReader);
+        Maple2.File.Parser.ItemParser parser = new(Paths.XmlReader, "en");
 
         foreach ((int id, string? name, ItemData? data) in parser.Parse()) {
             Console.WriteLine($"Parsing item {id} - {name}");
@@ -146,7 +146,7 @@ public static class ItemParser {
                 sell_price = JsonSerializer.Serialize(property.sell.price.ToList()),
                 kfms = JsonSerializer.Serialize(kfms),
                 icon_code = property.iconCode,
-                move_disable = property.moveDisable == 1,
+                move_disable = property.moveDisable,
                 remake_disable = property.remakeDisable,
                 enchantable = limit.exceptEnchant,
                 dyeable = customize?.color == 1,

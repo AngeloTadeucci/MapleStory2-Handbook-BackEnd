@@ -3,14 +3,13 @@
   <PropertyGroup>
     <AssemblyName>Maple2Storage</AssemblyName>
     <RootNamespace>Maple2Storage</RootNamespace>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <LangVersion>10</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetZip" Version="1.16.0" />
-    <PackageReference Include="Maple2.File.Parser" Version="2.0.9" />
+    <PackageReference Include="Maple2.File.Parser.Tadeucci" Version="2.3.4" />
     <PackageReference Include="Pastel" Version="3.0.0" />
     <PackageReference Include="protobuf-net" Version="3.0.101" />
   </ItemGroup>

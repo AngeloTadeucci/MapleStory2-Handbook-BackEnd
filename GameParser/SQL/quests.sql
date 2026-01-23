@@ -6,6 +6,7 @@ create table {databaseName}.quests (
     description text not null,
     manualDescription text not null,
     completeDescription text not null,
+    questType int not null,
     questLevel int not null,
     requiredLevel int not null,
     requiredQuest JSON not null,

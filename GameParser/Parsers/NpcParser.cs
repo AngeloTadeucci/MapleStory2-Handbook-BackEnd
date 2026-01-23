@@ -28,8 +28,11 @@ public static class NpcParser {
 
     public static void Parse() {
         Filter.Load(Paths.XmlReader, "NA", "Live");
-        Maple2.File.Parser.NpcParser parser = new(Paths.XmlReader);
+        Maple2.File.Parser.NpcParser parser = new(Paths.XmlReader, "en");
         foreach ((int id, string? name, NpcData? data, List<EffectDummy> dummy) in parser.Parse()) {
+            // Build tag lookup for mobs
+            NpcTagLookup.AddNpc(id, data.basic.mainTags);
+
             string? npcName = name;
             string? portrait = data.basic.portrait.ToLower();
             if (PetNameParser.PetNames.TryGetValue(id, out string? petName)) {

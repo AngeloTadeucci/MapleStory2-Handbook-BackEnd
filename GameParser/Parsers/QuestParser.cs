@@ -13,7 +13,7 @@ namespace GameParser.Parsers;
 public class QuestParser {
     public static void Parse() {
         Filter.Load(Paths.XmlReader, "NA", "Live");
-        Maple2.File.Parser.QuestParser parser = new(Paths.XmlReader);
+        Maple2.File.Parser.QuestParser parser = new(Paths.XmlReader, "en");
 
         foreach ((int Id, string Name, QuestData Data) in parser.Parse()) {
             QuestNameParser.QuestNames.TryGetValue(Id, out QuestNameParser.QuestDescription? questDescription);
@@ -33,6 +33,7 @@ public class QuestParser {
                 description,
                 manualDescription,
                 completeDescription,
+                Data.basic.questType,
                 questLevel = Data.basic.standardLevel,
                 requiredLevel = Data.require.level,
                 requiredQuest = JsonSerializer.Serialize(Data.require.quest),
@@ -42,6 +43,9 @@ public class QuestParser {
                 startRewards = JsonSerializer.Serialize(Convert(Data.acceptReward)),
                 completeRewards = JsonSerializer.Serialize(Convert(Data.completeReward)),
             });
+
+            // Insert quest-map relationships
+            ParseQuestMaps(Id, Data);
         }
     }
 
@@ -93,5 +97,39 @@ public class QuestParser {
             return expType;
         }
         return ExpType.none;
+    }
+
+    private static void ParseQuestMaps(int questId, QuestData questData) {
+        // Extract map IDs from ProgressMap
+        if (questData.progressMap?.progressMap != null && questData.progressMap.progressMap.Length > 0) {
+            foreach (int mapId in questData.progressMap.progressMap) {
+                if (mapId == 0) continue; // Skip invalid map IDs
+
+                try {
+                    QueryManager.QueryFactory.Query("quest_maps").Insert(new {
+                        quest_id = questId,
+                        map_id = mapId
+                    });
+                } catch {
+                    // Skip duplicates (unique index will prevent)
+                }
+            }
+        }
+
+        // Also check complete.map array for additional map associations
+        if (questData.complete?.map != null && questData.complete.map.Length > 0) {
+            foreach (int mapId in questData.complete.map) {
+                if (mapId == 0) continue; // Skip invalid map IDs
+
+                try {
+                    QueryManager.QueryFactory.Query("quest_maps").Insert(new {
+                        quest_id = questId,
+                        map_id = mapId
+                    });
+                } catch {
+                    // Skip duplicates (unique index will prevent)
+                }
+            }
+        }
     }
 }

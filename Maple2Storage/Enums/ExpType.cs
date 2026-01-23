@@ -1,4 +1,5 @@
 ﻿namespace Maple2Storage.Enums;
+
 public enum ExpType {
     none,
     unknown,

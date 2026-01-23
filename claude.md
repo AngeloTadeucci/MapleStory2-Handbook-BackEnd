@@ -1,5 +1,8 @@
 # MapleStory 2 Handbook - Backend (GameParser)
 
+**Project Path:** `d:\Projetos\Maple2_Codex\MapleStory2-Handbook-BackEnd`
+**Related Frontend:** `d:\Projetos\Maple2_Codex\MapleStory2-Handbook`
+
 ## Project Overview
 
 A .NET data parsing pipeline that extracts raw MapleStory 2 game data and populates a MySQL database. The parsed data is then served to the frontend SvelteKit application via Prisma ORM.

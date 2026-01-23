@@ -1,4 +1,5 @@
 ﻿namespace Maple2Storage.Enums;
+
 public readonly record struct ItemType(byte Group, byte Type) {
     public ItemType(int id) : this((byte) (id / 10000000), (byte) (id % 10000000 / 100000)) { }
 
