@@ -48,7 +48,7 @@ MapleStory2-Handbook-BackEnd/
 
 ## Database Schema
 
-The parser creates/updates 8 tables in MySQL:
+The parser creates/updates 7 tables in MySQL:
 
 | Table | Purpose |
 |-------|---------|
@@ -210,9 +210,12 @@ When MapleStory 2 receives an update with new content:
 
 **Parsers:**
 - `GameParser/Parsers/ItemParser.cs` - Item definitions and stats
+- `GameParser/Parsers/ItemDropParser.cs` - Loot box definitions
 - `GameParser/Parsers/NpcParser.cs` - NPC data
 - `GameParser/Parsers/MapNameParser.cs` - Map definitions
 - `GameParser/Parsers/QuestParser.cs` - Quest data
+- `GameParser/Parsers/AchieveParser.cs` - Achievement/trophy data
+- `GameParser/Parsers/AdditionalEffectParser.cs` - Buff/effect descriptions
 
 **Game Data Definitions:**
 - `GameParser/SQL/*.sql` - Database schema
