@@ -8,3 +8,7 @@ riderModule.iml
 Maple2Storage/Resources
 .env
 /.claude
+CLAUDE.local.md
+/plans
+FsbExtractor/bgm_*/
+FsbExtractor/output/

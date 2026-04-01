@@ -28,5 +28,6 @@ create table {databaseName}.maps (
   bounding_box_max_y int default 0,
   bounding_box_max_z int default 0,
   block_metadata json,
+  bgm_event_id int default 0,
   constraint maps_pk primary key (id)
 ) engine = InnoDB default charset = utf8mb4 collate = utf8mb4_0900_ai_ci;

@@ -49,6 +49,7 @@ if (!DatabaseExists()) {
     (["achieves"], AchieveParser.Parse),
     (["additional_effects"], AdditionalEffectParser.Parse),
     (["quests", "quest_maps"], QuestParser.Parse),
+    (["bgm_tracks"], BgmParser.Parse),
 ];
 
 foreach ((string[] tables, Action parser) in tableGroups) {

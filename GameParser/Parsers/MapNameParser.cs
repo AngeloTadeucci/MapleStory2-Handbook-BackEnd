@@ -65,7 +65,8 @@ public static class MapNameParser {
                 bounding_box_max_x = 0,
                 bounding_box_max_y = 0,
                 bounding_box_max_z = 0,
-                block_metadata = "{}"  // Blocks not available in MapData from parser
+                block_metadata = "{}",  // Blocks not available in MapData from parser
+                bgm_event_id = data.bgm.id
             });
 
             // Note: Entities (NPCs, Portals) and Blocks are not available in MapData from the parser
