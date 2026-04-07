@@ -76,6 +76,7 @@ public static class BgmParser {
     private static string? FindMetadataFile() {
         // Check common locations
         string[] searchPaths = [
+            Path.Combine(Maple2Storage.Types.Paths.SolutionDir, "GameParser", "Resources", MetadataPath),
             Path.Combine(Maple2Storage.Types.Paths.SolutionDir, MetadataPath),
             Path.Combine(Maple2Storage.Types.Paths.SolutionDir, "FsbExtractor", "bgm_final", "ogg", MetadataPath),
             Path.Combine(Directory.GetCurrentDirectory(), MetadataPath),
