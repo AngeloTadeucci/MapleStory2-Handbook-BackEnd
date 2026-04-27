@@ -192,6 +192,9 @@ dotnet run --project GameParser/GameParser.csproj
 
 **Build Tool:** Visual Studio 2022 or dotnet CLI
 
+**Commit Policy:**
+- Do not commit changes unless the user explicitly asks for a commit.
+
 ## Data Update Workflow
 
 When MapleStory 2 receives an update with new content:
