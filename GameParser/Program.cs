@@ -41,7 +41,8 @@ if (!DatabaseExists()) {
     (["items"], ItemParser.Parse),
     (["furnishing_shop"], FurnishingShopParser.Parse),
     (["item_boxes"], ItemDropParser.Parse),
-    (["npcs"], NpcParser.Parse),
+    (["drop_box_items"], ServerDropParser.Parse),
+    (["npcs", "npc_drop_boxes"], NpcParser.Parse),
     (["maps", "map_npcs", "map_portals", "map_mobs"], () => {
         MapNameParser.Parse();
         MapSpawnParser.Parse();  // Parse spawn metadata (requires NpcParser to run first for tag lookup)

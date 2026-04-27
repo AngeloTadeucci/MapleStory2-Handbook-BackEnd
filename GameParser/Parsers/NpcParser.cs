@@ -87,6 +87,30 @@ public static class NpcParser {
                 shop_id = data.basic.shopId,
                 skills = JsonSerializer.Serialize(data.skill, SerializeOptions.Options),
             });
+
+            foreach (int boxId in data.dropiteminfo.individualDropBoxId.Distinct()) {
+                if (boxId == 0) {
+                    continue;
+                }
+
+                QueryManager.QueryFactory.Query("npc_drop_boxes").Insert(new {
+                    npc_id = id,
+                    drop_box_id = boxId,
+                    drop_type = 0,
+                });
+            }
+
+            foreach (int boxId in data.dropiteminfo.individualHitDropBoxId.Distinct()) {
+                if (boxId == 0) {
+                    continue;
+                }
+
+                QueryManager.QueryFactory.Query("npc_drop_boxes").Insert(new {
+                    npc_id = id,
+                    drop_box_id = boxId,
+                    drop_type = 1,
+                });
+            }
         }
     }
 }
