@@ -39,6 +39,7 @@ if (!DatabaseExists()) {
 // Define table groups: each group has a list of tables and a single parser that populates all of them
 (string[] tables, Action parser)[] tableGroups = [
     (["items"], ItemParser.Parse),
+    (["furnishing_shop"], FurnishingShopParser.Parse),
     (["item_boxes"], ItemDropParser.Parse),
     (["npcs"], NpcParser.Parse),
     (["maps", "map_npcs", "map_portals", "map_mobs"], () => {

@@ -174,6 +174,9 @@ public static class ItemParser {
                 represent_option = property.representOption,
                 additional_effects = JsonSerializer.Serialize(additionalEffects, SerializeOptions.Options),
                 story_book_id = storyBookId,
+                housing_category = housing?.categoryIndex ?? 0,
+                housing_trophy_id = housing?.trophyID ?? 0,
+                housing_trophy_level = housing?.trophyLevel ?? 0,
             });
         }
     }
