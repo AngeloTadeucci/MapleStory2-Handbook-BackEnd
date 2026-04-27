@@ -51,6 +51,9 @@ CREATE TABLE {databaseName}.items
     represent_option    int              not null default 0,
     additional_effects  text             not null,
     story_book_id       int              not null default 0,
+    housing_category    smallint         not null default 0,
+    housing_trophy_id   int              not null default 0,
+    housing_trophy_level int             not null default 0,
     CONSTRAINT items_pk PRIMARY KEY (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
