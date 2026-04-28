@@ -50,7 +50,7 @@ if (!DatabaseExists()) {
     }),
     (["achieves"], AchieveParser.Parse),
     (["additional_effects"], AdditionalEffectParser.Parse),
-    (["quests", "quest_maps"], QuestParser.Parse),
+    (["quests", "quest_maps", "quest_rewards", "quest_objectives"], QuestParser.Parse),
     (["bgm_tracks"], BgmParser.Parse),
 ];
 

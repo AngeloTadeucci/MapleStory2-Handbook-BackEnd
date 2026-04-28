@@ -55,6 +55,9 @@ public class QuestParser {
 
             // Insert quest-map relationships
             ParseQuestMaps(Id, Data);
+            ParseQuestRewards(Id, "start", Data.acceptReward);
+            ParseQuestRewards(Id, "complete", Data.completeReward);
+            ParseQuestObjectives(Id, Data);
         }
     }
 
@@ -82,6 +85,46 @@ public class QuestParser {
             EssentialJobItem: essentialJobItem.Select(item =>
                 new QuestMetadataReward.Item(item.code, item.rank, item.count)).Where(x => x.Id != 0).ToList()
         );
+    }
+
+    private static IEnumerable<Reward.Item> GetRewardItems(Reward reward) {
+        List<Reward.Item> essentialItem = reward.essentialItem;
+        List<Reward.Item> essentialJobItem = reward.essentialJobItem;
+        if (FeatureLocaleFilter.FeatureEnabled("GlobalQuestRewardItem")) {
+            essentialItem = reward.globalEssentialItem.Count > 0 ? reward.globalEssentialItem : essentialItem;
+            essentialJobItem = reward.globalEssentialJobItem.Count > 0 ? reward.globalEssentialJobItem : essentialJobItem;
+        }
+
+        return essentialItem.Concat(essentialJobItem).Where(item => item.code != 0);
+    }
+
+    private static void ParseQuestRewards(int questId, string rewardKind, Reward reward) {
+        foreach (Reward.Item item in GetRewardItems(reward)) {
+            QueryManager.QueryFactory.Query("quest_rewards").Insert(new {
+                quest_id = questId,
+                reward_kind = rewardKind,
+                item_id = item.code,
+                count = item.count,
+                reward_rank = item.rank
+            });
+        }
+    }
+
+    private static void ParseQuestObjectives(int questId, QuestData questData) {
+        for (int index = 0; index < questData.condition.Count; index++) {
+            Condition condition = questData.condition[index];
+
+            QueryManager.QueryFactory.Query("quest_objectives").Insert(new {
+                quest_id = questId,
+                sequence = index,
+                condition_type = condition.type.ToString(),
+                required_value = condition.value,
+                codes = JsonSerializer.Serialize(condition.code),
+                targets = JsonSerializer.Serialize(condition.target),
+                party_count = condition.partyCount > 0 ? condition.partyCount : null as int?,
+                guild_party_count = condition.guildPartyCount > 0 ? condition.guildPartyCount : null as int?
+            });
+        }
     }
 
     public record QuestMetadataReward(
