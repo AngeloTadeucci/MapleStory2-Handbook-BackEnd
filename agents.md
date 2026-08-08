@@ -132,6 +132,12 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=root
 DB_NAME=maple2_codex
+
+# Optional. Root of the exported image tree, i.e. the folder that holds portrait/.
+# NpcParser uses it to correct portrait folders that the npc XML declares wrongly:
+# a portrait can be declared under mob/ while the exported file sits under npc/, and
+# vice versa. Unset means portrait paths are written exactly as the XML declares them.
+IMAGE_DIR=
 ```
 
 **Connection Management:** `QueryManager.cs` manages MySQL connections via SqlKata QueryFactory

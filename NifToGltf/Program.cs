@@ -9,6 +9,8 @@
 // 4. glhf
 
 using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
@@ -18,7 +20,6 @@ string solutionDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..
 string modelDir = Path.Combine(solutionDir, "Maple2Storage", "Resources", "Models");
 string texturesDir = Path.Combine(solutionDir, "Maple2Storage", "Resources", "Models", "Textures");
 string output = GetOutputDir(args) ?? Path.Combine(solutionDir, "Maple2Storage", "Resources", "GLTF");
-const char quote = '"';
 
 string[] textures = Directory.GetFileSystemEntries(texturesDir, "*.dds", SearchOption.AllDirectories);
 string[] models = Directory.GetFileSystemEntries(modelDir, "*.nif", SearchOption.AllDirectories);
@@ -34,6 +35,13 @@ if (dryRun) {
 
 if (postProcessExisting) {
     Console.WriteLine("Post-processing existing GLTF files when conversion is skipped.");
+}
+
+// `--repair-only` walks an existing GLTF library and only runs the JSON repair, without
+// needing the source NIFs staged. Useful for cleaning up output from older Noesis runs.
+if (args.Any(a => a.Equals("--repair-only", StringComparison.OrdinalIgnoreCase))) {
+    RepairLibrary(output, dryRun);
+    return;
 }
 
 Console.WriteLine($"Output directory: {output}");
@@ -78,27 +86,43 @@ foreach (string modelPath in models) {
         } else if (dryRun) {
             Console.WriteLine($"Dry run: would convert {fileName} base model.");
         } else {
-            string strCmdText2 = @$"/C noesis.exe ?cmode {quote}{modelPath}{quote} {quote}{output}\{fileName}\{fileName}.gltf{quote}";
-            Process? process2 = Process.Start("CMD.exe", strCmdText2);
-            // wait for process to finish
-            process2.WaitForExit();
+            RunNoesis(directoryName, modelPath, baseGltfPath);
 
             Console.WriteLine("Finished converting " + fileName + " base model.");
             PostProcessGltf(baseGltfPath, dryRun);
         }
 
-        // Only do animations for NPC folder
-        if (!directoryName.Contains("Npc")) {
+        // find kf files that match file name. Almost all of them belong to an NPC, but a few NPCs
+        // use a model that sits under Map, so look for the animations instead of the folder.
+        string[] animations = Directory.GetFileSystemEntries(directoryName, "*.kf", SearchOption.TopDirectoryOnly);
+        if (animations.Length == 0) {
             continue;
         }
 
         // get output textures .png
         string[] baseTextures = Directory.GetFileSystemEntries(outputFolder, "*.png", SearchOption.TopDirectoryOnly);
 
-        // find kf files that match file name
-        string[] animations = Directory.GetFileSystemEntries(directoryName, "*.kf", SearchOption.TopDirectoryOnly);
         foreach (string animation in animations) {
             string animationName = Path.GetFileNameWithoutExtension(animation);
+
+            // The name of a kf file is not always the name of the sequence it holds: it can carry
+            // the name of the model, or the name of the model and the sequence together. The
+            // handbook asks for the sequence name, so prefer the name that the kfm gives.
+            string? sequenceName = GetSequenceNameFromKfm(directoryName, animationName);
+            string source = "the kfm";
+            if (sequenceName is null) {
+                sequenceName = StripModelPrefix(animationName, fileName);
+                source = "the name of the kf file";
+            }
+
+            if (sequenceName is not null && sequenceName != animationName) {
+                Console.WriteLine($"Naming the {animationName} animation of {fileName} {sequenceName}, taken from {source}.");
+                animationName = sequenceName;
+            } else if (sequenceName is null && string.Equals(animationName, fileName, StringComparison.OrdinalIgnoreCase)) {
+                // Without another name this animation would overwrite the base model.
+                Console.WriteLine($"Skipping the {fileName} animation: it has the name of the model and the kfm gives no other name.");
+                continue;
+            }
 
             Console.WriteLine($"Converting {fileName} kf to gltf");
             // check if gltf dont exists
@@ -109,12 +133,9 @@ foreach (string modelPath in models) {
                     continue;
                 }
 
-                // CD into input directory
-                string cdCmdText = $"/C cd /d {quote}{directoryName}{quote}";
-                string strCmdText = @$"{cdCmdText} && noesis.exe ?cmode {quote}{animation}{quote} {quote}{output}\{fileName}\{animationName}.gltf{quote}";
-                Process? process = Process.Start("CMD.exe", strCmdText);
-                // wait for process to finish
-                process.WaitForExit();
+                // A .kf holds animation only, so Noesis needs the model nif as well. Passing it
+                // keeps the Noesis file dialog closed.
+                RunNoesis(directoryName, animation, animationGltfPath, "-kfpairnif", modelPath);
 
                 // get output animation textures .png
                 string[] pngs = Directory.GetFileSystemEntries(outputFolder, "*.png", SearchOption.TopDirectoryOnly);
@@ -206,15 +227,135 @@ foreach (string modelPath in models) {
     }
 }
 
+// Some kfm files hold no name for a sequence. Those models name the kf file after the model and
+// the sequence together, so the sequence is what remains once the name of the model is removed.
+static string? StripModelPrefix(string animationName, string modelName) {
+    string prefix = $"{modelName}_";
+    return animationName.Length > prefix.Length && animationName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+        ? animationName[prefix.Length..].ToLower()
+        : null;
+}
+
+// A kfm lists each sequence as the path of its kf file followed by the name of the sequence. Read
+// those two strings out of the binary to find what a given kf is called.
+static string? GetSequenceNameFromKfm(string directory, string animationName) {
+    foreach (string kfmFile in Directory.GetFiles(directory, "*.kfm", SearchOption.TopDirectoryOnly)) {
+        List<string> values = [];
+        StringBuilder value = new();
+        foreach (char character in Encoding.ASCII.GetString(File.ReadAllBytes(kfmFile))) {
+            if (character is >= ' ' and <= '~') {
+                value.Append(character);
+                continue;
+            }
+
+            if (value.Length >= 3) {
+                values.Add(value.ToString());
+            }
+
+            value.Clear();
+        }
+
+        for (int i = 0; i < values.Count - 1; i++) {
+            if (!values[i].EndsWith(".kf", StringComparison.OrdinalIgnoreCase) ||
+                !string.Equals(Path.GetFileNameWithoutExtension(values[i]), animationName, StringComparison.OrdinalIgnoreCase)) {
+                continue;
+            }
+
+            // The name runs up to the first byte that cannot be part of it. A kfm holds no
+            // separator between the name and the field that follows, so "Idle_A%" is common.
+            string candidate = values[i + 1];
+            int length = 0;
+            while (length < candidate.Length && (char.IsAsciiLetterOrDigit(candidate[length]) || candidate[length] == '_')) {
+                length++;
+            }
+
+            if (length != 0) {
+                return candidate[..length].ToLower();
+            }
+        }
+    }
+
+    return null;
+}
+
+// Runs noesis.exe directly instead of through CMD.exe, so no console window is created for each
+// of the thousands of conversions. Noesis still resolves .kfm/.nif references relative to the
+// working directory, so the caller passes the folder that holds the source model.
+static void RunNoesis(string workingDirectory, string inputPath, string outputPath, params string[] extraArgs) {
+    ProcessStartInfo startInfo = new() {
+        FileName = "noesis.exe",
+        WorkingDirectory = workingDirectory,
+        UseShellExecute = false,
+        CreateNoWindow = true,
+    };
+    startInfo.ArgumentList.Add("?cmode");
+    startInfo.ArgumentList.Add(inputPath);
+    startInfo.ArgumentList.Add(outputPath);
+    foreach (string extraArg in extraArgs) {
+        startInfo.ArgumentList.Add(extraArg);
+    }
+
+    using Process? process = Process.Start(startInfo);
+    process?.WaitForExit();
+}
+
+static void RepairLibrary(string libraryDir, bool dryRun) {
+    if (!Directory.Exists(libraryDir)) {
+        Console.WriteLine($"Repair-only: directory does not exist: {libraryDir}");
+        return;
+    }
+
+    string[] gltfFiles = Directory.GetFiles(libraryDir, "*.gltf", SearchOption.AllDirectories);
+    Console.WriteLine($"Repair-only: scanning {gltfFiles.Length} GLTF file(s) under {libraryDir}");
+
+    int repaired = 0;
+    foreach (string gltfPath in gltfFiles) {
+        string text = File.ReadAllText(gltfPath);
+        if (!TryRepairGltfText(text, out string repairedText, out List<string> repairs)) {
+            continue;
+        }
+
+        repaired++;
+        Console.WriteLine($"  {Path.GetRelativePath(libraryDir, gltfPath)}: {string.Join(", ", repairs)}");
+        if (dryRun) {
+            continue;
+        }
+
+        // Keep the original next to the repaired file so the change is reversible.
+        string backupPath = gltfPath + ".prerepair";
+        if (!File.Exists(backupPath)) {
+            File.Copy(gltfPath, backupPath);
+        }
+
+        File.WriteAllText(gltfPath, repairedText);
+    }
+
+    Console.WriteLine(dryRun
+        ? $"Repair-only dry run: {repaired} file(s) would be repaired."
+        : $"Repair-only: repaired {repaired} file(s).");
+}
+
 static void PostProcessGltf(string gltfPath, bool dryRun) {
     if (!File.Exists(gltfPath)) {
         Console.WriteLine($"  Post-process skipped, GLTF does not exist: {gltfPath}");
         return;
     }
 
+    string gltfText = File.ReadAllText(gltfPath);
+    if (TryRepairGltfText(gltfText, out string repairedText, out List<string> repairs)) {
+        Console.WriteLine($"  Post-process repaired {Path.GetFileName(gltfPath)}: {string.Join(", ", repairs)}");
+        if (dryRun) {
+            Console.WriteLine("    Dry run: repair not written.");
+        } else {
+            File.WriteAllText(gltfPath, repairedText);
+        }
+
+        gltfText = repairedText;
+    }
+
     JsonNode? root;
     try {
-        root = JsonNode.Parse(File.ReadAllText(gltfPath));
+        root = JsonNode.Parse(gltfText);
     } catch (JsonException e) {
         Console.WriteLine($"  Post-process skipped, invalid GLTF JSON in {Path.GetFileName(gltfPath)}: {e.Message}");
         return;
@@ -279,6 +420,122 @@ static void PostProcessGltf(string gltfPath, bool dryRun) {
         TypeInfoResolver = new DefaultJsonTypeInfoResolver()
     };
     File.WriteAllText(gltfPath, root.ToJsonString(options));
+}
+
+// Noesis passes two kinds of garbage straight through into its GLTF output, and both make the file
+// invalid JSON so nothing downstream can read it:
+//   * non-finite floats from degenerate bones, written as bare "nan" or as the MSVC "1.#QNAN" form;
+//   * raw control bytes embedded in NIF strings, which land unescaped inside JSON string literals.
+// Rewrite non-finite numbers to 0.0 and escape control bytes. Returns true when anything changed.
+static bool TryRepairGltfText(string text, out string repaired, out List<string> repairs) {
+    const string tokenChars = "+-.#()";
+    int nonFinite = 0;
+    int controlChars = 0;
+    int invalidEscapes = 0;
+
+    StringBuilder builder = new(text.Length);
+    bool inString = false;
+    bool escaped = false;
+
+    for (int i = 0; i < text.Length; i++) {
+        char c = text[i];
+
+        if (inString) {
+            if (escaped) {
+                escaped = false;
+            } else if (c == '\\') {
+                // Node names sometimes hold the original artist's Windows path, e.g.
+                // "D:\ms2team\ms2-design\...", whose lone backslashes are not valid JSON escapes.
+                if (IsValidEscape(text, i)) {
+                    escaped = true;
+                } else {
+                    builder.Append(@"\\");
+                    invalidEscapes++;
+                    continue;
+                }
+            } else if (c == '"') {
+                inString = false;
+            } else if (c < 0x20) {
+                builder.Append($"\\u{(int) c:x4}");
+                controlChars++;
+                continue;
+            }
+
+            builder.Append(c);
+            continue;
+        }
+
+        if (c == '"') {
+            inString = true;
+            builder.Append(c);
+            continue;
+        }
+
+        if (!char.IsLetterOrDigit(c) && !tokenChars.Contains(c)) {
+            builder.Append(c);
+            continue;
+        }
+
+        // Outside a string the only bare tokens JSON allows are numbers and true/false/null.
+        // Grab the whole token so a malformed number is replaced as a unit rather than in pieces.
+        int start = i;
+        while (i < text.Length && (char.IsLetterOrDigit(text[i]) || tokenChars.Contains(text[i]))) {
+            i++;
+        }
+
+        string token = text[start..i];
+        i--;
+
+        // double.TryParse accepts "NaN" and "Infinity" itself, so check the parsed value is finite too.
+        bool isFiniteNumber = double.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out double value) && double.IsFinite(value);
+        if (token is "true" or "false" or "null" || isFiniteNumber) {
+            builder.Append(token);
+            continue;
+        }
+
+        builder.Append("0.0");
+        nonFinite++;
+    }
+
+    repairs = [];
+    if (nonFinite > 0) {
+        repairs.Add($"{nonFinite} non-finite number(s) -> 0.0");
+    }
+
+    if (controlChars > 0) {
+        repairs.Add($"{controlChars} control character(s) escaped");
+    }
+
+    if (invalidEscapes > 0) {
+        repairs.Add($"{invalidEscapes} invalid backslash escape(s) escaped");
+    }
+
+    repaired = repairs.Count > 0 ? builder.ToString() : text;
+    return repairs.Count > 0;
+}
+
+// True when the backslash at index starts an escape sequence JSON actually allows.
+static bool IsValidEscape(string text, int index) {
+    if (index + 1 >= text.Length) {
+        return false;
+    }
+
+    char next = text[index + 1];
+    if (next is '"' or '\\' or '/' or 'b' or 'f' or 'n' or 'r' or 't') {
+        return true;
+    }
+
+    if (next != 'u' || index + 5 >= text.Length) {
+        return false;
+    }
+
+    for (int i = index + 2; i <= index + 5; i++) {
+        if (!Uri.IsHexDigit(text[i])) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 static bool IsDummyAvatarMeshRoot(int nodeIndex, JsonArray nodes, JsonArray meshes) {

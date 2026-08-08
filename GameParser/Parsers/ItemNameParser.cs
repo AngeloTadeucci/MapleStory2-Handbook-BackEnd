@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using GameParser.Tools;
 using Maple2Storage.Types;
 
 namespace GameParser.Parsers;
@@ -24,22 +25,16 @@ public static class ItemNameParser {
         if (nodes is null) {
             throw new("Failed to load itemname.xml");
         }
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes?["id"]?.Value ?? throw new("Failed to load itemname.xml"));
-            string name = node.Attributes["name"]?.Value ?? "";
-
-            ItemNames[id] = name;
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
+            ItemNames[id] = node.Attributes?["name"]?.Value ?? "";
         }
 
         nodes = xmlFilePlural.SelectNodes("/ms2/key");
         if (nodes is null) {
             throw new("Failed to load itemnameplural.xml");
         }
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes?["id"]?.Value ?? throw new("Failed to load itemnameplural.xml"));
-            string name = node.Attributes["name"]?.Value ?? "";
-
-            ItemNamesPlural[id] = name;
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
+            ItemNamesPlural[id] = node.Attributes?["name"]?.Value ?? "";
         }
     }
 }

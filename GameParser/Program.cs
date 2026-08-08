@@ -1,12 +1,17 @@
 ﻿using System.Data;
 using GameParser;
 using GameParser.Parsers;
+using Maple2.File.Parser.Tools;
 using Maple2Storage.Tools;
 using Maple2Storage.Types;
 using MySql.Data.MySqlClient;
 using SqlKata.Execution;
 
 DotEnv.Load();
+
+// Load up front: the parsers resolve feature/locale gated data off this, and several of them do so
+// from static constructors that can run before the parser making its own Filter.Load call.
+Filter.Load(Paths.XmlReader, "NA", "Live");
 
 // Ask if user wants to save view counts before parsing (must be done BEFORE dropping database)
 Dictionary<string, Dictionary<int, int>>? viewCounts = null;

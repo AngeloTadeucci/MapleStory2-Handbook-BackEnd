@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using GameParser.Tools;
 using Maple2Storage.Types;
 
 namespace GameParser.Parsers;
@@ -26,33 +27,24 @@ public static class NpcNameParser {
         if (nodes is null) {
             throw new("Failed to load itemname.xml");
         }
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes?["id"]?.Value ?? "0");
-            string name = node.Attributes?["name"]?.Value ?? "";
-
-            NpcNames[id] = name;
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
+            NpcNames[id] = node.Attributes?["name"]?.Value ?? "";
         }
 
         nodes = xmlFilePlural.SelectNodes("/ms2/key");
         if (nodes is null) {
             throw new("Failed to load itemnameplural.xml");
         }
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes?["id"]?.Value ?? "0");
-            string name = node.Attributes?["name"]?.Value ?? "";
-
-            NpcNamesPlural[id] = name;
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
+            NpcNamesPlural[id] = node.Attributes?["name"]?.Value ?? "";
         }
 
         nodes = xmlFileTitles.SelectNodes("/ms2/key");
         if (nodes is null) {
             throw new("Failed to load npctitle.xml");
         }
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes?["id"]?.Value ?? "0");
-            string name = node.Attributes?["name"]?.Value ?? "";
-
-            NpcTitles[id] = name;
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
+            NpcTitles[id] = node.Attributes?["name"]?.Value ?? "";
         }
     }
 }

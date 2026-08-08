@@ -23,7 +23,12 @@ public class ItemOptionStaticParser {
                 throw new("Failed to load itemoption/option/static.xml");
             }
             foreach (XmlNode node in nodeList) {
-                _ = int.TryParse(node.Attributes?["code"]?.Value ?? "0", out int id);
+                // itemoptionstatic_19.xml carries a blank <option code="" grade=""/>. Bucketing it under
+                // id 0 makes it the match for every item that has no static option at all, which then
+                // inherits its empty grade as rarity 0.
+                if (!int.TryParse(node.Attributes?["code"]?.Value, out int id) || id == 0) {
+                    continue;
+                }
                 ItemOptionsStatic optionsStatic = new();
 
                 foreach (XmlNode item in node.Attributes!) {

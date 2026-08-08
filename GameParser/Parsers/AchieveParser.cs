@@ -54,8 +54,12 @@ public static class AchieveParser {
                 ConditionType conditionType = grade.condition.type;
                 string[] conditionCode = grade.condition.code;
                 long conditionValue = grade.condition.value;
-                RewardType rewardType = (RewardType) grade.reward.type;
-                int rewardId = grade.reward.code;
+                // Some grades carry no <reward> element at all. Stand in a default one so they still show up
+                // as an unknown/empty reward, which is how they were represented when the element was present
+                // but left at its defaults.
+                Reward reward = grade.reward ?? new Reward();
+                RewardType rewardType = (RewardType) reward.type;
+                int rewardId = reward.code;
 
                 switch (rewardType) {
                     case RewardType.item:
@@ -68,8 +72,8 @@ public static class AchieveParser {
                         }
 
                         if (rewardType is RewardType.item) {
-                            if (grade.reward.value > 0) {
-                                itemName += $" x{grade.reward.value}";
+                            if (reward.value > 0) {
+                                itemName += $" x{reward.value}";
                             }
                         } else {
                             itemName += " Unlocked for Purchase";
@@ -81,14 +85,14 @@ public static class AchieveParser {
                     case RewardType.beauty_skin:
                     case RewardType.beauty_hair:
                         List<string> rewardsNames = [];
-                        foreach (string reward in grade.reward.extra) {
-                            string[] gender = reward.Split(":");
+                        foreach (string extra in reward.extra) {
+                            string[] gender = extra.Split(":");
                             int beautyId = int.Parse(gender.Last());
                             if (!ItemNameParser.ItemNames.TryGetValue(beautyId, out string? rewardName)) {
-                                rewardName = reward.ToString();
+                                rewardName = extra;
                             }
 
-                            rewardsNames.Add(reward + ":" + rewardName);
+                            rewardsNames.Add(extra + ":" + rewardName);
                         }
                         rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, string.Join(",", rewardsNames)));
                         break;
@@ -102,13 +106,13 @@ public static class AchieveParser {
                         rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, titleName));
                         break;
                     case RewardType.statpoint:
-                        rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, $"Attribute Point x{grade.reward.value}"));
+                        rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, $"Attribute Point x{reward.value}"));
                         break;
                     case RewardType.skillpoint:
-                        if (grade.reward.subJobLevel > 0) {
-                            rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, $"{grade.reward.value} Rank 2 Skill Points"));
+                        if (reward.subJobLevel > 0) {
+                            rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, $"{reward.value} Rank 2 Skill Points"));
                         } else {
-                            rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, $"Skill Point x{grade.reward.value}"));
+                            rewards.Add(new GradeStruct(gradeValue, conditionType, conditionValue, conditionCode, rewardType, rewardId, $"Skill Point x{reward.value}"));
                         }
                         break;
                     case RewardType.dynamicaction:
@@ -150,16 +154,7 @@ public static class AchieveParser {
         if (nodes is null) {
             throw new("Failed to load achievedescription.xml");
         }
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes?["id"]?.Value ?? "0");
-            if (id == 0) {
-                continue;
-            }
-
-            if (descriptions.ContainsKey(id)) {
-                continue;
-            }
-
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
             string description = Helper.FixDescription(node.Attributes?["desc"]?.Value ?? "");
             string complete_description = Helper.FixDescription(node.Attributes?["complete"]?.Value ?? "");
 

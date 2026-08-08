@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using GameParser.Tools;
 using Maple2Storage.Types;
 
 namespace GameParser.Parsers;
@@ -17,18 +18,8 @@ public static class NpcTitleParser {
         if (nodes is null) {
             throw new("Failed to load npctitle.xml");
         }
-        foreach (XmlNode node in nodes) {
-            if (!int.TryParse(node.Attributes?["id"]?.Value, out int id)) {
-                continue;
-            }
-
-            string name = node.Attributes["name"]?.Value ?? "";
-
-            if (string.IsNullOrEmpty(name)) {
-
-            }
-
-            NpcTitle.Add(id, name);
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
+            NpcTitle[id] = node.Attributes?["name"]?.Value ?? "";
         }
     }
 }

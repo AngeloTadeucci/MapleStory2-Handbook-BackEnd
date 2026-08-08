@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using GameParser.Tools;
 using Maple2Storage.Types;
 
 namespace GameParser.Parsers;
@@ -18,11 +19,8 @@ public static class TitleNameParser {
         if (nodes is null) {
             throw new("Failed to load titlename.xml");
         }
-        foreach (XmlNode node in nodes) {
-            int id = int.Parse(node.Attributes!["id"]?.Value ?? throw new("Failed to load titlename.xml"));
-            string name = node.Attributes["name"]?.Value ?? "";
-
-            TitleNames[id] = name;
+        foreach ((int id, XmlNode node) in StringTable.Resolve(nodes)) {
+            TitleNames[id] = node.Attributes?["name"]?.Value ?? "";
         }
     }
 }
