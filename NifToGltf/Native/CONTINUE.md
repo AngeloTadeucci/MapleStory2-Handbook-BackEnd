@@ -1,5 +1,24 @@
 # Continuation prompt: replace Noesis for non-effect assets
 
+## Current priority, updated 2026-09-06
+
+Follow [SIMULATOR-PLAN.md](SIMULATOR-PLAN.md) for the next implementation work:
+catalog, equipment rules, hair/face customization, backgrounds/visual acceptance,
+then publishing. The user accepts individual missing clothes, poses and effects
+as long as the overall clothing simulator works. Effects and particle simulation
+remain excluded.
+
+The original prompt below is retained as the wider converter backlog. Its demand
+for complete non-effect replacement is no longer a simulator release gate.
+Use [STATUS.md](STATUS.md) for current results; the original starting-point counts
+below are historical. The latest user request updates these plans only.
+
+## Original replacement prompt
+
+Implementation checkpoint: [STATUS.md](STATUS.md) records the work executed
+from this prompt, current tests, recovered sources and remaining blockers.
+The requirements below describe full replacement, not a completed checklist.
+
 Continue implementing the native MapleStory 2 NIF-to-glTF converter until it
 can replace Noesis for characters, equipment, NPCs and ordinary map geometry.
 Complete the remaining conversion and frontend integration work. Effects and
