@@ -15,6 +15,12 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 using MaplePacketLib2.Tools;
+using NifToGltf.Native;
+
+if (args.Contains("--native")) {
+    Environment.ExitCode = NativeCommand.Run(args);
+    return;
+}
 
 string solutionDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
 string modelDir = Path.Combine(solutionDir, "Maple2Storage", "Resources", "Models");

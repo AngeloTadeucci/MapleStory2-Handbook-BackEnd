@@ -1,0 +1,707 @@
+{
+  "files": 2830,
+  "parsed_files": 2830,
+  "directories": {
+    "Character": 2,
+    "Effect": 108,
+    "Item": 385,
+    "Map": 39,
+    "Npc": 2295,
+    "Textures": 1
+  },
+  "streams": 28161,
+  "formats": [
+    {
+      "hex": "0x00010215",
+      "occurrences": 16098,
+      "example": "Character/female/f_body.nif"
+    },
+    {
+      "hex": "0x00010425",
+      "occurrences": 206,
+      "example": "Npc/02/01/02010016/02010016_karangco.nif"
+    },
+    {
+      "hex": "0x00010435",
+      "occurrences": 13,
+      "example": "Item/0/02/10200230_m_hair_a.nif"
+    },
+    {
+      "hex": "0x00020436",
+      "occurrences": 7765,
+      "example": "Character/female/f_body.nif"
+    },
+    {
+      "hex": "0x00030437",
+      "occurrences": 38525,
+      "example": "Character/female/f_body.nif"
+    },
+    {
+      "hex": "0x00040108",
+      "occurrences": 5756,
+      "example": "Character/female/f_body.nif"
+    },
+    {
+      "hex": "0x00040110",
+      "occurrences": 31,
+      "example": "Item/1/31/13100290_darkmelodydagger.nif"
+    },
+    {
+      "hex": "0x00040214",
+      "occurrences": 12,
+      "example": "Npc/11/11000886/11000886_rabbit2.nif"
+    },
+    {
+      "hex": "0x00040438",
+      "occurrences": 137,
+      "example": "Npc/02/01/02010016/02010016_karangco.nif"
+    }
+  ],
+  "unexpected_formats": [
+    "0x00010425",
+    "0x00010435",
+    "0x00040110",
+    "0x00040214",
+    "0x00040438"
+  ],
+  "encoded_block_type_count": 84,
+  "block_class_count": 73,
+  "block_types": {
+    "NiAlphaController": 176,
+    "NiAlphaProperty": 516,
+    "NiBillboardNode": 124,
+    "NiBoolData": 341,
+    "NiBoolInterpolator": 130,
+    "NiBoolTimelineInterpolator": 211,
+    "NiBooleanExtraData": 30665,
+    "NiCamera": 2,
+    "NiCollisionData": 21,
+    "NiColorExtraData": 20754,
+    "NiDataStream\u00010\u000118": 4874,
+    "NiDataStream\u00010\u000119": 5680,
+    "NiDataStream\u00010\u000121": 2,
+    "NiDataStream\u00010\u000124": 9,
+    "NiDataStream\u00011\u000118": 5767,
+    "NiDataStream\u00011\u000119": 5780,
+    "NiDataStream\u00011\u000120": 6,
+    "NiDataStream\u00011\u000121": 11,
+    "NiDataStream\u00011\u000124": 106,
+    "NiDataStream\u00011\u00013": 174,
+    "NiDataStream\u00013\u00013": 5739,
+    "NiDataStream\u00013\u00015": 13,
+    "NiFlipController": 24,
+    "NiFloatData": 190,
+    "NiFloatExtraData": 41861,
+    "NiFloatInterpolator": 321,
+    "NiFloatsExtraData": 9,
+    "NiIntegerExtraData": 38304,
+    "NiIntegersExtraData": 3,
+    "NiMaterialProperty": 6460,
+    "NiMesh": 10587,
+    "NiMorphMeshModifier": 13,
+    "NiMorphWeightsController": 13,
+    "NiNode": 121704,
+    "NiPSAlignedQuadGenerator": 105,
+    "NiPSBoundUpdater": 196,
+    "NiPSBoxEmitter": 40,
+    "NiPSCylinderEmitter": 3,
+    "NiPSDragForce": 301,
+    "NiPSEmitParticlesCtlr": 196,
+    "NiPSFacingQuadGenerator": 80,
+    "NiPSForceActiveCtlr": 301,
+    "NiPSGravityForce": 126,
+    "NiPSMeshEmitter": 150,
+    "NiPSMeshParticleSystem": 11,
+    "NiPSParticleSystem": 185,
+    "NiPSResetOnLoopCtlr": 1,
+    "NiPSSimulator": 196,
+    "NiPSSimulatorCollidersStep": 196,
+    "NiPSSimulatorFinalStep": 196,
+    "NiPSSimulatorForcesStep": 196,
+    "NiPSSimulatorGeneralStep": 196,
+    "NiPSSimulatorMeshAlignStep": 11,
+    "NiPSSphereEmitter": 3,
+    "NiPathInterpolator": 17,
+    "NiPhysXActorDesc": 12,
+    "NiPhysXBodyDesc": 8,
+    "NiPhysXD6JointDesc": 6,
+    "NiPhysXDynamicSrc": 2,
+    "NiPhysXMaterialDesc": 8,
+    "NiPhysXMeshDesc": 12,
+    "NiPhysXProp": 101,
+    "NiPhysXPropDesc": 101,
+    "NiPhysXShapeDesc": 12,
+    "NiPhysXTransformDest": 6,
+    "NiPixelData": 128,
+    "NiPosData": 17,
+    "NiSkinningMeshModifier": 5768,
+    "NiSortAdjustNode": 50,
+    "NiSourceTexture": 15014,
+    "NiSpecularProperty": 2579,
+    "NiStencilProperty": 252,
+    "NiStringExtraData": 19090,
+    "NiStringsExtraData": 3,
+    "NiTextKeyExtraData": 105,
+    "NiTextureEffect": 227,
+    "NiTextureTransformController": 295,
+    "NiTexturingProperty": 5203,
+    "NiTransformController": 5958,
+    "NiTransformData": 1535,
+    "NiTransformInterpolator": 3504,
+    "NiVertexColorProperty": 2911,
+    "NiVisController": 1,
+    "NiZBufferProperty": 2980
+  },
+  "metadata_files": [
+    {
+      "path": "Effect/bg/liftup/co_liftup_firework_a01_m.nif",
+      "bytes": 11520
+    },
+    {
+      "path": "Effect/bg/liftup/kr_liftup_pot_a01_m.nif",
+      "bytes": 6042
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_acousticbass_a01.nif",
+      "bytes": 5913
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_baseguitar_a01.nif",
+      "bytes": 6427
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_baseguitar_b01.nif",
+      "bytes": 6729
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_bassdrum_c01_stick.nif",
+      "bytes": 4320
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_clarinet_a01.nif",
+      "bytes": 4179
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_clarinet_b01.nif",
+      "bytes": 3804
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_elecguitar_a01.nif",
+      "bytes": 6130
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_fretlessbass_a01.nif",
+      "bytes": 6053
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_guitar_b01.nif",
+      "bytes": 6183
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_oboe_a01.nif",
+      "bytes": 3520
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_ocarina_a01.nif",
+      "bytes": 6989
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_pinkbeanguitar_a01.nif",
+      "bytes": 5629
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_pizzicato_a01.nif",
+      "bytes": 5830
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_saxophone_a01.nif",
+      "bytes": 6337
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_shakuji_a01.nif",
+      "bytes": 5051
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_smalldrum_c01_stick.nif",
+      "bytes": 3703
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_timpani_a01_stick.nif",
+      "bytes": 2227
+    },
+    {
+      "path": "Effect/bg/perform/eff_perform_timpani_b01_stick.nif",
+      "bytes": 2143
+    },
+    {
+      "path": "Effect/item/eff_randombox_01.nif",
+      "bytes": 16505
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_cannonball_a01_m.nif",
+      "bytes": 8056
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_chickencage_a01_m.nif",
+      "bytes": 14167
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_drum_a01_m.nif",
+      "bytes": 2895
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_dynamite_a01_m.nif",
+      "bytes": 4131
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_gascan_a01_m.nif",
+      "bytes": 8890
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_shower_a01_l.nif",
+      "bytes": 10655
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_tire_a01_m.nif",
+      "bytes": 7369
+    },
+    {
+      "path": "Effect/item/skill/co_liftup_toilet_a01_l.nif",
+      "bytes": 8903
+    },
+    {
+      "path": "Effect/item/skill/he_liftup_egg_a01_m.nif",
+      "bytes": 12622
+    },
+    {
+      "path": "Effect/item/skill/ic_liftup_house_a01_l.nif",
+      "bytes": 9805
+    },
+    {
+      "path": "Effect/item/skill/ke_liftup_bus_a01_l.nif",
+      "bytes": 14517
+    },
+    {
+      "path": "Effect/item/skill/ke_liftup_drum_a01_m.nif",
+      "bytes": 11468
+    },
+    {
+      "path": "Effect/item/skill/ke_liftup_phonebox_a01_l.nif",
+      "bytes": 10780
+    },
+    {
+      "path": "Effect/item/skill/ke_liftup_trashcan_a01_m.nif",
+      "bytes": 4423
+    },
+    {
+      "path": "Effect/item/skill/ke_liftup_truck_a01_l.nif",
+      "bytes": 13908
+    },
+    {
+      "path": "Effect/item/skill/kr_liftup_house_a01_l.nif",
+      "bytes": 11713
+    },
+    {
+      "path": "Effect/item/skill/pe_liftup_house_a01_l.nif",
+      "bytes": 10356
+    },
+    {
+      "path": "Effect/item/skill/pe_liftup_sack_a01_m.nif",
+      "bytes": 11529
+    },
+    {
+      "path": "Effect/item/skill/pe_liftup_totem_b01_m.nif",
+      "bytes": 8103
+    },
+    {
+      "path": "Effect/item/skill/sf_liftup_train_a01_m.nif",
+      "bytes": 3270
+    },
+    {
+      "path": "Effect/item/skill/sw_liftup_bottlebox_a01_m.nif",
+      "bytes": 10499
+    },
+    {
+      "path": "Effect/item/skill/sw_liftup_drum_a01_m.nif",
+      "bytes": 10758
+    },
+    {
+      "path": "Map/common/interaction/interaction_fragment_a01.nif",
+      "bytes": 2976
+    },
+    {
+      "path": "Map/common/interaction/interaction_fragment_a02.nif",
+      "bytes": 3817
+    },
+    {
+      "path": "Map/common/liftup/co_liftup_drum_b01_m.nif",
+      "bytes": 11182
+    },
+    {
+      "path": "Map/common/liftup/co_liftup_light_a01_sa.nif",
+      "bytes": 6073
+    },
+    {
+      "path": "Map/common/liftup/co_liftup_shovel_a01_sa.nif",
+      "bytes": 3225
+    },
+    {
+      "path": "Map/common/liftup/co_liftup_tree_a01_sa.nif",
+      "bytes": 7987
+    },
+    {
+      "path": "Map/common/liftup/co_liftup_tree_a02_sa.nif",
+      "bytes": 7596
+    },
+    {
+      "path": "Map/common/liftup/he_liftup_bomb_a01.nif",
+      "bytes": 3711
+    },
+    {
+      "path": "Map/common/liftup/he_liftup_bomb_b01.nif",
+      "bytes": 12163
+    },
+    {
+      "path": "Map/common/liftup/he_liftup_jellydrum_a01.nif",
+      "bytes": 11707
+    },
+    {
+      "path": "Map/common/liftup/ke_liftup_sign_a01_sa.nif",
+      "bytes": 7086
+    },
+    {
+      "path": "Map/common/liftup/ke_liftup_signal_a01_sa.nif",
+      "bytes": 5614
+    },
+    {
+      "path": "Map/common/liftup/ke_liftup_utilitypole_a01_sa.nif",
+      "bytes": 8020
+    },
+    {
+      "path": "Map/common/liftup/kr_liftup_pot_b01_m.nif",
+      "bytes": 8000
+    },
+    {
+      "path": "Map/common/liftup/kr_liftup_stack_a01_m.nif",
+      "bytes": 7352
+    },
+    {
+      "path": "Map/common/liftup/kr_liftup_stack_a02_m.nif",
+      "bytes": 7258
+    },
+    {
+      "path": "Map/common/liftup/kr_liftup_statue_a01_m.nif",
+      "bytes": 9241
+    },
+    {
+      "path": "Map/common/liftup/ks_lfitup_plants_b01.nif",
+      "bytes": 9969
+    },
+    {
+      "path": "Map/common/liftup/ks_lfitup_plants_c01_sa.nif",
+      "bytes": 7367
+    },
+    {
+      "path": "Map/common/liftup/lu_liftup_hammer_a01_s_.nif",
+      "bytes": 9287
+    },
+    {
+      "path": "Map/common/liftup/lu_liftup_toyball_a01_m.nif",
+      "bytes": 7263
+    },
+    {
+      "path": "Map/common/liftup/pe_liftup_totem_a01_sa.nif",
+      "bytes": 7662
+    },
+    {
+      "path": "Map/common/liftup/ry_liftup_light_a01_sa.nif",
+      "bytes": 6334
+    },
+    {
+      "path": "Map/common/liftup/ry_liftup_toycushion_a01.nif",
+      "bytes": 9586
+    },
+    {
+      "path": "Map/common/liftup/ry_liftup_toycushion_b01.nif",
+      "bytes": 7926
+    },
+    {
+      "path": "Map/common/liftup/ry_liftup_toycushion_c01.nif",
+      "bytes": 9083
+    },
+    {
+      "path": "Map/common/liftup/ry_liftup_toycushion_d01.nif",
+      "bytes": 8255
+    },
+    {
+      "path": "Map/common/liftup/ry_liftup_toycushion_e01.nif",
+      "bytes": 10260
+    },
+    {
+      "path": "Map/common/liftup/ry_liftup_toycushion_g01.nif",
+      "bytes": 7136
+    },
+    {
+      "path": "Map/common/liftup/sf_liftup_incubator_a01_m.nif",
+      "bytes": 12679
+    },
+    {
+      "path": "Map/common/liftup/sf_liftup_pipe_a01_sa.nif",
+      "bytes": 6660
+    },
+    {
+      "path": "Map/common/quest/sw_quest_soulbead_b01/sw_quest_soulbead_b01.nif",
+      "bytes": 4197
+    },
+    {
+      "path": "Map/perion/field/pe_fi_struc_ugctent_a01.nif",
+      "bytes": 10915
+    },
+    {
+      "path": "Map/test/putup/a01.nif",
+      "bytes": 6530
+    },
+    {
+      "path": "Map/underworld/field/uw_fi_cubric_drum_a01.nif",
+      "bytes": 10465
+    },
+    {
+      "path": "Npc/02/01/02010039/02010039_berzzo.nif",
+      "bytes": 6868
+    },
+    {
+      "path": "Npc/02/01/02010040/02010040_rari.nif",
+      "bytes": 7718
+    },
+    {
+      "path": "Npc/02/01/02010046/02010046_corny.nif",
+      "bytes": 1003
+    },
+    {
+      "path": "Npc/02/01/02010047/02010047_el_man1.nif",
+      "bytes": 6267
+    },
+    {
+      "path": "Npc/02/01/02010049/02010049_el_woman1.nif",
+      "bytes": 6777
+    },
+    {
+      "path": "Npc/02/02/02020012/02020012_m_direbat.nif",
+      "bytes": 6123
+    },
+    {
+      "path": "Npc/02/02/02020031/02020031_m_regenworm.nif",
+      "bytes": 6303
+    },
+    {
+      "path": "Npc/02/02/02020073/02020073_m_ellanga.nif",
+      "bytes": 5110
+    },
+    {
+      "path": "Npc/02/02/02020075/02020075_m_ellangb.nif",
+      "bytes": 4708
+    },
+    {
+      "path": "Npc/02/04/02040014/02040014_roket1.nif",
+      "bytes": 7539
+    },
+    {
+      "path": "Npc/02/04/02040016/02040016_tireziptrek01.nif",
+      "bytes": 7142
+    },
+    {
+      "path": "Npc/02/04/02040017/02040017_tirependulum01.nif",
+      "bytes": 3056
+    },
+    {
+      "path": "Npc/02/05/02050017/02050017_m_scarecrowsandbag01.nif",
+      "bytes": 7605
+    },
+    {
+      "path": "Npc/02/05/02059990/02059990_m_orangemushroomtest.nif",
+      "bytes": 8111
+    },
+    {
+      "path": "Npc/11/11000474/11000474_roulette1.nif",
+      "bytes": 14463
+    },
+    {
+      "path": "Npc/11/11001653/11001653_o_flipslimeboard.nif",
+      "bytes": 10578
+    },
+    {
+      "path": "Npc/21/21000354/21000354_m_mimicgold.nif",
+      "bytes": 10934
+    },
+    {
+      "path": "Npc/21/21000355/21000355_m_mimicnormal.nif",
+      "bytes": 9912
+    },
+    {
+      "path": "Npc/21/21001036/21001036_m_redcrystaltower.nif",
+      "bytes": 11188
+    },
+    {
+      "path": "Npc/21/21001037/21001037_m_miniredcrystaltower.nif",
+      "bytes": 3417
+    },
+    {
+      "path": "Npc/21/21800910/21800910_m_cannonweaponnormal.nif",
+      "bytes": 7889
+    },
+    {
+      "path": "Npc/21/21800960/21800960_m_cannonweaponairship.nif",
+      "bytes": 5452
+    },
+    {
+      "path": "Npc/50/50400283/50400283_unicorn.nif",
+      "bytes": 8528
+    },
+    {
+      "path": "Npc/50/50400284/50400284_axolotl.nif",
+      "bytes": 4767
+    },
+    {
+      "path": "Npc/52/52000003/co_skillobj_electricfan_a01.nif",
+      "bytes": 8098
+    },
+    {
+      "path": "Npc/52/52000006/52000006_damagemeter_snowman_a01.nif",
+      "bytes": 7560
+    },
+    {
+      "path": "Npc/bg_obj/11000351_functionmirror/11000351_functionmirror.nif",
+      "bytes": 7662
+    },
+    {
+      "path": "Npc/bg_obj/break_bricka_01/break_bricka_01.nif",
+      "bytes": 7355
+    },
+    {
+      "path": "Npc/bg_obj/co_fi_prop_stick_a01.nif",
+      "bytes": 5306
+    },
+    {
+      "path": "Npc/bg_obj/co_fi_prop_stick_a02.nif",
+      "bytes": 4108
+    },
+    {
+      "path": "Npc/bg_obj/co_fi_prop_stick_a03.nif",
+      "bytes": 4063
+    },
+    {
+      "path": "Npc/bg_obj/co_fi_prop_stick_a04.nif",
+      "bytes": 4016
+    },
+    {
+      "path": "Npc/bg_obj/co_fi_prop_stick_a05.nif",
+      "bytes": 4105
+    },
+    {
+      "path": "Npc/bg_obj/co_obj_brk_tomb_ani/co_obj_brk_tomb_ani.nif",
+      "bytes": 3810
+    },
+    {
+      "path": "Npc/bg_obj/he_fi_struc_barn_a01_ani.nif",
+      "bytes": 2865
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020010_darksling/msb_02020010_darksling.nif",
+      "bytes": 9338
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020025_pim/msb_02020025_pim.nif",
+      "bytes": 11316
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020028_spokrak/msb_02020028_spokrak.nif",
+      "bytes": 9252
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020034_ducky/msb_02020034_ducky.nif",
+      "bytes": 10198
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020068_curseeye/msb_02020068_curseeye.nif",
+      "bytes": 9606
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020070_badmonkey/msb_02020070_badmonkey.nif",
+      "bytes": 12051
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020073_ellanga/msb_02020073_ellanga.nif",
+      "bytes": 10286
+    },
+    {
+      "path": "Npc/bg_obj/msb_02020166_fairyconehatblue/msb_02020166_fairyconehatblue.nif",
+      "bytes": 10198
+    },
+    {
+      "path": "Npc/bg_obj/msb_02030007_strawbunny01/msb_02030007_strawbunny01.nif",
+      "bytes": 11498
+    },
+    {
+      "path": "Npc/bg_obj/msb_02030013_ghostump/msb_02030013_ghostump.nif",
+      "bytes": 10343
+    },
+    {
+      "path": "Npc/bg_obj/sw_break_brick_a01/sw_break_bricka_01.nif",
+      "bytes": 7451
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_a01.nif",
+      "bytes": 6654
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_a02.nif",
+      "bytes": 6654
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_a03.nif",
+      "bytes": 6527
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_a04.nif",
+      "bytes": 6527
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_b01.nif",
+      "bytes": 6246
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_b02.nif",
+      "bytes": 6246
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_b03.nif",
+      "bytes": 6038
+    },
+    {
+      "path": "Npc/bg_obj/tr_in_prop_designitem_b04.nif",
+      "bytes": 6038
+    },
+    {
+      "path": "Npc/etc/50600330_r_shoppingcart/50600330_r_shoppingcart.nif",
+      "bytes": 11744
+    },
+    {
+      "path": "Npc/etc/break_woodpilea_01_npc/break_woodpilea_01_npc.nif",
+      "bytes": 8781
+    },
+    {
+      "path": "Npc/etc/co_obj_woodpilea_01_npc/co_obj_woodpilea_01_npci.nif",
+      "bytes": 8893
+    },
+    {
+      "path": "Npc/etc/damagemeter_puppeta_02/damagemeter_puppeta_02.nif",
+      "bytes": 7385
+    },
+    {
+      "path": "Npc/etc/ks_quest_truck_a01/ks_quest_truck_a01.nif",
+      "bytes": 13425
+    }
+  ],
+  "failures": [],
+  "plan_four_format_gate_passed": false
+}

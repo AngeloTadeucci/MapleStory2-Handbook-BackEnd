@@ -1,0 +1,2454 @@
+{
+  "mode": "static",
+  "total": 2830,
+  "converted": 2359,
+  "rejected": 471,
+  "validated": 2359,
+  "invalid": 0,
+  "warning_files": 3,
+  "rejection_categories": {
+    "Embedded texture": 41,
+    "Missing bone palette": 3,
+    "Missing or ambiguous external texture": 127,
+    "NiBillboardNode": 20,
+    "NiCamera": 1,
+    "NiPSMeshParticleSystem": 4,
+    "NiPSParticleSystem": 30,
+    "NiPhysXProp": 27,
+    "NiSortAdjustNode": 24,
+    "NiTextureEffect": 151,
+    "No meshes": 4,
+    "Non-finite transform": 1,
+    "UV texture transform": 15,
+    "Unsupported DDS format": 1,
+    "Unsupported mesh modifier": 9,
+    "Unsupported primitive type": 11,
+    "Zero tangent": 1,
+    "Zero-length normal": 1
+  },
+  "validation_issues": [
+    {
+      "input": "Item/1/17/11700263_m_shmaid02.gltf",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 2,
+        "numInfos": 25,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+            "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+            "severity": 1,
+            "pointer": "/meshes/0/primitives/0/material"
+          },
+          {
+            "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+            "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+            "severity": 1,
+            "pointer": "/meshes/1/primitives/0/material"
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "input": "Item/1/17/11700264_f_shmaid02.gltf",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 2,
+        "numInfos": 25,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+            "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+            "severity": 1,
+            "pointer": "/meshes/0/primitives/0/material"
+          },
+          {
+            "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+            "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+            "severity": 1,
+            "pointer": "/meshes/1/primitives/0/material"
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "input": "Item/1/22/12200264_f_clpamaid02.gltf",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 1,
+        "numInfos": 29,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+            "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+            "severity": 1,
+            "pointer": "/meshes/4/primitives/0/material"
+          }
+        ],
+        "truncated": false
+      }
+    }
+  ],
+  "rejections": [
+    {
+      "input": "Effect/bg/liftup/co_liftup_firework_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_firework_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/liftup/kr_liftup_pot_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture kr_liftup_pot_a01_m.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_acousticbass_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_acousticbass_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_baseguitar_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_baseguitar_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_baseguitar_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_baseguitar_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_bassdrum_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_bassdrum_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_bassdrum_b01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_bassdrum_B01_01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_bassdrum_c01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_bassdrum_C01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_christmasviolin_a01_bow.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_christmasviolin_A01_bow.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_christmasviolin_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_christmasviolin_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_clarinet_a01.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 18 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_clarinet_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_clarinet_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_clarinet_c01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_clarinet_c01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_cymbal_l_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_cymbal_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_cymbal_l_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_cymbal_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_cymbal_l_c01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_cymbal_C01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_cymbal_r_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_cymbal_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_cymbal_r_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_cymbal_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_cymbal_r_c01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_cymbal_C01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_elecguitar_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_elecguitar_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_flute_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_flute_A01_D.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_frenchhorn_a.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_FrenchHorn_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_fretlessbass_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_fretlessbass_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_guitar_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_guitar_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_guitar_b01.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 18 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_halloweenbase_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_halloweenbase_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_halloweenclarinet_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_HalloweenClarinet_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_halloweenelec_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_halloweenelec_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_harmonica_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_harmonica_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_marimbar_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_marimbar_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_marimbar_b01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_marimbar_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_melodictom_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_melodictom_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_nationaldayviolin_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_nationaldayviolin_A02.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_nationaldayviolin_a02_bow.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_nationaldayviolin_A02_bow.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_oboe_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_oboe_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_ocarina_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_ocarina_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_ocarina_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_ocarina_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_panflute_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_panflute_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_pinkbeanguitar_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_pinkbeanguitar_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_pizzicato_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_pizzicato_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_ratcello_a01_bow.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_ratcello_A01_bow.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_ratcello_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_ratcello_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_ratviolin_a01_bow.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_ratcello_A01_bow.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_ratviolin_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_ratviolin_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_recorder_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_recorder_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_reputationelec_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_reputationelec_A01_02.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_reputationsaxophone_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_reputationsaxophone_A01_02.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_saxophone_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_saxophone_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_saxophone_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_saxophone_B01_01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_shakuji_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_shakuji_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_shamisen_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_shamisen_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_smalldrum_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_smalldrum_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_smalldrum_b01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_smalldrum_B01_01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_smalldrum_c01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_smalldrum_C01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_steeldrum_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_steeldrum_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_steeldrum_b01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_steeldrum_b01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_tago_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_Tago_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_timpani_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_timpani_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_timpani_b01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_timpani_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_trevacello_a01_bow.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_trevacello_a01_bow.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_trevacello_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_TrevaCello_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_trevaoboe_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_trevaoboe_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_trevapizzicato_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_perform_trevapizzicato_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_trumpet_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_trumpet_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_trumpet_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_trumpet_B01_01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_vibraphone_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibrabphone_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_vibraphone_b01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibrabphone_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_vibraphone_c01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibrabphone_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_vibraphone_d01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibrabphone_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_whitedayvibraphone_a01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibraphone_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_whitedayvibraphone_b01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibraphone_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_whitedayvibraphone_c01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibraphone_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_whitedayvibraphone_d01_stick.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_vibraphone_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_xylophone_a01_stick.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 12."
+    },
+    {
+      "input": "Effect/bg/perform/eff_perform_xylophone_a01.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 14."
+    },
+    {
+      "input": "Effect/bg/perform/music_tronbone_b/eff_perform_trombone_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_trombone_B01_01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/bg/perform/music_tronbone/eff_perform_trombone_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture Eff_perform_trombone_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/cape/eff_mantle_trumpetbabyangel.nif",
+      "category": "NiPSMeshParticleSystem",
+      "error": "Referenced scene block 30 (NiPSMeshParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/eff_randombox_01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture eff_randombox_01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/ca_liftup_train_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ca_liftup_train_a01_m.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_cannonball_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_cannonball_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_chickencage_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_chickencage_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_drum_a01_m.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 78 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_dynamite_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_dynamite_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_gascan_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_gascan_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_shower_a01_l.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_shower_A01_L.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_tire_a01_m.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Effect/item/skill/co_liftup_toilet_a01_l.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_toilet_A01_L.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/eff_objectweapon_bomb2_keep_01_a.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 6 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/he_liftup_egg_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture he_liftup_egg_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/ic_liftup_house_a01_l.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ic_liftup_house_A01_L.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/ke_liftup_bus_a01_l.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/ke_liftup_drum_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_liftup_drum_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/ke_liftup_phonebox_a01_l.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_liftup_phonebox_A01_L.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/ke_liftup_trashcan_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_liftup_trashcan_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/ke_liftup_truck_a01_l.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 46 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/kr_liftup_house_a01_l.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture kr_liftup_house_A01_L.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/lu_liftup_toyball_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture lu_liftup_toyball_a01_m.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/pe_liftup_house_a01_l.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture pe_liftup_house_A01_L.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/pe_liftup_sack_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture pe_liftup_sack_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/pe_liftup_totem_b01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 10 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/sf_liftup_train_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture sf_liftup_train_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/sw_liftup_bottlebox_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture sw_liftup_bottlebox_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Effect/item/skill/sw_liftup_drum_a01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 11 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/0/02/10200230_m_hair_a.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Item/0/02/10200230_m_hair_a.nif: block 12 (HR:0), submesh 0: Invalid NiSkinningMeshModifier reference 39."
+    },
+    {
+      "input": "Item/0/02/10200231_m_hair_a.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Item/0/02/10200231_m_hair_a.nif: block 12 (HR:0), submesh 0: Invalid NiSkinningMeshModifier reference 39."
+    },
+    {
+      "input": "Item/0/02/10200247_m_hair_a.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Item/0/02/10200247_m_hair_a.nif: block 12 (HR:0), submesh 0: Invalid NiSkinningMeshModifier reference 40."
+    },
+    {
+      "input": "Item/0/02/10200251_m_hair_a.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Item/0/02/10200251_m_hair_a.nif: block 12 (HR:0), submesh 0: Invalid NiSkinningMeshModifier reference 39."
+    },
+    {
+      "input": "Item/0/02/10200252_f_hair_a.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Item/0/02/10200252_f_hair_a.nif: block 12 (HR:0), submesh 0: Invalid NiSkinningMeshModifier reference 39."
+    },
+    {
+      "input": "Item/0/02/10200261_f_hair_a.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Item/0/02/10200261_f_hair_a.nif: block 12 (HR0:0), submesh 0: Invalid NiSkinningMeshModifier reference 39."
+    },
+    {
+      "input": "Item/0/02/10200264_m_hair_a.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Item/0/02/10200264_m_hair_a.nif: block 12 (HR:0), submesh 0: Invalid NiSkinningMeshModifier reference 39."
+    },
+    {
+      "input": "Item/0/10/11020395_m_fhwinter01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 26 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300200_c_number04_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300209_c_number06_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300213_c_number07_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300214_c_number05_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300291_c_cpsherlock02_f.nif",
+      "category": "Zero tangent",
+      "error": "Item/1/13/11300291_c_cpsherlock02_f.nif: block 3 (CP), submesh 0: Zero tangent."
+    },
+    {
+      "input": "Item/1/18/11800263_c_mtmaid02.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 201 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11800368_c_mtblackbean.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 84 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Item/1/18/11820079_c_mtfairytale03.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 153 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11820091_c_mthalloween06.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 90 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11820375_c_mttraditionalnative05.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 67 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11820395_c_mtwinter01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 91 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11820423_c_mtwinter02.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 320 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11820427_c_mtuniform04.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 81 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/22/12290491_f_ugcclpamaid01.nif",
+      "category": "Unsupported DDS format",
+      "error": "DDS format \u0000\u0000\u0000\u0000."
+    },
+    {
+      "input": "Item/1/90/19000074_fishingrod074.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 77 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/90/19000076_fishingrod076.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 77 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/interaction/interaction_fragment_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 3 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/interaction/interaction_fragment_a02.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 3 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/co_liftup_drum_b01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_drum_b01_m.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/co_liftup_light_a01_sa.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 9 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/co_liftup_shovel_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_shovel_a01_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/co_liftup_tree_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_tree_A01_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/co_liftup_tree_a02_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture co_liftup_tree_A02_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_bomb_a01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 68 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_bomb_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture he_lfitup_Bomb_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_jellydrum_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture he_liftup_jellydrum_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_kart_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture he_liftup_kart_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_magnet_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture he_liftup_magnet_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/hv_liftup_redlapenta_a01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 54 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/ke_liftup_sign_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_liftup_sign_A01_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ke_liftup_signal_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_fi_prop_signal_A02_Red.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ke_liftup_utilitypole_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_liftup_utilitypole_A01_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/kr_liftup_pot_b01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture kr_liftup_pot_B01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/kr_liftup_stack_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture kr_liftup_stack_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/kr_liftup_stack_a02_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture kr_liftup_stack_A02_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/kr_liftup_statue_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture kr_liftup_statue_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ks_lfitup_plants_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ks_lfitup_plants_B01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ks_lfitup_plants_c01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ks_lfitup_plants_C01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/lu_liftup_hammer_a01_s_.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture lu_liftup_hammer_A01_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/lu_liftup_toyball_a01_m.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture lu_liftup_toyball_A01_M.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/pe_liftup_totem_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture pe_liftup_totem_A01_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ry_liftup_light_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ry_liftup_light_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ry_liftup_toycushion_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ry_liftup_toycushion_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ry_liftup_toycushion_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ry_liftup_toycushion_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ry_liftup_toycushion_c01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ry_liftup_toycushion_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ry_liftup_toycushion_d01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ry_liftup_toycushion_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ry_liftup_toycushion_e01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ry_liftup_toycushion_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/ry_liftup_toycushion_g01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ry_liftup_toycushion_F01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/liftup/sf_liftup_incubator_a01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 55 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/sf_liftup_pipe_a01_sa.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture sf_liftup_pipe_A01_S.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/common/quest/sw_quest_soulbead_b01/sw_quest_soulbead_b01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture sw_quest_soulbead_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/perion/field/pe_fi_struc_ugctent_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture pe_fi_struc_ugctent_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/test/putup/a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_fi_prop_utilitypole_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/test/putup/a04.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ke_fi_prop_utilitypole_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Map/underworld/field/uw_fi_cubric_drum_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture uw_fi_cubric_durm_A01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Npc/02/01/02010009/02010009_vigilancecom.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 80 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/01/02010036/02010036_patos.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 86 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/01/02010040/02010040_rari.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 101 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/01/02010044/02010044_anos.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 83 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020030/02020030_m_fapokrak.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 73 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020033/02020033_m_duckyball.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 42."
+    },
+    {
+      "input": "Npc/02/02/02020034/02020034_m_ducky.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 50."
+    },
+    {
+      "input": "Npc/02/02/02020107/02020107_m_lslime01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020107/02020107_m_lslime02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020107/02020107_m_lslime03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020127/02020127_m_pim.nif",
+      "category": "NiPSMeshParticleSystem",
+      "error": "Referenced scene block 123 (NiPSMeshParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020129/02020129_m_pim.nif",
+      "category": "NiPSMeshParticleSystem",
+      "error": "Referenced scene block 123 (NiPSMeshParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020131/02020131_m_pim.nif",
+      "category": "NiPSMeshParticleSystem",
+      "error": "Referenced scene block 123 (NiPSMeshParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020156/02020156_l_duckywhite.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 50."
+    },
+    {
+      "input": "Npc/02/02/02020182/02020182_m_woodfourblock02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/03/02030005/02030005_balrog_fall_a_camera.nif",
+      "category": "NiCamera",
+      "error": "Referenced scene block 8 (NiCamera) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/03/02030005/02030005_balrog_fall_a.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 135."
+    },
+    {
+      "input": "Npc/02/03/02030006/02030006_balrogfury.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 77 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/03/02030011/02030011_m_patos.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 84 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/05/02050016/02050017_m_scarecrowsandbag02.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 47 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/02/05/02050017/02050017_m_scarecrowsandbag01.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 56 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/02/05/02059990/02059990_m_orangemushroomtest.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture 02020001_M_OrangeMushroom_Face_01.DDS: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Npc/02/dummy/dummy.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/11/11000041/11000041_warrior.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 348 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/11/11000148/11000148_k_normalman2.nif",
+      "category": "Zero-length normal",
+      "error": "Npc/11/11000148/11000148_k_normalman2.nif: block 235 (CL:1), submesh 0: Zero-length normal."
+    },
+    {
+      "input": "Npc/11/11000154/11000154_k_normalwoman4.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 255 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000220/11000220_worker1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 259 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000222/11000222_worker2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 220 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000449/11000449_armed_woman.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 369 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000474/11000474_roulette1.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/11/11000491/11000491_cathykatalina.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 43 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000505/11000505_mafia1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 268 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000508/11000508_enchantmaster1.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 79 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000509/11000509_enchantmaster2.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 79 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000510/11000510_enchantmaster3.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 79 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000514/11000514_prisongovernor1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 312 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000515/11000515_trader1.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Npc/11/11000515/11000515_trader1.nif: block 107 (Editable Mesh), submesh 0: Invalid NiSkinningMeshModifier reference 135."
+    },
+    {
+      "input": "Npc/11/11000519/11000519_maleprisonguard2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 105 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000547/11000547_vigilancecom_rest.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 73 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000547/11000547_vigilancecom_restdown_idle_b.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 212 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000638/11000638_prisonerwoman2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 254 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000747/11000747_broker1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000748/11000748_broker2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000749/11000749_broker3.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000750/11000750_broker4.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000874/11000874_turtlewhiz.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 290 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000886/11000886_rabbit2.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/11/11000886/11000886_rabbit2.nif: block 47 (FA), submesh 0: FA: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/11/11001218/11001218_f_tara.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 126 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001518/11001518_m_newschool_coupon.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 45 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001519/11001519_f_newschool_coupon.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 46 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001521/11001521_f_expeditionsoldier2.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 83 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001560/11001560_m_vision.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 511 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001879/11001879_wholeride_sportscar05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 364 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001880/11001880_wholeride_poclain01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 362 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001881/11001881_wholeride_flamebike02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 159 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001882/11001882_wholeride_slime01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 332 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003447/11003447_anosptos.nif",
+      "category": "Non-finite transform",
+      "error": "Npc/11/11003447/11003447_anosptos.nif: block 51 (NiNode): Non-finite float at 14."
+    },
+    {
+      "input": "Npc/11/11003553/11003553_f_navy01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 115 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003587/11003587_happybirthcake.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 11 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003588/11003588_happybirthducky.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 27 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003717/11003717_m_madin.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 303 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004102/11004102_crow.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 46 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/11/11004215/11004215_chest.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 54 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004216/11004216_chest.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 3 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004351/11004351_m_georgofficer.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 72 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004352/11004352_m_georgsoldier.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004388/11004388_m_rafale.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004392/11004392_f_cladia_chair.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/11/11004727/11004727_m_darkmatter.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 463 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004744/11003368_m_baron_quest_prison_a.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/11/11004870/11004870_m_darkmatter.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 463 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000134/21000134_m_cube3x3black.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000141/21000141_m_mummycuteboyblue.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/21/21000141/21000141_m_mummycuteboyblue.nif: block 122 (21000141_M_MummyCuteBoyBlue), submesh 0: 21000141_M_MummyCuteBoyBlue: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/21/21000142/21000142_m_mummycutegirlblue.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/21/21000142/21000142_m_mummycutegirlblue.nif: block 77 (21000142_M_MummyCuteGirlBlue), submesh 0: 21000142_M_MummyCuteGirlBlue: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/21/21000605/21000605_m_chesspieceskingsilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 70 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000608/21000608_m_chesspiecesqueensilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 73 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000611/21000611_m_chesspiecesrooksilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000617/21000617_m_chesspiecespawnsilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 39 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000668/21000668_m_catsphinxnormal.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 48."
+    },
+    {
+      "input": "Npc/21/21000669/21000669_m_catsphinxblack.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 48."
+    },
+    {
+      "input": "Npc/21/21000670/21000670_m_catsphinxpink.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 48."
+    },
+    {
+      "input": "Npc/21/21000671/21000671_m_catsphinxbrown.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 48."
+    },
+    {
+      "input": "Npc/21/21000672/21000672_m_catsphinxwhite.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 48."
+    },
+    {
+      "input": "Npc/21/21000678/21000678_m_anubisguardnormal.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 80."
+    },
+    {
+      "input": "Npc/21/21000679/21000679_m_anubisguardblue.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 80."
+    },
+    {
+      "input": "Npc/21/21000680/21000680_m_anubisguardsilver.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 80."
+    },
+    {
+      "input": "Npc/21/21000681/21000681_m_anubisguardgreen.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 80."
+    },
+    {
+      "input": "Npc/21/21000682/21000682_m_anubisguardpurple.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 80."
+    },
+    {
+      "input": "Npc/21/21000732/21000732_m_constructrobottongsyellow.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/21/21000733/21000733_m_constructrobottongsred.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/21/21000734/21000734_m_constructrobottongsblue.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/21/21000747/21000747_m_floccusrabbitwhite.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000748/21000748_m_floccusrabbitorange.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000749/21000749_m_floccusrabbityellow.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000750/21000750_m_floccusrabbitblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000751/21000751_m_floccusrabbitdarkblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000752/21000752_m_skipenguindarkblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000753/21000753_m_skipenguinblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000754/21000754_m_skipenguinpink.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000755/21000755_m_skipenguinpurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000756/21000756_m_skipenguingreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000757/21000757_m_iceduckyellow.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000758/21000758_m_iceduckblack.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000759/21000759_m_iceduckblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000760/21000760_m_iceduckwhite.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000772/21000772_m_iceducknormal.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000803/21000803_m_airobotnormalwhite.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/21/21000804/21000804_m_airobotnormalblack.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/21/21000805/21000805_m_airobotnormalgold.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/21/21000825/21000825_m_walrusnormal.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/21/21000825/21000825_m_walrusnormal.nif: block 26 (Editable Mesh), submesh 0: Editable Mesh: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/21/21000826/21000826_m_walrusscar.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/21/21000826/21000826_m_walrusscar.nif: block 26 (Editable Mesh), submesh 0: Editable Mesh: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/21/21000827/21000827_m_walrusice.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/21/21000827/21000827_m_walrusice.nif: block 26 (Editable Mesh), submesh 0: Editable Mesh: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/21/21000932/21000932_m_darkspirithorn.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 149 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000933/21000933_m_darkspiritscythe.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 149 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000934/21000934_m_darkspiritspike.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 149 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000988/21000988_m_gargoylenormal.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/21/21000988/21000988_m_gargoylenormal.nif: block 97 (FA), submesh 0: FA: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/21/21000991/21000991_m_statuehuman01.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 61."
+    },
+    {
+      "input": "Npc/21/21000992/21000992_m_statuehuman02.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 59."
+    },
+    {
+      "input": "Npc/21/21000995/21000995_m_statuehuman03.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 48."
+    },
+    {
+      "input": "Npc/21/21000997/21000997_m_statuehuman04.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 12."
+    },
+    {
+      "input": "Npc/21/21001036/21001036_m_redcrystaltower.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 326 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/21/21001037/21001037_m_miniredcrystaltower.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 113 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/21/21001042/21001042_m_holyspirithorn.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 327 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21001043/21001043_m_holyspiritscythe.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 319 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21001044/21001044_m_holyspiritspike.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 319 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010069/21010069_m_tyrensoldierknuckle.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 134 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010070/21010070_m_tyrensoldierrifle.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 91 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010071/21010071_m_tyrensoldierwand.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 91 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010072/21010072_n_tyrensoldierclaymore.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010073/21010073_m_tyrensoldierknucklegreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 134 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010074/21010074_m_tyrensoldierriflegreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010075/21010075_m_tyrensoldierwandgreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 133 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010076/21010076_n_tyrensoldierclaymoregreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010077/21010077_m_tyrensoldierknucklepurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 134 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010078/21010078_m_tyrensoldierriflepurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 133 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010079/21010079_m_tyrensoldierwandpurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 133 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010080/21010080_n_tyrensoldierclaymorepurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21430201/21430201_m_bluelapenta.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/21/21800901/21800901_m_crossbowgreenhood.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 30."
+    },
+    {
+      "input": "Npc/21/21800910/21800910_m_cannonweaponnormal.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 30 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/21/21800960/21800960_m_cannonweaponairship.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 30 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/21/21900136/21900136_m_georgsoldier.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000051/22000051_n_cerberostallpurple.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/22/22000051/22000051_n_cerberostallpurple.nif: block 88 (FA), submesh 0: FA: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/22/22000052/22000052_n_cerberostallgreen.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/22/22000052/22000052_n_cerberostallgreen.nif: block 88 (FA), submesh 0: FA: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/22/22000103/22000103_n_babylionblue.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 64 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000104/22000104_n_babylionred.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 64 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000105/22000105_n_changelionblue.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 92 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000106/22000106_n_changelionred.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 92 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000112/22000112_n_gargoyleironmace.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/22/22000112/22000112_n_gargoyleironmace.nif: block 77 (Editable Mesh), submesh 0: Editable Mesh: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/23/23000003/23000003_b_slimeangelrainbow.nif",
+      "category": "Missing bone palette",
+      "error": "Npc/23/23000003/23000003_b_slimeangelrainbow.nif: block 69 (FA), submesh 0: FA: missing or invalid BONE_PALETTE:0."
+    },
+    {
+      "input": "Npc/23/23000011/23000011_b_lizarddragonfire.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/23/23000051/23000051_b_knighthollowarmorswordwhite.nif",
+      "category": "Unsupported primitive type",
+      "error": "Npc/23/23000051/23000051_b_knighthollowarmorswordwhite.nif: block 21 (Editable Mesh), submesh 0: Editable Mesh: primitive type 1, expected triangles."
+    },
+    {
+      "input": "Npc/23/23000052/23000052_b_knighthollowarmorswordred.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 335 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23000071/23000071_b_zakumbrown.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 32."
+    },
+    {
+      "input": "Npc/23/23000082/23000082_b_kandurabigburster.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 637 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23000097/23000097_b_carparadeblackbean.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 492 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23000098/23000098_b_carparadeblackbeanbroken.nif",
+      "category": "Missing bone palette",
+      "error": "Npc/23/23000098/23000098_b_carparadeblackbeanbroken.nif: block 387 (EYA:0), submesh 0: EYA:0: missing or invalid BONE_PALETTE:0."
+    },
+    {
+      "input": "Npc/23/23401071/23401071_b_zakumbrown01.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 28."
+    },
+    {
+      "input": "Npc/23/23402071/23402071_b_zakumbrown02.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 28."
+    },
+    {
+      "input": "Npc/23/23403071/23403071_b_zakumbrown03.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 28."
+    },
+    {
+      "input": "Npc/23/23404071/23404071_b_zakumbrown04.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 28."
+    },
+    {
+      "input": "Npc/23/23405071/23405071_b_zakumbrown05.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 28."
+    },
+    {
+      "input": "Npc/23/23406071/23406071_b_zakumbrown06.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 28."
+    },
+    {
+      "input": "Npc/23/23500140/23500140_b_mushroomrichking_cake01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 125 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23500150/23500150_b_mushroomrichking_cake02.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 124 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23500160/23500160_b_mushroomrichking_cake03.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 181 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/24/24120004/24120004_m_lightcircle.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/50/50400282/50400282_slime_a01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 66 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400282/50400282_slime_b01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 66 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400282/50400282_slime_c01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 68 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400283/50400283_unicorn.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 57 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/50/50400284/50400284_axolotl.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 56 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/50/50400309/50400309_pumpkindevil.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 233 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400341/50400341_ghostcat.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 105 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/52/52000002/co_skillobj_octopus_b01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 49 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/52/52000006/52000006_damagemeter_snowman_a01.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 45 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/90/90001318_m_mafia4/90001318_m_mafia4.nif",
+      "category": "Unsupported mesh modifier",
+      "error": "Npc/90/90001318_m_mafia4/90001318_m_mafia4.nif: block 323 (HR:0), submesh 0: Invalid NiSkinningMeshModifier reference 351."
+    },
+    {
+      "input": "Npc/90/90002021_m_immunebodywhite/90002021_m_immunebodywhite.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 28."
+    },
+    {
+      "input": "Npc/90/90002022_m_immunebodyblack/90002022_m_immunebodyblack.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 30."
+    },
+    {
+      "input": "Npc/bg_obj/11000351_functionmirror/11000351_functionmirror.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 40 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/co_fi_prop_stick_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 34 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/co_fi_prop_stick_a02.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 18 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/co_fi_prop_stick_a03.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 18 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/co_fi_prop_stick_a04.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 18 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/co_fi_prop_stick_a05.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 18 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/msb_02020025_pim/msb_02020025_pim.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 18 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/msb_02030013_ghostump/msb_02030013_ghostump.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 18 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_a01.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 46 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_a02.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 46 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_a03.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 43 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_a04.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 43 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_b01.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 28 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_b02.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 28 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_b03.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 45 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/bg_obj/tr_in_prop_designitem_b04.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 45 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/etc/20910001_ugc_jeep_01/20910001_ugc_jeep_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 44 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/20910002_ugc_nakedbeast_01/20910002_ugc_nakedbeast_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600170_ugc_fordecosport/50600170_ugc_fordecosport.nif",
+      "category": "Missing bone palette",
+      "error": "Npc/etc/50600170_ugc_fordecosport/50600170_ugc_fordecosport.nif: block 47 (FordEocsport_01_gla), submesh 0: FordEocsport_01_gla: missing or invalid BONE_PALETTE:0."
+    },
+    {
+      "input": "Npc/etc/50600188_ugc_habi01/50600188_ugc_habi01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 281 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600195_ugc_dragonchair/50600195_ugc_dragonchair.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 305 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600197_r_bobsleigh/50600197_r_bobsleigh.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 10 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600203_ugc_bjmike/50600203_ugc_bjmike.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600215_ugc_rickshaws_01/50600215_ugc_rickshaws_01.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 36."
+    },
+    {
+      "input": "Npc/etc/50600217_ugc_vampirehorse/50600217_ugc_vampirehorse.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 112 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600228_r_weddingcar/50600228_r_weddingcar.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 37 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600242_ugc_halloweencart/50600242_ugc_halloweencart.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 83."
+    },
+    {
+      "input": "Npc/etc/50600254_r_alienrobot/50600254_r_alienrobot.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 82 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600268_r_fatcat/50600268_r_fatcat.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 58 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600298_r_secretsafe/50600298_r_secretsafe.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 39 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600306_r_enchantmaster3/50600306_r_enchantmaster3.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 80 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600322_r_electricwheel/50600322_r_electricwheel.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 43 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600330_r_shoppingcart/50600330_r_shoppingcart.nif",
+      "category": "NiPhysXProp",
+      "error": "Referenced scene block 286 (NiPhysXProp) is not supported."
+    },
+    {
+      "input": "Npc/etc/dummy_b_airshipbalrogcrimson_01/dummy_b_airshipbalrogcrimson_01.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/etc/ks_quest_truck_a01/ks_quest_truck_a01.nif",
+      "category": "Missing or ambiguous external texture",
+      "error": "Texture ks_fi_prop_truck_a01.dds: expected one match under Maple2Storage/Resources/Models/Textures, found 0."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_catsphinxnormal/ugc_catsphinxnormal.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 48."
+    },
+    {
+      "input": "Npc/etc/ugc_classikcar/50600205_ugc_classikcar.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 104 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_adtruck_01/ugc_design_adtruck_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 64 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_bonito_01/ugc_design_bonito_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_campervan_01/ugc_design_campervan_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 70 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_equiria_01/ugc_design_equiria_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_f1racingcar_01/ugc_design_f1racingcar_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_intimo_01/ugc_design_intimo_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 62 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_jeep_npc/ugc_design_jeep_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 101 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_naked_01/ugc_design_naked_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 171 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_poclain_01/ugc_design_poclain_01.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 69."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 66 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 66 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 66 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_06.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_firrothparde/ugc_firrothparde.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/etc/ugc_flamebike_npc/ugc_flamebike_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 61 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flamebike_npc/ugc_flamebike_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 61 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flamebike_npc/ugc_flamebike_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 61 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_infernohorse/ugc_infernohorse.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 179 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 77 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 49 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 77 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 77 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 47 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_poclain/ugc_poclain_01.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 56."
+    },
+    {
+      "input": "Npc/etc/ugc_poclain/ugc_poclain_02.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 56."
+    },
+    {
+      "input": "Npc/etc/ugc_poclain/ugc_poclain_03.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 56."
+    },
+    {
+      "input": "Npc/etc/ugc_poclain/ugc_poclain_04.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 56."
+    },
+    {
+      "input": "Npc/etc/ugc_poclain/ugc_poclain_05.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 56."
+    },
+    {
+      "input": "Npc/etc/ugc_ride2_emptyride2/ugc_ride2_emptyride2.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/etc/ugc_ride2_floccusrabbityellow/21000749_m_floccusrabbityellow_ride2type.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_robotoffense_01/ugc_robotoffense_01.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/etc/ugc_scrooser/ugc_scrooser.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_skateboard2/ugc_skateboard2.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 11 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 89 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 86 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_unicorn/ugc_unicorn.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 61 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_zakumwalkingarm/ugc_zakumwalkingarm.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 44."
+    },
+    {
+      "input": "Npc/pet/60000010_newyearchick_01/60000010_newyearchick_01.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 54 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/pet/60000055_springfairy/60000055_springfairy.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 188 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/pet/61000010_lizarddragonfire/61000010_lizarddragonfire.nif",
+      "category": "UV texture transform",
+      "error": "UV texture transform."
+    },
+    {
+      "input": "Npc/pet/61100011_kylin_01/61100011_kylin_01.nif",
+      "category": "NiPSParticleSystem",
+      "error": "Referenced scene block 119 (NiPSParticleSystem) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/pet/61100146_pet_zakumwalkingarm/61100146_pet_zakumwalkingarm.nif",
+      "category": "Embedded texture",
+      "error": "Embedded texture at block 35."
+    },
+    {
+      "input": "Npc/pet/62000013_wukong/62000013_wukong.nif",
+      "category": "NiSortAdjustNode",
+      "error": "Referenced scene block 111 (NiSortAdjustNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    }
+  ]
+}

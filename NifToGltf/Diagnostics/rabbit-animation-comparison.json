@@ -1,0 +1,273 @@
+{
+  "method": "Native interpolation evaluated at Noesis keys; transforms remain in source coordinates.",
+  "clips": [
+    {
+      "clip": "attack_01_a",
+      "compared_tracks": 56,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 8.298750110704077e-05,
+        "translation_source_units": 3.814697265625e-05,
+        "scale": 1.1920928955078125e-07
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 0.800000011920929
+        },
+        "rotation_degrees": {
+          "node": "Ear_R_Bone03",
+          "time": 0.800000011920929
+        },
+        "scale": {
+          "node": "Weapon_R_Point02",
+          "time": 0.2666666805744171
+        }
+      }
+    },
+    {
+      "clip": "attack_02_a",
+      "compared_tracks": 54,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 0.0007678667595133777,
+        "translation_source_units": 2.294778823852539e-05,
+        "scale": 1.1920928955078125e-07
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 1.0
+        },
+        "rotation_degrees": {
+          "node": "Ear_R_Bone03",
+          "time": 1.600000023841858
+        },
+        "scale": {
+          "node": "Weapon_R_Point02",
+          "time": 1.5333333015441895
+        }
+      }
+    },
+    {
+      "clip": "attack_idle_a",
+      "compared_tracks": 51,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 8.833153862249631e-05,
+        "translation_source_units": 1.52587890625e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "rotation_degrees": {
+          "node": "Ear_R_Bone02",
+          "time": 1.2333333492279053
+        },
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 0.2666666805744171
+        }
+      }
+    },
+    {
+      "clip": "bore_a",
+      "compared_tracks": 52,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 0.0007559576264918939,
+        "translation_source_units": 0.0002384185791015625,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Weapon_R_Point01",
+          "time": 6.733333110809326
+        },
+        "rotation_degrees": {
+          "node": "Bip01 L Calf",
+          "time": 7.900000095367432
+        }
+      }
+    },
+    {
+      "clip": "damg_a",
+      "compared_tracks": 53,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 3.622254809177215e-05,
+        "translation_source_units": 1.52587890625e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 0.06666667014360428
+        },
+        "rotation_degrees": {
+          "node": "Ear_L_Bone06",
+          "time": 0.10000000149011612
+        }
+      }
+    },
+    {
+      "clip": "damg_b",
+      "compared_tracks": 49,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 4.306270419866663e-05,
+        "translation_source_units": 3.0517578125e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 0.03333333507180214
+        },
+        "rotation_degrees": {
+          "node": "Ear_L_Bone04",
+          "time": 0.2666666805744171
+        }
+      }
+    },
+    {
+      "clip": "dead_a",
+      "compared_tracks": 47,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 7.63638364166583e-05,
+        "translation_source_units": 1.52587890625e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Weapon_R_Point01",
+          "time": 0.1666666716337204
+        },
+        "rotation_degrees": {
+          "node": "Bip01",
+          "time": 0.9666666388511658
+        }
+      }
+    },
+    {
+      "clip": "dead_b",
+      "compared_tracks": 51,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 6.942392563728479e-05,
+        "translation_source_units": 4.1961669921875e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Bip01",
+          "time": 1.100000023841858
+        },
+        "rotation_degrees": {
+          "node": "Ear_L_Bone07",
+          "time": 1.0666667222976685
+        }
+      }
+    },
+    {
+      "clip": "idle_a",
+      "compared_tracks": 53,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 1.2429489891286025,
+        "translation_source_units": 1.52587890625e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 1.2333333492279053
+        },
+        "rotation_degrees": {
+          "node": "Point01",
+          "time": 1.2999999523162842
+        }
+      }
+    },
+    {
+      "clip": "regen_a",
+      "compared_tracks": 51,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 9.758449770090216e-05,
+        "translation_source_units": 3.0517578125e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 0.5666666626930237
+        },
+        "rotation_degrees": {
+          "node": "Bip01 R Foot",
+          "time": 0.9666666388511658
+        }
+      }
+    },
+    {
+      "clip": "run_a",
+      "compared_tracks": 52,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 3.9495683302510704e-05,
+        "translation_source_units": 1.33514404296875e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "rotation_degrees": {
+          "node": "Weapon_R_Point01",
+          "time": 0.2666666805744171
+        },
+        "translation_source_units": {
+          "node": "Weapon_R_Point01",
+          "time": 0.4333333373069763
+        }
+      }
+    },
+    {
+      "clip": "stun_a",
+      "compared_tracks": 50,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 6.099553964699637e-05,
+        "translation_source_units": 7.62939453125e-06,
+        "scale": 0
+      },
+      "worst_sample": {
+        "rotation_degrees": {
+          "node": "Ear_L_Bone04",
+          "time": 0.3333333432674408
+        },
+        "translation_source_units": {
+          "node": "Hat_Point01",
+          "time": 0.03333333507180214
+        }
+      }
+    },
+    {
+      "clip": "walk_a",
+      "compared_tracks": 48,
+      "missing_native_tracks": [],
+      "maximum_error": {
+        "rotation_degrees": 0.00013074728755970875,
+        "translation_source_units": 1.52587890625e-05,
+        "scale": 0
+      },
+      "worst_sample": {
+        "translation_source_units": {
+          "node": "Weapon_R_Point01",
+          "time": 1.0
+        },
+        "rotation_degrees": {
+          "node": "Bip01 R Calf",
+          "time": 1.0
+        }
+      }
+    }
+  ]
+}
