@@ -5,8 +5,13 @@ using System.Text;
 namespace NifToGltf.Native;
 
 // Base mip only. Unsupported DDS storage fails explicitly instead of emitting a bad texture.
+internal sealed record TexturePixels(int Width, int Height, byte[] Rgba) {
+    public byte[] ToPng() => DdsTexture.Png(Width, Height, Rgba);
+}
+
 internal static class DdsTexture {
-    public static byte[] ToPng(byte[] dds) {
+    public static byte[] ToPng(byte[] dds) => Decode(dds).ToPng();
+    public static TexturePixels Decode(byte[] dds) {
         if (dds.Length < 128 || Encoding.ASCII.GetString(dds, 0, 4) != "DDS ") {
             throw new InvalidDataException("Invalid DDS header.");
         }
@@ -14,18 +19,55 @@ internal static class DdsTexture {
         int width = checked((int) BinaryPrimitives.ReadUInt32LittleEndian(dds.AsSpan(16)));
         if (width <= 0 || height <= 0 || width > 16384 || height > 16384) throw new InvalidDataException("Invalid DDS dimensions.");
         string format = Encoding.ASCII.GetString(dds, 84, 4);
-        if (format is not ("DXT1" or "DXT3" or "DXT5")) throw new NotSupportedException($"DDS format {format}.");
+        if (format is not ("DXT1" or "DXT3" or "DXT5")) {
+            uint flags = BinaryPrimitives.ReadUInt32LittleEndian(dds.AsSpan(80));
+            if ((flags & 0x40) == 0 || (flags & 4) != 0) throw new NotSupportedException($"DDS pixel flags 0x{flags:X}, FourCC {format}.");
+            int bits = checked((int) BinaryPrimitives.ReadUInt32LittleEndian(dds.AsSpan(88)));
+            uint[] masks = Enumerable.Range(0, 4).Select(i => BinaryPrimitives.ReadUInt32LittleEndian(dds.AsSpan(92 + i * 4))).ToArray();
+            uint headerFlags = BinaryPrimitives.ReadUInt32LittleEndian(dds.AsSpan(8));
+            int pitch = (headerFlags & 8) != 0 ? checked((int) BinaryPrimitives.ReadUInt32LittleEndian(dds.AsSpan(20))) : checked(width * bits / 8);
+            return new TexturePixels(width, height, DecodeRgb(dds.AsSpan(128), width, height, bits, pitch, masks));
+        }
+        return new TexturePixels(width, height, DecodeCompressed(dds.AsSpan(128), width, height, format));
+    }
+    public static byte[] DecodeCompressed(ReadOnlySpan<byte> data, int width, int height, string format) {
+        if (width <= 0 || height <= 0 || width > 16384 || height > 16384) throw new InvalidDataException("Invalid texture dimensions.");
+        if (format is not ("DXT1" or "DXT3" or "DXT5")) throw new NotSupportedException($"Compression {format}.");
         byte[] pixels = new byte[checked(width * height * 4)];
-        int offset = 128;
+        int offset = 0;
         int size = format == "DXT1" ? 8 : 16;
         for (int y = 0; y < height; y += 4) {
             for (int x = 0; x < width; x += 4) {
-                if (offset + size > dds.Length) throw new InvalidDataException("Truncated DDS mip.");
-                DecodeBlock(dds.AsSpan(offset, size), format, pixels, width, height, x, y);
+                if (offset + size > data.Length) throw new InvalidDataException("Truncated DDS mip.");
+                DecodeBlock(data.Slice(offset, size), format, pixels, width, height, x, y);
                 offset += size;
             }
         }
-        return Png(width, height, pixels);
+        return pixels;
+    }
+    public static byte[] DecodeRgb(ReadOnlySpan<byte> data, int width, int height, int bits, int pitch, uint[] masks) {
+        if (width <= 0 || height <= 0 || width > 16384 || height > 16384 || bits is not (16 or 24 or 32) || masks.Length != 4 ||
+            pitch < checked(width * bits / 8) || data.Length < checked(pitch * height)) throw new InvalidDataException("Invalid RGB texture layout.");
+        uint used = 0;
+        foreach (uint mask in masks) {
+            if ((mask & used) != 0 || (bits < 32 && (mask >> bits) != 0)) throw new InvalidDataException("Overlapping/out-of-range RGB masks.");
+            used |= mask;
+            if (mask == 0) continue;
+            uint shifted = mask >> System.Numerics.BitOperations.TrailingZeroCount(mask);
+            if ((shifted & (shifted + 1)) != 0) throw new NotSupportedException("Non-contiguous RGB mask.");
+        }
+        byte[] pixels = new byte[checked(width * height * 4)];
+        for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
+            uint value = 0;
+            for (int i = 0; i < bits / 8; i++) value |= (uint) data[y * pitch + x * bits / 8 + i] << (i * 8);
+            for (int c = 0; c < 4; c++) {
+                uint mask = masks[c];
+                int shift = System.Numerics.BitOperations.TrailingZeroCount(mask);
+                pixels[(y * width + x) * 4 + c] = mask == 0 ? (byte) (c == 3 ? 255 : 0) :
+                    (byte) ((((ulong) (value & mask) >> shift) * 255 + (mask >> shift) / 2) / (mask >> shift));
+            }
+        }
+        return pixels;
     }
     private static void DecodeBlock(ReadOnlySpan<byte> block, string format, byte[] pixels, int width, int height, int x, int y) {
         int colorOffset = format == "DXT1" ? 0 : 8;
@@ -70,7 +112,8 @@ internal static class DdsTexture {
         int r = value >> 11, g = (value >> 5) & 63, b = value & 31;
         return [(byte) ((r << 3) | (r >> 2)), (byte) ((g << 2) | (g >> 4)), (byte) ((b << 3) | (b >> 2)), 255];
     }
-    private static byte[] Png(int width, int height, byte[] pixels) {
+    public static byte[] Png(int width, int height, byte[] pixels) {
+        if (pixels.Length != checked(width * height * 4)) throw new InvalidDataException("Invalid RGBA pixel count.");
         using MemoryStream output = new();
         output.Write(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 });
         byte[] header = new byte[13];

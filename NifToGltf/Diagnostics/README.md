@@ -8,6 +8,91 @@ for commands, verification results and the remaining fidelity requirements.
 
 ## Reproduce
 
+### Supported simulator release
+
+The local candidate is
+`../MapleStory2-Handbook/static/gltf/simulator-release-02/`. It includes portable
+models, exact item/body catalog, customization, face pixels, backgrounds,
+`coverage.json`, `appearance-review.json` and a SHA256 inventory. There are 46
+reviewed item/body entries, 54 previews and 12 unavailable entries. Conversion
+alone never sets the reviewed status.
+
+Run from the backend root with the existing extracted client resources:
+
+```powershell
+NifToGltf/Diagnostics/build_simulator.ps1 -Output NifToGltf/obj/simulator-reproduced-release -Work NifToGltf/obj/simulator-reproduce-01
+```
+
+That exact command was exercised and reproduced all 552 inventoried files.
+Choose new output/work paths on later runs; existing directories are preserved.
+The script does not publish. `simulator-review.json` pins the inspected catalog,
+model bytes and customization textures. Changed inputs fail the review gate;
+do not replace its hashes merely to make a build pass. Render changed assets
+and record a new review/version first.
+
+Required source layout under `Maple2Storage/Resources/`:
+
+- `Models/Character/{male,female}/` and `Models/Textures/`: our existing body,
+  six-clip and DDS exports from the installed client.
+- `SimulatorSources/Xml/`: itemmodel XML, emotion imports/common sequences,
+  colorpalette.xml. The client source is `D:/MS2/KMS2 Debug/Data/Xml.m2d`.
+- `SimulatorSources/Item/`: exact item-model paths selected by
+  `simulator_library.py prepare` from `Resource/Model/Item.m2d`.
+- `SimulatorSources/HairForms/`: eight exact C/D NIFs listed in
+  `simulator-hair-plan.json`, from the same Item archive.
+- `SimulatorSources/Face/item_face/`: the extracted source face DDS textures.
+- `SimulatorSources/Background/bg/`: bg_blue.dds, bg_henesys_a.dds and
+  bg_ellinia_a.dds from `Resource/Image.m2d`.
+
+The archive helper's list-only mode creates the required exact-path NIF index:
+
+```powershell
+dotnet run --no-build --project NifToGltf.Archives -- 'D:/MS2/KMS2 Debug/Data/Resource/Model/Item.m2d' '\.nif$' | Set-Content NifToGltf/obj/research/simulator-item-index.json
+```
+
+Extraction requires an empty destination and writes path/length/SHA256 receipts.
+Do not overwrite existing client archives. `prepare` writes the candidate batch
+plan and extraction regex. Missing sources, ambiguous URNs and unsupported
+native parts remain explicit failures. The candidate native batch's nonzero
+exit is expected for its twelve rejected parts; the release gate separately
+requires every approved item to exist unchanged.
+
+Verification used:
+
+```powershell
+dotnet run --project NifToGltf.Tests -- Maple2Storage/Resources/Models/Character/female/f_body.nif
+py -B -m unittest discover -s NifToGltf/Diagnostics -p 'test_*.py'
+node NifToGltf/Diagnostics/validate_gltf.cjs ../MapleStory2-Handbook/static/gltf/simulator-release-02 NifToGltf/obj/simulator-06/release-validation.json
+```
+
+In the frontend root:
+
+```powershell
+$env:SIMULATOR_LIBRARY_DIR='static/gltf/simulator-release-02'
+$env:NATIVE_ACCEPTANCE_DIR='static/gltf/native-acceptance-06'
+pnpm exec vitest run tests/nativeAssets.test.ts tests/sharedSkeleton.test.ts tests/nativeOutfitAssets.test.ts tests/bodyVisibility.test.ts tests/materialColors.test.ts tests/skinColors.test.ts tests/outfitCatalog.test.ts tests/simulatorLibrary.test.ts
+pnpm check
+pnpm build
+```
+
+Results: 31 C#, 11 Python and 156 focused frontend tests pass; 124 GLTFs have
+zero validator errors/warnings; typecheck and production build pass. The local
+build log is `NifToGltf/obj/research/simulator-production-build.log`. Existing package/chunk warnings and
+the unrelated nested `unescapeHtml.test.ts` failure do not represent a clean
+whole-project suite. Direct T3 outfit, expression, dye, background and PNG
+evidence is recorded in the review and [STATUS.md](../Native/STATUS.md).
+
+For later authorized publishing, upload this one versioned directory under the
+configured model URL and deploy the matching frontend build. Serve JSON as
+application/json, GLTF as model/gltf+json and images with their image MIME type.
+Use CORS for the Handbook origin and immutable caching for this versioned
+prefix. Never overwrite it in place. Local responses were checked; actual CDN
+headers, deployed configuration and production outfit/PNG flows remain untested
+until publishing is authorized. Other Noesis, NPC and map workflows remain as
+they were.
+
+### Converter diagnostics
+
 From the backend repository root on Windows:
 
 ```powershell
@@ -82,6 +167,52 @@ footer references, block type bounds, and empty input. They validate the
 survey only. They do not validate geometry, skinning, materials or animation.
 
 ## Native validation and reference comparison
+
+The continuation's current scoped results are in
+[non-effect-results.json](non-effect-results.json): 2,626 converted, one explicit
+effect exclusion, two missing assets and 201 failures. All converted outputs
+have zero validator errors/warnings. The older `batch-results.json` is retained
+as the baseline of 2,359 conversions and 471 rejections.
+
+`inspect_nif.py` exposes named scene blocks and texture references for source
+inspection. `texture_inventory.py` scans every external texture reference;
+it does not stop after the first missing material. `create_scope_plan.py` adds
+only the evidenced exclusions in `scope-exclusions.json`. These diagnostics
+have nine passing Python tests in total with the original scanner tests.
+
+```powershell
+py -B NifToGltf/Diagnostics/texture_inventory.py Maple2Storage/Resources/Models --textures Maple2Storage/Resources/Models/Textures Maple2Storage/Resources/NativeSources Maple2Storage/Resources/NativeRecovery-05 --output NifToGltf/obj/research/texture-inventory.json
+py -B NifToGltf/Diagnostics/create_scope_plan.py Maple2Storage/Resources/Models --output NifToGltf/obj/research/scope-plan.json
+```
+
+The optional `NifToGltf.Archives` CLI uses the existing Maple2.File parser
+package to read installed M2D/M2H pairs. It never overwrites an extraction
+directory. Omit the output argument to list matching entries without writing:
+
+```powershell
+dotnet run --project NifToGltf.Archives -- 'D:/MS2/KMS2 Debug/Data/Resource/Model/Character.m2d' '(female|male)/(idle_a|fitting_idle_a|walk_a|run_a|emotion_dance_t|emotion_dance_v)\.kf$'
+```
+
+Add a new empty output directory as the third argument to extract. Each output
+includes an `extraction-report.json` with relative names, lengths and SHA256.
+The Character archive contains the previously missing player animations.
+DDS recovery searched Textures, Effect, Map, Item, Npc and Character in both
+installed clients. See `Native/STATUS.md` for the four unresolved texture names.
+
+The tracked `acceptance-plan.json` exports twelve body, equipment, NPC and map
+fixtures. Its `itemModel` entries consume copied source XML under NativeSources.
+In the frontend, run the actual shared-skeleton fixture tests against that output:
+
+```powershell
+$env:NATIVE_ACCEPTANCE_DIR='static/gltf/native-acceptance-03'
+pnpm exec vitest run tests/nativeAssets.test.ts tests/sharedSkeleton.test.ts tests/nativeOutfitAssets.test.ts
+```
+
+Those tests skip the external fixtures when the environment variable is absent.
+They compare deformation numerically; they do not establish material appearance.
+Use `/outfits` and the normal item/NPC viewer for the remaining visual checks.
+
+### Baseline commands and historical evidence
 
 The C# runner in `NifToGltf.Tests` validates geometry, skinning, interpolation,
 attachment and merged animations. Khronos validation additionally checked all

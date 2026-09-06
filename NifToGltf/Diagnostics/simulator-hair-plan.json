@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "10200230-male-c",
+      "input": "SimulatorSources/HairForms/0/02/10200230_m_hair_c.nif",
+      "output": "male/10200230/c.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/male/m_body.nif"
+    },
+    {
+      "id": "10200230-male-d",
+      "input": "SimulatorSources/HairForms/0/02/10200230_m_hair_d.nif",
+      "output": "male/10200230/d.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/male/m_body.nif"
+    },
+    {
+      "id": "10200224-female-c",
+      "input": "SimulatorSources/HairForms/0/02/10200224_f_freeconcept010_c.nif",
+      "output": "female/10200224/c.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/female/f_body.nif"
+    },
+    {
+      "id": "10200224-female-d",
+      "input": "SimulatorSources/HairForms/0/02/10200224_f_freeconcept010_d.nif",
+      "output": "female/10200224/d.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/female/f_body.nif"
+    },
+    {
+      "id": "10200009-female-c",
+      "input": "SimulatorSources/HairForms/0/02/00200009_f_apple_c.nif",
+      "output": "female/10200009/c.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/female/f_body.nif"
+    },
+    {
+      "id": "10200009-female-d",
+      "input": "SimulatorSources/HairForms/0/02/00200009_f_apple_d.nif",
+      "output": "female/10200009/d.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/female/f_body.nif"
+    },
+    {
+      "id": "10200013-female-c",
+      "input": "SimulatorSources/HairForms/0/02/00200013_f_ameliebob_c.nif",
+      "output": "female/10200013/c.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/female/f_body.nif"
+    },
+    {
+      "id": "10200013-female-d",
+      "input": "SimulatorSources/HairForms/0/02/00200013_f_ameliebob_d.nif",
+      "output": "female/10200013/d.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "attach": "Bip01 Head",
+      "skeleton": "Models/Character/female/f_body.nif"
+    }
+  ]
+}

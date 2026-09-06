@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "effects": [
+    {
+      "input": "Effect/item/eff_randombox_01.nif",
+      "reason": "Standalone item reveal effect referenced by effect/bg/common/eff_massive_item.xml, type=nif, startDelay=0.5, loop=true. No itemmodel asset entry references this NIF in the inspected KMS2 XML tree. Ordinary instruments, lift-up props and cape geometry under Effect/ remain retained."
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 # Native NIF converter
 
 The opt-in `--native` path reads MS2 NIF 30.2.0.3 directly and writes glTF 2.0.
-The existing Noesis command remains the default. No production assets or
-database records have been replaced.
+The existing Noesis command remains the default because the non-effect
+acceptance gate is not complete. `--noesis` explicitly selects that fallback.
+No production assets or database records have been replaced. See
+[current status and blockers](STATUS.md) before treating an export as verified.
 
 ## Run
 
@@ -25,9 +27,10 @@ dotnet run --project NifToGltf -- --native --batch --input Maple2Storage/Resourc
 ```
 
 `--clips` selects KFM sequence names or KF basenames when using `--animations`.
-Player bodies require an explicit list. The available fitting idle proves
-binding but does not replace the full player animation export. The complete
-1,995-clip set referenced by plan 9 has not been located in the inspected tree.
+Player bodies require an explicit list. Both player KF sets were located in
+the installed KMS2 `Character.m2d` archive. The acceptance plan selects six
+clips per body: idle, fitting idle, walk, run and two dances. KF 30.1.0.3
+is supported alongside 30.2.0.3. No source root-motion track is stripped.
 
 `--skeleton` copies the full named body hierarchy. Skinned clothing rebinds to
 those bones while retaining its source inverse bind matrices. Rigid `CP`
@@ -36,8 +39,9 @@ an exact body bone name. Unverified slot mappings are not inferred.
 
 ## Output contract
 
-- One `.gltf` file, embedded binary buffer and PNG images. DDS DXT1, DXT3 and
-  DXT5 base mipmaps are decoded locally, without Noesis or an image dependency.
+- One `.gltf` file, embedded binary buffer and PNG images. DDS DXT1/3/5,
+  uncompressed RGB channel masks and supported embedded NiPixelData base
+  mipmaps are decoded locally, without Noesis or an image dependency.
 - Source node names and local skeleton units remain intact, including helper
   bones such as `SATA9NI_Bone01`. A wrapper converts Z-up centimeters to Y-up
   meters. Do not apply the old Noesis orientation or another centimeter scale.
@@ -47,14 +51,70 @@ an exact body bone name. Unverified slot mappings are not inferred.
 - Each selected animation is a named entry in `animations`. Meshes and
   materials are emitted once. Animation targets bind to unique exact names.
 - Diffuse, normal, emissive and alpha properties map to basic glTF materials.
-  Additional shader textures, including control masks, remain embedded and
-  referenced by `materials[].extras.nifTextures`. These are texture indices,
-  not an implemented dye shader. Image names retain source filenames.
+  Client default override colors are baked using the observed ColorOverride
+  shader formula. Both diffuse and control resolution are retained. Original
+  textures and colors remain in `materials[].extras` for customization.
+  `nifBaseColorTexture` and `nifColorControlTexture` identify the original maps;
+  `nifOverrideColors` retains the three source RGB values. The outfit viewer
+  exposes per-material color controls and reset using this data.
+  This does not implement the client's full lighting or face animation.
+- Per-texture UV matrices are baked into additional UV sets. Texture sampler
+  wrap/filter modes are retained. Missing tangents are generated from triangle
+  derivatives. Triangle strips are triangulated with alternating winding.
+- Relative position morphs retain the absolute base, offset targets and default
+  weights. Absolute/normalized morphs and normal-recomputing morphs still fail.
 - Source hidden meshes and descendants of hidden nodes are excluded from
   rendering and reported in `hiddenMeshes`.
-- Batch mode preserves relative directories and records every rejection in
-  `batch-report.json`. It currently exports static models. It does not infer
-  per-equipment skeletons, attachment mappings or per-NPC clip selections.
+- Batch mode preserves relative directories and separates converted, excluded,
+  missing and failed entries in `batch-report.json`. Without `--manifest` it
+  scans static NIFs. A version 1 plan provides explicit clips and skeletons.
+  `native-manifest.json` contains portable URLs, clips and equipment metadata.
+- Particle systems are omitted separately from ordinary geometry. Physics
+  resources are omitted from the visual scene and reported. Reflection effects
+  and billboards are not silently discarded. Effect folder names are not a
+  reliable exclusion rule: instruments, lift-up props and capes occur there.
+
+## Selected batches and Handbook integration
+
+The [acceptance plan](../Diagnostics/acceptance-plan.json) is relative to
+`Maple2Storage/Resources`. Extracted inputs remain in dedicated directories.
+Use a new empty output directory for each run:
+
+```powershell
+dotnet run --project NifToGltf -- --native --batch --input Maple2Storage/Resources --output ../MapleStory2-Handbook/static/gltf/native-acceptance --manifest NifToGltf/Diagnostics/acceptance-plan.json --textures 'Maple2Storage/Resources/Models/Textures;Maple2Storage/Resources/NativeSources;Maple2Storage/Resources/NativeRecovery-05'
+```
+
+Each plan model can specify `input`, `output`, `id`, `kfm` or `animations`,
+`clips`, `skeleton`, `attach`, `slot`, `bodyVariant`, and an evidenced
+`excludeEffect` reason. `itemModel` plus `itemId` reads the client's XML
+attachment for that exact source and gender. It preserves `selfnode`,
+`targetnode`, replacement and cutting metadata. Do not combine this with
+an explicit `attach`. Attached private skeletons still require more work.
+
+The Handbook reads `native-manifest.json` from the configured model base URL,
+or `/gltf/` in development. Manifest URIs are relative to that JSON file.
+If publishing a nested output under that base, prefix its URIs accordingly.
+The item/NPC viewers prefer a uniquely matched native asset and use its merged
+clips without the Noesis rotation. They retain legacy lookup when no match exists.
+
+`/outfits` uses Three.js, exact source names and one body mixer. Equipment skins
+share body bone objects and retain inverse bind matrices. Attachment helper
+nodes unused by the naked body's skins are promoted to joints without renaming.
+The consumer rejects mismatched rest poses and missing bones. XML replacement
+and cutting names hide the corresponding body nodes. CL replacement retains
+sibling CL_* garment parts while hiding the naked
+body's CL_* parts. The female acceptance top is the textured 11400158 hoodie;
+the old 11400182 untextured test mesh is no longer used as clothing acceptance.
+The male acceptance item is 11400350, using the current-client sleeveless hoodie.
+Its exposed-arm seam matches the body. The staged 11400040 shirt has an
+incompatible wrist opening and is no longer used as outfit acceptance.
+The viewer supports selection, play/pause, source-mask color controls, camera
+controls and PNG capture. Full simulator customization and
+client materials remain incomplete.
+
+The outfit body owns the skin palette. Equipped MS2CharacterSkinMaterial parts
+inherit it, and the Skin controls edit/reset all body and equipment skin together.
+Other material dyes remain independent. Standalone exports retain authored colors.
 
 Nonlinear transform curves use a 60 Hz sampling grid plus source key times and
 adaptive subdivision. Interpolation checks use 0.05 degrees for rotation,
@@ -64,7 +124,7 @@ B-splines, linear/step keys and quadratic scalar/vector/Euler keys are supported
 TCB curves and quadratic quaternion curves are rejected when interpolation is
 required. No animation error silently removes a selected clip.
 
-## Verified on 2026-09-06
+## Historical verification before this continuation
 
 The female body exports 2,034 vertices and 2,762 triangles across ten meshes.
 Source bind matrices cancel bone world transforms within 0.0001 source units
@@ -93,27 +153,10 @@ reference comparison is not proof of all client animation behavior.
 
 ## Remaining work before replacing Noesis
 
-1. Implement and verify missing scene classes, embedded pixels, UV transforms,
-   mesh modifiers, primitive types and DDS formats listed in the batch report.
-   Re-export the 127 inputs whose requested external textures were not found
-   beside the model or under the supplied texture root once assets are available.
-   Counts reflect the first failure per input; later requirements may also fail.
-2. Complete game material behavior. The body preview still shows overlapping
-   facial atlas details and uncustomized white skin. Generic glTF material output
-   does not implement face selection, skin color, dye, specular maps, texture
-   controllers or the client shader. Geometry and attachment proofs do not
-   establish character appearance parity. Inspect client material configuration
-   and a reference character render before changing the face UVs or shader.
-3. Validate TCB quaternion interpolation before enabling it. Balrog's 65-entry
-   manifest rejects `Attack_01_G`, `Attack_01_H`, `Attack_02_G`, `Attack_02_H`.
-   `Attack_Idle_A.kf` has two roots with the same sequence name, 102 evaluators
-   each, and different durations. KFM name lookup cannot select uniquely.
-   Determine the client's sequence selection rule before choosing one.
-4. Obtain the full player KF set, select curated clips, verify root motion and
-   equipment across the intended body variants, and supply explicit attachment
-   metadata for rigid slots other than CP.
-5. Add animated batch manifests and the production frontend integration from
-   plan 8. The development proof route is not the outfit simulator.
+See [STATUS.md](STATUS.md) for current evidence, remaining failures and the
+acceptance gaps. Reflection materials, billboards, face/material animation,
+TCB interpolation, ambiguous sequences, private equipment bones and visual
+verification must be resolved before switching the default.
 
 ## Verification commands
 
@@ -123,7 +166,7 @@ dotnet run --project NifToGltf.Tests -- Maple2Storage/Resources/Models/Character
 py -B -m unittest discover -s NifToGltf/Diagnostics -p 'test_*.py' -v
 ```
 
-The C# runner has 19 tests, including real body/gear fixtures, all thirteen
+The C# runner has 30 tests, including real body/gear fixtures, all thirteen
 rabbit clips, palette handling, numerical interpolation and ambiguous sequence
 rejection. Without the body argument it runs only the synthetic unit cases.
 See [diagnostic instructions](../Diagnostics/README.md) for the full validator

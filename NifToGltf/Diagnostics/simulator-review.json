@@ -1,0 +1,884 @@
+{
+  "version": 1,
+  "date": "2026-09-06",
+  "candidate": "simulator-release-02",
+  "browser": "T3, existing local preview on 127.0.0.1:4000/outfits",
+  "catalogHash": "ef0fed4a541b3c0e866c8f173c8d9f760c4996bf872ab25bba0ca529e3da57e5",
+  "assetHashes": {
+    "f_body": "a5353304337834eb2eddd44b178221f0c163b0a6d756911d9db52710cf152c64",
+    "m_body": "831e1529c7c1bda234c0cc0105d91344c39bc847334f2bd7d336bc7deec288b3",
+    "10200009-female-0": "da3ff2c8b0d821a5e849c9f5ded1643bcba6232eabf0e767cc0a7c5ab046f5fb",
+    "10200013-female-0": "078c871dcf9d376a6e07e0565ca5f04480d6071b6d73a665ebf15f2e4236f8ad",
+    "10200224-female-0": "6caff37e8088b4e7bc5c1273a3cdf1853f67e1d64997d4917037ad558055589b",
+    "10200230-male-0": "378a368e90817e5b1e8c3896fea9950c5f319ed97da31fcb86740ddc13d846c9",
+    "11300212-male-0": "b85999cdb790b7c70d4afcab921603fb4f53ad17fd9b12a625653d01fccc0e05",
+    "11300212-female-0": "c3df6e47af0e176292b5ba942ea36ead3407cca2c68c852093b2287dec99c100",
+    "11400158-female-0": "78416f7b4c7a46a1a5b67440c53341448d4ba05bb7177bf23c19e69fa6486ce0",
+    "11400350-male-0": "f55907c1e451bf6be9391b67dfb6f3fca9198ce3865993298eaa6c392d4d9b69",
+    "11800291-male-0": "aaa8efa0653868cc1c569fd1f4f9a904fe7b6416cf13156d724c7434a65a05ea",
+    "11800291-female-0": "6202674c95d5a1851e5685ba6a7ae275285748dcfbbfe68cbf0788569d77e35d",
+    "13100068-male-0": "27078bed8243dd86522d05e6d75e871f095160edbb5d3dd7c1c40946a77becff",
+    "13100068-female-0": "d359d16b7f89e3800e1661a86eb5b44c641e9c35a3d10cba0d2b2e54cc097fc2",
+    "10200001-male-0": "3deaed4167161b6dcedd471e6519840a0ed2a7238572a4816f2c6c5118dd6b4f",
+    "10200002-male-0": "5fa300c77786f8f0cb44fa2508812f49de7b6a5afbbf136a90194a03168cba7d",
+    "10200003-male-0": "99b60f30a2672539700069a55243d97912c07393cbc70aa93a9c18371c0c0b1b",
+    "10200006-female-0": "e0581646c3df3383f9b10cdccb34dfb2af2d78107eba2b53d800cb7719fb3783",
+    "10300001-male-0": "175d599efbdeceeae5ec27bdf15e9a2575212300a0e3d350a5520ee5cea4c52f",
+    "10300003-female-0": "99593ad9f5dfe1479d81e804ba3e8501eedb6b068e1120282e2332e9933aaa32",
+    "11200001-male-0": "31a39d71dafb0dd5fc344609dfce9d72315e8ced4378fc1bcca6e648facae79b",
+    "11200001-female-0": "ae7ac812e156e28d978c4a52e9cad50af86048bf4af38cf409842503a1393298",
+    "11200002-male-0": "412d9ad60529f9b62cede9038c0334326e0878b8ffb447d0dff6e72b07202227",
+    "11200002-female-0": "604ccc946eeb9aeeffab4f93ded4362d5ffe936801682cbf4b1a3f354b3f74ba",
+    "11300001-male-0": "40c2712ecb26e649b4101dc58d305ff03b13953346a2fe9f6e43f861a80ca5dd",
+    "11300001-female-0": "f3153c74cc677193c9cceedfbe66043589647774448c5446024cb325d6020537",
+    "11300002-male-0": "631eb101c88711c8524310160d73cedd2658a08df90753197530332ef0011397",
+    "11300002-female-0": "e149f881d37c87bb116650e1a19749e635eb76ef33bafc403315576932f9c96a",
+    "11400001-male-0": "8529e94cf45bafde8afb00d81b74565d84402caa38c9a088c6affb341eab687f",
+    "11400001-female-0": "2b59403686ca43f233b8493a2cf9fbded76e4c351ab13961f89697c2236a9b06",
+    "11400002-male-0": "19ceac4f0f4d02c64a46f9783c8a7650394abebf6361f076fa32a395983a1b7f",
+    "11400002-female-0": "c9727698e588163aafa46631270cd4dea36b433eac1a7fa5293c5b2c0f28abd1",
+    "11400003-male-0": "68a95a4e2d97b3bca29f870932644bf12f621a51bcfbdfdee33780961b6586f4",
+    "11400003-female-0": "e1d87b8b1277e365f9eb31b7d3c18dd496f2fa648f0f0dd4f2179c9a91c44a33",
+    "11500001-male-0": "f5850e2889037f62e24a2b49e22b0cfc310e2af2aeb1b7215a78cf42a8789f45",
+    "11500001-female-0": "7b566c0c2b636cce5062e18b8fe8cce82b54d4b364d5bcabf56b40eead21b6ce",
+    "11500002-male-0": "fca746dd8cf359dc46c1f824cf4aad5fb5bd0d62fc6b7517016299e895e77c5b",
+    "11500002-female-0": "4e02207a54ad7d5750240521611c6fc89ad128eef5d36e8b61f53b019176b9d9",
+    "11500003-male-0": "cdfb8c03724d87f441b0ba4ba66c78eb80935320cc4243bfec8f622ce9358f9f",
+    "11500003-female-0": "04c23a391a753fd8931e47dd0c0fe431408dfadbc3b9f2be07b25f08a039a0c9",
+    "11500004-male-0": "1951f97619a62dbcdaa3055bd64e1bee0091eb7e22da012b3f4c7e8660f88a46",
+    "11500004-female-0": "63f8c0dfee93fbd4aa5517100f9333f923895a52fb02396419b176f9d2d78cbf",
+    "11600001-male-0": "64a4fa806d7622251fdfe59d1bb3f403bf7f6e78ba08370e434f76189ec47a06",
+    "11600001-female-0": "29b317a7631f7f28739a35912612945205cc57f426131589b84291aabd47defe",
+    "11600003-male-0": "8c02c12b13812528fa34f05655905d1f538d13108c73e9ed02e7f25ab2368732",
+    "11600003-female-0": "7339b1b052da671807d315d807b2e6f3fc9f0717caa922cb01b74a4d829f52eb",
+    "11600004-male-0": "3f846fae0c753ad902c9c9f245be56f85c92edbe756875546902e0c301eb5fbb",
+    "11600004-female-0": "14cc3eb4bcf766df21b76213391b08104703d9d3758837b79103c81dd1c7c6e8",
+    "11600007-male-0": "9e8f6e1cd8b2f5528f6667e3c8d9de8eec7bc4e5844ffd48280e4b1724b4583c",
+    "11600007-female-0": "e5fad151b522ba66263a3a33e417322597b85ab7a9800e4ef256d051ae337708",
+    "11700001-male-0": "db9d69a1757c7a68fe613624150da7d4d397f68346980596f36e9a02d5959e7a",
+    "11700001-female-0": "2232038a187459d193c98f5da441f3fcb87af681031e4cc98a4c966c60da90ae",
+    "11700002-male-0": "76837ba397dae9f5680dd4c8288869f5b6e610a9c6074650e3cfb65f9e6fe0dd",
+    "11700002-female-0": "a5e284308cc07ef9d165d3fee992f200b8facaf33f261c217cb6c0accdc93d45",
+    "11700003-male-0": "ab5800ccc931d76abfe925f55bea5fd10cbe6516849579133c9468285c1df96d",
+    "11700003-female-0": "e0a71b691bcf5310194aab9f1c48b344e03005bc182dc24cfe698e403007da45",
+    "11700004-male-0": "0b9a4d154d438844451296b78079b99d31fe6f8f6cd88a08f262044e4c3c322a",
+    "11700004-female-0": "002fbae0375d39d6a433327cdd5a52a18e9120143cd48d820f1c92a1a97f0938",
+    "11800008-male-0": "ce96d8dfe69a19d211bc568d490bedd0e7a17c06f228efd4d877d88b0cd48ff8",
+    "11800008-female-0": "cd5a65933cc1ee44c96692605c592b2d1cba141d270fe930eb526ee110f9d9b8",
+    "11800009-male-0": "3afcea9759760a4932d8ebd7126605fab5a2e879ebfa0c5a2b90c527e06623cf",
+    "11800009-female-0": "74af578fde7b66cbc8099b1ad0c9ad99da09d7b67ad111fe32dcf487befaa958",
+    "12200001-male-0": "94cbe46fbcc611621485769dbdaf64290e2fc61671c1bcf87c5e681927203c76",
+    "12200001-male-1": "c349ba161f4c9708f27a2f0824d348aadecdb2a51683e601dfee7f70e5045777",
+    "12200001-female-0": "018449708f9c5ec5e9e83d23c38cc6e2c4abde1301059208143ca072cc4f68d9",
+    "12200001-female-1": "6f6004a33f5c681330631f6ba6c345aaba5339433fdafa1aa3af572b48eed3dc",
+    "12200002-male-0": "b9beaab56b1284e8f4bed6b8d6d6a6af9eebabfda804cf8f77f179ff878b2994",
+    "12200002-male-1": "5cb53d9845f22dcc93bc2a8139686ea30a53862330b443abbce6456a1653f717",
+    "12200002-female-0": "c68724ddbe65e5cee892a1efb870f3a65e7d834000a1f1bd2e7a207fd86628c3",
+    "12200002-female-1": "565f72cccf29cb777ebfa7abbdfaed1e728a4d2c27cd8e120f43668c3efbe75f",
+    "12200003-male-0": "c688295da950d2675c885108381339d5b38ed5bcdc8f87637c0837f758ef8fff",
+    "12200003-male-1": "5cb53d9845f22dcc93bc2a8139686ea30a53862330b443abbce6456a1653f717",
+    "12200003-female-0": "ac91c55477f45bbc6438cddc9c7eb794cf61705eebf5dbcc801f9ad916d42ae9",
+    "12200003-female-1": "6f6004a33f5c681330631f6ba6c345aaba5339433fdafa1aa3af572b48eed3dc",
+    "12200004-male-0": "ea1ac178472c38110d74e8d6a986b3337e9c5861cddd840b27629039ad966e89",
+    "12200004-male-1": "50ff93e8def39f0531bc02f67329b624042bcdf54be4ad0936243c4f3601ceff",
+    "12200004-female-0": "3dc649c58eab8906ec36374dc46e371e273e7bfe5f91df3795f32edeaa825a1b",
+    "12200004-female-1": "168beda8543eeb5215d60f0f500157fea353b22c5f435af193856563faf54cea",
+    "13000001-male-0": "396f1cffb6802cf394415ec656d90aab13b468d8535b4fe8af17379849566dd4",
+    "13000001-female-0": "e1ce1a08aec42d5a7c9d244026644579861985be868d2751b68fccb079f0c55b",
+    "13000002-male-0": "e2173a9dacb983a8b8f8305992075c6cce33b8ee01168739baaace7cbe84658c",
+    "13000002-female-0": "79468d8c39481b87c547e170f09b2db4b899a4c0df536901d56b9ef1c69c1c7c",
+    "13000003-male-0": "4598c826307e9610c6151954ecb6379118d34a05c4f30404c8aa595e99256f9b",
+    "13000003-female-0": "fc35583ecbfacde8040eb195b748d4b6af7d9f348fd9814d652b14cd84a1342c",
+    "13000004-male-0": "dbeeccf1b8438a8224119abd298c4b2229b7907c65b18f9d7d124818c785291f",
+    "13000004-female-0": "0573f2dffaf66947bfb4abdf6c4c03fb425f495ca179bba3c0e8455396f25406",
+    "13100001-male-0": "2bd01cc310ec303d05bd98eded7de89664575f9fc137740d5f56fd09cc27c2a4",
+    "13100001-female-0": "7da7f636a35a5b7d811be10bedc30404d36388cecd7ce950d54e634ba04a26a0",
+    "13100002-male-0": "47884d98edfc62de3a3b5685b71eee1a99dbf184a74386d1d0de7d4241bf9f79",
+    "13100002-female-0": "e17f5b2c1f9fd67025dd34ea5c4dd47d6b04464cfe92a613d416ccb26a676d1a",
+    "13100003-male-0": "d8aef6e545ea73bee62fd22188e8201dfcebcd4686c207e52bda501b262d0d0e",
+    "13100003-female-0": "74f75a337631e357e5ce8286bc8fc7c686f5383af697e5351d83bc38780640dc",
+    "14000000-male-0": "b7f51ea6df6274c8490cb085a62142bc8a53a8b344e9773c5893fa3ef7791a8d",
+    "14000000-female-0": "271ea28f9f88b7c5c6bf44dd55f8573de53b322327c8ac3e0d3f4859626ebca2",
+    "14000002-male-0": "2344a0ca7a47db72459fb33c7ef5b64d224d290ad0f9d669171787c21c07f5a0",
+    "14000002-female-0": "7b075b55ca6a92fb08ca08254f71c058865facafa86de0ab091ea4d2a2287071",
+    "14000003-male-0": "56eb060fa4b124fde0be1a86cb1f61059af16c523464c698a36fe0863f13bd50",
+    "14000003-female-0": "f761b2676eb73674558fdc979672f57e1e2017bf59bb9701d210ea27a5d35fd5",
+    "14000004-male-0": "21a355c99354fdede14cf898dd43b0cae7a34c3bb9ed74a4325b1c59184f9a13",
+    "14000004-female-0": "611f06a4394b52baec980269a1719db86b856f7ed5ae43d9541a805bf10705f9",
+    "15500000-male-0": "a5c913572b7eb51d5deb62419d713ca41b2a4c268670f8b532f36817789e4e55",
+    "15500000-male-1": "a5c913572b7eb51d5deb62419d713ca41b2a4c268670f8b532f36817789e4e55",
+    "15500000-female-0": "6a0bf68235afee7fe71251f5e08784f5e5cb9872cd76fe79719f9e687c104bce",
+    "15500000-female-1": "6a0bf68235afee7fe71251f5e08784f5e5cb9872cd76fe79719f9e687c104bce",
+    "15500002-male-0": "11acdb6d193445278c293850be1e4db1fb2b63aefe9e7090d567f0c2568d9a32",
+    "15500002-male-1": "11acdb6d193445278c293850be1e4db1fb2b63aefe9e7090d567f0c2568d9a32",
+    "15500002-female-0": "23ddb87cfdd1ea9b51b79a04f7f160a782586f9b113c8475db32325c6d8a1e52",
+    "15500002-female-1": "23ddb87cfdd1ea9b51b79a04f7f160a782586f9b113c8475db32325c6d8a1e52",
+    "15500003-male-0": "c7ad9f9094e674c21c41a282044e7d58905459760ed1bdf0e8a9d07af1dabcbf",
+    "15500003-male-1": "c7ad9f9094e674c21c41a282044e7d58905459760ed1bdf0e8a9d07af1dabcbf",
+    "15500003-female-0": "6db3ffc2307524db56da9ad20675f05d9a1976149fe1bfecb7c0575df88ad4b8",
+    "15500003-female-1": "6db3ffc2307524db56da9ad20675f05d9a1976149fe1bfecb7c0575df88ad4b8",
+    "15500004-male-0": "4b526508c32bd7ab2e5c9f2b38848a9e99f7e8b372958197089bab57d2bbe4fc",
+    "15500004-male-1": "4b526508c32bd7ab2e5c9f2b38848a9e99f7e8b372958197089bab57d2bbe4fc",
+    "15500004-female-0": "4b2502f17b49ccd5a1c4ab86eb22500ba00a59d1b78591fd31bcbd4bb0571d79",
+    "15500004-female-1": "4b2502f17b49ccd5a1c4ab86eb22500ba00a59d1b78591fd31bcbd4bb0571d79",
+    "10200230-male-c": "a6faf3a36da1f05ef27110af776025267a70ac8ae3e1aa8bac42b64b9b292567",
+    "10200230-male-d": "5d475eb65fb29bea591659135b3cfa7985860de5e3185b802576d8b47bac891e",
+    "10200224-female-c": "e81290df0b7c5983ed01baa5b7707361b61ea9b30144a12a129c7a5f6c98cdbc",
+    "10200224-female-d": "7723ae7c8430a6f7090a8e6c03b5d95071ca374ab0640629b1b9d62a9e533693",
+    "10200009-female-c": "f1f27401bc49de6c5f232f251a65eb57529ec5c161ffba76268462071df82fa9",
+    "10200009-female-d": "5c8a7252738960aee66290c64ccbbf39c8f061725c81f1d27351fa823f289947",
+    "10200013-female-c": "af1e3ee60c597a34a72e774c80ff5d35d67aa8462cb06497e03bafc9d3359f0b",
+    "10200013-female-d": "ccd7d3422c45041556935de11151c9df3d58d54ed82234c57754bdae8fcd5db6"
+  },
+  "fileHashes": {
+    "customization.json": "00ca29235014de84850452ee1ec04c23fb84ae75ffeb7afc6d98b96c59303cd8",
+    "faces/item_face/00300001/01_idle.json": "380c9f2ab21c81b19e704a244e626b1a6db1908c57a2e6f57674dda3df96133b",
+    "faces/item_face/00300001/02_idle_c.json": "6af0277d60e513c1600bc0d653a38222456a0fc3092e0b964ece3f045fc0c189",
+    "faces/item_face/00300001/03_blink1.json": "0adf93608cb43ebb2225351187903a070768702e7765fadcb21070b722d62af8",
+    "faces/item_face/00300001/04_blink1_c.json": "b68a5cd72d28567769c3f35b0de7078e2f296fb5f3a90c6c76372ac3f23401ff",
+    "faces/item_face/00300001/05_blink2.json": "e18c6fc6bbd01c84370ff88cbee7fcfbc1940aca0745d784d0f71ac520aca317",
+    "faces/item_face/00300001/06_talk.json": "3a5cdd4fcf7caa347ce03f5776b399085969e4cd8594841b3e61c6b9793663c2",
+    "faces/item_face/00300001/07_talk_c.json": "6af0277d60e513c1600bc0d653a38222456a0fc3092e0b964ece3f045fc0c189",
+    "faces/item_face/00300001/08_talk_blink1.json": "b1d502860bac26eee220f775472258178291da2df01638fd16389b9ded8d4d31",
+    "faces/item_face/00300001/09_talk_blink1_c.json": "b68a5cd72d28567769c3f35b0de7078e2f296fb5f3a90c6c76372ac3f23401ff",
+    "faces/item_face/00300001/10_talk_blink2.json": "53b4ee6966e937ad7f476a3e33bbbd6bfa897fc42ab7697d2df0bd5f9789f36f",
+    "faces/item_face/00300001/11_attack.json": "7b1ea0ccab6cb22326abb021a09d4d3562023e0d271f811f5c1444c3374165ba",
+    "faces/item_face/00300001/12_attack_c.json": "6af0277d60e513c1600bc0d653a38222456a0fc3092e0b964ece3f045fc0c189",
+    "faces/item_face/00300001/13_attack_blink1.json": "569115b35738358040bb34b819f686190f7e7aac88abeb5cd98548dcda3388f4",
+    "faces/item_face/00300001/14_attack_blink1_c.json": "b68a5cd72d28567769c3f35b0de7078e2f296fb5f3a90c6c76372ac3f23401ff",
+    "faces/item_face/00300001/15_attack_blink2.json": "d7b40c76aa5d0b6c9302846a52ac41f6dcbff595ce187045543931bf4a936e18",
+    "faces/item_face/00300001/16_focus.json": "34fc5540f8d9aa0652dd12c829300cbccade1cff9fbd5bf9fcd6f506476a276c",
+    "faces/item_face/00300001/17_focus_c.json": "6af0277d60e513c1600bc0d653a38222456a0fc3092e0b964ece3f045fc0c189",
+    "faces/item_face/00300001/18_pain.json": "6d480e494f744c06efa41e1bcd59dd7937b9b17336bfd8377699f32244401e66",
+    "faces/item_face/00300001/19_pain_c.json": "a3cbf1c5dda4406f3fa42a6482a60bd69004c13ef4557ba5a7a60e59ba43657f",
+    "faces/item_face/00300001/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300001/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300001/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300002/01_idle.json": "271b921988f0d8e5b57d86acc6fb635fb599cb68b704a1b26c8add5b97bd8bc1",
+    "faces/item_face/00300002/02_idle_c.json": "2ba660c6ca4772d06cdef1da55b7a171df39baa0d0d6de0e8a084471c80b44d3",
+    "faces/item_face/00300002/03_blink1.json": "5bc0569cc2cebe425845d613a9c6cdfaaedf0d3e8efc4c57af1815d8cc6f5d6c",
+    "faces/item_face/00300002/04_blink1_c.json": "f28fec4d91f0c0adbcb99d7cecc636d16071f0afcfa29deaa4a653b5f4a4fae0",
+    "faces/item_face/00300002/05_blink2.json": "66d6df46c9f15c1f3778707e4452c076634bc96f9581f7cad7e575bb2cc3664f",
+    "faces/item_face/00300002/06_talk.json": "27bf96dcf3a9f0fdce37723595c99ccf00f11130bfea57e72df267a8fd744ce2",
+    "faces/item_face/00300002/07_talk_c.json": "2ba660c6ca4772d06cdef1da55b7a171df39baa0d0d6de0e8a084471c80b44d3",
+    "faces/item_face/00300002/08_talk_blink1.json": "e2520f0d4c36503d3bf5872662d5778b9c0ac59c17b813aa5f5114930d091f46",
+    "faces/item_face/00300002/09_talk_blink1_c.json": "f28fec4d91f0c0adbcb99d7cecc636d16071f0afcfa29deaa4a653b5f4a4fae0",
+    "faces/item_face/00300002/10_talk_blink2.json": "3bda3e25ec6e789bf05940aafd1c401c280191457a30820ccd360ae6640a72fe",
+    "faces/item_face/00300002/11_attack.json": "b0d674a833d3f2ed09f33c120070424d56c1211a2afbee00a8a41acf7b923fc9",
+    "faces/item_face/00300002/12_attack_c.json": "2ba660c6ca4772d06cdef1da55b7a171df39baa0d0d6de0e8a084471c80b44d3",
+    "faces/item_face/00300002/13_attack_blink1.json": "1a3285b321c75aa04853ea0f3c993af63751c0432b9a556eab8781aeb2a91fac",
+    "faces/item_face/00300002/14_attack_blink1_c.json": "f28fec4d91f0c0adbcb99d7cecc636d16071f0afcfa29deaa4a653b5f4a4fae0",
+    "faces/item_face/00300002/15_attack_blink2.json": "9f3dedf6af83618290195275664fed7892249e3707facd244580c0fc173ca3ae",
+    "faces/item_face/00300002/16_focus.json": "8f3eff11afaeb1fbd74be8d360d141deb7450a3bec40940efb5158802e6d22cd",
+    "faces/item_face/00300002/17_focus_c.json": "2ba660c6ca4772d06cdef1da55b7a171df39baa0d0d6de0e8a084471c80b44d3",
+    "faces/item_face/00300002/18_pain.json": "eb440642483abc0d8c01525cd5d16679b83e7081cf624ca427e8d21eaa8e4e99",
+    "faces/item_face/00300002/19_pain_c.json": "7b445f21a0af0265fff4c18b23cf2be24dbc89860c71a853c17eb19471273441",
+    "faces/item_face/00300002/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300002/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300002/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300003/01_idle.json": "543fb49bd8bd9a818310ce2c2d0061f90bb586a8a6574b4635a153e56eea432f",
+    "faces/item_face/00300003/02_idle_c.json": "af0becba955a72ea060967fb4487723cb1be2955df65e03bed55c1d6cd9409b9",
+    "faces/item_face/00300003/03_blink1.json": "1b4e2d318c2e7d5d60f1df3a7c9ec2294b27f739a2b41830fff0fe1081609ba2",
+    "faces/item_face/00300003/04_blink1_c.json": "b288677a31a67799372929a81bc99c8db915c47b3e75037eee9f045d9ca99ece",
+    "faces/item_face/00300003/05_blink2.json": "30c0136e1961fc04fb318b631251c8b12a4c98706b18ecf0f6c046b5799570d3",
+    "faces/item_face/00300003/06_talk.json": "b920476043799ec33fe60caec21166eaa3cf171e5c6e369193adc78e0a17f8db",
+    "faces/item_face/00300003/07_talk_c.json": "af0becba955a72ea060967fb4487723cb1be2955df65e03bed55c1d6cd9409b9",
+    "faces/item_face/00300003/08_talk_blink1.json": "018eabc4c4cc6d9e60280875adc51988cf773752736e566e6b8897400b6b7a94",
+    "faces/item_face/00300003/09_talk_blink1_c.json": "b288677a31a67799372929a81bc99c8db915c47b3e75037eee9f045d9ca99ece",
+    "faces/item_face/00300003/10_talk_blink2.json": "72b69fb4fb625cfac4d60d9a1d0d898735abed446d152fd9b4ace4739fe7dae1",
+    "faces/item_face/00300003/11_attack.json": "8887159a058a086f7b993bd4becb4ca2492c8a531f8d0f748a8be155dbfeabe0",
+    "faces/item_face/00300003/12_attack_c.json": "af0becba955a72ea060967fb4487723cb1be2955df65e03bed55c1d6cd9409b9",
+    "faces/item_face/00300003/13_attack_blink1.json": "90e2211daab7782647bb0373f763e296859f7be2b9b05ddcc880646efc9f92e8",
+    "faces/item_face/00300003/14_attack_blink1_c.json": "b288677a31a67799372929a81bc99c8db915c47b3e75037eee9f045d9ca99ece",
+    "faces/item_face/00300003/15_attack_blink2.json": "feb9ea5598dd81d738ca219c0643cd800547f762593ed35d6a874ba3e70a483d",
+    "faces/item_face/00300003/16_focus.json": "c65887aa236c0d128bbfe9a8df70804328af6123a0a5ed6278866c1aeec67c23",
+    "faces/item_face/00300003/17_focus_c.json": "af0becba955a72ea060967fb4487723cb1be2955df65e03bed55c1d6cd9409b9",
+    "faces/item_face/00300003/18_pain.json": "b8281175e21015ea6269615169e5cc6611c7a70472e876609c427a6807c6cdd8",
+    "faces/item_face/00300003/19_pain_c.json": "2ee91e9c5573894bf30379169cc2ba016582f94b1dcac9f6c7a406002f535b32",
+    "faces/item_face/00300003/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300003/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300003/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300004/01_idle.json": "f6c948cbe2e60ea03b4291775a737e1ee627e2c3384147aa3ae43da109426cfc",
+    "faces/item_face/00300004/02_idle_c.json": "9ed54f688a4ad7fa66fddba1eaf1e28d4af13114b38cd65c4c0b69e90d8d9c39",
+    "faces/item_face/00300004/03_blink1.json": "c5c693f90e1a289a02f30d9c08dd346a14e6a402a9d5de1d3a00391443ab1e6c",
+    "faces/item_face/00300004/04_blink1_c.json": "c5f5c9226e8e9e2a3df082916414c7b371ddec2057655dad037f544141bb347e",
+    "faces/item_face/00300004/05_blink2.json": "281823abe632443a94a450b01f92b01111a096f0ea2fd6392519b7dffa265f56",
+    "faces/item_face/00300004/06_talk.json": "5f11c7376d1715541417b80fc85c407618eebda90fccb78b5edcfa5c731884bd",
+    "faces/item_face/00300004/07_talk_c.json": "9ed54f688a4ad7fa66fddba1eaf1e28d4af13114b38cd65c4c0b69e90d8d9c39",
+    "faces/item_face/00300004/08_talk_blink1.json": "634c3ac8b5c921dea6540c561c6a173ea4b784605594e30abc13240c5927b62f",
+    "faces/item_face/00300004/09_talk_blink1_c.json": "c5f5c9226e8e9e2a3df082916414c7b371ddec2057655dad037f544141bb347e",
+    "faces/item_face/00300004/10_talk_blink2.json": "85c02a8dba2de66ba3cd56978d46d7ee7cc7774742624f5c2f797475aa99531d",
+    "faces/item_face/00300004/11_attack.json": "f75faec9e4e3697e46daf7ed3902ca373d420cddc6808329f8eef512cb91fa5d",
+    "faces/item_face/00300004/12_attack_c.json": "9ed54f688a4ad7fa66fddba1eaf1e28d4af13114b38cd65c4c0b69e90d8d9c39",
+    "faces/item_face/00300004/13_attack_blink1.json": "d70265d6fed62a4fbe79e97c39b9344b28e113d5928251324959cd5ff2abb363",
+    "faces/item_face/00300004/14_attack_blink1_c.json": "c5f5c9226e8e9e2a3df082916414c7b371ddec2057655dad037f544141bb347e",
+    "faces/item_face/00300004/15_attack_blink2.json": "e4bf0a94bfd93a047f857e27a1959cf7ed7cb97ec5344b6984c49c41b1738bde",
+    "faces/item_face/00300004/16_focus.json": "8bca912a6e74eacb6c440ce2ee5f71353dd41cdf32bcef603d96e4b3f404aaa7",
+    "faces/item_face/00300004/17_focus_c.json": "9ed54f688a4ad7fa66fddba1eaf1e28d4af13114b38cd65c4c0b69e90d8d9c39",
+    "faces/item_face/00300004/18_pain.json": "476019db33d8f3fed8c12181e04005ce3b1326ee50379e114b72059590cfbc96",
+    "faces/item_face/00300004/19_pain_c.json": "32515c13a70134e1e3747c59f8839085fba450c6700beaa314b5daa26fb2a111",
+    "faces/item_face/00300004/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300004/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300004/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300005/01_idle.json": "775b458d61d8ca8bd47ed68d4c97cee8b80bd4f8ba525ca55f09e2d955620562",
+    "faces/item_face/00300005/02_idle_c.json": "2b802f464adc597475180d860c041ebeb2fe0c662ddc9e0c16427a52f459d847",
+    "faces/item_face/00300005/03_blink1.json": "539cd1c80e4bc05a2441f15132638a862b10caa497a06af1e78768d253c378ad",
+    "faces/item_face/00300005/04_blink1_c.json": "cb6d86129d55ee390657b4f3e93b32cf3f4c64efa3fc2d58bdd18edd36b4918b",
+    "faces/item_face/00300005/05_blink2.json": "887ce9486fefc4c5019d7d42ad3b666874a8901fb71e2dd11c0cfe1a8dee9442",
+    "faces/item_face/00300005/06_talk.json": "a799ee10baec9d18c5113e05356eb35ee585859445439a97c8cc505b41a7119a",
+    "faces/item_face/00300005/07_talk_c.json": "2b802f464adc597475180d860c041ebeb2fe0c662ddc9e0c16427a52f459d847",
+    "faces/item_face/00300005/08_talk_blink1.json": "acc7fbd1c07804bef69c6e32779fc046e703b9ec9a520e8a3e589d9f0aa870cd",
+    "faces/item_face/00300005/09_talk_blink1_c.json": "cb6d86129d55ee390657b4f3e93b32cf3f4c64efa3fc2d58bdd18edd36b4918b",
+    "faces/item_face/00300005/10_talk_blink2.json": "ca6a338f9c4ed1bcd54ac98c08bd355dbee744d9682254814587947d49ab537b",
+    "faces/item_face/00300005/11_attack.json": "7269b823ea5f4356c230f4411aaab9f70be41b9c8d3f40e9dedaececb198e504",
+    "faces/item_face/00300005/12_attack_c.json": "42ded75edd2c63146e6b9d94be73bdd7db45de02f7c6b7c8ed23ee7c7ee41cf2",
+    "faces/item_face/00300005/13_attack_blink1.json": "009463575b87cdcf1f243a7d8909f531a3081efdb472fc4a6ff2fc59630b090b",
+    "faces/item_face/00300005/14_attack_blink1_c.json": "cb6d86129d55ee390657b4f3e93b32cf3f4c64efa3fc2d58bdd18edd36b4918b",
+    "faces/item_face/00300005/15_attack_blink2.json": "563443e79ec24d7c09c03984f41e99b60b1e464e6b9919e55d14461f57079fd9",
+    "faces/item_face/00300005/16_focus.json": "dce10075def44599e60c5a83927819674ed3ee7c8d78e00b97cfaf19a61a42d3",
+    "faces/item_face/00300005/17_focus_c.json": "42ded75edd2c63146e6b9d94be73bdd7db45de02f7c6b7c8ed23ee7c7ee41cf2",
+    "faces/item_face/00300005/18_pain.json": "780a7289c4e733d36feba6c24bffad7af67e84b32d1c872611152363d25a2457",
+    "faces/item_face/00300005/19_pain_c.json": "dcaa0ef47421d6bfe8d2c479cb37e5a85b921950355335bd0a0f047002d078b8",
+    "faces/item_face/00300005/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300005/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300005/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300006/01_idle.json": "614e81e3b11317e774f3e26be7d8943cf4ce06d1f02f8f1fc093d52c9ca8e673",
+    "faces/item_face/00300006/02_idle_c.json": "dc5e149e2150b102b84e4e4c9af776ad8c026f72689aa4e4275321546b60dad2",
+    "faces/item_face/00300006/03_blink1.json": "4d9da6d957be7438374e8ed9c4ede7e73c6ac08a6d412b854c99c7bee999ca1a",
+    "faces/item_face/00300006/04_blink1_c.json": "42901acf95e69d4ed70b4b64c883b8aabcf58ce23beac3b1d4427d56fc888061",
+    "faces/item_face/00300006/05_blink2.json": "990dd2a6c22e46c316fde42e1e9ddc5f698a523fb051b9f2ae5847fde5289c0f",
+    "faces/item_face/00300006/06_talk.json": "3553b3fc69c62058b628b4da1eb01a6964e60680a3d3e2042ce4ca3b4545a2b3",
+    "faces/item_face/00300006/07_talk_c.json": "dc5e149e2150b102b84e4e4c9af776ad8c026f72689aa4e4275321546b60dad2",
+    "faces/item_face/00300006/08_talk_blink1.json": "216ff3282ac36127511a209faaebdb3851e8a1c9800862671ca315206c44bd69",
+    "faces/item_face/00300006/09_talk_blink1_c.json": "42901acf95e69d4ed70b4b64c883b8aabcf58ce23beac3b1d4427d56fc888061",
+    "faces/item_face/00300006/10_talk_blink2.json": "744edc859a9833ace31958a1b0c95d8ddf7930210f590cc636691020d1747e82",
+    "faces/item_face/00300006/11_attack.json": "ed5048d529463ba4450ef008ce49a44208ed8865cf3535c820ed8677483fefe5",
+    "faces/item_face/00300006/12_attack_c.json": "dc5e149e2150b102b84e4e4c9af776ad8c026f72689aa4e4275321546b60dad2",
+    "faces/item_face/00300006/13_attack_blink1.json": "ef7fa68eb352116c5707f50b209b3e720c8474c807363ceeb9381d398a7a7a4f",
+    "faces/item_face/00300006/14_attack_blink1_c.json": "42901acf95e69d4ed70b4b64c883b8aabcf58ce23beac3b1d4427d56fc888061",
+    "faces/item_face/00300006/15_attack_blink2.json": "25183dafb69a62d75f95c0e510c963ad0b75c590bb8a6d1fcdbfaecf8e61d3b5",
+    "faces/item_face/00300006/16_focus.json": "d2c4e1a8133648d271e4235663571d0837d0ac38838d936178f383e24bc17175",
+    "faces/item_face/00300006/17_focus_c.json": "dc5e149e2150b102b84e4e4c9af776ad8c026f72689aa4e4275321546b60dad2",
+    "faces/item_face/00300006/18_pain.json": "225d29c16e78e473e7b4c611f5b5fa417a24149f3b919b68c49aa3fa25517b7f",
+    "faces/item_face/00300006/19_pain_c.json": "448ced9c0321ab1f53d18bcc6217fcea0865ec446850b282e10482d2134304da",
+    "faces/item_face/00300006/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300006/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300006/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300007/01_idle.json": "ece2cf38048f8c37f57114d21ba0be436c5e78133994d889d8ee82df8ba8e4fa",
+    "faces/item_face/00300007/02_idle_c.json": "d968130c172d69d8bd8cfe1280cc0039bf577fc3e7cf5d14cc070138b1b3b741",
+    "faces/item_face/00300007/03_blink1.json": "621b022f2715cce8e9e6858880023607d9d57ca5c19282779e6365946b7b5dc1",
+    "faces/item_face/00300007/04_blink1_c.json": "aa4902c0491199846e63da01a2f3dab0c95e93d345f0424e716cbc57cae59f43",
+    "faces/item_face/00300007/05_blink2.json": "9bd4a9b5b1733605e51d3e6a893dd6cc092cf8c8be909e6f3101180773612a1e",
+    "faces/item_face/00300007/06_talk.json": "8ac6e26c007582029ea54740715af32dd3ff526967115e9d521fe34fe9f5f68b",
+    "faces/item_face/00300007/07_talk_c.json": "d968130c172d69d8bd8cfe1280cc0039bf577fc3e7cf5d14cc070138b1b3b741",
+    "faces/item_face/00300007/08_talk_blink1.json": "ef515e5a361be364449e9c17cad097d7a05da7c5c3c626af47cffe2e1fb395e9",
+    "faces/item_face/00300007/09_talk_blink1_c.json": "aa4902c0491199846e63da01a2f3dab0c95e93d345f0424e716cbc57cae59f43",
+    "faces/item_face/00300007/10_talk_blink2.json": "e24704e2feaeae1360dbad51f64190fc9fbcc003d1cfb7bb9591a1ab59822760",
+    "faces/item_face/00300007/11_attack.json": "0f6965b356ad1a04c564bd03a182916c8f26539d8f26056627a02bd58596f6dd",
+    "faces/item_face/00300007/12_attack_c.json": "d968130c172d69d8bd8cfe1280cc0039bf577fc3e7cf5d14cc070138b1b3b741",
+    "faces/item_face/00300007/13_attack_blink1.json": "5cbdb8148dd890fbffb237d7aea3dcedcd28f65d804aaf007fe0905a9ea00d49",
+    "faces/item_face/00300007/14_attack_blink1_c.json": "aa4902c0491199846e63da01a2f3dab0c95e93d345f0424e716cbc57cae59f43",
+    "faces/item_face/00300007/15_attack_blink2.json": "c628557e8d4f76cc0b0d0f74c36a419e926f8d6a9e33898680fbfbb97889745b",
+    "faces/item_face/00300007/16_focus.json": "99e3620725b4aa4a70d633ef9c812e6a8245adb8bc0499ada1a8551e39b50c49",
+    "faces/item_face/00300007/17_focus_c.json": "d968130c172d69d8bd8cfe1280cc0039bf577fc3e7cf5d14cc070138b1b3b741",
+    "faces/item_face/00300007/18_pain.json": "6f7f89766c6a8b23c1e41e862522b7ba1841f36fb36402f591fe1a874eb16906",
+    "faces/item_face/00300007/19_pain_c.json": "a0a248c7090c9cb2298c424558da642244b8c78e06b87eb4397a617d6a4242a1",
+    "faces/item_face/00300007/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300007/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300007/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300008/01_idle.json": "fd52173132cb417231bdf29637db5b799a94c42226acf9b9f766e24294c30389",
+    "faces/item_face/00300008/02_idle_c.json": "3d04d72783d50bc287f472cec1cf8581f60aa937d93b835ab45e019a9eb75d12",
+    "faces/item_face/00300008/03_blink1.json": "4920decc4002f935025f00500d6950b0f39cb174438207ee2e0581d2ac670ea8",
+    "faces/item_face/00300008/04_blink1_c.json": "af2e418f66303e312d6a83707daa8821adf0ae200fd147961dd90a43ec5c3165",
+    "faces/item_face/00300008/05_blink2.json": "c36b9cf80993701835df43f06474278242634c5ff681e9a369ddbdd80cdfc05a",
+    "faces/item_face/00300008/06_talk.json": "15caa0104fbf9310b379f8640b36ac3b24fbec6c7fd6af85bad31b3411a8f000",
+    "faces/item_face/00300008/07_talk_c.json": "3d04d72783d50bc287f472cec1cf8581f60aa937d93b835ab45e019a9eb75d12",
+    "faces/item_face/00300008/08_talk_blink1.json": "7d3a2c0c3a8d15c4e6c36743bbf03eaf380779e8d8401db17c2af98d1753b1a8",
+    "faces/item_face/00300008/09_talk_blink1_c.json": "af2e418f66303e312d6a83707daa8821adf0ae200fd147961dd90a43ec5c3165",
+    "faces/item_face/00300008/10_talk_blink2.json": "84860ccc9dc5af94a5c8c6a0c18cf05a5ef8e0ae1536275c361b599e31605f40",
+    "faces/item_face/00300008/11_attack.json": "1cff8ec5f3ba53910381ace4199831d57b0380bfd2b4487efd9fe1d88f439275",
+    "faces/item_face/00300008/12_attack_c.json": "3d04d72783d50bc287f472cec1cf8581f60aa937d93b835ab45e019a9eb75d12",
+    "faces/item_face/00300008/13_attack_blink1.json": "a17276a4b8c5e21adfaec0d0ae652c972804b3ecff4936b378ec58f9772f10e2",
+    "faces/item_face/00300008/14_attack_blink1_c.json": "af2e418f66303e312d6a83707daa8821adf0ae200fd147961dd90a43ec5c3165",
+    "faces/item_face/00300008/15_attack_blink2.json": "a653a1e3efd30351adc3905f5744faa4ea7f699c4f6b1092627b5155ca8c9b1b",
+    "faces/item_face/00300008/16_focus.json": "720b1576842a475d2810784c644b1ba3a60c5a333fd819472da0b2574304a899",
+    "faces/item_face/00300008/17_focus_c.json": "3d04d72783d50bc287f472cec1cf8581f60aa937d93b835ab45e019a9eb75d12",
+    "faces/item_face/00300008/18_pain.json": "e9019d14b714dadb51e368b3b04a886d7eeb5b7e59922cdb53c9d8b38d0dca36",
+    "faces/item_face/00300008/19_pain_c.json": "59682e491ba24ad76b9185a24dfed9da88da1b2a2146269a43cdbe497e216f32",
+    "faces/item_face/00300008/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300008/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300008/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300009/01_idle.json": "eef8771fd5e389a18f7d05907a9881ec21aec8d8f192db4e9551b9b454bcc0de",
+    "faces/item_face/00300009/02_idle_c.json": "760c00055bc37d0e0499da9cc28f3e083f7d8c93502551b1c9fceefdc1197db1",
+    "faces/item_face/00300009/03_blink1.json": "c7a5651bb6ff8e0575345dd92b32e90f3800400ecdcafbc83eef2b8eecd1de55",
+    "faces/item_face/00300009/04_blink1_c.json": "6ccd92b50dc545c54af782bb714d96eab6c8236f82ae08697cda18e1b5d735f4",
+    "faces/item_face/00300009/05_blink2.json": "ff83a5fef5e727bede646f5c6e296d4a05e5df79bc413c15413d902cbb32a0fc",
+    "faces/item_face/00300009/06_talk.json": "7f027a961274361dc909dcdb393ed3e75dfd7d9ae68962afa451b4164366ec02",
+    "faces/item_face/00300009/07_talk_c.json": "760c00055bc37d0e0499da9cc28f3e083f7d8c93502551b1c9fceefdc1197db1",
+    "faces/item_face/00300009/08_talk_blink1.json": "1966ee1c3b2ccd29413bf29bf3b6eefd690ed0622d11780c966b5514a940a5b4",
+    "faces/item_face/00300009/09_talk_blink1_c.json": "6ccd92b50dc545c54af782bb714d96eab6c8236f82ae08697cda18e1b5d735f4",
+    "faces/item_face/00300009/10_talk_blink2.json": "45cf6a67f8faa388a26067b01aa8b3ab15ffb53df4b9c8a32acf21426fcf0618",
+    "faces/item_face/00300009/11_attack.json": "5efd160865f11be4b395777db627ddc0190a92234b6a1e14734891ae9458bfa5",
+    "faces/item_face/00300009/12_attack_c.json": "9996fda7b981b3b5342b2d73a804e493d033dec987bea0598129244d4d83b7b3",
+    "faces/item_face/00300009/13_attack_blink1.json": "4b3890c2258c2dccdbe0b205a9be68757bab15fee906296c9c815a537f2672e2",
+    "faces/item_face/00300009/14_attack_blink1_c.json": "a919a32da439da409050db98464bfce953e16acd1a7c487b0ac7f403eeebac0f",
+    "faces/item_face/00300009/15_attack_blink2.json": "9f088c2decea814b147b52c00606a6ca3a5d8ce60994f57d27bc45ec88d23b91",
+    "faces/item_face/00300009/16_focus.json": "eca4990a88b170f90d196a1ce50739e139581a957ddc6a7143eead821da4d671",
+    "faces/item_face/00300009/17_focus_c.json": "df7424c34971d7b3376a2ec1dc36175784258c04787ea141d0030f204217f9da",
+    "faces/item_face/00300009/18_pain.json": "36d3262a913929bbff93818473905755844ddbaf96bf460dd97aab95208d1473",
+    "faces/item_face/00300009/19_pain_c.json": "77ffd57c8ff3d27ab38741210ed4827bea02484620674aeac90f3353792a143c",
+    "faces/item_face/00300009/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300009/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300009/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/fc_face_angry.json": "a40f6f20b381ae5d733ae724127f04f4db9cfe454c729d296bc2e9884d0b02c1",
+    "faces/item_face/fc_face_happy.json": "5eeabce5103d0c1df78c36434e6b94e7638d0873d05a540b4b05fe9ce0317f6b",
+    "faces/item_face/fc_face_serious.json": "e70afd6749c610177825bde85b0f741f627c430ebdf3bd5adf03f3bd1385da8d",
+    "faces/item_face/fc_face_smile.json": "f8a7d6fd6bab92ea47fd46a0854dd7c0d386e908e2f2226e5441274f77e90108",
+    "faces/item_face/mc_face_angry.json": "f281cbdbf3e35b3c759fdba609e06d278d806f3a4f93f37069a0abbf91a63484",
+    "faces/item_face/mc_face_happy.json": "8b65d2cb40709df1661329da5868f5e268c4e82fa920cc5a81321bda1fb35540",
+    "faces/item_face/mc_face_serious.json": "03a44c3c8813fd6307e0a330c6ab78fed463ff8e004c828d317a8a1d3a7a799e",
+    "faces/item_face/mc_face_smile.json": "49510b4af51ce805c6d5c244f8cf6134aa851b874b22cf05a0a82909242b5fb3",
+    "faces/texture-report.json": "317c0f16b5b4eb73df21f7bb963555256141dfcdab6f261a8edc4e65e3d616ca",
+    "backgrounds/bg/bg_blue.png": "af85a42a2850083512722572fa0c8e07757b9ef711f2c11b111ec52312b16960",
+    "backgrounds/bg/bg_ellinia_a.png": "fd46a8256782e16a9fe38da85080853330bdc942621f3a86d83a62e3aa63c3a0",
+    "backgrounds/bg/bg_henesys_a.png": "9a4e369444d910c7ccc046ff4fe7821ce1cce2a2bbd3d65b58d1979f105f36c6"
+  },
+  "items": [
+    {
+      "itemId": 10200001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleLooseHairMatrix.jpg"
+      ],
+      "limitation": "Reviewed loose. No supported cap hair form; remove hats before equipping."
+    },
+    {
+      "itemId": 10200230,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 10300001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 10300002,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11200001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11200002,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11300001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11300002,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11400003,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11400350,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11500001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11500003,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11600001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11600007,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11700001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11700003,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11800008,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11800009,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 12200001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 13000001,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 13100068,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 14000002,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 15500002,
+      "bodyVariant": "male",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-malePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-maleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 10200009,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 10200224,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 10300003,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 10300004,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11200001,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11200002,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11300001,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11300002,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11400003,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11400158,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11500001,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11500003,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11600001,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11600007,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11700001,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11700003,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11800008,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 11800009,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 12200001,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 13000001,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 13100068,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 14000002,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    },
+    {
+      "itemId": 15500002,
+      "bodyVariant": "female",
+      "evidence": [
+        "NifToGltf/obj/research/simulator-femalePoseMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleArmorMatrix.jpg",
+        "NifToGltf/obj/research/simulator-femaleRobeMatrix.jpg"
+      ]
+    }
+  ],
+  "matrix": {
+    "male": {
+      "items": [
+        10200001,
+        10200230,
+        10300001,
+        10300002,
+        11200001,
+        11200002,
+        11300001,
+        11300002,
+        11400003,
+        11400350,
+        11500001,
+        11500003,
+        11600001,
+        11600007,
+        11700001,
+        11700003,
+        11800008,
+        11800009,
+        12200001,
+        13000001,
+        13100068,
+        14000002,
+        15500002
+      ],
+      "clips": [
+        "idle_a",
+        "fitting_idle_a",
+        "walk_a",
+        "run_a",
+        "emotion_dance_t",
+        "emotion_dance_v"
+      ],
+      "sampleSeconds": 0.75,
+      "angles": [
+        "front",
+        "side",
+        "back"
+      ]
+    },
+    "female": {
+      "items": [
+        10200009,
+        10200224,
+        10300003,
+        10300004,
+        11200001,
+        11200002,
+        11300001,
+        11300002,
+        11400003,
+        11400158,
+        11500001,
+        11500003,
+        11600001,
+        11600007,
+        11700001,
+        11700003,
+        11800008,
+        11800009,
+        12200001,
+        13000001,
+        13100068,
+        14000002,
+        15500002
+      ],
+      "clips": [
+        "idle_a",
+        "fitting_idle_a",
+        "walk_a",
+        "run_a",
+        "emotion_dance_t",
+        "emotion_dance_v"
+      ],
+      "sampleSeconds": 0.75,
+      "angles": [
+        "front",
+        "side",
+        "back"
+      ]
+    }
+  },
+  "limits": [
+    "Appearance approval covers the recorded outfits and sampled states, not every item combination or animation frame.",
+    "Native body motion is preserved. Front/Side/Back reframe the current pose; there is no in-place animation mode.",
+    "Happy and Angry are independent face choices that hold their final source frame. Pose synchronization and other expressions are unavailable.",
+    "Eye reset uses client colorpalette 3 entry 0 as the viewer default, not a verified character-creation default. Garments and hair use exported material override defaults.",
+    "Authored C hair forms were reviewed for Natural Shaggy Hair with both selected hats, Flowing Angel Hair with Casual Cap, and Apple Bob with Beginner Fishing Hat. Other pairings are not appearance-certified. Outlandish Locks is supported loose only.",
+    "Clipping, private bones, special materials and unsupported source formats can still affect preview items. No body part was resized or item silently substituted.",
+    "All effects and particle simulation are excluded. Weapons use source itemmodel attachment locations; combat poses are outside this six-clip set.",
+    "Local URLs and MIME types are tested. Hosted CORS, immutable cache headers and published-origin verification require the separately authorized deployment."
+  ],
+  "interactionChecks": [
+    "Actual catalog name/ID searches and item buttons on both bodies",
+    "CL+PA robe clears separate garments; a separate garment removes the complete robe",
+    "Dual hand item clears RH+LH weapons",
+    "Second robe part HTTP404 leaves prior equipment unchanged",
+    "Unsupported Outlandish Locks plus Beginner Fishing Hat shows an error without replacing hair",
+    "Eight cap round trips: 26 geometries / 65 textures before and after",
+    "Flowing Angel Hair morph values 0.3 and 0.5 survive C form and loose form round trip",
+    "Skin, eyes, robe and hair custom color edits and exact reset through UI",
+    "Own Blue sky, Ellinia and Henesys images loaded through background selector",
+    "Save image downloaded a valid 823x520 PNG, 674131 bytes, with dyes, expression and Henesys",
+    "390px viewport: 390px document width, no overflowing main descendants",
+    "Invalid pagination HTTP400; literal injection-shaped search and wrong-body item return no rows"
+  ],
+  "reference": {
+    "url": "https://hunya.duckdns.org",
+    "observed": "2026-09-06",
+    "findings": [
+      "Male button reports male characters unsupported; no male visual comparison is claimed.",
+      "Female Flowing Angel Hair 10200224 and hat 11300001: saved HR model retains _a.gltf, hair-cut state becomes 8, cap position/rotation fields are zero. Reference canvas readback was black, so silhouette parity is unverified.",
+      "Equipping robe 12200001 changes CL to 12220001_F_ProbationMage.gltf and clears PA to -1/null. Our itemmodel/122.xml explicitly supplies CL+PA for each gender with the same source NIF.",
+      "Hat 11300001 showed saved dye channels (63,59,51) and (20,18,15). Hair retained saved purple dye when selecting another hair. These saved values do not establish new-character defaults.",
+      "Expression button interaction did not expose a reliable visual result in T3. Our exact MaleCustom/FemaleCustom imports identify Emotion_Happy_A and Emotion_Angry_A plus their texture frames. Only our local face rendering was visually verified.",
+      "Reference did not return the exact requested 10200006,10200009 or11300212 searches during the earlier targeted checks."
+    ]
+  }
+}

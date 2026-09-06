@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "f_body",
+      "input": "Models/Character/female/f_body.nif",
+      "output": "female/body.gltf",
+      "bodyVariant": "female",
+      "animations": "NativeSources/Character/female",
+      "clips": [
+        "idle_a",
+        "fitting_idle_a",
+        "walk_a",
+        "run_a",
+        "emotion_dance_t",
+        "emotion_dance_v"
+      ]
+    },
+    {
+      "id": "m_body",
+      "input": "Models/Character/male/m_body.nif",
+      "output": "male/body.gltf",
+      "bodyVariant": "male",
+      "animations": "NativeSources/Character/male",
+      "clips": [
+        "idle_a",
+        "fitting_idle_a",
+        "walk_a",
+        "run_a",
+        "emotion_dance_t",
+        "emotion_dance_v"
+      ]
+    },
+    {
+      "id": "11300212-female",
+      "input": "Models/Item/1/13/11300212_c_duckyballcap01_c.nif",
+      "output": "female/hat.gltf",
+      "bodyVariant": "female",
+      "slot": "CP",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/113.xml",
+      "itemId": "11300212"
+    },
+    {
+      "id": "11300212-male",
+      "input": "Models/Item/1/13/11300212_c_duckyballcap01_c.nif",
+      "output": "male/hat.gltf",
+      "bodyVariant": "male",
+      "slot": "CP",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/113.xml",
+      "itemId": "11300212"
+    },
+    {
+      "id": "11400350-male",
+      "input": "NativeSources/Clothing-03/1/14/11400151_m_hoodsleeveless.nif",
+      "output": "male/top.gltf",
+      "bodyVariant": "male",
+      "slot": "CL",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/114.xml",
+      "itemId": "11400350"
+    },
+    {
+      "id": "11400158-female",
+      "input": "NativeSources/Clothing-02/1/14/11400158_f_hoodtshirts.nif",
+      "output": "female/top.gltf",
+      "bodyVariant": "female",
+      "slot": "CL",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/114.xml",
+      "itemId": "11400158"
+    },
+    {
+      "id": "10200230-male",
+      "input": "Models/Item/0/02/10200230_m_hair_a.nif",
+      "output": "male/hr.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/102.xml",
+      "itemId": "10200230"
+    },
+    {
+      "id": "11200028-male",
+      "input": "Models/Item/1/12/11200028_m_eafirefighter01.nif",
+      "output": "male/ea.gltf",
+      "bodyVariant": "male",
+      "slot": "EA",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/112.xml",
+      "itemId": "11200028"
+    },
+    {
+      "id": "11800291-female",
+      "input": "Models/Item/1/18/11800291_c_mtsherlock02.nif",
+      "output": "female/mt.gltf",
+      "bodyVariant": "female",
+      "slot": "MT",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/118.xml",
+      "itemId": "11800291"
+    },
+    {
+      "id": "13100068-male",
+      "input": "Models/Item/1/31/13100068_blackbeandagger.nif",
+      "output": "male/oh.gltf",
+      "bodyVariant": "male",
+      "slot": "OH",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "NativeSources/Xml/itemmodel/131.xml",
+      "itemId": "13100068"
+    },
+    {
+      "id": "21000174_m_rabbitdollcymbalsgrey",
+      "input": "Models/Npc/21/21000174/21000174_m_rabbitdollcymbalsgrey.nif",
+      "output": "npc/rabbit.gltf",
+      "kfm": "Models/Npc/21/21000174/21000174_m_rabbitdollcymbalsgrey.kfm",
+      "clips": [
+        "all"
+      ]
+    },
+    {
+      "id": "co_liftup_shovel_a01_sa",
+      "input": "Models/Map/common/liftup/co_liftup_shovel_a01_sa.nif",
+      "output": "map/shovel.gltf"
+    }
+  ]
+}

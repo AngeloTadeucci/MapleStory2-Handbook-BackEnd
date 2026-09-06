@@ -4,7 +4,7 @@ using System.Text.Json.Nodes;
 
 namespace NifToGltf.Native;
 
-internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
+internal sealed class GltfWriter(NifDocument document, string? textureRoot, TextureCatalog? catalog = null) {
     private readonly JsonArray nodes = [], meshes = [], skins = [], accessors = [], views = [], materials = [], images = [], textures = [];
     private readonly MemoryStream buffer = new();
     private readonly Dictionary<int, int> nodeMap = [];
@@ -12,12 +12,24 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
     private readonly Dictionary<int, int> parents = [];
     private readonly List<object> primitiveReports = [];
     private readonly List<string> hiddenMeshes = [];
-    private string[]? textureFiles;
+    private readonly TextureCatalog textureCatalog = catalog ?? new(textureRoot);
+    private readonly List<TexturePixels> imagePixels = [];
+    private readonly JsonArray samplers = [];
+    private readonly Dictionary<ushort, int> samplerMap = [];
+    private readonly Dictionary<int, List<TextureTransform>> uvTransforms = [];
+    private int nextUv;
     public static JsonNode Json<T>(T value) => JsonSerializer.SerializeToNode(value)!;
     public static float[] MatrixValues(Matrix4x4 m) => [m.M11, m.M12, m.M13, m.M14, m.M21, m.M22, m.M23, m.M24,
         m.M31, m.M32, m.M33, m.M34, m.M41, m.M42, m.M43, m.M44];
 
     public object Write(string output, IReadOnlyList<AnimationClip>? clips = null, bool overwrite = false) {
+        document.OmitParticles();
+        HashSet<int> reachable = [];
+        void Visit(int id) {
+            if (id < 0 || !reachable.Add(id)) return;
+            if (document.Nodes.TryGetValue(id, out NifNode? node)) foreach (int child in node.Children) Visit(child);
+        }
+        foreach (int root in document.Roots) Visit(root);
         foreach (NifNode node in document.Nodes.Values) {
             nodeMap[node.Id] = nodes.Count;
             if (!Matrix4x4.Decompose(node.Transform, out Vector3 scale, out Quaternion rotation, out Vector3 translation)) {
@@ -25,11 +37,13 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
             }
             nodes.Add(Json(new { name = node.Name, translation = new[] { translation.X, translation.Y, translation.Z },
                 rotation = new[] { rotation.X, rotation.Y, rotation.Z, rotation.W }, scale = new[] { scale.X, scale.Y, scale.Z } }));
+            if (node.SortingMode is { } sorting) nodes[^1]!["extras"] = Json(new { nifSortingMode = sorting });
             foreach (int child in node.Children) {
                 if (!parents.TryAdd(child, node.Id)) throw new InvalidDataException($"Multiple parents for block {child}.");
             }
         }
         foreach (NifNode node in document.Nodes.Values) {
+            if (!reachable.Contains(node.Id)) continue;
             HashSet<int> ancestry = [node.Id];
             int current = node.Id;
             while (parents.TryGetValue(current, out current)) {
@@ -41,14 +55,26 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
             int ancestor = node.Id;
             while (parents.TryGetValue(ancestor, out ancestor)) hidden |= (document.Nodes[ancestor].Flags & 1) != 0;
             if (hidden) { hiddenMeshes.Add(node.Name); continue; }
+            int effectAncestor = node.Id;
+            do {
+                foreach (int effect in document.Nodes[effectAncestor].Effects.Where(id => id >= 0)) {
+                    throw new NotSupportedException($"Visible mesh {node.Name} uses scene effect block {effect} ({document.Blocks[effect].Type}); appearance requires an explicit material implementation.");
+                }
+            } while (parents.TryGetValue(effectAncestor, out effectAncestor));
             JsonArray primitives = [];
             int material = Material(node);
             int? skinIndex = null;
+            double[]? morphWeights = null;
             for (int submesh = 0; submesh < node.Mesh.Submeshes; submesh++) {
                 DecodedPrimitive decoded;
                 try { decoded = MeshDecoder.Decode(document, node, submesh); }
                 catch (Exception e) when (e is InvalidDataException or NotSupportedException) {
                     throw new InvalidDataException($"{document.Path}: block {node.Id} ({node.Name}), submesh {submesh}: {e.Message}", e);
+                }
+                foreach (TextureTransform transform in uvTransforms[node.Id]) transform.Apply(decoded.Attributes);
+                if (materials[material]?["normalTexture"] is JsonObject normalTexture &&
+                    (!decoded.Attributes.ContainsKey("TANGENT") || uvTransforms[node.Id].Count > 0)) {
+                    MeshDecoder.GenerateTangents(decoded.Attributes, decoded.Indices, normalTexture["texCoord"]?.GetValue<int>() ?? 0);
                 }
                 JsonObject attributes = new();
                 foreach ((string semantic, MeshAttribute attribute) in decoded.Attributes) {
@@ -57,6 +83,13 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
                 }
                 int indices = Accessor(decoded.Indices.Select(value => (double) value).ToArray(), 1, 5125, 34963);
                 primitives.Add(new JsonObject { ["attributes"] = attributes, ["indices"] = indices, ["material"] = material });
+                if (decoded.MorphPositions.Length > 0) {
+                    primitives[^1]!["targets"] = Json(decoded.MorphPositions.Select(target => new {
+                        POSITION = Accessor(target.Values, 3, 5126, 34962, true)
+                    }).ToArray());
+                    if (morphWeights is not null && !morphWeights.SequenceEqual(decoded.MorphWeights)) throw new InvalidDataException("Submeshes disagree on morph weights.");
+                    morphWeights = decoded.MorphWeights;
+                }
                 if (decoded.Skin is { } skin && skinIndex is null) {
                     skinIndex = skins.Count;
                     skins.Add(Json(new { name = node.Name, skeleton = NodeIndex(skin.Root), joints = skin.Bones.Select(NodeIndex).ToArray(),
@@ -68,6 +101,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
             nodes[nodeMap[node.Id]]!["mesh"] = meshes.Count;
             if (skinIndex.HasValue) nodes[nodeMap[node.Id]]!["skin"] = skinIndex.Value;
             meshes.Add(new JsonObject { ["name"] = node.Name, ["primitives"] = primitives });
+            if (morphWeights is not null) meshes[^1]!["weights"] = Json(morphWeights);
         }
         if (meshes.Count == 0) throw new InvalidDataException("No meshes to export.");
         int[] roots = document.Roots.Where(root => root >= 0).Select(NodeIndex).ToArray();
@@ -122,7 +156,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
         };
         if (skins.Count > 0) gltf["skins"] = skins;
         if (animations.Count > 0) gltf["animations"] = animations;
-        if (images.Count > 0) { gltf["images"] = images; gltf["textures"] = textures; }
+        if (images.Count > 0) { gltf["images"] = images; gltf["textures"] = textures; gltf["samplers"] = samplers; }
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
         string temporary = output + $".{Guid.NewGuid():N}.tmp";
         try {
@@ -132,7 +166,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
             if (File.Exists(temporary)) File.Delete(temporary);
         }
         return new { source = document.Path, output = Path.GetFullPath(output), nodes = nodes.Count, meshes = meshes.Count,
-            skins = skins.Count, textures = textures.Count, animations = animations.Count, hiddenMeshes, primitives = primitiveReports };
+            skins = skins.Count, textures = textures.Count, animations = animations.Count, hiddenMeshes, omitted = document.Omitted, primitives = primitiveReports };
     }
     private int NodeIndex(int block) => nodeMap.TryGetValue(block, out int index) ? index :
         throw new NotSupportedException($"Referenced scene block {block} ({document.Blocks[block].Type}) is not supported.");
@@ -165,6 +199,9 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
         return accessors.Count - 1;
     }
     private int Material(NifNode node) {
+        uvTransforms[node.Id] = [];
+        nextUv = checked((int) (node.Mesh!.Streams.SelectMany(stream => stream.Semantics)
+            .Where(semantic => semantic.Name == "TEXCOORD").Select(semantic => semantic.Index + 1).DefaultIfEmpty(0u).Max()));
         List<int> properties = [..node.Properties];
         int parent = node.Id;
         while (parents.TryGetValue(parent, out parent)) properties.AddRange(document.Nodes[parent].Properties);
@@ -189,15 +226,23 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
             } else if (type == "NiAlphaProperty") {
                 ushort flags = r.U16();
                 byte cutoff = r.Byte();
-                if ((flags & 512) != 0) { material["alphaMode"] = "MASK"; material["alphaCutoff"] = cutoff / 255.0; }
-                else if ((flags & 1) != 0) material["alphaMode"] = "BLEND";
+                // The face uses alpha testing AND source-alpha blending. Mask alone makes
+                // every zero-alpha texel opaque when its source threshold is zero.
+                if ((flags & 1) != 0) material["alphaMode"] = "BLEND";
+                else if ((flags & 512) != 0) {
+                    int comparison = (flags >> 10) & 7;
+                    if (comparison is not (4 or 6)) throw new NotSupportedException($"Alpha test comparison {comparison} cannot use glTF MASK directly.");
+                    if (comparison == 4 && cutoff == 255) throw new NotSupportedException("Alpha test rejects every fragment.");
+                    material["alphaMode"] = "MASK";
+                    material["alphaCutoff"] = (cutoff + (comparison == 4 ? 0.5 : 0)) / 255.0;
+                }
             } else {
                 r.U16();
                 int count = r.Count();
                 JsonObject extraTextures = new();
                 for (int slot = 0; slot < count; slot++) {
                     if (!r.Bool()) continue;
-                    JsonObject texture = TextureDescriptor(r);
+                    JsonObject texture = TextureDescriptor(r, node.Id);
                     if (slot == 0) pbr["baseColorTexture"] = texture;
                     else if (slot == 6) material["normalTexture"] = texture;
                     else extraTextures[$"slot{slot}"] = texture;
@@ -207,7 +252,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
                 int shaders = r.Count();
                 for (int i = 0; i < shaders; i++) {
                     if (!r.Bool()) continue;
-                    JsonObject texture = TextureDescriptor(r);
+                    JsonObject texture = TextureDescriptor(r, node.Id);
                     uint map = r.U32();
                     extraTextures[$"shader{map}"] = texture;
                 }
@@ -215,42 +260,92 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot) {
             }
             r.Finish();
         }
+        ApplyMaterialColors(node, material, pbr);
         materials.Add(material);
         return materials.Count - 1;
     }
-    private JsonObject TextureDescriptor(NifReader r) {
+    private JsonObject TextureDescriptor(NifReader r, int node) {
         int source = r.I32();
         ushort flags = r.U16();
         r.U16();
-        if (r.Bool()) throw new NotSupportedException("UV texture transform.");
         int uv = flags & 255;
-        JsonObject info = new() { ["index"] = Texture(source) };
+        if (r.Bool()) {
+            Vector2 translation = new(r.Float(), r.Float()), scale = new(r.Float(), r.Float());
+            float rotation = r.Float();
+            uint method = r.U32();
+            Vector2 center = new(r.Float(), r.Float());
+            Matrix3x2 matrix = TextureTransform.Create(translation, scale, rotation, method, center);
+            if (matrix != Matrix3x2.Identity) {
+                TextureTransform? existing = uvTransforms[node].FirstOrDefault(transform => transform.Source == uv && transform.Matrix == matrix);
+                if (existing is null) {
+                    existing = new TextureTransform(uv, nextUv++, matrix);
+                    uvTransforms[node].Add(existing);
+                }
+                uv = existing.Target;
+            }
+        }
+        JsonObject info = new() { ["index"] = Texture(source, flags) };
         if (uv != 0) info["texCoord"] = uv;
         return info;
     }
-    private int Texture(int block) {
+    private int Texture(int block, ushort flags) {
         NifReader r = document.Reader(block, "NiSourceTexture");
         document.ObjectNet(r);
-        if (r.Byte() != 1) throw new NotSupportedException($"Embedded texture at block {block}.");
+        bool external = r.Bool();
         string name = document.Name(r);
-        r.I32(); r.Take(12); r.Byte(); r.Bool(); r.Bool(); r.Finish();
+        int pixels = r.I32(); r.Take(12); r.Byte(); r.Bool(); r.Bool(); r.Finish();
         string fileName = Path.GetFileName(name.Replace('\\', '/'));
-        string local = Path.Combine(Path.GetDirectoryName(document.Path)!, fileName);
-        string? path = File.Exists(local) ? local : Directory.EnumerateFiles(Path.GetDirectoryName(document.Path)!)
-            .FirstOrDefault(file => string.Equals(Path.GetFileName(file), fileName, StringComparison.OrdinalIgnoreCase));
-        if (path is null && textureRoot is not null) {
-            textureFiles ??= Directory.GetFiles(textureRoot, "*.dds", SearchOption.AllDirectories);
-            string[] matches = textureFiles.Where(file => string.Equals(Path.GetFileName(file), fileName, StringComparison.OrdinalIgnoreCase)).ToArray();
-            if (matches.Length != 1) throw new FileNotFoundException($"Texture {name}: expected one match under {textureRoot}, found {matches.Length}.");
-            path = matches[0];
-        }
-        if (path is null) throw new FileNotFoundException($"Texture {name} missing beside {document.Path}; supply --textures.");
-        if (textureMap.TryGetValue(path, out int index)) return index;
-        byte[] png = DdsTexture.ToPng(File.ReadAllBytes(path));
+        string path = external ? textureCatalog.Resolve(document.Path, name) : $"embedded:{pixels}";
+        ushort sampling = (ushort) (flags & 0xFF00);
+        string key = $"{path}:{sampling}";
+        if (textureMap.TryGetValue(key, out int index)) return index;
+        TexturePixels decoded = external ? DdsTexture.Decode(File.ReadAllBytes(path)) : EmbeddedTexture.Decode(document, pixels);
+        byte[] png = decoded.ToPng();
         index = textures.Count;
-        textureMap[path] = index;
+        textureMap[key] = index;
         images.Add(Json(new { name = fileName, uri = "data:image/png;base64," + Convert.ToBase64String(png) }));
-        textures.Add(Json(new { source = images.Count - 1 }));
+        imagePixels.Add(decoded);
+        if (!samplerMap.TryGetValue(sampling, out int sampler)) {
+            samplerMap[sampling] = sampler = samplers.Count;
+            int filter = (flags >> 8) & 15, clamp = (flags >> 12) & 3;
+            int min = filter switch { 0 => 9728, 1 => 9729, 2 => 9987, 3 => 9984, 4 => 9985, 5 => 9986, _ => throw new NotSupportedException($"Texture filter {filter}.") };
+            samplers.Add(Json(new { wrapS = (clamp & 2) != 0 ? 10497 : 33071, wrapT = (clamp & 1) != 0 ? 10497 : 33071,
+                magFilter = filter is 0 or 3 or 5 ? 9728 : 9729, minFilter = min }));
+        }
+        textures.Add(Json(new { source = images.Count - 1, sampler }));
         return index;
+    }
+    private void ApplyMaterialColors(NifNode node, JsonObject material, JsonObject pbr) {
+        JsonObject extras = material["extras"]?.AsObject() ?? new JsonObject();
+        if (material["extras"] is null) material["extras"] = extras;
+        extras["nifShader"] = node.MaterialName;
+        Dictionary<string, Vector3> colors = [];
+        uint? map = null;
+        foreach (int extra in node.ExtraData) {
+            NifReader r = document.Reader(extra);
+            string name = document.Name(r);
+            if (document.Blocks[extra].Type == "NiColorExtraData" && name.StartsWith("OverrideColor", StringComparison.Ordinal)) {
+                colors[name] = r.Vector(); r.Float(); r.Finish();
+            } else if (document.Blocks[extra].Type == "NiIntegerExtraData" && name == "ColorOverrideMapIndex") {
+                map = r.U32(); r.Finish();
+            }
+        }
+        if (node.MaterialName is not ("MS2CharacterMaterial" or "MS2CharacterSkinMaterial" or "MS2CharacterHairMaterial") || map is null || colors.Count != 3) return;
+        Vector3[] values = Enumerable.Range(0, 3).Select(i => colors[$"OverrideColor{i}"]).ToArray();
+        extras["nifOverrideColors"] = Json(values.Select(color => new[] { color.X, color.Y, color.Z }));
+        if (extras["nifTextures"]?[$"shader{map}"] is not JsonObject control || pbr["baseColorTexture"] is not JsonObject baseInfo) return;
+        if ((control["texCoord"]?.GetValue<int>() ?? 0) != (baseInfo["texCoord"]?.GetValue<int>() ?? 0)) throw new NotSupportedException("Color override uses different base/control UV coordinates.");
+        int baseTexture = baseInfo["index"]!.GetValue<int>(), maskTexture = control["index"]!.GetValue<int>();
+        JsonNode maskSampler = samplers[textures[maskTexture]!["sampler"]!.GetValue<int>()]!;
+        JsonNode baseSampler = samplers[textures[baseTexture]!["sampler"]!.GetValue<int>()]!;
+        TexturePixels tinted = MaterialColors.Bake(imagePixels[textures[baseTexture]!["source"]!.GetValue<int>()], imagePixels[textures[maskTexture]!["source"]!.GetValue<int>()], values,
+            maskSampler["magFilter"]!.GetValue<int>() != 9728, maskSampler["wrapS"]!.GetValue<int>() == 10497, maskSampler["wrapT"]!.GetValue<int>() == 10497,
+            baseSampler["magFilter"]!.GetValue<int>() != 9728, baseSampler["wrapS"]!.GetValue<int>() == 10497, baseSampler["wrapT"]!.GetValue<int>() == 10497);
+        extras["nifBaseColorTexture"] = baseInfo.DeepClone();
+        extras["nifColorControlTexture"] = control.DeepClone();
+        images.Add(Json(new { name = node.Name + " color override", uri = "data:image/png;base64," + Convert.ToBase64String(tinted.ToPng()) }));
+        imagePixels.Add(tinted);
+        textures.Add(Json(new { source = images.Count - 1, sampler = textures[baseTexture]!["sampler"]!.GetValue<int>() }));
+        baseInfo["index"] = textures.Count - 1;
     }
 }

@@ -2,6 +2,54 @@
 
 Updated 2026-09-06 following the user's revised acceptance scope.
 
+Gelo follow-up: a development-only preview at `/outfits?preview=gelo-01`
+loads eight saved appearance items and colors from a read-only snapshot of
+local `tria-game-server`. Front/side/back views and visible-tab playback were
+checked in T3. Explicit omissions and exact evidence are in `STATUS.md`.
+The preview is separate from the unchanged release-02 publishing candidate.
+
+User review on 2026-09-06 accepts Gelo's appearance for now, with shader
+differences explicitly unresolved. Commit this implementation checkpoint and
+plans. Shader refinement and the documented missing Gelo items remain follow-up
+work; effects remain excluded. Publishing still requires separate authorization.
+Generated libraries, source extracts and the saved character snapshot remain
+local ignored artifacts; the source commit does not publish or bundle them.
+
+## Implementation progress, 2026-09-06
+
+Phases 1–3 are implemented in the local `/outfits` route: paginated database
+catalog, exact XML item/body bundles, transactional multi-slot equipment,
+body/garment cutting, authored cap hair variants, source face textures and blink
+timings, palettes and shared skin. The default catalog has 23 reviewed items per
+body. Available-model browsing also includes previews, 47 named items per body
+in the current database. All-item browsing explains absent or rejected models.
+
+Phase 4 has a recorded T3 matrix for both bodies: hoodie and leather sets, robes,
+accessories, all twelve supported slots, and all six baseline clips. Front, side
+and back views were inspected. Female 10200224 + cap 11300002 uses its own C
+hair model and restores loose hair, dye and selected morph lengths on removal.
+Eight cap round trips returned to 26 geometries / 65 textures. An intentionally
+missing second robe part retained the complete previous outfit. Robe 12200001
+replaces CL+PA together. Current expression choices come from the exported face
+sequences; an erroneous hardcoded Sad choice was removed after browser testing.
+Three own backgrounds load, dyes and reset were exercised, PNG export was
+decoded and inspected, and the 390px layout has no horizontal overflow.
+
+Phase 5 has a self-contained local candidate at
+`../MapleStory2-Handbook/static/gltf/simulator-release-02`: 124 models, separate
+catalog and customization contracts, own face/background textures and inventory.
+There are 46 reviewed item/body entries, 54 previews and 12 unavailable entries.
+`Diagnostics/simulator-review.json` records exact IDs, states, evidence and
+reviewed hashes. `Diagnostics/build_simulator.ps1` reproduced all 552 inventory
+entries byte for byte. The frontend production build passes. Hosted-origin
+checks remain part of the separately authorized deployment. The user authorized
+source commits after reviewing Gelo. No deployment or production data write has
+occurred.
+
+Verification: 31 source-backed C# tests, 11 Python tests, 156 focused frontend
+tests, zero typecheck errors/warnings, and 124 glTFs with zero validator errors
+or warnings. See STATUS.md for the evidence and precise acceptance limits.
+
 ## Outcome and scope
 
 Finish a usable Handbook clothing simulator at `/outfits`: browse clothing,
@@ -20,7 +68,7 @@ shipping the simulator. The wider converter work remains documented in Plan 09.
 Deploying the site or assets is a separate step requiring authorization.
 Do not commit unless asked.
 
-## Current foundation
+## Foundation before this implementation
 
 - Native NIF geometry, skinning, texture decoding and merged animation exports.
 - Both player bodies with six curated clips each.

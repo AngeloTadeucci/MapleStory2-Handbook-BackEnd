@@ -1,12 +1,5 @@
-﻿// I use this to convert the nif files to gltf
-// Noesis is required to run this
-// No, I won't make this readable, maybe in the future, uwu
-
-// Quickest tutorial I can give:
-// 1. Download Noesis
-// 2. Export the nif files to Resources/Models and DDS textures to Resources/Models/Textures
-// 3. Run this app — it copies the DDS files Noesis needs next to each NIF, then converts NIF -> GLTF in one pass
-// 4. glhf
+﻿// Native conversion is selected with --native. --noesis explicitly selects the
+// legacy workflow, which remains the default until non-effect acceptance passes.
 
 using System.Diagnostics;
 using System.Globalization;
@@ -17,6 +10,11 @@ using System.Text.Json.Serialization.Metadata;
 using MaplePacketLib2.Tools;
 using NifToGltf.Native;
 
+if (args.Contains("--native") && args.Contains("--noesis")) {
+    Console.Error.WriteLine("Choose --native or --noesis, not both.");
+    Environment.ExitCode = 1;
+    return;
+}
 if (args.Contains("--native")) {
     Environment.ExitCode = NativeCommand.Run(args);
     return;

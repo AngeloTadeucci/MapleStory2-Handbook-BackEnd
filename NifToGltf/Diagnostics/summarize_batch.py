@@ -13,6 +13,9 @@ def category(error):
         return match[1]
     for text, name in [
         ('expected one match under', 'Missing or ambiguous external texture'),
+        ('missing beside model', 'Missing external texture'),
+        ('is ambiguous across', 'Ambiguous external texture'),
+        ('uses scene effect block', 'Visible scene effect material'),
         ('Embedded texture', 'Embedded texture'),
         ('texture transform', 'UV texture transform'),
         ('primitive type', 'Unsupported primitive type'),
@@ -44,6 +47,8 @@ if __name__ == '__main__':
                  'issues': f['issues']} for f in validation['bad']]
     result = {'mode': batch['mode'], 'total': batch['total'],
               'converted': batch['convertedCount'], 'rejected': batch['failedCount'],
+              'effect_excluded': batch.get('excludedCount', 0), 'missing': batch.get('missingCount', 0),
+              'effect_exclusions': batch.get('excluded', []), 'missing_assets': batch.get('missing', []),
               'validated': validation['total'], 'invalid': validation['invalid'],
               'warning_files': validation['warningFiles'],
               'rejection_categories': dict(sorted(Counter(f['category'] for f in failed).items())),

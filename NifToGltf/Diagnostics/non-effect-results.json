@@ -1,0 +1,1045 @@
+{
+  "mode": "selected",
+  "total": 2830,
+  "converted": 2626,
+  "rejected": 201,
+  "effect_excluded": 1,
+  "missing": 2,
+  "effect_exclusions": [
+    {
+      "input": "Effect/item/eff_randombox_01.nif",
+      "reason": "Standalone item reveal effect referenced by effect/bg/common/eff_massive_item.xml, type=nif, startDelay=0.5, loop=true. No itemmodel asset entry references this NIF in the inspected KMS2 XML tree. Ordinary instruments, lift-up props and cape geometry under Effect/ remain retained."
+    }
+  ],
+  "missing_assets": [
+    {
+      "input": "Effect/bg/perform/eff_perform_frenchhorn_a.nif",
+      "error": "Texture Eff_perform_FrenchHorn_A01.dds missing beside model and in supplied texture roots."
+    },
+    {
+      "input": "Npc/02/05/02059990/02059990_m_orangemushroomtest.nif",
+      "error": "Texture 02020001_M_OrangeMushroom_Face_01.DDS missing beside model and in supplied texture roots."
+    }
+  ],
+  "validated": 2626,
+  "invalid": 0,
+  "warning_files": 0,
+  "rejection_categories": {
+    "Ambiguous external texture": 2,
+    "NiBillboardNode": 38,
+    "NiCamera": 2,
+    "NiTextureEffect": 152,
+    "No meshes": 4,
+    "Non-finite transform": 1,
+    "Other": 1,
+    "Zero-length normal": 1
+  },
+  "validation_issues": [],
+  "rejections": [
+    {
+      "input": "Effect/item/skill/co_liftup_drum_a01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 24 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/ke_liftup_bus_a01_l.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/ke_liftup_truck_a01_l.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 46 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/lu_liftup_toyball_a01_m.nif",
+      "category": "Ambiguous external texture",
+      "error": "Texture lu_liftup_toyball_a01_m.dds is ambiguous across 2 distinct-path candidates in supplied texture roots."
+    },
+    {
+      "input": "Effect/item/skill/pe_liftup_totem_b01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 10 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Effect/item/skill/sw_liftup_drum_a01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 11 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/0/10/11020395_m_fhwinter01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 26 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300200_c_number04_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300209_c_number06_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300213_c_number07_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/13/11300214_c_number05_a.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11820079_c_mtfairytale03.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 153 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/18/11820091_c_mthalloween06.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 90 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Item/1/22/12290491_f_ugcclpamaid01.nif",
+      "category": "Other",
+      "error": "Invalid NiSourceTexture reference -1."
+    },
+    {
+      "input": "Map/common/interaction/interaction_fragment_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 3 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/interaction/interaction_fragment_a02.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 3 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/co_liftup_light_a01_sa.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 9 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_bomb_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 32 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_kart_a01.nif",
+      "category": "NiCamera",
+      "error": "Referenced scene block 12 (NiCamera) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/he_liftup_magnet_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 53 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/hv_liftup_redlapenta_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 5 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/kr_liftup_pot_b01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 11 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Map/common/liftup/lu_liftup_toyball_a01_m.nif",
+      "category": "Ambiguous external texture",
+      "error": "Texture lu_liftup_toyball_A01_M.dds is ambiguous across 2 distinct-path candidates in supplied texture roots."
+    },
+    {
+      "input": "Map/common/liftup/sf_liftup_incubator_a01_m.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 55 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020030/02020030_m_fapokrak.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 73 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020107/02020107_m_lslime01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020107/02020107_m_lslime02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020107/02020107_m_lslime03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/02/02020182/02020182_m_woodfourblock02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/03/02030005/02030005_balrog_fall_a_camera.nif",
+      "category": "NiCamera",
+      "error": "Referenced scene block 8 (NiCamera) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/02/dummy/dummy.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/11/11000148/11000148_k_normalman2.nif",
+      "category": "Zero-length normal",
+      "error": "Npc/11/11000148/11000148_k_normalman2.nif: block 235 (CL:1), submesh 0: Zero-length normal."
+    },
+    {
+      "input": "Npc/11/11000154/11000154_k_normalwoman4.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 255 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000220/11000220_worker1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 259 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000222/11000222_worker2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 220 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000449/11000449_armed_woman.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 369 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000474/11000474_roulette1.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 47 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000491/11000491_cathykatalina.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 43 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000505/11000505_mafia1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 268 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000514/11000514_prisongovernor1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 312 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000519/11000519_maleprisonguard2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 105 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000638/11000638_prisonerwoman2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 254 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000747/11000747_broker1.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000748/11000748_broker2.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000749/11000749_broker3.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000750/11000750_broker4.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 90 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11000874/11000874_turtlewhiz.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 290 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001218/11001218_f_tara.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 126 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001518/11001518_m_newschool_coupon.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 45 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001519/11001519_f_newschool_coupon.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 46 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001879/11001879_wholeride_sportscar05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 364 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001880/11001880_wholeride_poclain01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 362 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001881/11001881_wholeride_flamebike02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 159 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11001882/11001882_wholeride_slime01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 332 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003447/11003447_anosptos.nif",
+      "category": "Non-finite transform",
+      "error": "Npc/11/11003447/11003447_anosptos.nif: block 51 (NiNode): Non-finite float at 14."
+    },
+    {
+      "input": "Npc/11/11003553/11003553_f_navy01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 115 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003587/11003587_happybirthcake.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 13 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003588/11003588_happybirthducky.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 29 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11003717/11003717_m_madin.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 303 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004215/11004215_chest.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 54 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004216/11004216_chest.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 188 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004351/11004351_m_georgofficer.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 72 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004352/11004352_m_georgsoldier.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004388/11004388_m_rafale.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004727/11004727_m_darkmatter.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 24 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/11/11004870/11004870_m_darkmatter.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 25 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000134/21000134_m_cube3x3black.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 80 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000605/21000605_m_chesspieceskingsilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 70 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000608/21000608_m_chesspiecesqueensilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 73 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000611/21000611_m_chesspiecesrooksilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000617/21000617_m_chesspiecespawnsilver.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 39 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000747/21000747_m_floccusrabbitwhite.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000748/21000748_m_floccusrabbitorange.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000749/21000749_m_floccusrabbityellow.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000750/21000750_m_floccusrabbitblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000751/21000751_m_floccusrabbitdarkblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000752/21000752_m_skipenguindarkblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000753/21000753_m_skipenguinblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000754/21000754_m_skipenguinpink.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000755/21000755_m_skipenguinpurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000756/21000756_m_skipenguingreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000757/21000757_m_iceduckyellow.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000758/21000758_m_iceduckblack.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000759/21000759_m_iceduckblue.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000760/21000760_m_iceduckwhite.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21000772/21000772_m_iceducknormal.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010069/21010069_m_tyrensoldierknuckle.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 134 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010070/21010070_m_tyrensoldierrifle.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 91 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010071/21010071_m_tyrensoldierwand.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 91 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010072/21010072_n_tyrensoldierclaymore.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010073/21010073_m_tyrensoldierknucklegreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 134 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010074/21010074_m_tyrensoldierriflegreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010075/21010075_m_tyrensoldierwandgreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 133 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010076/21010076_n_tyrensoldierclaymoregreen.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010077/21010077_m_tyrensoldierknucklepurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 134 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010078/21010078_m_tyrensoldierriflepurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 133 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010079/21010079_m_tyrensoldierwandpurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 133 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21010080/21010080_n_tyrensoldierclaymorepurple.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 110 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21430201/21430201_m_bluelapenta.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 51 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/21/21900136/21900136_m_georgsoldier.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000103/22000103_n_babylionblue.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 64 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000104/22000104_n_babylionred.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 64 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000105/22000105_n_changelionblue.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 92 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/22/22000106/22000106_n_changelionred.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 92 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23000052/23000052_b_knighthollowarmorswordred.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 335 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23000097/23000097_b_carparadeblackbean.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 492 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23500140/23500140_b_mushroomrichking_cake01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 125 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23500150/23500150_b_mushroomrichking_cake02.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 124 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/23/23500160/23500160_b_mushroomrichking_cake03.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 181 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/24/24120004/24120004_m_lightcircle.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/50/50400282/50400282_slime_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 291 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400282/50400282_slime_b01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 291 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400282/50400282_slime_c01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 293 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400309/50400309_pumpkindevil.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 163 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/50/50400341/50400341_ghostcat.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 253 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/52/52000002/co_skillobj_octopus_b01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 49 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/11000351_functionmirror/11000351_functionmirror.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 40 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/co_fi_prop_stick_a01.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 34 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/msb_02020025_pim/msb_02020025_pim.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 18 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/bg_obj/msb_02030013_ghostump/msb_02030013_ghostump.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 18 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/20910001_ugc_jeep_01/20910001_ugc_jeep_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 44 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/20910002_ugc_nakedbeast_01/20910002_ugc_nakedbeast_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600195_ugc_dragonchair/50600195_ugc_dragonchair.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 14 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600203_ugc_bjmike/50600203_ugc_bjmike.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600228_r_weddingcar/50600228_r_weddingcar.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600254_r_alienrobot/50600254_r_alienrobot.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 82 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600298_r_secretsafe/50600298_r_secretsafe.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 39 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/50600322_r_electricwheel/50600322_r_electricwheel.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 43 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/dummy_b_airshipbalrogcrimson_01/dummy_b_airshipbalrogcrimson_01.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_bonito/ugc_bonito_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_campervan/ugc_campervan_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_classikcar/50600205_ugc_classikcar.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 104 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_adtruck_01/ugc_design_adtruck_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 64 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_bonito_01/ugc_design_bonito_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 57 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_campervan_01/ugc_design_campervan_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 70 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_equiria_01/ugc_design_equiria_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_f1racingcar_01/ugc_design_f1racingcar_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 41 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_intimo_01/ugc_design_intimo_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 62 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_jeep_npc/ugc_design_jeep_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 101 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_design_naked_01/ugc_design_naked_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 171 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 66 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 66 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 66 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_equiria/ugc_equiria_06.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 53 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_f1racingcar/ugc_f1racingcar_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 42 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flamebike_npc/ugc_flamebike_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 61 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flamebike_npc/ugc_flamebike_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 61 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flamebike_npc/ugc_flamebike_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 61 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_flyingwheel/ugc_flyingwheel_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_intimo/ugc_intimo_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 68 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 77 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 49 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 77 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_jeep_npc/ugc_jeep_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 77 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 47 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_minivelo/ugc_minivelo_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 52 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_nakedbeast/ugc_nakedbeast_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 67 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_ride2_emptyride2/ugc_ride2_emptyride2.nif",
+      "category": "No meshes",
+      "error": "No meshes to export."
+    },
+    {
+      "input": "Npc/etc/ugc_ride2_floccusrabbityellow/21000749_m_floccusrabbityellow_ride2type.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_scrooser/ugc_scrooser.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 86 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 84 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_sportscar_npc/ugc_sportscar_npc_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 89 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_01.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_02.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_03.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_04.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_tank/ugc_tank_05.nif",
+      "category": "NiTextureEffect",
+      "error": "Referenced scene block 74 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    },
+    {
+      "input": "Npc/etc/ugc_unicorn/ugc_unicorn.nif",
+      "category": "NiBillboardNode",
+      "error": "Referenced scene block 61 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $."
+    }
+  ]
+}

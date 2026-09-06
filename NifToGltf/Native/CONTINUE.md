@@ -2,16 +2,26 @@
 
 ## Current priority, updated 2026-09-06
 
-Follow [SIMULATOR-PLAN.md](SIMULATOR-PLAN.md) for the next implementation work:
-catalog, equipment rules, hair/face customization, backgrounds/visual acceptance,
-then publishing. The user accepts individual missing clothes, poses and effects
-as long as the overall clothing simulator works. Effects and particle simulation
-remain excluded.
+The catalog, equipment rules, hair/face customization, backgrounds and local
+release candidate are implemented. Follow [SIMULATOR-PLAN.md](SIMULATOR-PLAN.md)
+and [STATUS.md](STATUS.md) for exact verification and remaining gaps. The user
+reviewed Gelo's `/outfits?preview=gelo-01` appearance and accepted the current
+shader differences for now, then authorized committing the work and plans.
+Shader parity remains unresolved. Missing Gelo items remain explicitly listed;
+effects and particle simulation remain excluded.
+
+Next release action is review of the prepared supported library before separately
+authorized publishing. Do not restart completed phases or silently expand the
+reviewed library with Gelo's preview items. Source commits do not contain the
+ignored generated assets or saved character snapshot. Preserve those local files.
 
 The original prompt below is retained as the wider converter backlog. Its demand
 for complete non-effect replacement is no longer a simulator release gate.
 Use [STATUS.md](STATUS.md) for current results; the original starting-point counts
-below are historical. The latest user request updates these plans only.
+below are historical. The simulator implementation and local release candidate
+are now recorded in STATUS.md. Review `simulator-release-02` before any separately
+authorized deployment. Do not restart completed catalog work or treat the wider
+converter backlog as a simulator release gate.
 
 ## Original replacement prompt
 
