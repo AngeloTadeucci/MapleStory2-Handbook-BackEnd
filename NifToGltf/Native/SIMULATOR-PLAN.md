@@ -1,6 +1,192 @@
 # Clothing simulator completion plan
 
-Updated 2026-09-06 following the user's revised acceptance scope.
+Updated 2026-09-07. The wardrobe expansion below is the current implementation
+plan. It takes priority over save/load and sharing. Earlier implementation
+phases and release counts below are historical context, not unfinished basics.
+
+## Current plan: complete clothing and decoration coverage
+
+### Outcome and boundaries
+
+Make every clothing and wearable-decoration option in our selected client data
+discoverable, and make every supported source family usable on its eligible
+bodies. Missing items must be individually accounted for. A successful batch
+conversion does not establish correct appearance or finish this work.
+
+Include normal equipment and cosmetic outfits, tops, bottoms, full outfits,
+hats, gloves, shoes, back items, hair, faces, makeup and visible accessories.
+Inventory all client-declared wearable slots, including slots the current
+SLOTS allowlist omits. Include handheld equipment/decorations, distinct hand
+placements, and ordinary animated geometry attached to an item. Determine from
+client data which rings, belts or other stat slots have a visible component;
+explicitly classify nonvisual equipment rather than inventing geometry.
+
+Badges remain excluded. Preserve the supported hair-twinkle effect, but do not
+expand into a general effect/particle engine. An otherwise usable garment with
+an unsupported effect should identify that omission separately. NPCs, maps,
+global Noesis replacement, new backgrounds, an exhaustive pose library, accounts
+and outfit save/share are not part of this expansion. Custom player UGC images
+require their real supplied content; ship neither invented replacements nor
+private player artwork harvested from a database.
+
+### Baseline and accounting
+
+Release-05 currently has 153 models and 127 item/body entries: 82 reviewed,
+35 previews and 10 unavailable. These are subset counts, not total wardrobe
+coverage. The complete client denominator is unknown until the inventory runs.
+Keep release-05, its 635-file inventory and Gelo's private preview intact.
+
+Count distinct item IDs, eligible item/body pairs and reusable asset families
+separately. A unisex item may have two body entries. Shared geometry must never
+make a real item ID disappear. Track source presence, conversion status, visual
+review and optional-feature support separately. The existing UI availability
+labels can remain, with precise reasons derived from that richer evidence.
+
+### 1. Inventory the full wardrobe before selecting batches
+
+- Read the installed client itemdata, itemmodel/preset references, customization,
+  archive indexes and relevant feature/locale selection. Itemdata identity and
+  eligibility must be joined to the selected model; an itemmodel ID or filename
+  alone is not a complete list of equippable items. Preserve source hashes.
+- Extend Diagnostics/simulator_library.py beyond its fixed per-slot sample,
+  explicit ID list, slot allowlist and filename-based gender heuristics. Resolve
+  exact paths and URNs using archive metadata; record ambiguous references.
+  Do not skip missing parts, mixed slots or items without geometry without a row.
+- For every item/body pair, record selected preset, all parts, attachments,
+  cutting, dyes/defaults, hair forms, private joints, animation/material needs,
+  source provenance and blockers. Classify exclusions and nonvisual equipment
+  with a reason. Record client/Handbook database mismatches without DB writes.
+- Produce wardrobe-inventory.json, coverage-by-slot/body and a failure-family
+  report. Every source item in the selected scope must reconcile to inventory
+  or an explicit exclusion. Report missing names/icons separately from geometry.
+
+Exit: a deterministic complete denominator, no silent drops, and an ordered list
+of conversion families. Resolve scope classification from the client before
+treating a slot as unsupported. Do not estimate a completion percentage from 127.
+
+### 2. Make the full inventory searchable
+
+- Extend the catalog producer, frontend catalog.ts, outfit API and outfit page
+  together. Include source-backed entries absent from the Handbook DB or with
+  empty names. Prefer the existing localized DB label when present, otherwise
+  a source label or explicit item ID. Missing icons get a visible placeholder.
+- The current API filters by database slot/gender and nonempty name, and only
+  recognizes slot-0 full outfits through selected library IDs. Replace those
+  coverage assumptions with the reconciled inventory's item/body/slot data.
+  Ensure filtering and pagination use one consistent dataset and count.
+- Keep reviewed-only and available-model browsing; All clothing must include
+  unresolved entries with concise reasons. Failed conversion must not remove an
+  item from search. Show effect-only omissions independently of equipability.
+- Keep index loading bounded and models lazy. Use a versioned metadata index,
+  paginated queries and caching as needed; do not load the wardrobe's geometry
+  to search it. Retain parameter validation and read-only database access.
+
+Exit: every in-scope ID is findable on its eligible bodies, including unresolved
+and DB-missing cases. Name, ID, slot, body and availability pagination reconcile
+to inventory totals. A catalog completeness test must enumerate all records.
+
+### 3. Convert by shared source family
+
+- Generate batches from inventory, not hand-maintained lists of favorite IDs.
+  Reuse NativeBatch, ItemModelAttachment, SkeletonGraft and existing texture/
+  archive tools. Retain exact item-specific metadata around reusable geometry.
+- Cache by all conversion-affecting inputs: source model/texture hashes, body
+  skeleton, attachment/transform choices, source options and converter version.
+  Do not deduplicate items or declare two bundles equivalent merely because
+  their NIF path matches. Customization and dye differences remain explicit.
+- Use deterministic, bounded, restartable batches with per-item failures.
+  Write to fresh work/candidate paths. Fix high-coverage failure families and
+  retry only affected inputs; do not rerun unchanged full archives repeatedly.
+- Queue ordinary tops/pants/full outfits and footwear/gloves first; then hats,
+  hair/faces/makeup and accessories; then back items, multi-part decorations and
+  hands. Within each group, prioritize fixes that unlock the most eligible
+  entries and fill both-body gaps. Do not treat the first useful batch as done.
+
+Exit: every resolvable family has been attempted. Remaining failures have exact
+IDs, source evidence, a reproducible cause and a next action. Known-supported
+families must not retain unexplained conversion failures.
+
+### 4. Resolve equipment and appearance-family blockers
+
+- Triage the existing 35 previews and 10 unavailable entries alongside new ones.
+  Prioritize missing textures, incorrect item/preset aliases, private joints,
+  exposed skin seams, alpha/material failures and unhandled attachment rules.
+- Cover complete multi-slot bundles and rollback on partial failure, robe versus
+  top/pants conflicts, exposed-skin dye inheritance, head/face accessories and
+  hair A/C/D transitions. Preserve hair length and dye state through hat changes.
+- Handle source-defined drawn/stowed/left/right parts separately. Reproduce the
+  paired-star stow overlap before claiming a fix. Do not shift items arbitrarily,
+  substitute another item, resize the body or silently freeze moving geometry.
+- Keep a real failing fixture and add the smallest meaningful regression for
+  each new rule or decoder fix. Limit renderer work to behavior required by the
+  wardrobe, preserving the accepted shader and hair effects elsewhere.
+
+Exit: each blocked family either works with evidence or has a precise supported
+scope and visible limitation. Converted-but-unreviewed is unfinished review work,
+not an acceptable permanent failure category.
+
+### 5. Review the expanded wardrobe in complete outfits
+
+- Generate front/side/back contact sheets for each distinct visual bundle and
+  eligible body. Reuse review evidence only when geometry, textures, materials,
+  skeleton/attachments, customization and cutting signatures are identical.
+  Different textures or dyes can expose different failures and require coverage.
+- Use T3 and the existing local preview for direct interaction. Review newly
+  implemented source families, every exceptional item, and every changed old
+  failure. Contact sheets supplement, rather than replace, live checks.
+- Use representative pairwise outfit combinations across compatible slots and
+  target known seams/conflicts. Exercise fitting/idle and a relevant moving pose,
+  equip/replace/remove, both bodies, dye/reset, hair/hat fitting, expressions,
+  load failure recovery and PNG export. Exhaustive cross-products are not needed.
+- Keep Gelo's twelve saved instances and a complete male outfit as fixed
+  regressions. Record exact item IDs, body, hair form, dyes, pose/time, camera,
+  background, renderer version and hashes with each review. Check resource
+  cleanup and narrow-viewport catalog interaction at the expanded index size.
+- Compare hunya only for a specific unresolved behavior with matching IDs/states,
+  especially fitting, slot conflicts, expressions and dye defaults. Confirm
+  against our XML/NIF/HLSL. If unavailable, record that limit. Use our own assets.
+
+Exit: no family is promoted from conversion/typecheck success alone. Known broken
+geometry cannot appear as reviewed or as an unexplained available preview.
+Allowed optional limitations remain labeled and attributable to exact items.
+
+### 6. Prepare the expanded release for review
+
+- Build a fresh versioned candidate from inventory plus approved asset/review
+  records. Preserve review hashes only when their actual inputs still match.
+  Avoid another chain of manual one-off release patches as the library grows.
+- Reproduce the candidate, verify all relative URLs/dependencies and inventory
+  hashes, and test producer/consumer contracts. Publish no private snapshots,
+  raw client archives, temporary captures or failed intermediate outputs.
+- Measure index bytes, largest outfit download, initial/equip latency and memory
+  on actual desktop/narrow viewports. Compare to the release-05 baseline before
+  choosing practical budgets. Deduplicate textures/assets where safe and ensure
+  ordinary browsing does not download the entire library.
+- Build the frontend against the candidate layout and verify packaged files.
+  Update STATUS.md with final totals by slot/body, reviewed/limited/blocked counts,
+  remaining exception IDs and evidence. Prepare source and asset release together;
+  changing simulator-release.json alone does not distribute the generated files.
+
+Exit: all scoped clothing is discoverable; all items in supported families are
+usable and reviewed; remaining individual exceptions are explicit. Both core
+body/outfit workflows pass. No broad supported slot may be omitted as an
+individual exception. Hand over a concrete release for publishing review.
+
+### Execution and verification rules
+
+Work on feat/clothing-simulator in both repositories. Inspect/fetch upstream and
+preserve other changes before implementation. Do not commit, push, deploy, alter
+production data, start another preview server or stop existing processes without
+new authorization for that action. Current authorization is to write this plan.
+
+Implement in the order above once requested. Update inventory and STATUS.md
+after each batch with counts and evidence. Test exact new inventory/resolution,
+deduplication, API, equipment and material rules. Run source-backed C#/Python
+checks when those components change, focused frontend tests, typecheck, direct
+T3 acceptance and final build/package checks. Do not rerun unrelated suites or
+claim full appearance parity from automated checks.
+
+## Earlier implementation checkpoints
 
 The user-requested surface shading correction is implemented: source ambient
 coefficients, independent material ambient, authored rim parameters and hair

@@ -1,5 +1,18 @@
 # Non-effect replacement status, 2026-09-06
 
+## Wardrobe expansion plan, 2026-09-07
+
+The user prioritized complete clothing/decorations coverage before save/share
+and requested a plan. SIMULATOR-PLAN.md now defines inventory reconciliation,
+full catalog discovery, conversion by family, equipment fixes, visual review
+and expanded-release gates. No expansion is implemented in this planning turn.
+The current coverage.json was rechecked: 153 models, 127 item/body entries,
+82 reviewed, 35 previews, 10 unavailable. The complete client total is unknown.
+Inspected constraints: simulator_library.py uses per-slot sampling, signature
+deduplication, a slot allowlist and itemmodel-based enumeration; the API requires
+nonempty DB names and primarily uses DB slot/gender filters. These must not be
+mistaken for a complete wardrobe inventory. Existing release assets are unchanged.
+
 ## Source review checkpoint, 2026-09-07
 
 The user authorized new `feat/clothing-simulator` branches from local master in

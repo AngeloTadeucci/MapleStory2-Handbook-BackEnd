@@ -2,6 +2,14 @@
 
 ## Current priority, updated 2026-09-07
 
+Next priority is full clothing and wearable-decoration coverage before outfit
+save/load or sharing. The current user request is planning only. Follow the
+"Current plan: complete clothing and decoration coverage" section at the top of
+SIMULATOR-PLAN.md when implementation is requested. Start with a complete client
+inventory, then full discovery, family batches, compatibility fixes, visual
+review and a reproducible release. Badges remain excluded; preserve the current
+hair effects and shader. The total wardrobe denominator is not yet measured.
+
 Review branch: `feat/clothing-simulator` in both repositories, based on the local
 master checkpoints and preserving the four earlier simulator commits. The user
 authorized committing and pushing the complete source changes on 2026-09-07.
