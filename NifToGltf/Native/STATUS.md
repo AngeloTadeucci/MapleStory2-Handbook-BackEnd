@@ -1,15 +1,32 @@
 # Simulator status, 2026-09-07
 
 Release candidate **simulator-release-14** is implemented in both repositories on
-`feat/clothing-simulator`. The user authorized committing and pushing this work.
+`feat/clothing-simulator`. The saved hair controls and Sassy static preview are
+included in the local hair follow-up commits requested by the user.
 No deployment or database writes were performed. Oracle review servers on ports
 4000, 4002 and 4003 were stopped at the user's request.
 
 ## Coverage
 
+The [Sassy Pigtails follow-up](SASSY-PIGTAILS.md) resolves its second-tail KFM
+reference and adds narrow posed NonAccum target handling. A separately authorized
+local export now enables both tails at `/outfits?hairPreview=sassy`, using the
+existing release-14 base hair. Both glTFs validate and all 59 runtime checks pass;
+18 Sassy captures and 20 refreshed snapshot-outfit captures were inspected in T3.
+Tails remain rigid in their rest pose. Physics is absent and client visual parity
+is not established. Release 14 and the normal catalog remain unchanged.
+
 Local follow-up: [authored hair placement and client evidence](HAIR-PLACEMENT.md)
 adds source placement presets for 25 preview hairstyles without changing release
 assets. Curled Pigtails has a missing direction texture; physics remains absent.
+The [hair follow-up](HAIR-FOLLOWUP.md) corrects saved back/front morph lengths,
+adds ponytail size presets, and records decoded client physics constraints.
+The [reviewed Claude investigation](HAIR-CLIENT-RESEARCH.md) adds joint XML
+defaults and scale bounds. Adjustable hair channels now have continuous controls,
+including the verified reverse conversion at the UI boundary. A native diagnostic
+loads all 34 authored collision hulls with the client's PhysX 2.8.4 DLL. Browser
+physics, final hair-scene settings and missing texture binding remain open. The
+notes also record the delegated investigation's earlier Ghidra listing mutation.
 The [movable hat correction and client evidence](HAT-PLACEMENT.md) covers Blaze's
 and EIIie's reported hat placements without changing the packaged assets.
 The [Asthoria dress alias](ASTHORIA-DRESS.md) maps inventory item 12220364 to its

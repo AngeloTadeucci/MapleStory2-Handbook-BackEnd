@@ -93,12 +93,9 @@
             if (p && r) controls.push(createHairPlacement(group.children[partIndex], {...part, presets:[{position:vector(p),rotation:vector(r)}]}, prefix, 0, () => {}));
           }
           if (controls.length) viewer.hairPlacements.set(key, controls);
-          // Keep the existing simulator's supported scale values; flag continuous saved values.
-          for (const [index, control] of viewer.hairControls.entries()) {
-            const value = saved.appearance[index === 0 ? 'BackLength' : 'FrontLength'] ?? 0;
-            if (control.values.includes(value)) control.set(value);
-            else report.notes.push('Hair length ' + value + ' is not supported by the preset-only control; retained exported length.');
-          }
+          report.hairLengths = viewer.setHairLengths([
+            saved.appearance.BackLength ?? 0, saved.appearance.FrontLength ?? 0
+          ]);
         }
         if (saved.appearance?.['!'] === 'decal' && viewer.makeupControls) {
           const a = saved.appearance;

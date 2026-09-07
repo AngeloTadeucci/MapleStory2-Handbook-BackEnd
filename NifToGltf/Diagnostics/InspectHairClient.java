@@ -16,7 +16,11 @@ public class InspectHairClient extends GhidraScript {
                     var base = toAddr(arg.substring(7));
                     for (int i = 0; i < 4; i++) println("FLOAT " + base.add(i * 4) + " " + Float.intBitsToFloat(getInt(base.add(i * 4))));
                 } else if (arg.startsWith("namespace:")) {
-                    Function member = getFunctionAt(toAddr(arg.substring(10)));
+                    Function member = getFunctionContaining(toAddr(arg.substring(10)));
+                    if (member == null) {
+                        println("NO FUNCTION " + arg);
+                        continue;
+                    }
                     SymbolIterator members = currentProgram.getSymbolTable().getSymbols(member.getParentNamespace());
                     while (members.hasNext()) {
                         Symbol symbol = members.next();
@@ -44,7 +48,9 @@ public class InspectHairClient extends GhidraScript {
                     Function function = arg.startsWith("containing:")
                         ? getFunctionContaining(toAddr(arg.substring(11))) : getFunctionAt(toAddr(arg));
                     if (function == null) {
-                        for (Reference reference : getReferencesTo(toAddr(arg))) {
+                        var address = toAddr(arg.startsWith("containing:") ? arg.substring(11) : arg);
+                        println("NO FUNCTION " + address);
+                        for (Reference reference : getReferencesTo(address)) {
                             Function caller = getFunctionContaining(reference.getFromAddress());
                             println("DATA XREF " + reference.getFromAddress() + " " + caller);
                             if (caller != null) {

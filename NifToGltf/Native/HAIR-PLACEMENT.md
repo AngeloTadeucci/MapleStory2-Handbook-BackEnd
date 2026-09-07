@@ -1,5 +1,9 @@
 # Authored hair placement, 2026-09-07
 
+See [the follow-up](HAIR-FOLLOWUP.md) for saved length corrections, attachment
+size controls, and the source physics investigation. The verification below
+describes the initial placement change.
+
 The local frontend now applies the source custom position and rotation presets to
 each ponytail attachment. It reapplies them after equipment animation updates,
 keeps independent controls for twin tails, remembers choices through hat-form
@@ -24,8 +28,8 @@ decompiles functions and lists cross-references without editing the program.
 - `0x141695ca0`: item rotation degrees converted to radians before that call.
 - `0x141693210`: ponytail controller calls the same Euler routine.
 - `0x1416962d0`: CPonyTailPhysXHelper::UpdateModelPhysXValues, identified by its
-  embedded error string. Matches joint names and applies softness and joint-frame
-  rotation from jointangle records. These are physics settings, not interpolated
+  embedded error string. Matches joint names and applies jointangle data to
+  joint limits and local frames. These are physics settings, not interpolated
   skeleton poses.
 
 Flower-knotted Hair 10200008 attaches Point01 to Bip01 Head. Its exported empty

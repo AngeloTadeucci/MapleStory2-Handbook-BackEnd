@@ -2,8 +2,12 @@ using System.Numerics;
 
 namespace NifToGltf.Native;
 
-internal sealed record AnimationTrack(string Node, string Path, double[] Times, double[] Values, int Width, string Interpolation);
-internal sealed record AnimationClip(string Name, AnimationTrack[] Tracks);
+internal sealed record AnimationTrack(string Node, string Path, double[] Times, double[] Values, int Width, string Interpolation) {
+    public bool Posed { get; init; }
+}
+internal sealed record AnimationClip(string Name, AnimationTrack[] Tracks) {
+    public string? AccumulationRoot { get; init; }
+}
 internal sealed record AnimationCurve(Func<double, double[]> Evaluate, double[] KeyTimes, bool Sample = false, bool Step = false);
 internal sealed record AnimationKey(double Time, double[] Value, double[] Forward, double[] Backward, double[] Tbc);
 
@@ -22,7 +26,7 @@ internal static class AnimationReader {
         double duration = sequence.Float();
         sequence.U32();
         double frequency = sequence.Float();
-        document.Name(sequence);
+        string accumulationRoot = document.Name(sequence);
         sequence.U32();
         sequence.Finish();
         if (duration <= 0 || duration > 3600 || frequency <= 0) throw new InvalidDataException("Invalid animation duration/frequency.");
@@ -34,7 +38,9 @@ internal static class AnimationReader {
             }
         }
         if (tracks.Count == 0) throw new InvalidDataException($"{path}: no transform animation tracks.");
-        return new AnimationClip(string.IsNullOrWhiteSpace(name) ? System.IO.Path.GetFileNameWithoutExtension(path) : name, tracks.ToArray());
+        return new AnimationClip(string.IsNullOrWhiteSpace(name) ? System.IO.Path.GetFileNameWithoutExtension(path) : name, tracks.ToArray()) {
+            AccumulationRoot = accumulationRoot
+        };
     }
 
     private static IEnumerable<AnimationTrack> ReadEvaluator(NifDocument document, int block, double duration, double frequency, int fps) {
@@ -120,7 +126,9 @@ internal static class AnimationReader {
                 values = [..values.Take(outputWidth), ..values.Take(outputWidth)];
                 keyTimes = [0, duration];
             }
-            yield return new AnimationTrack(node, paths[channel], keyTimes.Select(t => t / frequency).ToArray(), values.ToArray(), outputWidth, curve.Step ? "STEP" : "LINEAR");
+            yield return new AnimationTrack(node, paths[channel], keyTimes.Select(t => t / frequency).ToArray(), values.ToArray(), outputWidth, curve.Step ? "STEP" : "LINEAR") {
+                Posed = (channels[channel] & 64) != 0 && curves[channel] is null
+            };
         }
     }
     private static double[][] Pose(NifReader r) => [ReadValues(r, 3), ReadValues(r, 4), [r.Float()]];

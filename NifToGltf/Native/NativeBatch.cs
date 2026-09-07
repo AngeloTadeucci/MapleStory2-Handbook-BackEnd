@@ -74,6 +74,13 @@ internal static class NativeBatch {
                     continue;
                 }
                 string attachmentSource = file;
+                KfmDocument? kfm = model.Kfm is null ? null : KfmDocument.Read(Resolve(root, model.Kfm));
+                if (kfm is not null) {
+                    if (!Path.GetFullPath(kfm.Model).Equals(file, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("KFM model does not match manifest input.");
+                    // Distinct XML URNs can have KFM files that reference one NIF.
+                    // Select the attachment by its KFM identity, not shared geometry.
+                    attachmentSource = Resolve(root, model.Kfm!);
+                }
                 if (model.AlternateOf is { } primary) {
                     string primaryFile = Resolve(root, primary);
                     string stem = Path.GetFileNameWithoutExtension(file), primaryStem = Path.GetFileNameWithoutExtension(primaryFile);
@@ -100,8 +107,6 @@ internal static class NativeBatch {
                     attachment = attachment with { TargetNode = attachment.AttachNode, Translation = null, Rotation = null };
                 }
                 if (model.Skeleton is { } skeleton) SkeletonGraft.Apply(document, NifDocument.Load(Resolve(root, skeleton)), attachment?.TargetNode ?? model.Attach, attachment?.SelfNode, attachment?.Replace ?? false, attachment?.DummyTransform);
-                KfmDocument? kfm = model.Kfm is null ? null : KfmDocument.Read(Resolve(root, model.Kfm));
-                if (kfm is not null && !Path.GetFullPath(kfm.Model).Equals(file, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("KFM model does not match manifest input.");
                 List<AnimationClip> clips = ClipSelection.Read(file, kfm, model.Animations is null ? null : Resolve(root, model.Animations), model.Clips is null ? null : string.Join(',', model.Clips));
                 AnimationClip? embedded = EmbeddedAnimation.Read(document);
                 if (embedded is not null) {
@@ -113,7 +118,9 @@ internal static class NativeBatch {
                 converted.Add(new { input = relative, report });
                 assets.Add(JsonSerializer.SerializeToNode(new { id = model.Id ?? Path.GetFileNameWithoutExtension(relative), input = relative,
                     uri = targetRelative, clips = clips.Select(clip => clip.Name), skeleton = model.Skeleton, attach = model.Attach,
-                    slot = attachment?.Slot ?? model.Slot, bodyVariant = model.BodyVariant, itemId = model.ItemId, attachment, omitted = document.Omitted }, Options));
+                    slot = attachment?.Slot ?? model.Slot, bodyVariant = model.BodyVariant, itemId = model.ItemId,
+                    attachmentSource = Path.GetRelativePath(root, attachmentSource).Replace('\\', '/'), attachment,
+                    unboundAnimationTargets = report["unboundAnimationTargets"], omitted = document.Omitted }, Options));
             } catch (IOException e) when (e is FileNotFoundException or DirectoryNotFoundException) {
                 missing.Add(new { input = relative, error = PortableError(e.Message, root, destination) });
             } catch (Exception e) when (e is IOException or InvalidDataException or NotSupportedException or ArgumentException or OverflowException) {

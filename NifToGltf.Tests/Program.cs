@@ -103,6 +103,66 @@ Test("itemmodel attachment selection respects asset identity and body variant", 
         Reject(() => ItemModelAttachment.Read(path, "11800001", "cape_m.nif", "female"));
     } finally { File.Delete(path); }
 });
+Test("shared KFM geometry retains separate XML attachment identities", () => {
+    string directory = Path.Combine(Path.GetTempPath(), $"native-kfm-{Guid.NewGuid():N}");
+    Directory.CreateDirectory(directory);
+    try {
+        File.WriteAllBytes(Path.Combine(directory, "tail.nif"), []);
+        File.WriteAllBytes(Path.Combine(directory, "tail.kf"), []);
+        byte[] kfm = Bytes(w => {
+            void String(string value) { byte[] data = System.Text.Encoding.ASCII.GetBytes(value); w.Write(data.Length); w.Write(data); }
+            w.Write(System.Text.Encoding.ASCII.GetBytes(";Gamebryo KFM File Version 30.2.0.3b\n")); w.Write((byte) 1);
+            String(".\\TAIL.nif"); String("Point01");
+            w.Write(0); w.Write(0); w.Write(0f); w.Write(0f); w.Write(1);
+            w.Write(1); String(".\\TAIL.kf"); String("TailIdle"); w.Write(0); w.Write(0);
+        });
+        string xml = Path.Combine(directory, "item.xml");
+        File.WriteAllText(xml, """
+            <ms2><ItemModel id="10"><slots><slot name="HR">
+              <asset name="urn:tail" selfnode="Point01" targetnode="First" gender="1" />
+              <asset name="urn:tail2" selfnode="Point01" targetnode="Second" gender="1" />
+            </slot></slots></ItemModel></ms2>
+            """);
+        foreach (string name in new[] { "tail", "tail2" }) File.WriteAllBytes(Path.Combine(directory, name + ".kfm"), kfm);
+        string first = Path.Combine(directory, "tail.kfm"), second = Path.Combine(directory, "tail2.kfm");
+        KfmDocument a = KfmDocument.Read(first), b = KfmDocument.Read(second);
+        Assert(a.Model == b.Model && a.Clips.SequenceEqual(b.Clips), "Explicit shared references changed");
+        Assert(ItemModelAttachment.Read(xml, "10", first, "female", "HR").TargetNode == "First", "First identity lost");
+        Assert(ItemModelAttachment.Read(xml, "10", second, "female", "HR").TargetNode == "Second", "Second identity lost");
+    } finally {
+        foreach (string file in Directory.GetFiles(directory)) File.Delete(file);
+        Directory.Delete(directory);
+    }
+});
+Test("only absent posed accumulation targets can remain unbound", () => {
+    AnimationTrack track = new("Point01 NonAccum", "translation", [0, 1], [0, 0, 0, 0, 0, 0], 3, "LINEAR") { Posed = true };
+    AnimationClip clip = new("tail", [track]) { AccumulationRoot = "Point01" };
+    Dictionary<string, int> targets = new() { ["Point01"] = 1 };
+    Assert(AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track, targets), "Missing posed target rejected");
+    Assert(!AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track with { Posed = false }, targets), "Animated target silently dropped");
+    Assert(!AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track with { Node = "Other NonAccum" }, targets), "Unrelated target dropped");
+    Assert(!AnimationBinding.IsUnboundPosedAccumulationTrack(clip with { AccumulationRoot = null }, track, targets), "Guessed accumulation root");
+    Assert(!AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track, new Dictionary<string, int>()), "Absent root accepted");
+    targets["Point01"] = 2;
+    Assert(!AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track, targets), "Ambiguous root accepted");
+    targets["Point01"] = 1;
+    foreach (int count in new[] { 1, 2 }) {
+        targets[track.Node] = count;
+        Assert(!AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track, targets), "Existing target dropped");
+    }
+});
+string sassySource = "NifToGltf/obj/hair-investigation/source/0/02/00200010_f_pipi_p_a.nif";
+if (File.Exists(sassySource)) Test("Sassy source retains Point01 channels and leaves only its absent posed NonAccum unbound", () => {
+    NifDocument source = NifDocument.Load(sassySource);
+    AnimationClip clip = AnimationReader.Read(Path.ChangeExtension(sassySource, ".kf"));
+    Assert(clip.AccumulationRoot == "Point01", "Wrong accumulation root");
+    Assert(clip.Tracks.Length == 6 && clip.Tracks.All(track => track.Posed), "Unexpected source animation data");
+    var counts = source.Nodes.Values.GroupBy(node => node.Name).ToDictionary(group => group.Key, group => group.Count());
+    AnimationTrack[] unbound = clip.Tracks.Where(track => AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track, counts)).ToArray();
+    Assert(unbound.Length == 3 && unbound.All(track => track.Node == "Point01 NonAccum"), "Incorrect unbound tracks");
+    Assert(clip.Tracks.Except(unbound).All(track => track.Node == "Point01" && counts[track.Node] == 1), "Root tracks lost");
+});
+else Console.WriteLine("SKIP local Sassy source binding regression: existing extraction is required.");
 Test("cubic B-spline reduces to a known Bezier polynomial with four controls", () => {
     foreach (double t in new[] { 0, 0.25, 0.5, 0.75, 1 }) Near(AnimationReader.BSpline([0, 1, 4, 9], 1, t)[0], 3 * t + 6 * t * t);
 });

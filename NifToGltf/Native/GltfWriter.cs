@@ -131,13 +131,20 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             foreach (string property in new[] { "translation", "rotation", "scale" }) nodes[index]!.AsObject().Remove(property);
         }
         JsonArray animations = [];
+        List<object> unboundAnimationTargets = [];
         foreach (AnimationClip clip in clips ?? []) {
             JsonArray animationSamplers = [], animationChannels = [];
             Dictionary<string, int[]> targets = document.Nodes.Values.GroupBy(node => node.Name)
                 .ToDictionary(group => group.Key, group => group.Select(node => NodeIndex(node.Id)).ToArray());
+            Dictionary<string, int> targetCounts = targets.ToDictionary(pair => pair.Key, pair => pair.Value.Length);
             HashSet<(int Node, string Path)> used = [];
             Dictionary<string, int> timeAccessors = [];
             foreach (AnimationTrack track in clip.Tracks) {
+                if (AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track, targetCounts)) {
+                    unboundAnimationTargets.Add(new { clip = clip.Name, node = track.Node, path = track.Path,
+                        reason = "Missing posed accumulation target remains unbound, matching client FillInfo behavior." });
+                    continue;
+                }
                 if (!targets.TryGetValue(track.Node, out int[]? matches) || matches.Length != 1) {
                     throw new InvalidDataException($"Clip {clip.Name}: expected one node named {track.Node}, found {matches?.Length ?? 0}.");
                 }
@@ -149,6 +156,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
                 animationSamplers.Add(Json(new { input = timeAccessor, output = Accessor(track.Values, track.Width, 5126), interpolation = track.Interpolation }));
                 animationChannels.Add(Json(new { sampler = animationSamplers.Count - 1, target = new { node = matches[0], path = track.Path } }));
             }
+            if (animationChannels.Count == 0) throw new InvalidDataException($"Clip {clip.Name}: no bound animation tracks.");
             animations.Add(new JsonObject { ["name"] = clip.Name, ["samplers"] = animationSamplers, ["channels"] = animationChannels });
         }
         JsonObject gltf = new() {
@@ -170,7 +178,8 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             if (File.Exists(temporary)) File.Delete(temporary);
         }
         return new { source = document.Path, output = Path.GetFullPath(output), nodes = nodes.Count, meshes = meshes.Count,
-            skins = skins.Count, textures = textures.Count, animations = animations.Count, hiddenMeshes, omitted = document.Omitted, primitives = primitiveReports };
+            skins = skins.Count, textures = textures.Count, animations = animations.Count, hiddenMeshes,
+            unboundAnimationTargets, omitted = document.Omitted, primitives = primitiveReports };
     }
     private int NodeIndex(int block) => nodeMap.TryGetValue(block, out int index) ? index :
         throw new NotSupportedException($"Referenced scene block {block} ({document.Blocks[block].Type}) is not supported.");

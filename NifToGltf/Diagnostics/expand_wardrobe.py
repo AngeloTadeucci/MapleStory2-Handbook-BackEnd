@@ -17,6 +17,7 @@ import shutil
 import subprocess
 from wardrobe_inventory import digest, write
 from inspect_nif import read_document
+from kfm_source import animation_inputs
 
 
 def read(path):
@@ -69,12 +70,17 @@ def prepare(args):
             source_hashes.setdefault(key, sha(source))
             model = {'input': 'WardrobeSources/' + part['source'], 'bodyVariant': body, 'slot': part['slot'],
                      'skeleton': skeleton, 'itemModel': 'WardrobeSources/Xml/' + item['itemModel'], 'itemId': str(item['presetId'])}
-            kfm = source.with_suffix('.kfm')
-            if kfm.exists():
+            try:
+                kfm, kfs = animation_inputs(source, resource / 'WardrobeSources', part.get('kfm'))
+            except (ValueError, OSError) as error:
+                entry['blockers'].append(f'Animation source resolution failed for {part["source"]}: {error}')
+                continue
+            for animation in ([kfm] if kfm is not None else []) + kfs:
+                source_hashes.setdefault(str(animation), sha(animation))
+            if kfm is not None:
                 model.update(kfm=kfm.relative_to(resource).as_posix(), clips=['all'])
             # A KF without a KFM still carries required ordinary animation.
-            kfs = sorted(source.parent.glob(source.stem + '*.kf'))
-            if kfs and not kfm.exists():
+            if kfs and kfm is None:
                 model.update(animations=source.parent.relative_to(resource).as_posix(), clips=[p.stem for p in kfs])
             variants = [(None, model)]
             if part['slot'] == 'OH':
@@ -85,7 +91,7 @@ def prepare(args):
                 signature = {'source': source_hashes[key], 'skeleton': sha(resource / skeleton),
                              'part': part, 'cutting': item['cutting'], 'body': body,
                              'placement': placement, 'drawn': plan.get('drawn'), 'textures': texture_hash,
-                             'converter': digest(converter), 'animation': {str(p): sha(p) for p in ([kfm] if kfm.exists() else []) + kfs}}
+                             'converter': digest(converter), 'animation': {str(p): sha(p) for p in ([kfm] if kfm is not None else []) + kfs}}
                 identity = 'wardrobe-' + digest(signature)[:24]
                 plan.update(id=identity, output=f'wardrobe/{identity}.gltf')
                 jobs.setdefault(identity, {'plan': plan, 'signature': signature, 'priority': priority(item['slots']), 'items': []})['items'].append([item['itemId'], body])

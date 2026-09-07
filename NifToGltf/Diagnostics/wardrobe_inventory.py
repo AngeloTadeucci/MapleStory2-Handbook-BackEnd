@@ -11,6 +11,7 @@ import hashlib
 import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
+from kfm_source import beside, read_kfm
 
 
 WEARABLE = set('HR FA FD LH RH CP MT CL PA GL SH FH EY EA PD RI BE ER OH BH RHLH'.split())
@@ -47,9 +48,12 @@ class ArchiveIndex:
         self.paths = {p.lower(): p for p in paths}
         self.qualified = any(p.lower().startswith('item/') for p in paths)
         self.stems = defaultdict(list)
+        self.kfms = defaultdict(list)
         for p in paths:
             if p.lower().endswith('.nif'):
                 self.stems[Path(p).stem.lower()].append(p)
+            elif p.lower().endswith('.kfm'):
+                self.kfms[Path(p).stem.lower()].append(p)
 
     def resolve(self, name):
         value = name.replace('\\', '/').lower().removeprefix('./')
@@ -60,8 +64,26 @@ class ArchiveIndex:
             matches = [self.paths[value]] if value in self.paths else []
         return matches[0] if len(matches) == 1 else None, matches
 
+    def resolve_asset(self, name, sources=None):
+        source, matches = self.resolve(name)
+        # Preserve explicit NIF resolution. Only an otherwise missing URN can
+        # follow an inspected KFM; a similarly named NIF is never substituted.
+        if source or matches or not name.lower().startswith('urn:') or sources is None:
+            return source, matches, None
+        kfms = self.kfms[name[4:].lower()]
+        if len(kfms) != 1:
+            return None, kfms, None
+        kfm = kfms[0]
+        payload = (sources / kfm).read_bytes()
+        record = read_kfm(payload)
+        reference = beside(kfm, record['model'])
+        resolved = self.paths.get(reference.lower())
+        if resolved is None or not resolved.lower().endswith('.nif'):
+            raise ValueError(f'KFM {kfm} references missing model: {reference}')
+        return resolved, [resolved], dict(path=kfm, sha256=hashlib.sha256(payload).hexdigest(), **record)
 
-def reconcile(xml, paths):
+
+def reconcile(xml, paths, sources=None):
     features = {e.get('name'): int(e.get('KR', '999'))
                 for e in ET.parse(xml / 'table/feature.xml').getroot()}
     level = int(ET.parse(xml / 'table/feature_setting.xml').getroot().find("setting[@type='Live']").get('KR'))
@@ -121,13 +143,20 @@ def reconcile(xml, paths):
                         for asset in slot.findall('asset'):
                             if asset.get('gender', str(sex)) != str(sex):
                                 continue
-                            source, matches = index.resolve(asset.get('name', ''))
+                            resolution_error = None
+                            try:
+                                source, matches, kfm = index.resolve_asset(asset.get('name', ''), sources)
+                            except (ValueError, OSError) as error:
+                                source, matches, kfm = None, [], None
+                                resolution_error = f'KFM source resolution failed for {asset.get("name")}: {error}'
                             part = {'slot': slot.get('name'), 'source': source, 'declared': asset.get('name'),
                                     'attributes': dict(asset.attrib), 'children': [tree(c) for c in asset],
                                     'selfNode': asset.get('selfnode'), 'targetNode': asset.get('targetnode'),
                                     'replace': asset.get('replace') == '1'}
+                            if kfm is not None:
+                                part['kfm'] = kfm
                             if source is None:
-                                blockers.append(f'{"Ambiguous" if matches else "Missing"} Item archive source: {asset.get("name")}')
+                                blockers.append(resolution_error or f'{"Ambiguous" if matches else "Missing"} Item archive source: {asset.get("name")}')
                                 part['matches'] = matches
                             parts.append(part)
                 nonvisual = bool(parts) and all(p['source'] and p['source'].lower() in {'empty.nif', 'item/empty.nif'} for p in parts)
@@ -180,8 +209,9 @@ if __name__ == '__main__':
     parser.add_argument('--xml', type=Path, required=True)
     parser.add_argument('--index', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--sources', type=Path, help='Existing extracted archive root, for explicit KFM references')
     args = parser.parse_args()
-    inventory = reconcile(args.xml, json.loads(args.index.read_text()))
+    inventory = reconcile(args.xml, json.loads(args.index.read_text()), args.sources)
     write(args.output / 'wardrobe-inventory.json', inventory)
     report = summary(inventory)
     write(args.output / 'coverage-by-slot-body.json', report)
