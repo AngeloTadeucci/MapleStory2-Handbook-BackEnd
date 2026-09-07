@@ -7,6 +7,15 @@ No deployment or database writes were performed. Oracle review servers on ports
 
 ## Coverage
 
+Local follow-up: [authored hair placement and client evidence](HAIR-PLACEMENT.md)
+adds source placement presets for 25 preview hairstyles without changing release
+assets. Curled Pigtails has a missing direction texture; physics remains absent.
+The [movable hat correction and client evidence](HAT-PLACEMENT.md) covers Blaze's
+and EIIie's reported hat placements without changing the packaged assets.
+The [Asthoria dress alias](ASTHORIA-DRESS.md) maps inventory item 12220364 to its
+explicit source preset 12220360, whose CL/PA geometry is already in release 14.
+The release counts below describe the original packaged catalog.
+
 | Measure | Count |
 |---|---:|
 | Scoped item IDs | 19,268 |
