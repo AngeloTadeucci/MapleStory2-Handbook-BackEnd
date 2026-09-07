@@ -39,12 +39,16 @@ try{
   await hairPalette.selectOption('1');
   const dyed=await controls().evaluate((e,label)=>structuredClone(e.outfitViewer.colorControls.find(c=>c.label===label).colors),hairState.label);
   if(JSON.stringify(dyed)===JSON.stringify(hairState.colors))throw Error('Hair palette did not change');
+  const primary=page.getByRole('group',{name:hairState.label,exact:true}).getByLabel('Primary',{exact:true});
+  await primary.fill('#123456');await primary.blur();await expect(primary).toHaveValue('#123456');
+  const manualDye=await controls().evaluate((e,label)=>structuredClone(e.outfitViewer.colorControls.find(c=>c.label===label).colors[0]),hairState.label);
+  expect(manualDye).toEqual([0x12/255,0x34/255,0x56/255]);
   await equip(11300002);await equip(11300001);
-  expect(await controls().evaluate((e,label)=>e.outfitViewer.colorControls.find(c=>c.label===label).colors,hairState.label)).toEqual(dyed);
+  expect(await controls().evaluate((e,label)=>e.outfitViewer.colorControls.find(c=>c.label===label).colors[0],hairState.label)).toEqual(manualDye);
   await page.getByRole('group',{name:hairState.label,exact:true}).getByRole('button',{name:'Reset colors',exact:true}).click();
   const reset=await controls().evaluate((e,label)=>e.outfitViewer.colorControls.find(c=>c.label===label).colors,hairState.label);
   if(reset.some((c,i)=>c.some((v,j)=>Math.abs(v-hairState.colors[i][j])>1e-6)))throw Error('Hair reset lost source defaults');
-  states.push({body,hairPalette:{id:'1',initial:hairState.colors,dyed,reset},hatReplacement:[11300002,11300001]});
+  states.push({body,hairPalette:{id:'1',initial:hairState.colors,dyed,manualDye,reset},hatReplacement:[11300002,11300001]});
   await equip(12200002);
   let robe=await controls().evaluate(e=>e.outfitViewer.inspect());
   if(robe.equipped.some(i=>[11400367,11500004].includes(i.id)))throw Error('Full outfit did not replace top and pants');

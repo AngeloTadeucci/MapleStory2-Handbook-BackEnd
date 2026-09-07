@@ -51,6 +51,10 @@ try {
     if (!(await colors.evaluate(e => e.closest('details').open))) await colors.click();
     const group = page.getByRole('group', { name: labels[1], exact: true });
     await group.getByLabel(labels[1] + ' palette', { exact: true }).selectOption('1');
+    const primary = group.getByLabel('Primary', { exact: true });
+    await primary.fill('#123456');
+    await primary.blur();
+    await expect(primary).toHaveValue('#123456');
     await capture(`${body}-hair-dyed`);
     await equip(11300002); await equip(11300001);
     await group.getByRole('button', { name: 'Reset colors', exact: true }).click();
