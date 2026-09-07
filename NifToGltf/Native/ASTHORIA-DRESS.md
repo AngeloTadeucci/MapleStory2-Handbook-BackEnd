@@ -21,7 +21,10 @@ preview status and omitted-feature limitations remain unchanged.
 
 No GameParser, database writes, asset conversion or review-hash changes were
 needed. The dress's special action and omitted attached features are not newly
-implemented by this mapping. Other missing Asthoria equipment remains separate.
+implemented by this mapping. The subsequent [catalog alias audit](CATALOG-ALIASES.md)
+covers her hat, balloon, gloves, shoes and eyewear. Her weapon and ring remain
+separate blockers. The small alias mechanism now lives in `catalog.ts` with exact
+mapping data in `catalog-aliases.json`.
 
 Verification: 12 catalog and alias tests pass; svelte-check reports zero errors
 and warnings. Tests cover exact asset mapping, dye metadata, CL/PA replacement,

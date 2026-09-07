@@ -6,6 +6,7 @@
   const { joinCatalog } = await import('/src/lib/outfits/search.ts');
   const { enableApproximateHair } = await import('/src/lib/outfits/approximateHair.ts');
   const { hairPlacementSource, createHairPlacement } = await import('/src/lib/outfits/hairPlacement.ts');
+  const { isSkinColor } = await import('/src/lib/outfits/skinColors.ts');
   const base = '/gltf/simulator-release-14/';
   const url = new URL(base + 'native-manifest.json', location.href).href;
   const assets = parseNativeManifest(await (await fetch(url)).json(), url);
@@ -15,14 +16,14 @@
   const viewer = document.querySelector('[aria-label="Outfit preview"]').outfitViewer;
   const rgb = c => ['Red', 'Green', 'Blue'].map(k => (c?.[k] ?? 0) / 255);
   const vector = v => ['X', 'Y', 'Z'].map(k => v?.[k] ?? 0);
-  const order = ['Blaze', 'EIIie', 'Chiisa', 'Skillet', 'Asthoria', 'GolemSoldier', 'Areki', 'Gelo', 'Tree', 'Robbit'];
-  window.liveExport = { running: true, results: [], images: {} };
+  const order = window.liveRenderNames ?? ['Blaze', 'EIIie', 'Chiisa', 'Skillet', 'Asthoria', 'GolemSoldier', 'Areki', 'Gelo', 'Tree', 'Robbit'];
+  window.liveExport = { running: true, results: [], images: {}, sides: {} };
   try {
     for (const name of order) {
       const character = window.liveRows.find(r => r.kind === 'character' && r.name === name);
       if (!character) throw new Error('Missing character ' + name);
       const body = character.gender === 0 ? 'male' : 'female';
-      const report = { name, level: character.level, savedAt: character.savedAt, equipped: [], omitted: [], notes: [] };
+      const report = { name, level: character.level, savedAt: character.savedAt, equipped: [], omitted: [], nonvisual: [], notes: [], dyeChecks: [] };
       window.liveExport.current = name;
       await viewer.setBody(assets.find(a => a.bodyVariant === body && !a.skeleton));
       viewer.setCustomization(custom, base);
@@ -51,6 +52,10 @@
       const loaded = [];
       for (const saved of [...selected.values()].sort((a,b) => a.slot-b.slot)) {
         const item = items.find(i => i.id === saved.itemId && i.gender === character.gender);
+        if (item?.library.classification === 'nonvisual') {
+          report.nonvisual.push({ id: saved.itemId, slot: saved.slot, reason: item.library.reason });
+          continue;
+        }
         if (!item || item.library.availability === 'unavailable') {
           report.omitted.push({ id: saved.itemId, slot: saved.slot, reason: item?.library.reason ?? 'Not in release catalog' });
           continue;
@@ -66,9 +71,15 @@
       for (const {saved,bundle} of loaded) {
         const key = bundleKey(bundle);
         const color = saved.appearance?.Color;
-        if (color && (color.Primary || color.Secondary || color.Tertiary))
-          viewer.setItemColors(key, ['Primary','Secondary','Tertiary'].map(k => rgb(color[k])));
-        report.equipped.push({id:saved.itemId,slot:saved.slot,name:bundle.item.name});
+        if (color && (color.Primary || color.Secondary || color.Tertiary)) {
+          const expected = ['Primary','Secondary','Tertiary'].map(k => rgb(color[k]));
+          viewer.setItemColors(key, expected);
+          const controls = bundle.slots.includes('FA') ? [viewer.face.control] : (viewer.equipmentColors.get(key) ?? []).filter(c => !isSkinColor(c));
+          report.dyeChecks.push({id:saved.itemId, expected, controls:controls.length,
+            matches: controls.length ? controls.every(c => c.colors.every((rgb, i) => rgb.every((v, j) => Math.abs(v - expected[i][j]) < 1e-6))) : null});
+        }
+        report.equipped.push({id:saved.itemId,slot:saved.slot,name:bundle.item.name,
+          availability:bundle.item.library.availability,limitations:bundle.item.library.limitations ?? []});
         if (saved.appearance?.['!'] === 'hair') {
           const current = viewer.equippedItems.find(b => bundleKey(b) === key);
           const group = viewer.equipment.get(key);
@@ -99,10 +110,24 @@
       viewer.playing = false;
       viewer.seek(0.3);
       viewer.refreshHatAttachments(true);
-      viewer.view('front');
+      // Foreground hair, tiara and weapon tips can touch the 823x650 capture
+      // edge with the viewer's default perspective framing. Pad the camera.
+      report.captureDistanceScale = 1.08;
+      const captureView = angle => {
+        viewer.view(angle);
+        viewer.camera.position.sub(viewer.controls.target).multiplyScalar(report.captureDistanceScale).add(viewer.controls.target);
+        viewer.controls.update();
+      };
+      captureView('front');
       await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
       window.liveExport.images[name] = viewer.screenshot();
+      captureView('side');
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      window.liveExport.sides[name] = viewer.screenshot();
+      captureView('front');
       report.state = viewer.inspect();
+      report.slotCheck = report.state.equipped.every((item, index, all) =>
+        all.slice(index + 1).every(other => !item.slots.some(slot => other.slots.includes(slot))));
       window.liveExport.results.push(report);
     }
   } catch (error) { window.liveExport.error = String(error); }

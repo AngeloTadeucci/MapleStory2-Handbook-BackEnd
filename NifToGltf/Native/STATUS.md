@@ -14,6 +14,9 @@ The [movable hat correction and client evidence](HAT-PLACEMENT.md) covers Blaze'
 and EIIie's reported hat placements without changing the packaged assets.
 The [Asthoria dress alias](ASTHORIA-DRESS.md) maps inventory item 12220364 to its
 explicit source preset 12220360, whose CL/PA geometry is already in release 14.
+The [live outfit alias audit](CATALOG-ALIASES.md) adds Asthoria's five accessories,
+Tree's cap, Robbit's stowed scepter and two suppressed Skillet aliases. The
+Cherry Blossom Orb alias retains its unsupported animation-target blocker.
 The release counts below describe the original packaged catalog.
 
 | Measure | Count |
