@@ -210,6 +210,11 @@ if (args.Length > 0) {
             byte[] buffer = Convert.FromBase64String(root.GetProperty("buffers")[0].GetProperty("uri").GetString()!.Split(',')[1]);
             Assert(buffer.Length == root.GetProperty("buffers")[0].GetProperty("byteLength").GetInt32(), "Buffer length mismatch");
             Assert(root.GetProperty("meshes").GetArrayLength() == 10 && root.GetProperty("skins").GetArrayLength() == 9, "Mesh/skin counts");
+            JsonElement faceLighting = root.GetProperty("materials").EnumerateArray().Single(m => m.GetProperty("name").GetString() == "FA").GetProperty("extras").GetProperty("nifLighting");
+            Assert(!faceLighting.GetProperty("specularEnabled").GetBoolean(), "Face must not acquire specular without its source enable property");
+            JsonElement skinLighting = root.GetProperty("materials").EnumerateArray().Single(m => m.GetProperty("name").GetString() == "CL_Skin").GetProperty("extras").GetProperty("nifLighting");
+            Assert(skinLighting.GetProperty("specularEnabled").GetBoolean(), "Lost source skin specular property");
+            Near(skinLighting.GetProperty("power").GetDouble(), 120);
             foreach (JsonElement skin in root.GetProperty("skins").EnumerateArray()) {
                 JsonElement accessor = root.GetProperty("accessors")[skin.GetProperty("inverseBindMatrices").GetInt32()];
                 Assert(accessor.GetProperty("count").GetInt32() == skin.GetProperty("joints").GetArrayLength(), "Bind matrix count");
@@ -340,6 +345,52 @@ if (args.Length > 0) {
             }
             throw new Exception("Null sequence root accepted");
         } finally { File.Delete(path); }
+    });
+}
+if (args.Length > 0) {
+    string resources = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(args[0])!, "../../.."));
+    string neonPath = Path.Combine(resources, "GeloSources/Item/1/18/11850281_c_mtvalentine04.nif");
+    if (File.Exists(neonPath)) Test("private neon skeleton retains sibling skinned geometry and source bind matrices", () => {
+        NifDocument neon = NifDocument.Load(neonPath);
+        NifNode mesh = neon.Nodes.Values.Single(node => node.Name == "MT");
+        DecodedPrimitive before = MeshDecoder.Decode(neon, mesh, 0);
+        SkeletonGraft.Apply(neon, NifDocument.Load(args[0]), "Scene Root", "MT_Point01");
+        DecodedPrimitive after = MeshDecoder.Decode(neon, neon.Nodes[mesh.Id], 0);
+        Assert(after.Attributes["POSITION"].Values.SequenceEqual(before.Attributes["POSITION"].Values), "Changed sign geometry");
+        Assert(after.Skin!.BindTransforms.SequenceEqual(before.Skin!.BindTransforms), "Changed private bind matrices");
+        Assert(after.Skin.Bones.All(neon.EquipmentBones.Contains), "Lost private joints");
+        int root = neon.Nodes.Values.Single(node => node.Name == "MT_Point01").Id;
+        NifNode parent = neon.Nodes.Values.Single(node => node.Children.Contains(root));
+        Assert(parent.Name == "Scene Root" && parent.Id >= neon.Blocks.Length, "Wrong declared attachment");
+        Assert(neon.Nodes.Values.Count(node => node.Mesh is not null) == 3, "Discarded rigid wing meshes or main sign");
+    });
+    string itemXml = Path.Combine(resources, "SimulatorSources/Xml/itemmodel/134.xml");
+    if (File.Exists(itemXml)) Test("weapon dummy transforms use the selected body's client offsets", () => {
+        ItemModelAttachment female = ItemModelAttachment.Read(itemXml, "13400263", "13400263_FirePrismStar.nif", "female");
+        ItemModelAttachment male = ItemModelAttachment.Read(itemXml, "13400263", "13400263_FirePrismStar.nif", "male");
+        Assert(female.Slot == "OH" && female.TargetNode == "Weapon_Back_B_Point", "Wrong source attachment");
+        Near(Vector3.Transform(Vector3.Zero, female.DummyTransform).X, -6);
+        Near(Vector3.Transform(Vector3.Zero, male.DummyTransform).X, -4);
+        Near(Vector3.Transform(Vector3.Zero, female.DummyTransform).Y, 6);
+    });
+    string knuckleXml = Path.Combine(resources, "SimulatorSources/Xml/itemmodel/155.xml");
+    if (File.Exists(knuckleXml)) Test("paired knuckles distinguish drawn attachnodes from back dummy transforms", () => {
+        foreach (string variant in new[] { "female", "male" })
+            foreach (string slot in new[] { "RH", "LH" }) {
+                var attachment = ItemModelAttachment.Read(knuckleXml, "15500002", "15500002_Knuckle_001_B.nif", variant, slot);
+                Assert(attachment.TargetNode == "Weapon_Back_B_Point", "Lost stowed target");
+                Assert(attachment.AttachNode == (slot == "RH" ? "Weapon_Hand_R_Point" : "Weapon_Hand_L_Point"), "Wrong drawn hand");
+                Assert(attachment.Rotation!.SequenceEqual(new float[] { 77, 90, 127 }), "Lost source dummy");
+            }
+    });
+    string signClip = Path.Combine(resources, "SimulatorMotion/Item/1/18/11850281_c_mtvalentine04_idle_a.kf");
+    if (File.Exists(signClip)) Test("sign source clip retains the four-second heart orbit and private wing tracks", () => {
+        var clip = AnimationReader.Read(signClip);
+        var heart = clip.Tracks.Single(t => t.Node == "MT_Heart" && t.Path == "translation");
+        Near(heart.Times.Last(), 4);
+        Near(heart.Values[0], 49.3990936, .001);
+        Assert(heart.Values.Where((_, i) => i % 3 == 0).Min() < -40, "Heart orbit frozen");
+        Assert(clip.Tracks.Any(t => t.Node == "M_Wing_L" && t.Path == "rotation") && clip.Tracks.Any(t => t.Node == "M_Wing_R" && t.Path == "rotation"), "Lost wing animation");
     });
 }
 Console.WriteLine($"{tests} tests passed.");

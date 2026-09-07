@@ -1,5 +1,160 @@
 # Non-effect replacement status, 2026-09-06
 
+## Motion, coverage and shaders implemented, 2026-09-06
+
+The user authorized all four follow-ups. The default local release is now
+`simulator-release-04`, with 144 models and 124 item/body entries: 82 reviewed,
+32 preview and 10 unavailable. Gelo is at `/outfits?preview=gelo-05` with twelve
+saved instances and original dyes. Sign 11820024 exports its separate four-second Idle_A KF and
+the viewer binds its tracks to owned joint UUIDs, independently of body motion.
+Both bodies include source star_attack_idle_a and star_run_a. Explicit star
+draw/stow preserves hand identity and dyes. Paired back placement still overlaps
+at the XML anchor and is labeled unresolved rather than shifted artificially.
+
+Thin Adventurer Cape 11800001 now retains private joints on both bodies. New
+complete outfit matrices cover 11400001/2, 11500002/4, 11600003/4, 11700002/4
+and robes 12200002/3/4. The all-items
+filter omitted database slot-0 full outfits; it now includes exact catalog IDs.
+Paired knuckles now use their explicit source attachnode for drawn placement;
+the old exports used the back target without the dummy rotation. Female Gelo
+and a male hoodie/cape outfit were directly checked with corrected 15500002.
+This corrects the earlier claim that those old knuckle exports established
+proper placement. Other knuckle entries remain previews.
+
+Material exports retain specular enable flags, colors and powers. The renderer
+uses client half-Lambert diffuse and gloss-modulated specular under studio lights.
+A first specular render exposed missing enable flags and was rejected; it is
+not acceptance evidence. Full client scene/rim/hair shader parity remains open.
+Final checks: 35 C# tests, 12 Python tests, 192 focused frontend tests and zero
+Svelte errors/warnings. All 144 glTFs validate with zero errors/warnings.
+`Diagnostics/refine_simulator.py` and `motion-library-plan.json` re-export the
+whole selected library, including source material flags/powers and explicit
+knuckle attachnodes. `motion-library-review.json` binds 82 reviewed entries to
+exact model, catalog and customization hashes. A second independent build
+reproduced all 620 inventory files byte for byte. The 617 release-03 files are
+unchanged. Generated libraries and Gelo's appearance snapshot remain ignored.
+
+Production packaging also passes `pnpm build`. The adapter packages only the
+selected simulator release under gltf, preserving ordinary application assets
+and leaving local candidate libraries and character snapshots in the source tree.
+The first build exhausted file handles compressing all local research libraries.
+An adapter regression test now verifies the selected-release copy and exclusions.
+All 620 files in the final build/client release match the inventory SHA-256 hashes.
+The shared release setting lives in src/lib/outfits/simulator-release.json;
+placing it at the repository root initially caused Vite's browser allow-list to
+reject it with 403. Moving it into src fixed the directly reproduced client 500.
+The 11 catalog/API/packaging tests passed again after that correction, bringing
+the focused frontend total to 193 including the packaging test. The production
+build retains nonfatal dependency, optional-hook-export and chunk-size warnings.
+No production server was started or deployed for this packaging check.
+
+After the packaging correction, T3 loaded Gelo's twelve saved instances and dyes
+again. At 390x844, the canvas is 343x549 and document width remains 390. The
+front fitting_idle_a at 0.3 seconds shows the complete outfit without cropping.
+The additional Henesys/Happy PNG export check timed out when T3 reported the tab
+invisible; that final combination is not claimed verified. Earlier studio PNG
+encoding and the outfit/animation matrices remain separate evidence.
+
+Direct T3 evidence is under `obj/motion/evidence/`. Set A is 11400001,11500002,
+11600003,11700002. Set B is 11400002,11500004,11600004,11700004. Both use the
+body's reviewed hair/face, 11200001 earrings and drawn stars, with 11800001 cape
+added for later checks. Robes replace CL+PA together; either separate piece
+removes the complete robe. Female 10200224 + 11300001 switches to C hair and
+restores A on removal. Camera framing now measures current deformed vertices,
+fixing cached SkinnedMesh bounds that cropped hair after changing poses.
+
+Sign removal/equip repeated five times returns to seven private joints, 26
+geometries and 85 textures with the gloss maps enabled. Removal leaves zero
+private joints. An intentionally missing second sign part preserves the twelve
+items, previous animation and the same resource counts. A numerical regression
+compares sign vertex deformation against its independently loaded source clip
+while the body runs, at 0,0.5,1,2,3,4 seconds. Draw/stow buttons preserve saved
+left/right dyes and expose the paired-back overlap. A single star removes the
+whole knuckle bundle. Actual star-pose selection and playback advance the body
+from 32.8748 to 35.9026 seconds while the heart position changes independently.
+T3 recording: `C:/Users/atade/.t3/userdata/browser-artifacts/browser-recording-mtqj5kyn.webm`.
+
+Reference interaction: hunya female idle_a, 11400002 plus 11500004 coexist;
+12200002 clears PA; re-equipping 11500004 clears the full outfit. Our XML
+confirms the same CL/PA bundles and exact models. The reference retains prior
+dyes RGB63,59,51 and20,18,15 when choosing the hoodie, which does not establish
+the NIF defaults. Its weapon UI still explicitly reports unsupported weapons.
+No reference assets were copied. Shader scene lighting, rim light, anisotropic
+hair behavior and paired star back-placement parity remain unresolved. Cape
+cloth physics, effects and particles are excluded. Knuckle stowed rotations
+remain unsupported; only the explicit drawn attachnodes are used.
+
+The user authorized committing this checkpoint on 2026-09-06. No effects,
+publishing, production writes or process stops occurred. Generated releases,
+visual captures and the private Gelo snapshot remain outside Git.
+
+## Gelo missing equipment implemented, 2026-09-06
+
+The active library is now `simulator-release-03`: 142 models and 124 item/body
+entries, with 58 reviewed, 54 preview and 12 unavailable. The previous release-02
+remains unchanged. Gelo's updated local preview is
+`http://127.0.0.1:4000/outfits?preview=gelo-02`. It equips twelve instances,
+including back sign 11820024, blush 10400108 and two 13400306 Fire Prism Stars.
+All saved colors are retained. These changes are not committed or deployed.
+
+The sign retains its own source joints and sibling MT mesh under the XML
+`MT_Point01` to `Scene Root` attachment. Rigid wing meshes keep their declared
+source parents. The frontend owns and releases these private joints per item.
+Five remove/equip cycles stayed at seven private joints and 26 geometries /
+74 textures. A deliberately missing second model retained the previous outfit
+and leaked no joints. Source geometry and bind matrices have regression coverage.
+
+Stars use distinct item/hand keys, so dyes and removal are independent. OH means
+either hand. RH and LH exports use the client weapon-hand helpers, confirmed in
+the installed x64 client at 0x141658150. The XML stowed target is
+`Weapon_Back_B_Point`, with female translation (-6,6,0), male (-4,6,0), and zero
+rotation. These stowed exports are retained for research, not exposed as a
+reviewed stowed-pose workflow. Nonzero dummy rotations fail explicitly.
+Two-handed equipment clears both stars, and either star replaces a two-handed
+bundle. The left removal button preserves the right star and its dye.
+
+Blush uses our `Item_Makeup/10400107_RosyCheeks.dds`, the saved/client XML
+position (0.25,0.01), scale 0.52 and zero rotation. The implementation follows
+`MS2CharacterSkinMaterial/Shader0001-P.hlsl` TexCoordTransform2D and alpha blend
+on FA_Skin. It survives face changes, expressions and skin recoloring without
+substituting geometry. Removal changes the rendered image; reapplying it
+reproduces the original image in the tested paused state.
+
+T3 evidence covers complete Gelo front/side/back views at fitting_idle_a 0.3,
+fitting_idle_a/run_a/Dance T at 0.75, and Blink/Happy/Angry with blush. Male
+10200230, 10300001, 11400350, 11500003, 11600001, 11700001, 11200001 and both
+stars were checked in the same views/poses. Male run playback advanced from
+0.75 to 2.7722 seconds. Dance T brings stars through the face, and the UI states
+that limitation. Baseline poses are not weapon combat poses. The sign's own
+wing animation is not included; the local preview and catalog explain this.
+Shader differences remain accepted for now, with parity unresolved. Effects
+and particles remain excluded.
+
+Reference site: 11820024 selects `11850281_C_MTValentine04.gltf`, with source
+red colors (170,47,47) and (96,19,19). Its weapon UI explicitly reports no
+weapon support. Makeup supports only 10400056, not Gelo's 10400108. Reference
+canvas readback remains transparent, so silhouette parity is unresolved.
+Our client supplies all shipped assets and placement data.
+
+`Diagnostics/extend_simulator.py` rebuilds all 18 extension models and 23 source
+textures using `gelo-library-plan.json` and `gelo-library-items.json`, then
+applies `gelo-library-review.json`. The review checks both hand variants and
+the blush texture hash before promotion. All 142 candidate GLTFs validate
+without errors or warnings; their bytes and customization match the T3 preview.
+Evidence captures are local under `NifToGltf/obj/gelo/gelo02*.jpg`.
+
+Final checks: 33 C# tests, 12 Python tests and 182 focused frontend tests pass,
+with zero Svelte errors/warnings. The final extension rebuild reproduces all
+617 release-03 inventory entries byte for byte; release-02's 552 hashes still
+match. Female playback with all twelve instances advanced from 132.6268 to
+136.7156 seconds. The visible catalog left-hand equip button preserves the
+right-hand dye. Legacy single-model OH dagger 13100068 now occupies RH and
+replaces only the right star, leaving the left star intact; unsupported LH
+selection is rejected. Skin recoloring/reset and changing the face retain blush.
+The production build and hosted-origin deployment have not been run for this
+follow-up. Previously documented unrelated whole-project lint/test failures
+remain outside these focused results.
+
 ## Gelo character preview, local only
 
 User review on 2026-09-06 accepts Gelo's current appearance for now. Shader

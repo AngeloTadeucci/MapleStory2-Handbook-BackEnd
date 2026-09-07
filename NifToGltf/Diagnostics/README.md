@@ -248,3 +248,49 @@ The composer rebases object indices and merges same-named clips across the two
 skeletons. This is a development proof, not the outfit simulator's shared
 skeleton implementation. The local Handbook `/dev/nif-converter` route exposes
 body, gear and NPC fixtures with a clip selector and playback controls.
+# Gelo equipment extension
+
+The current simulator uses `simulator-release-03`. Rebuild its extension from
+the immutable release-02 base and our extracted resources, using fresh paths:
+
+```powershell
+py -X utf8 NifToGltf/Diagnostics/extend_simulator.py --base ../MapleStory2-Handbook/static/gltf/simulator-release-02 --resources Maple2Storage/Resources --work NifToGltf/obj/gelo-new-build --output ../MapleStory2-Handbook/static/gltf/simulator-release-03-copy --review NifToGltf/Diagnostics/gelo-library-review.json
+```
+
+`gelo-library-plan.json` lists the exact native inputs, attachments and body
+variants. Required ignored resources are the original `GeloSources/Item` and
+`GeloSources/Face` extracts, plus `GeloMissing/Item/1/34/13400263_fireprismstar.nif`
+and `GeloMissing/Makeup/item_makeup/10400107_rosycheeks.dds`. The latter two come
+from our installed KMS2 Item.m2d and Textures.m2d archives. Original archives
+remain read only. Base resources and source XML paths are unchanged.
+
+The builder converts eighteen models and twenty-three textures, generates the
+extended customization catalog, verifies both hand variants and decal hashes,
+and writes a new inventory. It does not read a game database or include Gelo's
+saved character snapshot. `gelo-library-review.json` records tested states and
+limitations. Stowed star exports are research assets; reviewed star workflows
+use independent drawn hands. The sign's independent wing animation is absent.
+# Motion, compatibility and material refinement
+
+`refine_simulator.py` rebuilds release-04 from immutable release-03 plus our
+source extracts. It reconstructs all 144 conversion entries, then applies the
+explicit `motion-library-review.json`. The resulting 620 files were rebuilt
+twice and matched byte for byte. This command never reads the game database or
+publishes assets:
+
+```powershell
+py -X utf8 NifToGltf/Diagnostics/refine_simulator.py --base ../MapleStory2-Handbook/static/gltf/simulator-release-03 --resources Maple2Storage/Resources --work NifToGltf/obj/fresh-refinement --output ../MapleStory2-Handbook/static/gltf/fresh-release --review NifToGltf/Diagnostics/motion-library-review.json
+```
+
+The input resources include `SimulatorMotion/Item/1/18/11850281_*` NIF/KF,
+and `SimulatorMotion/Body/{female,male}` with idle_a, fitting_idle_a, walk_a,
+run_a, emotion_dance_t, emotion_dance_v, star_attack_idle_a and star_run_a.
+These came from our installed Item.m2d and Character.m2d through the read-only
+archive extractor. Existing SimulatorSources/GeloSources/GeloMissing textures,
+models and XML remain required. The generated plan lives in the chosen work
+directory. Use fresh work and output paths; existing outputs are preserved.
+
+The review lists precise item/body states and unresolved appearance limits.
+Changing source data requires new visual review and hashes. Successful conversion
+does not promote preview items. The saved Gelo profile remains a separate local
+development preview. See Native/STATUS.md for direct T3 evidence and limitations.

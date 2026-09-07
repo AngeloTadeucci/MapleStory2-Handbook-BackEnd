@@ -1,0 +1,290 @@
+[
+  {
+    "itemId": 10200124,
+    "bodyVariant": "female",
+    "slots": [
+      "HR"
+    ],
+    "parts": [
+      {
+        "assetId": "10200124-female-0",
+        "slot": "HR"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "2",
+      "scale": "1"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": [
+      [
+        1.0
+      ]
+    ],
+    "hairForms": {
+      "c": [
+        "10200124-female-c"
+      ],
+      "d": [
+        "10200124-female-d"
+      ]
+    }
+  },
+  {
+    "itemId": 10300135,
+    "bodyVariant": "female",
+    "slots": [
+      "FA"
+    ],
+    "parts": [
+      {
+        "assetId": "10300135-female-0",
+        "slot": "FA"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "3"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": []
+  },
+  {
+    "itemId": 10500001,
+    "bodyVariant": "female",
+    "slots": [
+      "ER"
+    ],
+    "parts": [
+      {
+        "assetId": "10500001-female-0",
+        "slot": "ER"
+      }
+    ],
+    "customize": {},
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": []
+  },
+  {
+    "itemId": 11320024,
+    "bodyVariant": "female",
+    "slots": [
+      "CP"
+    ],
+    "parts": [
+      {
+        "assetId": "11320024-female-0",
+        "slot": "CP"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "10",
+      "defaultColorIndex": "9"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": [],
+    "hatHairForm": "c"
+  },
+  {
+    "itemId": 11820024,
+    "bodyVariant": "female",
+    "slots": [
+      "MT"
+    ],
+    "parts": [
+      {
+        "assetId": "11820024-female-0",
+        "slot": "MT"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "10",
+      "defaultColorIndex": "0"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Own client attachment skeleton; visual review pending.",
+    "hairScales": []
+  },
+  {
+    "itemId": 12220024,
+    "bodyVariant": "female",
+    "slots": [
+      "CL",
+      "PA"
+    ],
+    "parts": [
+      {
+        "assetId": "12220024-female-0",
+        "slot": "CL"
+      },
+      {
+        "assetId": "12220024-female-1",
+        "slot": "PA"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "10",
+      "defaultColorIndex": "9"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": []
+  },
+  {
+    "itemId": 11620024,
+    "bodyVariant": "female",
+    "slots": [
+      "GL"
+    ],
+    "parts": [
+      {
+        "assetId": "11620024-female-0",
+        "slot": "GL"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "10",
+      "defaultColorIndex": "0"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": []
+  },
+  {
+    "itemId": 11720024,
+    "bodyVariant": "female",
+    "slots": [
+      "SH"
+    ],
+    "parts": [
+      {
+        "assetId": "11720024-female-0",
+        "slot": "SH"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "10",
+      "defaultColorIndex": "9"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": []
+  },
+  {
+    "itemId": 11220024,
+    "bodyVariant": "female",
+    "slots": [
+      "EA"
+    ],
+    "parts": [
+      {
+        "assetId": "11220024-female-0",
+        "slot": "EA"
+      }
+    ],
+    "customize": {
+      "color": "1",
+      "colorPalette": "10",
+      "defaultColorIndex": "0"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Gelo appearance trial",
+    "hairScales": []
+  },
+  {
+    "itemId": 10400108,
+    "bodyVariant": "female",
+    "slots": [
+      "FD"
+    ],
+    "parts": [],
+    "customize": {},
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Client UV decal transform; visual review pending.",
+    "decal": {
+      "texture": "makeup/item_makeup/10400107_rosycheeks.png",
+      "transform": [
+        0.25,
+        0.01,
+        0,
+        0.52
+      ]
+    }
+  },
+  {
+    "itemId": 13400306,
+    "bodyVariant": "female",
+    "slots": [
+      "OH"
+    ],
+    "parts": [
+      {
+        "assetId": "13400306-female-stowed",
+        "slot": "OH"
+      }
+    ],
+    "handParts": {
+      "RH": [
+        "13400306-female-RH"
+      ],
+      "LH": [
+        "13400306-female-LH"
+      ]
+    },
+    "customize": {
+      "color": "1",
+      "colorPalette": "10"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Drawn weapons use client left/right hand helpers; visual review pending."
+  },
+  {
+    "itemId": 13400306,
+    "bodyVariant": "male",
+    "slots": [
+      "OH"
+    ],
+    "parts": [
+      {
+        "assetId": "13400306-male-stowed",
+        "slot": "OH"
+      }
+    ],
+    "handParts": {
+      "RH": [
+        "13400306-male-RH"
+      ],
+      "LH": [
+        "13400306-male-LH"
+      ]
+    },
+    "customize": {
+      "color": "1",
+      "colorPalette": "10"
+    },
+    "cutting": [],
+    "availability": "preview",
+    "reason": "Drawn weapons use client left/right hand helpers; visual review pending."
+  }
+]

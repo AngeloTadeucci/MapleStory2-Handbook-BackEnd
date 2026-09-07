@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "11820024-female-0",
+      "input": "SimulatorMotion/Item/1/18/11850281_c_mtvalentine04.nif",
+      "output": "female/11820024/0.gltf",
+      "bodyVariant": "female",
+      "slot": "MT",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/118.xml",
+      "itemId": "11820024",
+      "animations": "SimulatorMotion/Item/1/18",
+      "clips": [
+        "11850281_c_mtvalentine04_idle_a"
+      ]
+    },
+    {
+      "id": "f_body",
+      "input": "Models/Character/female/f_body.nif",
+      "output": "female/body.gltf",
+      "bodyVariant": "female",
+      "animations": "SimulatorMotion/Body/female",
+      "clips": [
+        "idle_a",
+        "fitting_idle_a",
+        "walk_a",
+        "run_a",
+        "emotion_dance_t",
+        "emotion_dance_v",
+        "star_attack_idle_a",
+        "star_run_a"
+      ]
+    },
+    {
+      "id": "m_body",
+      "input": "Models/Character/male/m_body.nif",
+      "output": "male/body.gltf",
+      "bodyVariant": "male",
+      "animations": "SimulatorMotion/Body/male",
+      "clips": [
+        "idle_a",
+        "fitting_idle_a",
+        "walk_a",
+        "run_a",
+        "emotion_dance_t",
+        "emotion_dance_v",
+        "star_attack_idle_a",
+        "star_run_a"
+      ]
+    },
+    {
+      "id": "11800001-male-0",
+      "input": "SimulatorSources/Item/1/18/11800007_m_wingofdestiny.nif",
+      "output": "male/11800001/0.gltf",
+      "bodyVariant": "male",
+      "slot": "MT",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/118.xml",
+      "itemId": "11800001"
+    },
+    {
+      "id": "11800001-female-0",
+      "input": "SimulatorSources/Item/1/18/11800007_f_wingofdestiny.nif",
+      "output": "female/11800001/0.gltf",
+      "bodyVariant": "female",
+      "slot": "MT",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/118.xml",
+      "itemId": "11800001"
+    }
+  ]
+}

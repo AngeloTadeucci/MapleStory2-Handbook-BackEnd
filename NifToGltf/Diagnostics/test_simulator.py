@@ -8,6 +8,34 @@ from package_simulator import apply_review
 
 
 class SimulatorLibraryTest(unittest.TestCase):
+    def test_review_requires_both_hand_variants_and_decal_texture(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ['body', 'right', 'left', 'blush']:
+                (root / name).write_text(name)
+            manifest = {'assets': [{'id': name, 'uri': name, **({'skeleton': 'body'} if name != 'body' else {})}
+                                   for name in ['body', 'right', 'left']]}
+            catalog = {'items': [{'itemId': 1, 'bodyVariant': 'female', 'availability': 'preview',
+                                  'parts': [{'assetId': 'right'}], 'handParts': {'RH': ['right'], 'LH': ['left']}}]}
+            review = {'catalogHash': hashlib.sha256(json.dumps(catalog, sort_keys=True).encode()).hexdigest(),
+                      'assetHashes': {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in ['body', 'right']},
+                      'fileHashes': {}, 'items': [{'itemId': 1, 'bodyVariant': 'female', 'evidence': ['both-hands.jpg']}]}
+            with self.assertRaisesRegex(ValueError, 'omits an item part'):
+                apply_review(root, manifest, catalog, review)
+            review['assetHashes']['left'] = hashlib.sha256((root / 'left').read_bytes()).hexdigest()
+            apply_review(root, manifest, catalog, review)
+            catalog['items'][0].update(stowedParts=['back'], availability='preview')
+            review['catalogHash'] = hashlib.sha256(json.dumps(catalog, sort_keys=True).encode()).hexdigest()
+            with self.assertRaisesRegex(ValueError, 'omits an item part'):
+                apply_review(root, manifest, catalog, review)
+            del catalog['items'][0]['stowedParts']
+            catalog['items'][0].update(parts=[], handParts={}, decal={'texture': 'blush'}, availability='preview')
+            review['catalogHash'] = hashlib.sha256(json.dumps(catalog, sort_keys=True).encode()).hexdigest()
+            with self.assertRaisesRegex(ValueError, 'omits a decal texture'):
+                apply_review(root, manifest, catalog, review)
+            review['fileHashes']['blush'] = hashlib.sha256((root / 'blush').read_bytes()).hexdigest()
+            apply_review(root, manifest, catalog, review)
+
     def test_review_requires_the_inspected_bytes_and_complete_available_item(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

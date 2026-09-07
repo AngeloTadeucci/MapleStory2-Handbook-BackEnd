@@ -1,0 +1,420 @@
+{
+  "version": 1,
+  "date": "2026-09-06",
+  "candidate": "simulator-release-03",
+  "baseRelease": "simulator-release-02",
+  "catalogHash": "b681997bfbeed1430eb1b3d3e4c405a557dc53172c8910bfad52776876f0abdd",
+  "assetHashes": {
+    "f_body": "a5353304337834eb2eddd44b178221f0c163b0a6d756911d9db52710cf152c64",
+    "m_body": "831e1529c7c1bda234c0cc0105d91344c39bc847334f2bd7d336bc7deec288b3",
+    "10200009-female-0": "da3ff2c8b0d821a5e849c9f5ded1643bcba6232eabf0e767cc0a7c5ab046f5fb",
+    "10200013-female-0": "078c871dcf9d376a6e07e0565ca5f04480d6071b6d73a665ebf15f2e4236f8ad",
+    "10200224-female-0": "6caff37e8088b4e7bc5c1273a3cdf1853f67e1d64997d4917037ad558055589b",
+    "10200230-male-0": "378a368e90817e5b1e8c3896fea9950c5f319ed97da31fcb86740ddc13d846c9",
+    "11300212-male-0": "b85999cdb790b7c70d4afcab921603fb4f53ad17fd9b12a625653d01fccc0e05",
+    "11300212-female-0": "c3df6e47af0e176292b5ba942ea36ead3407cca2c68c852093b2287dec99c100",
+    "11400158-female-0": "78416f7b4c7a46a1a5b67440c53341448d4ba05bb7177bf23c19e69fa6486ce0",
+    "11400350-male-0": "f55907c1e451bf6be9391b67dfb6f3fca9198ce3865993298eaa6c392d4d9b69",
+    "11800291-male-0": "aaa8efa0653868cc1c569fd1f4f9a904fe7b6416cf13156d724c7434a65a05ea",
+    "11800291-female-0": "6202674c95d5a1851e5685ba6a7ae275285748dcfbbfe68cbf0788569d77e35d",
+    "13100068-male-0": "27078bed8243dd86522d05e6d75e871f095160edbb5d3dd7c1c40946a77becff",
+    "13100068-female-0": "d359d16b7f89e3800e1661a86eb5b44c641e9c35a3d10cba0d2b2e54cc097fc2",
+    "10200001-male-0": "3deaed4167161b6dcedd471e6519840a0ed2a7238572a4816f2c6c5118dd6b4f",
+    "10200002-male-0": "5fa300c77786f8f0cb44fa2508812f49de7b6a5afbbf136a90194a03168cba7d",
+    "10200003-male-0": "99b60f30a2672539700069a55243d97912c07393cbc70aa93a9c18371c0c0b1b",
+    "10200006-female-0": "e0581646c3df3383f9b10cdccb34dfb2af2d78107eba2b53d800cb7719fb3783",
+    "10300001-male-0": "175d599efbdeceeae5ec27bdf15e9a2575212300a0e3d350a5520ee5cea4c52f",
+    "10300003-female-0": "99593ad9f5dfe1479d81e804ba3e8501eedb6b068e1120282e2332e9933aaa32",
+    "11200001-male-0": "31a39d71dafb0dd5fc344609dfce9d72315e8ced4378fc1bcca6e648facae79b",
+    "11200001-female-0": "ae7ac812e156e28d978c4a52e9cad50af86048bf4af38cf409842503a1393298",
+    "11200002-male-0": "412d9ad60529f9b62cede9038c0334326e0878b8ffb447d0dff6e72b07202227",
+    "11200002-female-0": "604ccc946eeb9aeeffab4f93ded4362d5ffe936801682cbf4b1a3f354b3f74ba",
+    "11300001-male-0": "40c2712ecb26e649b4101dc58d305ff03b13953346a2fe9f6e43f861a80ca5dd",
+    "11300001-female-0": "f3153c74cc677193c9cceedfbe66043589647774448c5446024cb325d6020537",
+    "11300002-male-0": "631eb101c88711c8524310160d73cedd2658a08df90753197530332ef0011397",
+    "11300002-female-0": "e149f881d37c87bb116650e1a19749e635eb76ef33bafc403315576932f9c96a",
+    "11400001-male-0": "8529e94cf45bafde8afb00d81b74565d84402caa38c9a088c6affb341eab687f",
+    "11400001-female-0": "2b59403686ca43f233b8493a2cf9fbded76e4c351ab13961f89697c2236a9b06",
+    "11400002-male-0": "19ceac4f0f4d02c64a46f9783c8a7650394abebf6361f076fa32a395983a1b7f",
+    "11400002-female-0": "c9727698e588163aafa46631270cd4dea36b433eac1a7fa5293c5b2c0f28abd1",
+    "11400003-male-0": "68a95a4e2d97b3bca29f870932644bf12f621a51bcfbdfdee33780961b6586f4",
+    "11400003-female-0": "e1d87b8b1277e365f9eb31b7d3c18dd496f2fa648f0f0dd4f2179c9a91c44a33",
+    "11500001-male-0": "f5850e2889037f62e24a2b49e22b0cfc310e2af2aeb1b7215a78cf42a8789f45",
+    "11500001-female-0": "7b566c0c2b636cce5062e18b8fe8cce82b54d4b364d5bcabf56b40eead21b6ce",
+    "11500002-male-0": "fca746dd8cf359dc46c1f824cf4aad5fb5bd0d62fc6b7517016299e895e77c5b",
+    "11500002-female-0": "4e02207a54ad7d5750240521611c6fc89ad128eef5d36e8b61f53b019176b9d9",
+    "11500003-male-0": "cdfb8c03724d87f441b0ba4ba66c78eb80935320cc4243bfec8f622ce9358f9f",
+    "11500003-female-0": "04c23a391a753fd8931e47dd0c0fe431408dfadbc3b9f2be07b25f08a039a0c9",
+    "11500004-male-0": "1951f97619a62dbcdaa3055bd64e1bee0091eb7e22da012b3f4c7e8660f88a46",
+    "11500004-female-0": "63f8c0dfee93fbd4aa5517100f9333f923895a52fb02396419b176f9d2d78cbf",
+    "11600001-male-0": "64a4fa806d7622251fdfe59d1bb3f403bf7f6e78ba08370e434f76189ec47a06",
+    "11600001-female-0": "29b317a7631f7f28739a35912612945205cc57f426131589b84291aabd47defe",
+    "11600003-male-0": "8c02c12b13812528fa34f05655905d1f538d13108c73e9ed02e7f25ab2368732",
+    "11600003-female-0": "7339b1b052da671807d315d807b2e6f3fc9f0717caa922cb01b74a4d829f52eb",
+    "11600004-male-0": "3f846fae0c753ad902c9c9f245be56f85c92edbe756875546902e0c301eb5fbb",
+    "11600004-female-0": "14cc3eb4bcf766df21b76213391b08104703d9d3758837b79103c81dd1c7c6e8",
+    "11600007-male-0": "9e8f6e1cd8b2f5528f6667e3c8d9de8eec7bc4e5844ffd48280e4b1724b4583c",
+    "11600007-female-0": "e5fad151b522ba66263a3a33e417322597b85ab7a9800e4ef256d051ae337708",
+    "11700001-male-0": "db9d69a1757c7a68fe613624150da7d4d397f68346980596f36e9a02d5959e7a",
+    "11700001-female-0": "2232038a187459d193c98f5da441f3fcb87af681031e4cc98a4c966c60da90ae",
+    "11700002-male-0": "76837ba397dae9f5680dd4c8288869f5b6e610a9c6074650e3cfb65f9e6fe0dd",
+    "11700002-female-0": "a5e284308cc07ef9d165d3fee992f200b8facaf33f261c217cb6c0accdc93d45",
+    "11700003-male-0": "ab5800ccc931d76abfe925f55bea5fd10cbe6516849579133c9468285c1df96d",
+    "11700003-female-0": "e0a71b691bcf5310194aab9f1c48b344e03005bc182dc24cfe698e403007da45",
+    "11700004-male-0": "0b9a4d154d438844451296b78079b99d31fe6f8f6cd88a08f262044e4c3c322a",
+    "11700004-female-0": "002fbae0375d39d6a433327cdd5a52a18e9120143cd48d820f1c92a1a97f0938",
+    "11800008-male-0": "ce96d8dfe69a19d211bc568d490bedd0e7a17c06f228efd4d877d88b0cd48ff8",
+    "11800008-female-0": "cd5a65933cc1ee44c96692605c592b2d1cba141d270fe930eb526ee110f9d9b8",
+    "11800009-male-0": "3afcea9759760a4932d8ebd7126605fab5a2e879ebfa0c5a2b90c527e06623cf",
+    "11800009-female-0": "74af578fde7b66cbc8099b1ad0c9ad99da09d7b67ad111fe32dcf487befaa958",
+    "12200001-male-0": "94cbe46fbcc611621485769dbdaf64290e2fc61671c1bcf87c5e681927203c76",
+    "12200001-male-1": "c349ba161f4c9708f27a2f0824d348aadecdb2a51683e601dfee7f70e5045777",
+    "12200001-female-0": "018449708f9c5ec5e9e83d23c38cc6e2c4abde1301059208143ca072cc4f68d9",
+    "12200001-female-1": "6f6004a33f5c681330631f6ba6c345aaba5339433fdafa1aa3af572b48eed3dc",
+    "12200002-male-0": "b9beaab56b1284e8f4bed6b8d6d6a6af9eebabfda804cf8f77f179ff878b2994",
+    "12200002-male-1": "5cb53d9845f22dcc93bc2a8139686ea30a53862330b443abbce6456a1653f717",
+    "12200002-female-0": "c68724ddbe65e5cee892a1efb870f3a65e7d834000a1f1bd2e7a207fd86628c3",
+    "12200002-female-1": "565f72cccf29cb777ebfa7abbdfaed1e728a4d2c27cd8e120f43668c3efbe75f",
+    "12200003-male-0": "c688295da950d2675c885108381339d5b38ed5bcdc8f87637c0837f758ef8fff",
+    "12200003-male-1": "5cb53d9845f22dcc93bc2a8139686ea30a53862330b443abbce6456a1653f717",
+    "12200003-female-0": "ac91c55477f45bbc6438cddc9c7eb794cf61705eebf5dbcc801f9ad916d42ae9",
+    "12200003-female-1": "6f6004a33f5c681330631f6ba6c345aaba5339433fdafa1aa3af572b48eed3dc",
+    "12200004-male-0": "ea1ac178472c38110d74e8d6a986b3337e9c5861cddd840b27629039ad966e89",
+    "12200004-male-1": "50ff93e8def39f0531bc02f67329b624042bcdf54be4ad0936243c4f3601ceff",
+    "12200004-female-0": "3dc649c58eab8906ec36374dc46e371e273e7bfe5f91df3795f32edeaa825a1b",
+    "12200004-female-1": "168beda8543eeb5215d60f0f500157fea353b22c5f435af193856563faf54cea",
+    "13000001-male-0": "396f1cffb6802cf394415ec656d90aab13b468d8535b4fe8af17379849566dd4",
+    "13000001-female-0": "e1ce1a08aec42d5a7c9d244026644579861985be868d2751b68fccb079f0c55b",
+    "13000002-male-0": "e2173a9dacb983a8b8f8305992075c6cce33b8ee01168739baaace7cbe84658c",
+    "13000002-female-0": "79468d8c39481b87c547e170f09b2db4b899a4c0df536901d56b9ef1c69c1c7c",
+    "13000003-male-0": "4598c826307e9610c6151954ecb6379118d34a05c4f30404c8aa595e99256f9b",
+    "13000003-female-0": "fc35583ecbfacde8040eb195b748d4b6af7d9f348fd9814d652b14cd84a1342c",
+    "13000004-male-0": "dbeeccf1b8438a8224119abd298c4b2229b7907c65b18f9d7d124818c785291f",
+    "13000004-female-0": "0573f2dffaf66947bfb4abdf6c4c03fb425f495ca179bba3c0e8455396f25406",
+    "13100001-male-0": "2bd01cc310ec303d05bd98eded7de89664575f9fc137740d5f56fd09cc27c2a4",
+    "13100001-female-0": "7da7f636a35a5b7d811be10bedc30404d36388cecd7ce950d54e634ba04a26a0",
+    "13100002-male-0": "47884d98edfc62de3a3b5685b71eee1a99dbf184a74386d1d0de7d4241bf9f79",
+    "13100002-female-0": "e17f5b2c1f9fd67025dd34ea5c4dd47d6b04464cfe92a613d416ccb26a676d1a",
+    "13100003-male-0": "d8aef6e545ea73bee62fd22188e8201dfcebcd4686c207e52bda501b262d0d0e",
+    "13100003-female-0": "74f75a337631e357e5ce8286bc8fc7c686f5383af697e5351d83bc38780640dc",
+    "14000000-male-0": "b7f51ea6df6274c8490cb085a62142bc8a53a8b344e9773c5893fa3ef7791a8d",
+    "14000000-female-0": "271ea28f9f88b7c5c6bf44dd55f8573de53b322327c8ac3e0d3f4859626ebca2",
+    "14000002-male-0": "2344a0ca7a47db72459fb33c7ef5b64d224d290ad0f9d669171787c21c07f5a0",
+    "14000002-female-0": "7b075b55ca6a92fb08ca08254f71c058865facafa86de0ab091ea4d2a2287071",
+    "14000003-male-0": "56eb060fa4b124fde0be1a86cb1f61059af16c523464c698a36fe0863f13bd50",
+    "14000003-female-0": "f761b2676eb73674558fdc979672f57e1e2017bf59bb9701d210ea27a5d35fd5",
+    "14000004-male-0": "21a355c99354fdede14cf898dd43b0cae7a34c3bb9ed74a4325b1c59184f9a13",
+    "14000004-female-0": "611f06a4394b52baec980269a1719db86b856f7ed5ae43d9541a805bf10705f9",
+    "15500000-male-0": "a5c913572b7eb51d5deb62419d713ca41b2a4c268670f8b532f36817789e4e55",
+    "15500000-male-1": "a5c913572b7eb51d5deb62419d713ca41b2a4c268670f8b532f36817789e4e55",
+    "15500000-female-0": "6a0bf68235afee7fe71251f5e08784f5e5cb9872cd76fe79719f9e687c104bce",
+    "15500000-female-1": "6a0bf68235afee7fe71251f5e08784f5e5cb9872cd76fe79719f9e687c104bce",
+    "15500002-male-0": "11acdb6d193445278c293850be1e4db1fb2b63aefe9e7090d567f0c2568d9a32",
+    "15500002-male-1": "11acdb6d193445278c293850be1e4db1fb2b63aefe9e7090d567f0c2568d9a32",
+    "15500002-female-0": "23ddb87cfdd1ea9b51b79a04f7f160a782586f9b113c8475db32325c6d8a1e52",
+    "15500002-female-1": "23ddb87cfdd1ea9b51b79a04f7f160a782586f9b113c8475db32325c6d8a1e52",
+    "15500003-male-0": "c7ad9f9094e674c21c41a282044e7d58905459760ed1bdf0e8a9d07af1dabcbf",
+    "15500003-male-1": "c7ad9f9094e674c21c41a282044e7d58905459760ed1bdf0e8a9d07af1dabcbf",
+    "15500003-female-0": "6db3ffc2307524db56da9ad20675f05d9a1976149fe1bfecb7c0575df88ad4b8",
+    "15500003-female-1": "6db3ffc2307524db56da9ad20675f05d9a1976149fe1bfecb7c0575df88ad4b8",
+    "15500004-male-0": "4b526508c32bd7ab2e5c9f2b38848a9e99f7e8b372958197089bab57d2bbe4fc",
+    "15500004-male-1": "4b526508c32bd7ab2e5c9f2b38848a9e99f7e8b372958197089bab57d2bbe4fc",
+    "15500004-female-0": "4b2502f17b49ccd5a1c4ab86eb22500ba00a59d1b78591fd31bcbd4bb0571d79",
+    "15500004-female-1": "4b2502f17b49ccd5a1c4ab86eb22500ba00a59d1b78591fd31bcbd4bb0571d79",
+    "10200230-male-c": "a6faf3a36da1f05ef27110af776025267a70ac8ae3e1aa8bac42b64b9b292567",
+    "10200230-male-d": "5d475eb65fb29bea591659135b3cfa7985860de5e3185b802576d8b47bac891e",
+    "10200224-female-c": "e81290df0b7c5983ed01baa5b7707361b61ea9b30144a12a129c7a5f6c98cdbc",
+    "10200224-female-d": "7723ae7c8430a6f7090a8e6c03b5d95071ca374ab0640629b1b9d62a9e533693",
+    "10200009-female-c": "f1f27401bc49de6c5f232f251a65eb57529ec5c161ffba76268462071df82fa9",
+    "10200009-female-d": "5c8a7252738960aee66290c64ccbbf39c8f061725c81f1d27351fa823f289947",
+    "10200013-female-c": "af1e3ee60c597a34a72e774c80ff5d35d67aa8462cb06497e03bafc9d3359f0b",
+    "10200013-female-d": "ccd7d3422c45041556935de11151c9df3d58d54ed82234c57754bdae8fcd5db6",
+    "10200124-female-0": "13f942d4ca866a841d92af667428d88e677cd08bd28ebd4f097ed829e79a1a90",
+    "10300135-female-0": "99593ad9f5dfe1479d81e804ba3e8501eedb6b068e1120282e2332e9933aaa32",
+    "10500001-female-0": "c577de5ca8a64d896fbfec41e3c14790fd2dad3d9dda4e54f207a0bf5b071511",
+    "11320024-female-0": "57327ad6b62a7838e69e8200b044b9efadba5018efbeb7e6837848896e16887d",
+    "11820024-female-0": "1fa98562d62ec896b0aae431bd9e6414c23ed8fc48b9acdd56c85777a0504910",
+    "12220024-female-0": "7c167038814d0cfaf3c9fae5376e0d96b63eaca6d771ba7733090b89418e44d0",
+    "12220024-female-1": "22678b48872c12ba5f33ccc7fcbbc14217915e32ef9134b38010c014a5439dde",
+    "11620024-female-0": "f3fd01775e9ee9fe9a673752b6cc7f60e483868a8db194d133c00c80a052f656",
+    "11720024-female-0": "79e9c318dc7434eea08a611f4188fdca0a53369f76eecad39e2cb6bc3c436da8",
+    "11220024-female-0": "9522a905a14770b2e298893b9b12e277014e47980eafd831da76fe4ae5402bf3",
+    "10200124-female-c": "2ece8ae02026ed9fa18dd79db72f58066cad1792345b3ada9119dee9eb870e36",
+    "10200124-female-d": "e347560745183defc93b919d6ada9d8c7fde1f5eca735c2026dfeed6a16f5196",
+    "13400306-female-RH": "d36d99172fde2786edf2017f0086c02425f8ad9575cc74f40c98e687a6b37f1c",
+    "13400306-female-LH": "c37f77b938549474f30f3bbd31d0bb3af29397969f457987e49a1aa15923a25d",
+    "13400306-female-stowed": "ff2b03abe8ba28bb51f21669112eded0cc68bfe1071bec11ffd7be3e6548aa8d",
+    "13400306-male-RH": "d71c875a186adfea3f47af91a5e8f10a977b760f45f3d74e37ffab5c386b65c3",
+    "13400306-male-LH": "5e5f9c5225a478b9379fd24b77717d105ce3facc6673616593d0b4f6be63ab32",
+    "13400306-male-stowed": "ffc1acc0fe4cb76aed14786e3a5c4d624544e0a1d6f51f1c0d07020203a70c25"
+  },
+  "fileHashes": {
+    "customization.json": "c47ac60132f90da5631419a0113f952390e47b8a0b06b85ffa00548da1961e89",
+    "makeup/item_makeup/10400107_rosycheeks.json": "c69f4ad7f09c9ac8a5de7297ce8af453944511f1b5f613b845a15ba61d27b391",
+    "makeup/item_makeup/10400107_rosycheeks.png": "b46ae29a7615345bd078b6025988c2e9d798aa685aadfa5ef5f61410617c150b",
+    "faces/item_face/00300135/01_idle.json": "0a37207638cd8a61d1c62ae8bb0564ae7d73c3a4124fa142e13d6cdb24b1c9bf",
+    "faces/item_face/00300135/01_idle.png": "7af8fb554a0ae0489db77110a601b2eda0fa07e93bcb865b7ff5efb510335470",
+    "faces/item_face/00300135/02_idle_c.json": "bb8891efb55754bed6e6de2e2abe631d23118f6ae8dd36531d3acbd720365a6c",
+    "faces/item_face/00300135/02_idle_c.png": "60067e01502244febd4289edbef283cf26ed432a4cd5df38b8fe88e12988ec88",
+    "faces/item_face/00300135/03_blink1.json": "13bb333dcee891bdb5a0579c2530618e1e4ce7ca2d451697a46cb4953720974e",
+    "faces/item_face/00300135/03_blink1.png": "9c39b06458072633af5f881e7269150b892ca015b4645d470c7f08ca066af488",
+    "faces/item_face/00300135/04_blink1_c.json": "534b34390f0e69565041bd0e28d709cf5ca363e193904b13ef8a2ac8a6dd090d",
+    "faces/item_face/00300135/04_blink1_c.png": "bf1f3b71feb70ffea535b4aa3fa8bde8ad6abe396d6d7a95c8e19f8fde61c699",
+    "faces/item_face/00300135/05_blink2.json": "8bae6daa231df8e36bd9c0dbe4ecedb0451424fcf299e327504e175bf4001d3f",
+    "faces/item_face/00300135/05_blink2.png": "276cbd1fda3015e5693a1e91bf02daf154a16c670f4ae96df324b702a8cb2102",
+    "faces/item_face/00300135/06_talk.json": "2dbac6a4df6f5f028c6b391ce1953e14552677eb50eec48260820d2dad518683",
+    "faces/item_face/00300135/06_talk.png": "a170c69f790f09fdb75896bceb975729355b2a20e7aa6b2cedf81f3c2f24994e",
+    "faces/item_face/00300135/07_talk_c.json": "bb8891efb55754bed6e6de2e2abe631d23118f6ae8dd36531d3acbd720365a6c",
+    "faces/item_face/00300135/07_talk_c.png": "60067e01502244febd4289edbef283cf26ed432a4cd5df38b8fe88e12988ec88",
+    "faces/item_face/00300135/08_talk_blink1.json": "2ab95d294800c65a3eab5011fe8cb164acef6b561d825bfd9fc5dffe484a5173",
+    "faces/item_face/00300135/08_talk_blink1.png": "5af689fc9b3391b0310f5c3835b5db53a162ebc75bce3d0fb8797166bce40c4b",
+    "faces/item_face/00300135/09_talk_blink1_c.json": "534b34390f0e69565041bd0e28d709cf5ca363e193904b13ef8a2ac8a6dd090d",
+    "faces/item_face/00300135/09_talk_blink1_c.png": "bf1f3b71feb70ffea535b4aa3fa8bde8ad6abe396d6d7a95c8e19f8fde61c699",
+    "faces/item_face/00300135/10_talk_blink2.json": "ddad61c7f41e4c0f610106f2fb550358196e09c63097a737dc1283d62db9ac08",
+    "faces/item_face/00300135/10_talk_blink2.png": "7306bad363220f9e168dfc5519e5c8d606c5b98793b24ef74ee127d9e9008537",
+    "faces/item_face/00300135/11_attack.json": "9d54cc75911339555b1be556ee4214ffa1d668b45560a75e3f87dc871524d6ca",
+    "faces/item_face/00300135/11_attack.png": "d3d2b0e3be0c1eb4912c2f4893f07a7c1b6264c9a3bf52ded378f06d2d676d99",
+    "faces/item_face/00300135/12_attack_c.json": "d2e9036aab107f7926ad3760f77fd36df9b7ea83998063dc60939c405f312a0c",
+    "faces/item_face/00300135/12_attack_c.png": "921cabff3fd0ce9fd5515c78fb485fb6985c01ba577dfcb265209d27703ce69b",
+    "faces/item_face/00300135/13_attack_blink1.json": "96a6a3eb06dd5d6bd04ca6d7e293b2567832cb96f1480aa670b24896719d7362",
+    "faces/item_face/00300135/13_attack_blink1.png": "be5ba6bd6d9655018299dd7b05e09174dde34f81ae0d893103855c950311c1fc",
+    "faces/item_face/00300135/14_attack_blink1_c.json": "534b34390f0e69565041bd0e28d709cf5ca363e193904b13ef8a2ac8a6dd090d",
+    "faces/item_face/00300135/14_attack_blink1_c.png": "bf1f3b71feb70ffea535b4aa3fa8bde8ad6abe396d6d7a95c8e19f8fde61c699",
+    "faces/item_face/00300135/15_attack_blink2.json": "68904182824b25579cdcadfcc4c0aef260b2f78dd1eba0c590aedee625352b3e",
+    "faces/item_face/00300135/15_attack_blink2.png": "affcdedef73fc282d1da8b1d8009116257737b09ea4cbabe58f316bc84d23611",
+    "faces/item_face/00300135/16_focus.json": "f3a45f00a37c4cb955242a55adfa7d5fc3749a1fefc6ebbc4448c5befaa5b219",
+    "faces/item_face/00300135/16_focus.png": "dec1f1609fb85158c8d390034d6101342a0fb74bed6a8664ed63e9b4cbab5d5e",
+    "faces/item_face/00300135/17_focus_c.json": "d2e9036aab107f7926ad3760f77fd36df9b7ea83998063dc60939c405f312a0c",
+    "faces/item_face/00300135/17_focus_c.png": "921cabff3fd0ce9fd5515c78fb485fb6985c01ba577dfcb265209d27703ce69b",
+    "faces/item_face/00300135/18_pain.json": "2a53b3d96e9f07994a98d1df11bb9bcf7b314bd9c799d27b06bfd0f9268f1bc5",
+    "faces/item_face/00300135/18_pain.png": "d32cbf6e70444008a18695c0aa5146a9661f50ab2e01c49433614ebf8ac5d9ef",
+    "faces/item_face/00300135/19_pain_c.json": "7f896dda6b132901645933e48d8424bd66d239a9b8c975756a6fbf919b68127d",
+    "faces/item_face/00300135/19_pain_c.png": "1efe5fc77d075ce721ec886bd42794d58f66d9967a4b39d98f83876837a0e8a0",
+    "faces/item_face/00300135/20_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300135/20_blink2_c.png": "be16ce9ea2e1f4fd98007a99c99dd60f81a7239faec5e9708f107a59e50557b5",
+    "faces/item_face/00300135/21_talk_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300135/21_talk_blink2_c.png": "be16ce9ea2e1f4fd98007a99c99dd60f81a7239faec5e9708f107a59e50557b5",
+    "faces/item_face/00300135/22_attack_blink2_c.json": "c77a6fed98d772b809242ea2019d0fd1d189173c0b7c20f5965a803fbb19ef2b",
+    "faces/item_face/00300135/22_attack_blink2_c.png": "be16ce9ea2e1f4fd98007a99c99dd60f81a7239faec5e9708f107a59e50557b5"
+  },
+  "items": [
+    {
+      "itemId": 10200124,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 10300135,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 10500001,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 11320024,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 11820024,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Authored sign geometry and private joints reviewed. Its independent wing animation is not included."
+    },
+    {
+      "itemId": 12220024,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 11620024,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 11720024,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 11220024,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 10400108,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Reviewed on Gelo, female fitting_idle_a at 0.3 seconds, with her saved colors."
+    },
+    {
+      "itemId": 13400306,
+      "bodyVariant": "female",
+      "evidence": [
+        "gelo02front.jpg",
+        "gelo02angles.jpg",
+        "gelo02poses.jpg",
+        "gelo02expressions.jpg"
+      ],
+      "limitation": "Both drawn hand instances reviewed in fitting idle and run. Dance T intersects the face; stowed appearance and weapon combat poses are not reviewed."
+    },
+    {
+      "itemId": 13400306,
+      "bodyVariant": "male",
+      "evidence": [
+        "gelo02male.jpg",
+        "gelo02malePoses.jpg"
+      ],
+      "limitation": "Both drawn hand instances reviewed in fitting idle and run. Dance T intersects the face; stowed appearance and weapon combat poses are not reviewed."
+    }
+  ],
+  "states": {
+    "femaleItems": [
+      10200124,
+      10300135,
+      10500001,
+      11320024,
+      11820024,
+      12220024,
+      11620024,
+      11720024,
+      11220024,
+      10400108,
+      13400306
+    ],
+    "maleItems": [
+      10200230,
+      10300001,
+      11400350,
+      11500003,
+      11600001,
+      11700001,
+      11200001,
+      13400306
+    ],
+    "poses": {
+      "fitting_idle_a": [
+        0.3,
+        0.75
+      ],
+      "run_a": [
+        0.75
+      ],
+      "emotion_dance_t": [
+        0.75
+      ]
+    },
+    "expressions": [
+      "default",
+      "happy",
+      "angry"
+    ],
+    "sourceSkinPalette": [
+      1,
+      12
+    ],
+    "sourceBlushTransform": [
+      0.25,
+      0.01,
+      0,
+      0.52
+    ]
+  },
+  "behavior": [
+    "Removing left star preserves right star and dye. Two-handed equipment evicts both; a single star evicts the full two-handed bundle.",
+    "Five neon removal/equip cycles retain seven private joints and 26 geometries / 74 textures.",
+    "Intentionally missing second sign model returns HTTP404 and retains the previous outfit, without leaking joints.",
+    "Blush removal changes the rendered image; restoration reproduces the same image."
+  ],
+  "reference": {
+    "url": "https://hunya.duckdns.org",
+    "neonItem": 11820024,
+    "neonModel": "11850281_C_MTValentine04.gltf",
+    "neonColors": [
+      [
+        170,
+        47,
+        47
+      ],
+      [
+        96,
+        19,
+        19
+      ]
+    ],
+    "limits": [
+      "Weapons unsupported in reference UI.",
+      "Makeup UI supports only 10400056, not Gelo blush 10400108.",
+      "Reference canvas readback is transparent; silhouette parity unresolved."
+    ],
+    "ownClient": {
+      "weaponHelperFunction": "0x141658150, MapleStory2.exe x64",
+      "weaponHelperStrings": [
+        "Weapon_Hand_R_Point",
+        "Weapon_Hand_L_Point"
+      ],
+      "decalShader": "MS2CharacterSkinMaterial/Shader0001-P.hlsl, TexCoordTransform2D and AlphaBlendColors"
+    }
+  }
+}

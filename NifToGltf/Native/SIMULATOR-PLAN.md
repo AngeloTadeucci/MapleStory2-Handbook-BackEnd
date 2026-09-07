@@ -2,6 +2,32 @@
 
 Updated 2026-09-06 following the user's revised acceptance scope.
 
+The four authorized follow-ups are implemented in `simulator-release-04`:
+source sign animation; star idle/run and explicit draw/stow; 24 more reviewed
+item/body combinations, cape recovery and corrected knuckle attachment; client
+half-Lambert and source gloss/specular behavior. The catalog's slot-0 full-outfit
+filter and camera framing were also corrected after direct interaction.
+The 144-model release has 82 reviewed, 32 preview and 10 unavailable entries.
+Its 620 files reproduce byte for byte. STATUS.md records exact tests and T3
+states. Gelo is `/outfits?preview=gelo-05`. Paired star back overlap, full shader
+parity and cape cloth physics remain explicit limits. Effects remain excluded.
+Earlier static-sign and baseline-only-star limitations below are historical.
+The production build passes with all 620 packaged release files hash-checked.
+Candidate libraries and local character snapshots are excluded from that package.
+
+Release-03 checkpoint: Gelo's missing ordinary equipment is present in
+`/outfits?preview=gelo-02`: sign 11820024 with its own joints, independent
+left/right stars 13400306 with saved dyes, and source UV blush 10400108.
+The extended default library `simulator-release-03` has 142 models and 58
+reviewed item/body entries. It preserves release-02 and includes a repeatable
+extension builder and hash-bound review. STATUS.md records exact outfit states,
+tests and direct T3 interaction evidence. These follow-up changes are uncommitted.
+
+Remaining limits: shader parity, the sign's independent wing animation and
+weapon combat poses. Dance T intersects drawn stars with the face and is marked
+in the UI. These are not silently counted as verified appearance. Effects stay
+excluded. Publishing remains a separate authorized action.
+
 Gelo follow-up: a development-only preview at `/outfits?preview=gelo-01`
 loads eight saved appearance items and colors from a read-only snapshot of
 local `tria-game-server`. Front/side/back views and visible-tab playback were

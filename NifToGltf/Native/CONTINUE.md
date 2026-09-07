@@ -2,26 +2,34 @@
 
 ## Current priority, updated 2026-09-06
 
-The catalog, equipment rules, hair/face customization, backgrounds and local
-release candidate are implemented. Follow [SIMULATOR-PLAN.md](SIMULATOR-PLAN.md)
-and [STATUS.md](STATUS.md) for exact verification and remaining gaps. The user
-reviewed Gelo's `/outfits?preview=gelo-01` appearance and accepted the current
-shader differences for now, then authorized committing the work and plans.
-Shader parity remains unresolved. Missing Gelo items remain explicitly listed;
-effects and particle simulation remain excluded.
+All four authorized follow-ups are implemented and locally verified: sign KF
+animation, star combat idle/run and draw/stow, broader clothing compatibility,
+and source half-Lambert/gloss/specular shading. The default library is
+`simulator-release-04`, with 144 models and 82 reviewed item/body entries.
+`/outfits?preview=gelo-05` loads Gelo with twelve saved instances and dyes.
+Read the latest STATUS.md section for exact states, tests and remaining limits.
 
-Next release action is review of the prepared supported library before separately
-authorized publishing. Do not restart completed phases or silently expand the
-reviewed library with Gelo's preview items. Source commits do not contain the
-ignored generated assets or saved character snapshot. Preserve those local files.
+The 620 release files reproduce byte for byte using Diagnostics/refine_simulator.py
+and motion-library-review.json. Paired star back placement overlaps at the XML
+anchor and remains explicitly unresolved. Full client scene/rim/hair shader
+parity and cape cloth physics are not established. Knuckles now use source
+hand attachnodes; their old back placement was not correct appearance evidence.
+Effects and particle simulation remain excluded. Complete NPC/map conversion
+and global Noesis replacement are not simulator release prerequisites.
 
-The original prompt below is retained as the wider converter backlog. Its demand
-for complete non-effect replacement is no longer a simulator release gate.
-Use [STATUS.md](STATUS.md) for current results; the original starting-point counts
-below are historical. The simulator implementation and local release candidate
-are now recorded in STATUS.md. Review `simulator-release-02` before any separately
-authorized deployment. Do not restart completed catalog work or treat the wider
-converter backlog as a simulator release gate.
+Next action is review of this concrete local release before separately authorized
+publishing. Do not restart the completed implementation phases or claim every
+preview item is verified. The user authorized committing these follow-ups on
+2026-09-06; deployment remains unauthorized. Preserve local commits, ignored
+asset releases, the read-only DB appearance snapshot and existing processes.
+Both repositories were fetched at the start: master, three ahead and zero behind.
+The source commits do not contain the generated libraries or character snapshot.
+The production build passes and packages only simulator-release-04 under gltf.
+All 620 packaged files match inventory hashes. Local character snapshots and
+research libraries are excluded without deleting their source files. See STATUS.md
+for the corrected Vite import restriction and final mobile/export evidence limits.
+
+The original converter prompt below is a wider backlog, not a release checklist.
 
 ## Original replacement prompt
 

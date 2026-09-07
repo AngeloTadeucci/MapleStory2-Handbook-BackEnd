@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "10200124-female-0",
+      "input": "GeloSources/Item/0/02/10200096_f_velvetlonghair_a.nif",
+      "output": "female/10200124/0.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/102.xml",
+      "itemId": "10200096"
+    },
+    {
+      "id": "10300135-female-0",
+      "input": "GeloSources/Item/0/03/00300003_f_cuteface.nif",
+      "output": "female/10300135/0.gltf",
+      "bodyVariant": "female",
+      "slot": "FA",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/103.xml",
+      "itemId": "10300135"
+    },
+    {
+      "id": "10500001-female-0",
+      "input": "GeloSources/Item/0/05/00500001_f_bodyear.nif",
+      "output": "female/10500001/0.gltf",
+      "bodyVariant": "female",
+      "slot": "ER",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/105.xml",
+      "itemId": "10500001"
+    },
+    {
+      "id": "11320024-female-0",
+      "input": "GeloSources/Item/1/13/11301587_c_cpvalentine04_c.nif",
+      "output": "female/11320024/0.gltf",
+      "bodyVariant": "female",
+      "slot": "CP",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/113.xml",
+      "itemId": "11320024"
+    },
+    {
+      "id": "11820024-female-0",
+      "input": "GeloSources/Item/1/18/11850281_c_mtvalentine04.nif",
+      "output": "female/11820024/0.gltf",
+      "bodyVariant": "female",
+      "slot": "MT",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/118.xml",
+      "itemId": "11820024"
+    },
+    {
+      "id": "12220024-female-0",
+      "input": "GeloSources/Item/1/22/12200730_f_clpavalentine04.nif",
+      "output": "female/12220024/0.gltf",
+      "bodyVariant": "female",
+      "slot": "CL",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/122.xml",
+      "itemId": "12220024"
+    },
+    {
+      "id": "12220024-female-1",
+      "input": "GeloSources/Item/1/22/12200730_f_clpavalentine04.nif",
+      "output": "female/12220024/1.gltf",
+      "bodyVariant": "female",
+      "slot": "PA",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/122.xml",
+      "itemId": "12220024"
+    },
+    {
+      "id": "11620024-female-0",
+      "input": "GeloSources/Item/1/16/11601377_f_glvalentine04.nif",
+      "output": "female/11620024/0.gltf",
+      "bodyVariant": "female",
+      "slot": "GL",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/116.xml",
+      "itemId": "11620024"
+    },
+    {
+      "id": "11720024-female-0",
+      "input": "GeloSources/Item/1/17/11701491_f_shvalentine04.nif",
+      "output": "female/11720024/0.gltf",
+      "bodyVariant": "female",
+      "slot": "SH",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/117.xml",
+      "itemId": "11720024"
+    },
+    {
+      "id": "11220024-female-0",
+      "input": "GeloSources/Item/1/12/11250215_f_eavalentine04.nif",
+      "output": "female/11220024/0.gltf",
+      "bodyVariant": "female",
+      "slot": "EA",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/112.xml",
+      "itemId": "11220024"
+    },
+    {
+      "id": "10200124-female-c",
+      "input": "GeloSources/Item/0/02/10200096_f_velvetlonghair_c.nif",
+      "output": "female/10200124/c.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "attach": "Bip01 Head"
+    },
+    {
+      "id": "10200124-female-d",
+      "input": "GeloSources/Item/0/02/10200096_f_velvetlonghair_d.nif",
+      "output": "female/10200124/d.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "attach": "Bip01 Head"
+    },
+    {
+      "id": "13400306-female-RH",
+      "input": "GeloMissing/Item/1/34/13400263_fireprismstar.nif",
+      "output": "female/13400306/RH.gltf",
+      "bodyVariant": "female",
+      "slot": "OH",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/134.xml",
+      "itemId": "13400263",
+      "hand": "RH"
+    },
+    {
+      "id": "13400306-female-LH",
+      "input": "GeloMissing/Item/1/34/13400263_fireprismstar.nif",
+      "output": "female/13400306/LH.gltf",
+      "bodyVariant": "female",
+      "slot": "OH",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/134.xml",
+      "itemId": "13400263",
+      "hand": "LH"
+    },
+    {
+      "id": "13400306-female-stowed",
+      "input": "GeloMissing/Item/1/34/13400263_fireprismstar.nif",
+      "output": "female/13400306/stowed.gltf",
+      "bodyVariant": "female",
+      "slot": "OH",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/134.xml",
+      "itemId": "13400263"
+    },
+    {
+      "id": "13400306-male-RH",
+      "input": "GeloMissing/Item/1/34/13400263_fireprismstar.nif",
+      "output": "male/13400306/RH.gltf",
+      "bodyVariant": "male",
+      "slot": "OH",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/134.xml",
+      "itemId": "13400263",
+      "hand": "RH"
+    },
+    {
+      "id": "13400306-male-LH",
+      "input": "GeloMissing/Item/1/34/13400263_fireprismstar.nif",
+      "output": "male/13400306/LH.gltf",
+      "bodyVariant": "male",
+      "slot": "OH",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/134.xml",
+      "itemId": "13400263",
+      "hand": "LH"
+    },
+    {
+      "id": "13400306-male-stowed",
+      "input": "GeloMissing/Item/1/34/13400263_fireprismstar.nif",
+      "output": "male/13400306/stowed.gltf",
+      "bodyVariant": "male",
+      "slot": "OH",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/134.xml",
+      "itemId": "13400263"
+    }
+  ]
+}

@@ -132,6 +132,7 @@ internal sealed class NifDocument {
     public Dictionary<int, NifNode> Nodes { get; } = [];
     public Dictionary<int, NifSkin> GraftedSkins { get; } = [];
     public Dictionary<int, NifSkin> CanonicalSkins { get; } = [];
+    public HashSet<int> EquipmentBones { get; } = [];
     public List<OmittedContent> Omitted { get; } = [];
     private readonly Dictionary<int, NifStream> streams = [];
     public string Name(NifReader r) {

@@ -17,6 +17,8 @@ internal sealed record BatchModel(string Input) {
     public string? ExcludeEffect { get; init; }
     public string? ItemModel { get; init; }
     public string? ItemId { get; init; }
+    public string? Hand { get; init; }
+    public bool Drawn { get; init; }
 }
 internal sealed record BatchPlan(int Version, BatchModel[] Models);
 
@@ -74,7 +76,18 @@ internal static class NativeBatch {
                     model.ItemId ?? throw new InvalidDataException("ItemModel requires itemId."), file, model.BodyVariant ?? "", model.Slot);
                 if (attachment is not null && model.Skeleton is null) throw new InvalidDataException("ItemModel attachment requires a skeleton.");
                 if (attachment is not null && model.Attach is not null) throw new InvalidDataException("Use itemmodel attachment or an explicit attach, not both.");
-                if (model.Skeleton is { } skeleton) SkeletonGraft.Apply(document, NifDocument.Load(Resolve(root, skeleton)), attachment?.TargetNode ?? model.Attach, attachment?.SelfNode, attachment?.Replace ?? false);
+                if (model.Hand is { } hand) {
+                    if (hand is not ("RH" or "LH") || attachment?.Slot != "OH") throw new InvalidDataException("Hand selection requires a dual-wieldable OH itemmodel.");
+                    // Client 0x141658150 selects these helpers for drawn weapons.
+                    // The XML target and its dummy describe the stowed attachment.
+                    attachment = attachment with { Slot = hand, TargetNode = hand == "RH" ? "Weapon_Hand_R_Point" : "Weapon_Hand_L_Point", Translation = null, Rotation = null };
+                }
+                if (model.Drawn) {
+                    if (attachment?.Slot is not ("RH" or "LH") || string.IsNullOrWhiteSpace(attachment.AttachNode))
+                        throw new InvalidDataException("Drawn placement requires the item's explicit hand attachnode.");
+                    attachment = attachment with { TargetNode = attachment.AttachNode, Translation = null, Rotation = null };
+                }
+                if (model.Skeleton is { } skeleton) SkeletonGraft.Apply(document, NifDocument.Load(Resolve(root, skeleton)), attachment?.TargetNode ?? model.Attach, attachment?.SelfNode, attachment?.Replace ?? false, attachment?.DummyTransform);
                 KfmDocument? kfm = model.Kfm is null ? null : KfmDocument.Read(Resolve(root, model.Kfm));
                 if (kfm is not null && !Path.GetFullPath(kfm.Model).Equals(file, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("KFM model does not match manifest input.");
                 List<AnimationClip> clips = ClipSelection.Read(file, kfm, model.Animations is null ? null : Resolve(root, model.Animations), model.Clips is null ? null : string.Join(',', model.Clips));

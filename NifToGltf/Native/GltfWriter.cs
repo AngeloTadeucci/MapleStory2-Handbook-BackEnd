@@ -38,6 +38,10 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             nodes.Add(Json(new { name = node.Name, translation = new[] { translation.X, translation.Y, translation.Z },
                 rotation = new[] { rotation.X, rotation.Y, rotation.Z, rotation.W }, scale = new[] { scale.X, scale.Y, scale.Z } }));
             if (node.SortingMode is { } sorting) nodes[^1]!["extras"] = Json(new { nifSortingMode = sorting });
+            if (document.EquipmentBones.Contains(node.Id)) {
+                nodes[^1]!["extras"] ??= new JsonObject();
+                nodes[^1]!["extras"]!["equipmentBone"] = true;
+            }
             foreach (int child in node.Children) {
                 if (!parents.TryAdd(child, node.Id)) throw new InvalidDataException($"Multiple parents for block {child}.");
             }
@@ -207,20 +211,26 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
         while (parents.TryGetValue(parent, out parent)) properties.AddRange(document.Nodes[parent].Properties);
         JsonObject pbr = new() { ["metallicFactor"] = 0, ["roughnessFactor"] = 1 };
         JsonObject material = new() { ["name"] = node.Name, ["pbrMetallicRoughness"] = pbr };
+        JsonObject lighting = new() { ["specularEnabled"] = false };
         HashSet<string> seen = [];
         foreach (int property in properties) {
             NifReader r = document.Reader(property);
             string type = document.Blocks[property].Type;
             if (!seen.Add(type)) continue;
-            if (type is not ("NiMaterialProperty" or "NiTexturingProperty" or "NiAlphaProperty")) continue;
+            if (type is not ("NiMaterialProperty" or "NiTexturingProperty" or "NiAlphaProperty" or "NiSpecularProperty")) continue;
             document.ObjectNet(r);
-            if (type == "NiMaterialProperty") {
-                r.Vector();
+            if (type == "NiSpecularProperty") {
+                lighting["specularEnabled"] = (r.U16() & 1) != 0;
+            } else if (type == "NiMaterialProperty") {
+                Vector3 ambient = r.Vector();
                 Vector3 diffuse = r.Vector();
-                r.Vector();
+                Vector3 specular = r.Vector();
                 Vector3 emissive = r.Vector();
-                r.Float();
+                float power = r.Float();
                 float alpha = r.Float();
+                lighting["ambient"] = Json(new[] { ambient.X, ambient.Y, ambient.Z });
+                lighting["specular"] = Json(new[] { specular.X, specular.Y, specular.Z });
+                lighting["power"] = power;
                 pbr["baseColorFactor"] = Json(new[] { diffuse.X, diffuse.Y, diffuse.Z, alpha }.Select(v => Math.Clamp(v, 0, 1)).ToArray());
                 material["emissiveFactor"] = Json(new[] { emissive.X, emissive.Y, emissive.Z }.Select(v => Math.Clamp(v, 0, 1)).ToArray());
             } else if (type == "NiAlphaProperty") {
@@ -261,6 +271,14 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             r.Finish();
         }
         ApplyMaterialColors(node, material, pbr);
+        foreach (int extra in node.ExtraData.Where(id => document.Blocks[id].Type == "NiFloatExtraData")) {
+            NifReader r = document.Reader(extra);
+            string name = document.Name(r);
+            if (name is "ColorBoost" or "FresnelBoost" or "FresnelExponent") {
+                lighting[name] = r.Float(); r.Finish();
+            }
+        }
+        if (lighting.Count > 0) material["extras"]!["nifLighting"] = lighting;
         materials.Add(material);
         return materials.Count - 1;
     }

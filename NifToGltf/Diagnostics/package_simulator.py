@@ -34,8 +34,13 @@ def apply_review(output, manifest, catalog, review):
             raise ValueError(f'Review contains a duplicate or unavailable item: {key}')
         seen.add(key)
         required = [p['assetId'] for p in item['parts']]
+        required += [identity for ids in item.get('handParts', {}).values() for identity in ids]
+        required += item.get('stowedParts', [])
+        required += [identity for ids in item.get('hairForms', {}).values() for identity in ids]
         if any(identity not in review['assetHashes'] for identity in required):
             raise ValueError(f'Review omits an item part: {key}')
+        if item.get('decal') and item['decal']['texture'] not in review['fileHashes']:
+            raise ValueError(f'Review omits a decal texture: {key}')
         if not approved['evidence']:
             raise ValueError(f'Review has no appearance evidence: {key}')
         item['availability'] = 'verified'
