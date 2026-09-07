@@ -82,6 +82,11 @@ internal static class AnimationReader {
             }
         } else throw new NotSupportedException($"Evaluator type {type}.");
         r.Finish();
+        return BuildTracks(node, curves, pose, channels, duration, frequency, fps);
+    }
+
+    internal static IEnumerable<AnimationTrack> BuildTracks(string node, AnimationCurve?[] curves,
+        double[][] pose, byte[] channels, double duration, double frequency, int fps) {
         string[] paths = ["translation", "rotation", "scale"];
         for (int channel = 0; channel < 3; channel++) {
             if ((channels[channel] & 63) == 0) continue;
@@ -155,7 +160,7 @@ internal static class AnimationReader {
         return output.ToArray();
     }
 
-    private static AnimationCurve?[] KeyData(NifReader r) {
+    internal static AnimationCurve?[] KeyData(NifReader r) {
         int rotationCount = r.Count();
         uint rotationType = rotationCount == 0 ? 0 : r.U32();
         AnimationCurve? rotation = null;

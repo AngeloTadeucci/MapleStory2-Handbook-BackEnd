@@ -7,6 +7,18 @@ internal static class SkeletonGraft {
         bool IsSkin(int id) => gear.GraftedSkins.ContainsKey(id) || gear.CanonicalSkins.ContainsKey(id) ||
             ((uint) id < gear.Blocks.Length && gear.Blocks[id].Type == "NiSkinningMeshModifier");
         bool sourceSkinned = gear.Nodes.Values.Any(node => node.Mesh?.Modifiers.Any(IsSkin) == true);
+        bool worldSpaceHair = false;
+        if (sourceSkinned && replace && attachBone == "HR") {
+            HashSet<string> bodyNames = body.Nodes.Values.Select(n => n.Name).ToHashSet();
+            bool privateJoints = gear.Nodes.Values.Where(n => n.Mesh is not null).SelectMany(n => n.Mesh!.Modifiers)
+                .Where(IsSkin).SelectMany(id => gear.Skin(id).Bones).Any(id => !bodyNames.Contains(gear.Nodes[id].Name));
+            if (privateJoints) {
+                worldSpaceHair = true;
+                NifNode hair = body.Nodes.Values.Single(n => n.Name == "HR");
+                attachBone = body.Nodes.Values.Single(n => n.Children.Contains(hair.Id)).Name;
+                replace = false;
+            }
+        }
         bool privateAttachment = sourceSkinned && attachBone is not null && !replace;
         if (privateAttachment && dummyTransform is { } dummy && dummy != Matrix4x4.Identity)
             throw new NotSupportedException("Skinned attachment dummy transforms require verified source support.");
@@ -23,7 +35,10 @@ internal static class SkeletonGraft {
             if (selected.Length == 0 && selfNode == "HR" && replace && !sourceSkinned) {
                 // Client hair 10200224/10200006 exposes HR0 and HR1 with separate
                 // length morphs. XML addresses their shared HR replacement slot.
-                selected = gear.Nodes.Values.Where(node => node.Name.Length > 2 && node.Name.StartsWith("HR", StringComparison.Ordinal) && node.Name[2..].All(char.IsDigit)).ToArray();
+                selected = gear.Nodes.Values.Where(node => {
+                    string name = node.Name.Split(':')[0];
+                    return name.StartsWith("HR", StringComparison.Ordinal) && name[2..].All(char.IsDigit);
+                }).ToArray();
                 splitHair = selected.Length > 0 && selected.Select(node => gearParents.GetValueOrDefault(node.Id, -1)).Distinct().Count() == 1;
             }
             // Some weapons name both the attachment node and its child mesh
@@ -36,7 +51,9 @@ internal static class SkeletonGraft {
             }
             // Inspected player/garment NIFs use CL_Skin, PA_Skin/PA_Panty and
             // SH_Skin as sibling replacement parts. Robes can have only PA_*.
-            bool family = sourceSkinned && replace && selfNode is "CL" or "PA" or "SH";
+            // Wrist accessories use GL_Wrist plus GL_Skin without a GL mesh.
+            // Like garment skin siblings, both are part of the declared slot.
+            bool family = sourceSkinned && replace && selfNode is "CL" or "PA" or "SH" or "GL";
             NifNode[] siblings = family ? gear.Nodes.Values.Where(node => node.Name.StartsWith(selfNode + "_", StringComparison.Ordinal)).ToArray() : [];
             if ((selected.Length > 1 && !splitHair) || (selected.Length == 0 && siblings.Length == 0)) throw new InvalidDataException($"Expected one equipment selfnode {selfNode}, found {selected.Length}.");
             HashSet<int> branch = [];
@@ -101,9 +118,30 @@ internal static class SkeletonGraft {
                 foreach (NifSkin skin in sourceSkins.Values)
                     if (skin.Bones.Any(bone => !attachmentBranch.Contains(bone)))
                         throw new InvalidDataException("Skinned attachment references joints outside its itemmodel branch.");
-                int parent = gearParents[root];
-                gear.Nodes[parent] = gear.Nodes[parent] with { Children = gear.Nodes[parent].Children.Where(id => id != root).ToArray() };
+                if (gearParents.TryGetValue(root, out int parent)) {
+                    gear.Nodes[parent] = gear.Nodes[parent] with { Children = gear.Nodes[parent].Children.Where(id => id != root).ToArray() };
+                } else if (gear.Roots.Contains(root)) {
+                    // Animated hats can attach their entire Scene Root. Move it
+                    // out of the scene roots before parenting it to the head.
+                    gear.Roots = gear.Roots.Where(id => id != root).ToArray();
+                } else throw new InvalidDataException("Private attachment has neither a parent nor a scene root.");
                 int target = mapping[matches[0].Id];
+                if (worldSpaceHair) {
+                    // Replacement hair joints are authored in character space.
+                    // Preserve their source bind pose beneath the animated head.
+                    // A separate parent keeps source animation keys unchanged.
+                    Dictionary<int, int> bodyParents = body.Nodes.Values.SelectMany(n => n.Children.Select(c => (c, n.Id)))
+                        .ToDictionary(pair => pair.c, pair => pair.Id);
+                    Matrix4x4 BodyWorld(int id) => body.Nodes[id].Transform * (bodyParents.TryGetValue(id, out int p) ? BodyWorld(p) : Matrix4x4.Identity);
+                    if (!Matrix4x4.Invert(BodyWorld(matches[0].Id), out Matrix4x4 inverseHead))
+                        throw new InvalidDataException("Singular hair replacement parent.");
+                    Matrix4x4 sourceParent = gearParents.TryGetValue(root, out int sourceParentId) ? GearWorld(sourceParentId) : Matrix4x4.Identity;
+                    int bridge = nextId++;
+                    gear.Nodes[bridge] = gear.Nodes[target] with { Id = bridge, Name = "Equipment hair bind parent",
+                        Transform = sourceParent * inverseHead, Children = [root] };
+                    gear.EquipmentBones.Add(bridge);
+                    root = bridge;
+                }
                 gear.Nodes[target] = gear.Nodes[target] with { Children = [..gear.Nodes[target].Children, root] };
                 foreach (int id in attachmentBranch.Where(id => gear.Nodes[id].Mesh is null)) gear.EquipmentBones.Add(id);
                 foreach ((int id, NifSkin skin) in sourceSkins) gear.CanonicalSkins[id] = skin with { Root = skeletonRoots.Single() };
@@ -116,6 +154,8 @@ internal static class SkeletonGraft {
                     gear.GraftedSkins[modifier] = new NifSkin(skeletonRoots.Single(), Matrix4x4.Identity, [joint], [mesh.Transform]);
                     gear.Nodes[mesh.Id] = mesh with { Mesh = mesh.Mesh! with { Modifiers = [..mesh.Mesh!.Modifiers, modifier] } };
                 }
+                foreach (NifNode node in gear.Nodes.Values.Where(n => n.Id < gear.Blocks.Length && !attachmentBranch.Contains(n.Id)).ToArray())
+                    if (bodyNodes.Any(b => b.Name == node.Name)) gear.Nodes[node.Id] = node with { Name = $"Equipment source/{node.Name}" };
                 return;
             }
             Dictionary<string, int> bodyBones = bodyNodes.ToDictionary(node => node.Name, node => mapping[node.Id]);
@@ -130,6 +170,10 @@ internal static class SkeletonGraft {
             if (gearMeshes.Any(node => !node.Mesh!.Modifiers.Any(IsSkin))) throw new NotSupportedException("Mixed rigid/skinned equipment requires per-mesh attachment metadata.");
             return;
         }
+        // Rigid accessories can carry an unused copy of the player hierarchy.
+        // Reserve the body's animation names for the grafted, deforming skeleton.
+        foreach (NifNode node in gear.Nodes.Values.Where(n => n.Id < gear.Blocks.Length).ToArray())
+            if (bodyNodes.Any(b => b.Name == node.Name)) gear.Nodes[node.Id] = node with { Name = $"Equipment source/{node.Name}" };
         foreach (NifNode node in gearMeshes) {
             int modifier = nextId++;
             gear.GraftedSkins[modifier] = new NifSkin(skeletonRoots.Single(), Matrix4x4.Identity,

@@ -1,0 +1,3313 @@
+{
+  "version": 1,
+  "release": "simulator-release-14",
+  "date": "2026-09-07",
+  "scope": {
+    "sourceItemIds": 36022,
+    "scopedItemIds": 19268,
+    "bodyPairs": 33170,
+    "bodyCounts": {
+      "male": 16575,
+      "female": 16595
+    },
+    "searchableEntries": 33170,
+    "sourceFamilies": 8978,
+    "excluded": {
+      "No wearable slot or wearable category": 15313,
+      "No KR Live environment": 1397,
+      "Badges excluded by scope": 44
+    }
+  },
+  "conversion": {
+    "scopedItems": 19268,
+    "bodyPairs": 33170,
+    "searchableEntries": 33170,
+    "families": 8978,
+    "convertedModels": 9329,
+    "convertedFamilies": 7078,
+    "availability": {
+      "verified": 80,
+      "preview": 27788,
+      "unavailable": 5302
+    },
+    "conversion": {
+      "baseline-reused": 675,
+      "converted": 28096,
+      "failed": 3231,
+      "not-converted": 962,
+      "customization-only": 206
+    },
+    "baselineOnlyEntries": [
+      [
+        11800291,
+        "male"
+      ],
+      [
+        11800291,
+        "female"
+      ],
+      [
+        10300198,
+        "female"
+      ],
+      [
+        10300199,
+        "male"
+      ],
+      [
+        11800001,
+        "male"
+      ],
+      [
+        11800001,
+        "female"
+      ]
+    ],
+    "bySlotBody": {
+      "BE": {
+        "male": {
+          "unavailable": 122
+        },
+        "female": {
+          "unavailable": 122
+        }
+      },
+      "CL": {
+        "male": {
+          "verified": 8,
+          "preview": 2044,
+          "unavailable": 33
+        },
+        "female": {
+          "verified": 9,
+          "preview": 2061,
+          "unavailable": 31
+        }
+      },
+      "CP": {
+        "male": {
+          "unavailable": 323,
+          "verified": 2,
+          "preview": 2000
+        },
+        "female": {
+          "unavailable": 329,
+          "verified": 3,
+          "preview": 1990
+        }
+      },
+      "EA": {
+        "male": {
+          "verified": 2,
+          "unavailable": 21,
+          "preview": 347
+        },
+        "female": {
+          "verified": 3,
+          "unavailable": 21,
+          "preview": 346
+        }
+      },
+      "ER": {
+        "male": {
+          "preview": 1
+        },
+        "female": {
+          "verified": 1
+        }
+      },
+      "EY": {
+        "male": {
+          "unavailable": 71,
+          "preview": 41
+        },
+        "female": {
+          "unavailable": 71,
+          "preview": 41
+        }
+      },
+      "FA": {
+        "male": {
+          "verified": 2,
+          "preview": 94,
+          "unavailable": 1
+        },
+        "female": {
+          "verified": 3,
+          "preview": 90,
+          "unavailable": 1
+        }
+      },
+      "FD": {
+        "male": {
+          "unavailable": 1,
+          "preview": 104
+        },
+        "female": {
+          "unavailable": 2,
+          "preview": 102,
+          "verified": 1
+        }
+      },
+      "FH": {
+        "male": {
+          "preview": 89,
+          "unavailable": 9
+        },
+        "female": {
+          "preview": 89,
+          "unavailable": 9
+        }
+      },
+      "GL": {
+        "male": {
+          "verified": 4,
+          "preview": 1847,
+          "unavailable": 50
+        },
+        "female": {
+          "verified": 5,
+          "preview": 1857,
+          "unavailable": 41
+        }
+      },
+      "HR": {
+        "male": {
+          "verified": 2,
+          "preview": 119,
+          "unavailable": 8
+        },
+        "female": {
+          "preview": 100,
+          "unavailable": 27,
+          "verified": 3
+        }
+      },
+      "LH": {
+        "male": {
+          "preview": 1835,
+          "verified": 2,
+          "unavailable": 1592
+        },
+        "female": {
+          "preview": 1808,
+          "verified": 2,
+          "unavailable": 1619
+        }
+      },
+      "MT": {
+        "male": {
+          "preview": 450,
+          "verified": 2,
+          "unavailable": 63
+        },
+        "female": {
+          "preview": 449,
+          "verified": 3,
+          "unavailable": 63
+        }
+      },
+      "OH": {
+        "male": {
+          "preview": 738,
+          "unavailable": 40,
+          "verified": 2
+        },
+        "female": {
+          "preview": 739,
+          "unavailable": 39,
+          "verified": 2
+        }
+      },
+      "PA": {
+        "male": {
+          "verified": 8,
+          "preview": 2004,
+          "unavailable": 23
+        },
+        "female": {
+          "verified": 9,
+          "preview": 2026,
+          "unavailable": 26
+        }
+      },
+      "PD": {
+        "male": {
+          "unavailable": 127
+        },
+        "female": {
+          "unavailable": 127
+        }
+      },
+      "RH": {
+        "male": {
+          "verified": 2,
+          "preview": 2222,
+          "unavailable": 1469
+        },
+        "female": {
+          "verified": 2,
+          "preview": 2196,
+          "unavailable": 1495
+        }
+      },
+      "RI": {
+        "male": {
+          "unavailable": 123
+        },
+        "female": {
+          "unavailable": 123
+        }
+      },
+      "SH": {
+        "male": {
+          "verified": 4,
+          "preview": 1938,
+          "unavailable": 13
+        },
+        "female": {
+          "verified": 5,
+          "preview": 1946,
+          "unavailable": 5
+        }
+      }
+    },
+    "completeBundleOrCustomizationFamilies": 7515,
+    "originalModelJobsAttempted": 10464
+  },
+  "appearance": {
+    "inheritedVerifiedPairs": 80,
+    "newlyPromotedPairs": 0,
+    "visuallyInspectedBodyPairs": 77,
+    "capturedOutfitCases": 42,
+    "reviewScope": "These captures were inspected as previews. Conversion, successful interaction and inspection do not establish complete client appearance parity.",
+    "entries": [
+      {
+        "itemId": 10200001,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "c1ec78886514893c9048cb78bcea8f8944174eede2e15feba0936c2ba6e97c10"
+      },
+      {
+        "itemId": 10200006,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "99a506d414c753fb0edcde1656447649db6612680052bbbe9da954ca4af549ba"
+      },
+      {
+        "itemId": 10200121,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "2e997b526d46e2982740abe1c43a8c6bb058a52df9142f27425a6f3cd06edf1c"
+      },
+      {
+        "itemId": 10200124,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "e85beea2942c9786f5422f7c363955eda0d38c93a0f0367f4fa3fa727885b9f7"
+      },
+      {
+        "itemId": 10200178,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "55165ec244d5a2b48f438c164b25b77c8afb3c516143fbd0a34a8bb33e36a3f2"
+      },
+      {
+        "itemId": 10200183,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "dab06f1f425d3a90f4fd42d1c631efdbbb1749a4ee38f58e7f34cd9162fdb822"
+      },
+      {
+        "itemId": 10300001,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "2c3d53d14d5d8df03cf9b95b25e550ef0f03e87e112cfde6249319c9ca543177"
+      },
+      {
+        "itemId": 10300003,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "aa1474e9d329a6f35d3969e9f4a405f939c4824a687b49b35b314340bc1b52df"
+      },
+      {
+        "itemId": 10400002,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "e60bb11e50fa9231b6ebafb2c43d0bfce113876e0903754d34d95043f3e478d0"
+      },
+      {
+        "itemId": 10400004,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "ac29fd8ba7a6995ed908902d5ab7a59ff0b9b36ce29499213f3db1fe43fc2e5d"
+      },
+      {
+        "itemId": 10400011,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "f722f83b5dd2c5f9246ec4004ee5ce7cb0115eae5257f150ab8a79df262d9230"
+      },
+      {
+        "itemId": 10400013,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "211173ffa99acf240d88ac1ce8c2dfd138f001703db1cfcb582be73681108db1"
+      },
+      {
+        "itemId": 10500001,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "953a8201d765b48fafeb4acf6870b36955db0a1eca5103b7e4c9008f0c1897f7"
+      },
+      {
+        "itemId": 10500001,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "f2db2b763010fd3ac14824a61f6dbde617f2a65d14cdf98c163693c2c9a90893"
+      },
+      {
+        "itemId": 11020005,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "f953e4840bb7fd39b3a2d751f733723c3f17855bb37e5f41022b8c326a301101"
+      },
+      {
+        "itemId": 11020006,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "ef64cbdf0f58e80d7401899c066737a8e6c8826c29d49fbeaadfd7285d599e58"
+      },
+      {
+        "itemId": 11050055,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "f6fcca00d3b8efceaed1108364d866c21d6e8641c60c0ed6006d87004e286942"
+      },
+      {
+        "itemId": 11050055,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "da669234a7a62db0c8010d286200ed260b111141547e6041e8d25c1a4501283b"
+      },
+      {
+        "itemId": 11120014,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "ac30502c78df11ba12c4cc162f8deeb928011879ec0664162b33f1d4b818ef9f"
+      },
+      {
+        "itemId": 11120014,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "9018a055c9c0360cf2c8637c0a973f4e38a49af8779c9d7c0b83c99bb5290f23"
+      },
+      {
+        "itemId": 11200001,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "e491d57bd2a1601851622892bb49ae344c845ff431767ac309d4723bc8aa343f"
+      },
+      {
+        "itemId": 11200001,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "481395a2eaf3f24eca6373e79b7236d34889196c14178f44a9d92f049a5e663e"
+      },
+      {
+        "itemId": 11300001,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "c066cccefeef24dfeffb1619ea4c9cd294c340c5cde8b52d8b0920b84e2a60e9"
+      },
+      {
+        "itemId": 11300001,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "6b6b33877d9f2408b296cb4127d608c3d67f21df7d82a313f19f67c959ad4dd7"
+      },
+      {
+        "itemId": 11300204,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "85878e763383772d7f822b14ed2b8b9b3f7193a9d5dc2631a7f1357bc65a41fd"
+      },
+      {
+        "itemId": 11300204,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "10ed7d5a8fd8e123de119d23a3bc9dc8e7a69927b5f8203dee83efbd0289bb09"
+      },
+      {
+        "itemId": 11300506,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "08927ba4a3fe583a700a689cda6d96e85a3f4e52e3373ee022f1827cbb9645f2"
+      },
+      {
+        "itemId": 11300506,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "9da1ab440a16df5c3ff5aace120f044fbf9b7f6b79ed485ae75bf2ea794c04bc"
+      },
+      {
+        "itemId": 11301482,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "fb202dec6c6f925fd6f36c6f806d4b19f3515809e2b3432059079a97f790f95c"
+      },
+      {
+        "itemId": 11304825,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "f8c7a0d1eb310ad41c9fca989abd32f84ce7a64fc56623d08de9670850e9d3d4"
+      },
+      {
+        "itemId": 11304825,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "0d40895671ec1bdb25d2df1fb2982c56436422738e9ba936ef24fe1a001a5874"
+      },
+      {
+        "itemId": 11304858,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "80c25971e21fbf34b92a7334b182d1ded060d44374804c6e5005e9bbcac458ae"
+      },
+      {
+        "itemId": 11304858,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "14c66ca4f9e5f47e9c608303b0c0f4b4c671a316e1031c385a165acecf1bb71a"
+      },
+      {
+        "itemId": 11320133,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "de9f872b71e9553ae2688b9810c4c3ac019ea4376409419097a14fb4b4d8279e"
+      },
+      {
+        "itemId": 11320134,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "9b39f0d66fc00f6a3e0cced655cd3a462c146c4708c63f3c4e4a31687bec0f18"
+      },
+      {
+        "itemId": 11320265,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "9b15a2853b7a90acc5d8d29e758721162f52f79a9e2a71c5bc04c21cc0161454"
+      },
+      {
+        "itemId": 11320266,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "91e2a235e55e417be9312c56bb944024555c7ed1deefbb45fb07d2f7cc9fa7d7"
+      },
+      {
+        "itemId": 11400022,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "3b6482f17e018a9dcf37dcc74ce0eed99325786fafa9d0de6710ed1f0a392673"
+      },
+      {
+        "itemId": 11400049,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "c5b864e18434f943b4aaf94e4302989ef8fb349b436f91d22a34d2fed070daa8"
+      },
+      {
+        "itemId": 11400049,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "98dbd4d64147b406aebfecbdb163e138b14a978d3b7858fb1062c3732fd6af5f"
+      },
+      {
+        "itemId": 11400114,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "828cd97aec7d413fcc4c6ddd043183269b521312fbfe0767d6b5d172ac12297b"
+      },
+      {
+        "itemId": 11400367,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "91caeb7538d4dfca9bb8662e3afe29c4a7c7b9d2985afb490f62240aa15c7064"
+      },
+      {
+        "itemId": 11400367,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "f61e00f8fdf5f8535578edcbcb039759900c30161fd5608eb37a6d4427451a97"
+      },
+      {
+        "itemId": 11420327,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "18038aceaecf1f4445d615623f009d71b1a064c7d473b5d5ad9683011efa973a"
+      },
+      {
+        "itemId": 11420328,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "eabb3745ea3567f8f778f84784d386eb942a26e5aa0f6c2309f0265b4e059e19"
+      },
+      {
+        "itemId": 11500004,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "a10dccf89e49e9c7ec0b26708e76dd55a7b3dc603f184ff200a5fd9384210a1a"
+      },
+      {
+        "itemId": 11500004,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "551fd128083a032e74ca8587150d3d30aa21e732d52db3e0b2cd2c3a4f4fdc03"
+      },
+      {
+        "itemId": 11520328,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "be2a4634ddaf28be30158f6f5bb50404c1d473985c9caffaeea5d07b06e1d448"
+      },
+      {
+        "itemId": 11600254,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "92f0af4c3b41bc24bf87ec40c729645b91a2431961a3e603af6a3b99e7baae96"
+      },
+      {
+        "itemId": 11600426,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "2bfba4db4feca22ab50e58f964e27f9d8be69115b57cb42a3cc5230f4add2665"
+      },
+      {
+        "itemId": 11700004,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "7e865b9f857d806763f91d7b4c494fd3aa7b688a00a21f7068409059f18bb2d7"
+      },
+      {
+        "itemId": 11700004,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "375de8164b4d27ef001e23792ef2fee804808964db5f6025500c5642d4515c60"
+      },
+      {
+        "itemId": 11720327,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "0063700da332c233db7d019461929681c699c7e3ce9b12149578a7ddc085a59e"
+      },
+      {
+        "itemId": 11720328,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "528b89a2dbdb4d3ed993a7f98713c7b7758552c0885ce6603dbe03ad1775ef6a"
+      },
+      {
+        "itemId": 11800011,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "5be35c8efc83a18be85a54e5120e2ade09c61ed41a7abb060a17c932b4d102f6"
+      },
+      {
+        "itemId": 11800011,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "f7eed137abcd538db4bd9e0db9c88dd66ee02485b46bb846f110687e8d766161"
+      },
+      {
+        "itemId": 12200001,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "7a58101abe1e1f5d2cdc8f1c88bfce1ab5e9612f62b3a4db21e36580b5ec39a7"
+      },
+      {
+        "itemId": 12200001,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "093a2b2521cd68fc3f748877bbad64ac9d40fcc80fd81138dde00ea63c958a8f"
+      },
+      {
+        "itemId": 12200002,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "6487067d711a068d9fdb1a6b3fe4ff5fc14fe204f8697001b0dc65926831ffd8"
+      },
+      {
+        "itemId": 12200002,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "f187c1051fa88b67490d56b670015b5e01eba1b73b5050c5a29ced01bc9e9fb1"
+      },
+      {
+        "itemId": 12200053,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "cb07c4e41732ea4a740cd43291ab515cec1f69259ff1de8e8996a7074ec253a6"
+      },
+      {
+        "itemId": 12200054,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "18df25e7cd02a9dc7e21ea0815ad9a55c290c94eae0b262d7c6097d09558034c"
+      },
+      {
+        "itemId": 12200281,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "4e99f26aa6fc88557384e010ac7a7fe0196d97d14d3990f4deea77379cd64308"
+      },
+      {
+        "itemId": 12220133,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "7238782c79918bf5bb0ed93f2ac47f8c68a263744e6486e2e1c546c46f1bb8c5"
+      },
+      {
+        "itemId": 12220134,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "23043880b5d1ab794668016f12f4687b9965c233ee0584d4e06fc3f6ce6f9333"
+      },
+      {
+        "itemId": 13000001,
+        "bodyVariant": "female",
+        "availability": "verified",
+        "family": "c437dc74a7d0c5a63b29a68041f814ff6a58549230b6cf332f18a7187b6c65de"
+      },
+      {
+        "itemId": 13000001,
+        "bodyVariant": "male",
+        "availability": "verified",
+        "family": "6b24e3c5e5dfb6333ea2566c8f9e38f6e0aebe670e5123687b7f239b675c8554"
+      },
+      {
+        "itemId": 13000042,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "295f0d8ae696f52284726e1b37449e5b7dfab4c7b0b754e7eef6c44ff743aea7"
+      },
+      {
+        "itemId": 13000042,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "140d1a23a36abe7afdac86b2f40427f7c9a8651870589b14627a3dcb422e4014"
+      },
+      {
+        "itemId": 14000065,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "f0a8c0ca30ae08aea8b0e67fe6040c7291a23493aec4eaa5ea20d3ae855512bf"
+      },
+      {
+        "itemId": 14000065,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "1d9ca6c61d979e8b5ccdbb5ab83637c231250bda539cf013b27a097124d764ab"
+      },
+      {
+        "itemId": 14100001,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "f7e51ce15e7e49c499190dc5cb0258941afca416c01abb58d0592e0cecc02939"
+      },
+      {
+        "itemId": 14100001,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "6603f930ce6f1339eb8fca638cafa268c8b433482466dc5695e6d7918c9d3594"
+      },
+      {
+        "itemId": 15000025,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "3efc26a5a9e58edc72fe069d7bf4f71e58d80f90ce7ebb9bde1275edf7b0d029"
+      },
+      {
+        "itemId": 15000025,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "1cd8976ff8ac6dcec22d7aa2b2b1b8627bc0bf2be59ab8e5fa0692fb24882fd9"
+      },
+      {
+        "itemId": 34000009,
+        "bodyVariant": "female",
+        "availability": "preview",
+        "family": "d86213140d3a21d77e7b516a374b3ffbfc1b338b1272d44222761645fcc1a42d"
+      },
+      {
+        "itemId": 34000009,
+        "bodyVariant": "male",
+        "availability": "preview",
+        "family": "649b1090298300d374fbb259ab46c81bee7258c1c8faae110510fe28e554c3cc"
+      }
+    ],
+    "cases": [
+      {
+        "group": "family-review-14",
+        "name": "wrist",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          11400367,
+          11500004,
+          11700004,
+          11600254,
+          11200001,
+          11300001,
+          10200124
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/wrist-female-front.png",
+            "bytes": 147233,
+            "sha256": "3dd9d1bdfe587c2a874f5da79e677ddf685349dc9e58b244f6db90e5f5f29254"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/wrist-female-back.png",
+            "bytes": 114284,
+            "sha256": "83094440f9ba84f8a9b0418a7ff0f8a2093b1682fa73885ae22afbf44161acb9"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "snake-wings",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11400367,
+          11500004,
+          11700004,
+          11300506,
+          11800011,
+          10400011
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/snake-wings-female-front.png",
+            "bytes": 206077,
+            "sha256": "1bf3a80da3d563327325a63f6f50de6542927c6e60fb1b52db451475c6494e7b"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/snake-wings-female-back.png",
+            "bytes": 173430,
+            "sha256": "c9d025a730cd66db3165bab28c049152e4389a06e14df505a380175593730098"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "palette-hat",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          12200002,
+          11700004,
+          11304858
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/palette-hat-female-front.png",
+            "bytes": 143943,
+            "sha256": "1693774adddff7441ed8b2edef436c273681cf40700f66458752205141b37f4c"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/palette-hat-female-back.png",
+            "bytes": 110714,
+            "sha256": "2d0f9dc74455e886b86da1d457e87c5482195221cdc8d77996519917d13dad59"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "masked-accessories",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          12200002,
+          11700004,
+          10400013,
+          11120014,
+          11020006,
+          10500001
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "happy",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/masked-accessories-female-front.png",
+            "bytes": 138516,
+            "sha256": "478b2f9c9a1dbeb284ff1c55de4f216ebe315cedf04b8587a418f400bc4fa4b6"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/masked-accessories-female-back.png",
+            "bytes": 100768,
+            "sha256": "f01a86fef8a000f6911c8e4c1cf0a71b4dc4ed124c3e4d0c438e40fffc7a2d08"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "weapon",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11400367,
+          11500004,
+          11700004,
+          13000001,
+          14100001
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/weapon-female-front.png",
+            "bytes": 136556,
+            "sha256": "785b574ebf86c4e64eeaf5c69eec432a040b5dc9529a02210668aa78a200ff7a"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/weapon-female-back.png",
+            "bytes": 113204,
+            "sha256": "faba07da1d7bbae440ddf84625b3e9ab2b4118558c77ab3cdfa43c4ed89bc4c7"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "instrument",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11400367,
+          11500004,
+          11700004,
+          34000009
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/instrument-female-front.png",
+            "bytes": 146833,
+            "sha256": "656b1f3cbb7226fbe922fe1ed0b7efb6e5de1135fc2783867cff9c8b0a97313f"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/instrument-female-back.png",
+            "bytes": 112083,
+            "sha256": "d25d415c055d6df531778d278dd3f2adebd97666d7b1a9e4592b16cd0f04775e"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "robe",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          12200001,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/robe-female-front.png",
+            "bytes": 134453,
+            "sha256": "773ea4e9bbbddc6f063f0d7b73cb7296c321de1511e9978f11517bb6da96a8ca"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/robe-female-back.png",
+            "bytes": 100190,
+            "sha256": "2fb17b3581d11e7670c67ffbed81e1ac8d12956b34f1d23c819d401d4e080781"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "nose-quackling",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11400367,
+          11500004,
+          11700004,
+          11050055,
+          11304825
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/nose-quackling-female-front.png",
+            "bytes": 149527,
+            "sha256": "9ced32b16c6c49d634df097f3695d39d374dac66261aa851ade997653de5a43d"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/nose-quackling-female-back.png",
+            "bytes": 115806,
+            "sha256": "f3b9bbb5f153e4a2eccbaaf1ba9b06e6945aaaa971ddfe692edce2724508a068"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "sleeveless",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11500004,
+          11700004,
+          11400022,
+          11600254
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/sleeveless-female-front.png",
+            "bytes": 126546,
+            "sha256": "e7f5fb8ac8f574b4fe88391599925b89d78077359ff2affd2af3e0b88d86138e"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/sleeveless-female-back.png",
+            "bytes": 95195,
+            "sha256": "873a7079f3d6b0d642c85e423c885528ac9bc9ce7e7387a1fe06a31a0fc8aaee"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "heavy-armor",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11500004,
+          11700004,
+          11400049,
+          11600254
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/heavy-armor-female-front.png",
+            "bytes": 129610,
+            "sha256": "05b1c827417b2fccda27f5988826dd63f934c6e6b2e8ffe99e01721fc0487e33"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/heavy-armor-female-back.png",
+            "bytes": 99105,
+            "sha256": "6aaeec0e35f2f8f530c7883e48179fa7315ff5c31539bbd5f302e1cc1e664c53"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "swim",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11700004,
+          12200053,
+          11600254
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/swim-female-front.png",
+            "bytes": 124103,
+            "sha256": "94e8943559164f018be9b5457ae51896f21a674aa0a69c408a1ea25afdd4220e"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/swim-female-back.png",
+            "bytes": 95096,
+            "sha256": "134d63dcc69e5dc19fcab7600cd65dbcc8291a3103a81690ef6b259cca2a73b2"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "wrist",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          11400367,
+          11500004,
+          11700004,
+          11600426,
+          11200001,
+          11300001,
+          10200121
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/wrist-male-front.png",
+            "bytes": 143440,
+            "sha256": "34cda2bf4654d63812ea3a32d5f541f3a4e8b7488c9fc1eefb1fdee39d950a71"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/wrist-male-back.png",
+            "bytes": 122708,
+            "sha256": "2b2e5bc8bd473926036cddc6630cfcf0cf823224a9ed20e888afc7e81bc3c223"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "snake-wings",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11400367,
+          11500004,
+          11700004,
+          11300506,
+          11800011,
+          10400002
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/snake-wings-male-front.png",
+            "bytes": 207824,
+            "sha256": "04c4d35ed13c9c607ebe96d02eacb01092b8427e04c5ef6aca73283bf43ee8b6"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/snake-wings-male-back.png",
+            "bytes": 167463,
+            "sha256": "56415fba2f0e00846f343ac07a8e8c5bd69579d644387a64739dcc695776d33d"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "palette-hat",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          12200002,
+          11700004,
+          11304858
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/palette-hat-male-front.png",
+            "bytes": 137813,
+            "sha256": "c93df22a01594bd6d5df3d475c886c0d2c7af57adecfcbded779a140b04406dc"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/palette-hat-male-back.png",
+            "bytes": 110068,
+            "sha256": "f96ed8f706856caf9d911eb93bb5df496bae2b6c2ed7cd183c087c3e66b2f601"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "masked-accessories",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          12200002,
+          11700004,
+          10400004,
+          11120014,
+          11020005,
+          10500001
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "happy",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/masked-accessories-male-front.png",
+            "bytes": 133904,
+            "sha256": "059de9bd95c445e7b134788522b71763ac979c0d6f4cb9b7cfff1bf91e0d1941"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/masked-accessories-male-back.png",
+            "bytes": 101979,
+            "sha256": "44943057e253702b23468edf53fd6286f8224aca8eba18da271f2e3e3311791d"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "weapon",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11400367,
+          11500004,
+          11700004,
+          13000001,
+          14100001
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/weapon-male-front.png",
+            "bytes": 140877,
+            "sha256": "67c09086bf774e089ce3d86495db7f421cb03fb8f2f8db3fecf26cf11969b6d1"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/weapon-male-back.png",
+            "bytes": 118302,
+            "sha256": "ddcb53e6810f7e151f0db8e3847ec5a7784b3906a46c144b719f9dde372079e3"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "instrument",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11400367,
+          11500004,
+          11700004,
+          34000009
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/instrument-male-front.png",
+            "bytes": 155400,
+            "sha256": "2f820d94ba30ba082cad9a29c9026c9cd34a73ab472ecd0d88f136fd7e51751b"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/instrument-male-back.png",
+            "bytes": 121259,
+            "sha256": "64351e40613114567f54782e48e77a8a081c6b65bc848e21b84060eb784a8959"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "robe",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          12200001,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/robe-male-front.png",
+            "bytes": 128665,
+            "sha256": "6578b9b0ed354223186c737d911758b2e133c99201639b2b51351c289b7aa161"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/robe-male-back.png",
+            "bytes": 99904,
+            "sha256": "b9b676fe59a7370bbdb26110dde40dbfef694090825454ad37f97c54f0b964bd"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "nose-quackling",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11400367,
+          11500004,
+          11700004,
+          11050055,
+          11304825
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/nose-quackling-male-front.png",
+            "bytes": 145886,
+            "sha256": "2266d7eccb8290d803e13fc82cdda3cb2f899e59abb0a5f75e73f8f51494e486"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/nose-quackling-male-back.png",
+            "bytes": 119291,
+            "sha256": "1f4b82717a94fab8cd626c37ece8e5cdba020caf73ea3f29c70e913f2057d0da"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "sleeveless",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11500004,
+          11700004,
+          11400114,
+          11600426
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/sleeveless-male-front.png",
+            "bytes": 122464,
+            "sha256": "caf38a4be58d3698e2bab96e6eb0ff4e09e1b0695610b11051529f558847e55a"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/sleeveless-male-back.png",
+            "bytes": 98461,
+            "sha256": "997f2fcf0f7daac7ebea9dd94c135512161a97c441468db6d74f6e9b348aad95"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "heavy-armor",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11500004,
+          11700004,
+          11400049,
+          11600426
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/heavy-armor-male-front.png",
+            "bytes": 127815,
+            "sha256": "2f60a50e5d5fb30a1df64161a32e7f3ed22ffad5f6d43d35afa04bd1650308c7"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/heavy-armor-male-back.png",
+            "bytes": 103290,
+            "sha256": "a0fd228781a4660a96723d8eb18b214deec223adb9a24bd6cec413275e6bbad7"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "formal",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11700004,
+          12200281,
+          11600426
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/formal-male-front.png",
+            "bytes": 127327,
+            "sha256": "f4ebf3d49b6ab10112f7772c988f6bad6d3d10f861dba4ac426b49aa116188df"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/formal-male-back.png",
+            "bytes": 96786,
+            "sha256": "3b5e5ecb7b23fffb6ac455446a6c1a366ee8962884f7e3fec46e6d93b7d62d9c"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "swim",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11700004,
+          12200054,
+          11600426
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/swim-male-front.png",
+            "bytes": 122583,
+            "sha256": "6ffc5cbd25d6483c87fbdfdd15da3bc3bfbc7fba6f3b14899359552458f913e8"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/swim-male-back.png",
+            "bytes": 98610,
+            "sha256": "2d052b077dedd32bd3e6a3fcc8af331174b384981fdc10c6609d761ded268bb5"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "private-hair",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          11400367,
+          11500004,
+          11700004,
+          11300001,
+          10200183
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/private-hair-male-front.png",
+            "bytes": 160339,
+            "sha256": "967a49f51d128717900cfda488e91b51243d31dc96e23388f32184b325b80e4e"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/private-hair-male-back.png",
+            "bytes": 139573,
+            "sha256": "eb26db7205b10a52d5d96bbf05811235d0f1b79c40743262145bd464fe0d0aba"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "single-axis-marlin-hotpot",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11400367,
+          11500004,
+          11700004,
+          13000042,
+          14000065
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-marlin-hotpot-female-front.png",
+            "bytes": 134252,
+            "sha256": "c7eb7ff6ccae51a9f378010b5de4423578bf9361f71c7a22d59fcde74b5c8590"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-marlin-hotpot-female-back.png",
+            "bytes": 127304,
+            "sha256": "0d3d021d2f8f3bdbbf71cae9dca3bad1b74870d0ce3fb43bc7d35d7a37ef9f36"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "single-axis-spatula",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11400367,
+          11500004,
+          11700004,
+          15000025
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-spatula-female-front.png",
+            "bytes": 151002,
+            "sha256": "b5eeafeda9ed10e0ac71344b8fdaef2f4dee34736ac7b13816919d5861de08c9"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-spatula-female-back.png",
+            "bytes": 120639,
+            "sha256": "e1714325ed37ea44919cd24a0d0cc308cd279018919be6eb75b44ba4c3059015"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "private-hair-female",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          11400367,
+          11500004,
+          11700004,
+          11300001,
+          10200178
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/private-hair-female-female-front.png",
+            "bytes": 152135,
+            "sha256": "d87cb1d5f7603b84fc7c8893d5aaf0cea8dde807e027425f4893c29c2b7aa1cf"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/private-hair-female-female-back.png",
+            "bytes": 127652,
+            "sha256": "474571ce8eea4c1c5997a98b30b87076cce2ea3cf065b622ac184f6bc488720e"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "matching-revision-jellyfish",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          11400367,
+          11500004,
+          11700004,
+          11301482,
+          10200124
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/matching-revision-jellyfish-female-front.png",
+            "bytes": 153315,
+            "sha256": "e70f61ad9581b3702b1ef11099c58a48a789f5340c13d492ee7e945f8107f1a7"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/matching-revision-jellyfish-female-back.png",
+            "bytes": 116506,
+            "sha256": "c3207a8f24f59c8077c29e5aa8def2dd7bc1822284489c39228dff0d8766723a"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "single-axis-marlin-hotpot",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11400367,
+          11500004,
+          11700004,
+          13000042,
+          14000065
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-marlin-hotpot-male-front.png",
+            "bytes": 135960,
+            "sha256": "fdd4166dc808be59f1de98c0fd1c812c8a2b09ddf623f161250bab1e4aa12b40"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-marlin-hotpot-male-back.png",
+            "bytes": 130576,
+            "sha256": "e37add6550da1acd6c1c59573b361316dddc071bc07f52b1fa9522496c9a2511"
+          }
+        ]
+      },
+      {
+        "group": "family-review-14",
+        "name": "single-axis-spatula",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11400367,
+          11500004,
+          11700004,
+          15000025
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-spatula-male-front.png",
+            "bytes": 150171,
+            "sha256": "88293af6bfc3070dd25c2deeeaa2850bb5451be3b893d901de4e6df4a03e5fcb"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/family-review-14/single-axis-spatula-male-back.png",
+            "bytes": 127765,
+            "sha256": "c01113fbc765944775cbb006ea8929f76e6c96f09e1190be6f272754a5570dbb"
+          }
+        ]
+      },
+      {
+        "group": "corrected-texture-review-14",
+        "name": "matching-jellyfish-street",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11420328,
+          11520328,
+          11720328,
+          11320266
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-jellyfish-street-female-front.png",
+            "bytes": 135151,
+            "sha256": "68aa9a3a00baafd322383dfe0ee79912bb3c23071002e17c78343daeaa3e17c9"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-jellyfish-street-female-back.png",
+            "bytes": 105891,
+            "sha256": "de33a8ae6a34ba8007d4e6d2c1b8f42b2e6c402dcc838f095f1dbe3a6b0509cd"
+          }
+        ]
+      },
+      {
+        "group": "corrected-texture-review-14",
+        "name": "matching-sports",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          12220134,
+          11320134,
+          10200124,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-sports-female-front.png",
+            "bytes": 122367,
+            "sha256": "f5c96a54612f9eaa27cfab9df8497d96f49dbfacf17945f5b226f1ee8531b384"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-sports-female-back.png",
+            "bytes": 95039,
+            "sha256": "972ca82890d54fdad7ce2dd8da8c4e427f3ab80a699cb9ac733197600631abf2"
+          }
+        ]
+      },
+      {
+        "group": "corrected-texture-review-14",
+        "name": "matching-crosshelmet",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          11400367,
+          11500004,
+          11700004,
+          11300204,
+          10200124
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-crosshelmet-female-front.png",
+            "bytes": 146901,
+            "sha256": "ba26a0a874c93e50afd7fb7c2d326179476310d48e2e32857c13c3389ecca7e1"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-crosshelmet-female-back.png",
+            "bytes": 117170,
+            "sha256": "2668a4b1df8455a3e16021b4d1ff7ecfdf3c750e92eda2342cf453e17dfff426"
+          }
+        ]
+      },
+      {
+        "group": "corrected-texture-review-14",
+        "name": "matching-jellyfish-street",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11420327,
+          11500004,
+          11720327,
+          11320265
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-jellyfish-street-male-front.png",
+            "bytes": 136368,
+            "sha256": "f880e4396d8b23661676a4c642dd7aa3226af13fda65a9c43859adc6707a236c"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-jellyfish-street-male-back.png",
+            "bytes": 109106,
+            "sha256": "cc27f898fcdc49149ddf8642e55ad483954a96f606cf77501a813c2745ad57b0"
+          }
+        ]
+      },
+      {
+        "group": "corrected-texture-review-14",
+        "name": "matching-sports",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          12220133,
+          11320133,
+          10200121,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-sports-male-front.png",
+            "bytes": 120371,
+            "sha256": "5b46ab7544571af8fe1acf36c918ebcc7b2903d3e23a02d248dafb89c3d79491"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-sports-male-back.png",
+            "bytes": 100321,
+            "sha256": "b61dc3f7d04cadbb684383afa846b274c315e3053156cdbe74116c26223ba961"
+          }
+        ]
+      },
+      {
+        "group": "corrected-texture-review-14",
+        "name": "matching-crosshelmet",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          11400367,
+          11500004,
+          11700004,
+          11300204,
+          10200121
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-crosshelmet-male-front.png",
+            "bytes": 143238,
+            "sha256": "c2552001033f7a95dd7a8be98db2e8a70812aeb4ff0a7277a644c265c79593fd"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/matching-crosshelmet-male-back.png",
+            "bytes": 124045,
+            "sha256": "b6e56ed06aad66dc06cacafe73dc8b8d8f847a895a9848c0b7bd2f406825ae7b"
+          }
+        ]
+      },
+      {
+        "group": "crusader-palette-review-14",
+        "name": "crusader-source-palette9",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200124,
+          11500004,
+          11700004,
+          11400049,
+          11600254
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": {
+          "itemId": 11400049,
+          "index": "9"
+        },
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/crusader-palette-review-14/crusader-source-palette9-female-front.png",
+            "bytes": 128129,
+            "sha256": "03296bef1241a7bd90a4c3a7072ed2549cfe47f5077a90c4c4ebe9fba20ab01f"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/crusader-palette-review-14/crusader-source-palette9-female-back.png",
+            "bytes": 98212,
+            "sha256": "74cd8d6bbc82bc13827d18527da3994ec1faad1e8db6b16aa70d1b1bf175a9dd"
+          }
+        ]
+      },
+      {
+        "group": "crusader-palette-review-14",
+        "name": "crusader-source-palette9",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200121,
+          11500004,
+          11700004,
+          11400049,
+          11600426
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": null,
+        "palette": {
+          "itemId": 11400049,
+          "index": "9"
+        },
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/crusader-palette-review-14/crusader-source-palette9-male-front.png",
+            "bytes": 126435,
+            "sha256": "f716a78ae9a20ce3e7605261d470c2542f1e4f3fbc9d1e6ffe55ec4711f58a95"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/crusader-palette-review-14/crusader-source-palette9-male-back.png",
+            "bytes": 102212,
+            "sha256": "c8bfedb5aed6861372d0dcbf27f38b28ec4f113a37b167d48b9edbb0ac65882a"
+          }
+        ]
+      },
+      {
+        "group": "hair-length-review-14-unhatted",
+        "name": "adjustable-hair-min-unhatted",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200006,
+          11400367,
+          11500004,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": "min",
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-min-unhatted-female-front.png",
+            "bytes": 146453,
+            "sha256": "674018bcafaea1aaee5164798f6e20eb37ebdad0336302f88f0fecbecf261bfd"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-min-unhatted-female-back.png",
+            "bytes": 116646,
+            "sha256": "1dd8cecea19aa3b88f3bf7524af1bd2414bb9882cf22719fd306c84acddeeb93"
+          }
+        ]
+      },
+      {
+        "group": "hair-length-review-14-unhatted",
+        "name": "adjustable-hair-max-unhatted",
+        "body": "female",
+        "equippedItemIds": [
+          10300003,
+          10200006,
+          11400367,
+          11500004,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": "max",
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-max-unhatted-female-front.png",
+            "bytes": 150016,
+            "sha256": "d8bc64fcb472231110fd6bb95a29b22cb2393c4ffea749832b9441c352ef9940"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-max-unhatted-female-back.png",
+            "bytes": 115662,
+            "sha256": "8aca88dd4d022a180278d3274eca66d7373a7ca7f04f14edbbd89050f8bf7513"
+          }
+        ]
+      },
+      {
+        "group": "hair-length-review-14-unhatted",
+        "name": "adjustable-hair-min-unhatted",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200001,
+          11400367,
+          11500004,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": "min",
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-min-unhatted-male-front.png",
+            "bytes": 149847,
+            "sha256": "3c672db5a189b7b18ffcd2add377b7e9ea92812ec1185be0996fb68ac9c04279"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-min-unhatted-male-back.png",
+            "bytes": 114354,
+            "sha256": "65253705d209560250be05a4eceae0c0896787536df3fa1a954bf4dbf7dec45c"
+          }
+        ]
+      },
+      {
+        "group": "hair-length-review-14-unhatted",
+        "name": "adjustable-hair-max-unhatted",
+        "body": "male",
+        "equippedItemIds": [
+          10300001,
+          10200001,
+          11400367,
+          11500004,
+          11700004
+        ],
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "expression": "default",
+        "hairLength": "max",
+        "palette": null,
+        "captures": [
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-max-unhatted-male-front.png",
+            "bytes": 151446,
+            "sha256": "c40b5b14e41c43c74e36102893fc2f1b19cdc1e02601558936d436d6a61a23a7"
+          },
+          {
+            "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/adjustable-hair-max-unhatted-male-back.png",
+            "bytes": 117859,
+            "sha256": "29b63cd524947489e43fbdf11c8ec7cebd13992c38c410ecff3b002b48c1ddf9"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "csharpTests": 45,
+    "pythonTests": 17,
+    "frontendLogicAndSourceTests": 115,
+    "assetTests": {
+      "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+      "assets": 9327,
+      "batches": 37,
+      "failedBatches": [],
+      "records": [
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 0,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 256,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 512,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 768,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 1024,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 1280,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 1536,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 1792,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 2048,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 2304,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 2560,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 2816,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 3072,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 3328,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 3584,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 3840,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 4096,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 4352,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 4608,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 4864,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 5120,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 5376,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 5632,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 5888,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 6144,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 6400,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 6656,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 6912,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 7168,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 7424,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 7680,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 7936,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 8192,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 8448,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 8704,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 8960,
+          "count": 256,
+          "exitCode": 0
+        },
+        {
+          "fingerprint": "35fac6ca4e3790dfdbe67f1c7402875cd1228231322e74c093ea7c37586279b6",
+          "start": 9216,
+          "count": 111,
+          "exitCode": 0
+        }
+      ]
+    },
+    "gltf": {
+      "total": 9329,
+      "invalid": 0,
+      "warningFiles": 0,
+      "bad": []
+    },
+    "compiledUiBodies": [
+      "female",
+      "male"
+    ],
+    "privateGeloRegression": true,
+    "t3": "Unavailable: no preview automation host for this environment",
+    "baselinePreservation": {
+      "checked": 1273,
+      "failed": []
+    }
+  },
+  "limitations": [
+    "No complete visual coverage claim. All new entries remain preview or unavailable.",
+    "11400049 on both bodies matches the reference cross/coat coloring with explicit client palette10/index9. Missing defaultColorIndex fallback remains unresolved and visible in the catalog.",
+    "10200006/female cannot fit hat11300001 because its required hair form is unavailable. The interaction reports the reason instead of substituting hair.",
+    "The capture named matching-revision-jellyfish in family-review-14 is item11301482/female, whose selected source preset is11301385 resort wear. Actual corrected jellyfish assets were separately captured using11320265/male and11320266/female.",
+    "Paired star stow overlap and unsupported drawn anchors remain visible limitations.",
+    "Private ponytail controls, some animation/material/light controllers and multi-axis dummy rotations remain blocked with source evidence.",
+    "Missing sources, nonvisual equipment and UGC templates lacking user-supplied artwork remain discoverable; no private art was supplied or harvested."
+  ],
+  "unavailableReasonCountsNonexclusive": [
+    [
+      "Nonzero item dummy rotations require verified client rotation order.",
+      2216
+    ],
+    [
+      "Nonvisual equipment: client explicitly selects Item/Empty.nif",
+      746
+    ],
+    [
+      "Source animation targets require attachment support: Main_A, Main_A NonAccum",
+      500
+    ],
+    [
+      "Hat hair-form selection requires source fitting evidence",
+      286
+    ],
+    [
+      "Skinned attachment dummy transforms require verified source support.",
+      160
+    ],
+    [
+      "Source animation targets require attachment support: Main_A, Main_A NonAccum, Move_Point01, Point01",
+      152
+    ],
+    [
+      "UGC template requires supplied artwork; no private artwork is included",
+      118
+    ],
+    [
+      "Clip Idle_A: expected one node named Bip01, found 2.",
+      82
+    ],
+    [
+      "Skinned attachment references joints outside its itemmodel branch.",
+      56
+    ],
+    [
+      "Referenced scene block 40 (NiDirectionalLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      44
+    ],
+    [
+      "Expected one equipment selfnode EA, found 0.",
+      38
+    ],
+    [
+      "Missing item attachment selfnode.",
+      36
+    ],
+    [
+      "Authored ponytail placement and joint-angle controls are not implemented; source custom/jointangle records are retained in the inventory",
+      30
+    ],
+    [
+      "Source user-rotation defaults require attachment control support: [{'axis': 'x', 'min': '-15', 'max': '15', 'default': '10,10,5,5,5,5'}, {'axis': 'y', 'min': '-15', 'max': '15', 'default': '0,0,-15,15,-15,15'}, {'axis': 'z', 'min': '-180', 'max': '180', 'default': '0,180,-100,-100,100,-100'}]",
+      25
+    ],
+    [
+      "Source user-rotation defaults require attachment control support: [{'axis': 'z', 'min': '-180', 'max': '180', 'default': '180'}]",
+      24
+    ],
+    [
+      "Clip Attack_Idle_A: expected one node named Bip01, found 2.",
+      22
+    ],
+    [
+      "Referenced scene block 36 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      22
+    ],
+    [
+      "Clip Equip_Change_Idle_A: expected one node named Bip01, found 2.",
+      20
+    ],
+    [
+      "Referenced scene block 29 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      18
+    ],
+    [
+      "Referenced scene block 21 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      18
+    ],
+    [
+      "WardrobeSources/Item/1/16/11600043_f_glgoldencrusadesvambrace.nif: block 221 (GL), submesh 0: Zero-length normal.",
+      18
+    ],
+    [
+      "WardrobeSources/Item/1/16/11600043_m_glgoldencrusadesvambrace.nif: block 244 (GL), submesh 0: Zero-length normal.",
+      18
+    ],
+    [
+      "Texture line_r002a.dds is ambiguous across 4 distinct-path candidates in supplied texture roots.",
+      16
+    ],
+    [
+      "Expected one equipment selfnode CP, found 0.",
+      15
+    ],
+    [
+      "2 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/31/13100018_voleurkhanjar_attack_idle_a.kf: evaluator 1: Non-transform evaluator 13100018_VoleurKhanjar:1/NiMaterialProperty/NiMaterialColorController.\nWardrobeSources/Item/1/31/13100018_voleurkhanjar_idle_a.kf: evaluator 1: Non-transform evaluator 13100018_VoleurKhanjar:1/NiMaterialProperty/NiMaterialColorController.",
+      14
+    ],
+    [
+      "WardrobeSources/Item/1/16/11600041_f_glcrusadesvambrace.nif: block 221 (GL), submesh 0: Zero-length normal.",
+      13
+    ],
+    [
+      "WardrobeSources/Item/1/16/11600041_m_glcrusadesvambrace.nif: block 224 (GL), submesh 0: Zero-length normal.",
+      13
+    ],
+    [
+      "Clip Idle_A: expected one node named MT_Point01 NonAccum, found 0.",
+      12
+    ],
+    [
+      "Active embedded NiAlphaController on Editable Poly requires controller support; animation was not frozen.",
+      12
+    ],
+    [
+      "Referenced scene block 20 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      12
+    ],
+    [
+      "KFM asset ./15600007_Orb_004_A.kf missing or ambiguous beside WardrobeSources/Item/1/56/15600007_orb_004_a.kfm.",
+      12
+    ],
+    [
+      "Referenced scene block 35 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      11
+    ],
+    [
+      "Referenced scene block 37 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      10
+    ],
+    [
+      "Source user-rotation defaults require attachment control support: [{'axis': 'x', 'min': '-10', 'max': '10', 'default': '0,0,5,5,5,5'}, {'axis': 'y', 'min': '-10', 'max': '10', 'default': '0,0,-10,10,-10,10'}, {'axis': 'z', 'min': '-180', 'max': '180', 'default': '0,180,-100,-100,100,100'}]",
+      10
+    ],
+    [
+      "Referenced scene block 258 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      9
+    ],
+    [
+      "Referenced scene block 178 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      9
+    ],
+    [
+      "Texture PA_Leggings_C.dds is ambiguous across 2 distinct-path candidates in supplied texture roots.",
+      9
+    ],
+    [
+      "Referenced scene block 32 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      8
+    ],
+    [
+      "Referenced scene block 26 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      8
+    ],
+    [
+      "Referenced scene block 28 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      8
+    ],
+    [
+      "Referenced scene block 20 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      8
+    ],
+    [
+      "Texture 01300007_C_Crown_D02.dds is ambiguous across 2 distinct-path candidates in supplied texture roots.",
+      8
+    ],
+    [
+      "Referenced scene block 22 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      8
+    ],
+    [
+      "1 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/18/11850133_c_mtolympos01_idle_a.kf: expected one NiSequenceData matching Idle_A, found 2.",
+      8
+    ],
+    [
+      "Referenced scene block 305 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      8
+    ],
+    [
+      "Active embedded NiTextureTransformController on Plane01 requires controller support; animation was not frozen.",
+      8
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_cannonball_A01_M.nif",
+      8
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_toilet_A01_L.nif",
+      8
+    ],
+    [
+      "WardrobeSources/Item/1/16/11600042_f_glblackcrusadesvambrace.nif: block 221 (GL), submesh 0: Zero-length normal.",
+      7
+    ],
+    [
+      "WardrobeSources/Item/1/16/11600042_m_glblackcrusadesvambrace.nif: block 224 (GL), submesh 0: Zero-length normal.",
+      7
+    ],
+    [
+      "Referenced scene block 30 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      6
+    ],
+    [
+      "Expected one equipment selfnode EY, found 0.",
+      6
+    ],
+    [
+      "Referenced scene block 34 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      6
+    ],
+    [
+      "Referenced scene block 27 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      6
+    ],
+    [
+      "WardrobeSources/Item/1/14/11400064_m_clphoenixpiettra.nif: block 183 (CL), submesh 0: Zero-length normal.",
+      6
+    ],
+    [
+      "Source animation targets require attachment support: Point01, Point01 NonAccum, Point02",
+      6
+    ],
+    [
+      "1 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/18/11800109_c_mtdarktutor_idle_a.kf: evaluator 3: TCB quaternion interpolation requires validation against a reference export.",
+      6
+    ],
+    [
+      "1 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/18/11850244_c_mtswim05_idle_a.kf: evaluator 1: Non-transform evaluator PArray02//NiPSForceActiveCtlr.",
+      6
+    ],
+    [
+      "Clip Idle_A: expected one node named Bone08, found 0.",
+      6
+    ],
+    [
+      "Clip Idle_A: expected one node named Point01, found 0.",
+      6
+    ],
+    [
+      "Expected one equipment selfnode MT, found 0.",
+      6
+    ],
+    [
+      "Expected one equipment selfnode Point01, found 0.",
+      6
+    ],
+    [
+      "Source animation targets require attachment support: MAin_A, MAin_A NonAccum",
+      6
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/lu_liftup_hammer_A01_S_.nif",
+      6
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_drum_A01_M.nif",
+      6
+    ],
+    [
+      "Missing Item archive source: Data\\Resource\\Model\\Map\\Common\\Liftup\\sf_liftup_incubator_A01_M.nif",
+      6
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/lu_liftup_toyball_A01_M.nif",
+      6
+    ],
+    [
+      "Clip Idle_A: expected one node named Bip01 Head, found 2.",
+      4
+    ],
+    [
+      "Referenced scene block 23 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 38 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 31 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 32 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 31 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 37 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 9 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 19 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 51 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 39 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Source animation targets require attachment support: MT_Point01, MT_Point01 NonAccum",
+      4
+    ],
+    [
+      "2 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/18/11850165_moonrabbit_idle_a.kf: evaluator 41: Evaluator type NiPathEvaluator.\nWardrobeSources/Item/1/18/11850165_moonrabbit_attack_idle_a.kf: evaluator 37: Evaluator type NiPathEvaluator.",
+      4
+    ],
+    [
+      "1 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/18/11850153_c_mtmarine02_idle_a.kf: evaluator 15: TCB quaternion interpolation requires validation against a reference export.",
+      4
+    ],
+    [
+      "Clip Idle_A: expected one node named Bone06, found 0.",
+      4
+    ],
+    [
+      "1 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/18/11850128_c_mtorientalangel.kf: evaluator 2: TCB quaternion interpolation requires validation against a reference export.",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Npc/BG_Obj/co_fi_prop_stick_A01.nif",
+      4
+    ],
+    [
+      "Referenced scene block 24 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "Referenced scene block 119 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      4
+    ],
+    [
+      "2 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/56/15600179_asuraorb_idle_a.kf: evaluator 1: Non-transform evaluator PArray01//NiPSForceActiveCtlr.\nWardrobeSources/Item/1/56/15600179_asuraorb_attack_idle_a.kf: evaluator 1: Non-transform evaluator PArray01//NiPSForceActiveCtlr.",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_light_A01_Sa.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_sign_A01_Sa.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ry_liftup_light_A01_Sa.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ca_liftup_train_A01_M.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_chickencage_A01_M.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/pe_liftup_sack_A01_M.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/pe_liftup_totem_B01_M.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/sf_liftup_train_A01_M.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/sw_liftup_drum_A01_M.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/kr_liftup_statue_A01_M.nif",
+      4
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Interaction/Interaction_fragment_A01.nif",
+      4
+    ],
+    [
+      "Clip Fishing_Bore_A: expected one node named Fishrod_Point01 NonAccum, found 0.",
+      4
+    ],
+    [
+      "Indexed source is not extracted: Effect/bg/perform/music_tronbone/eff_perform_trombone_a01.nif",
+      4
+    ],
+    [
+      "Expected one equipment selfnode FA, found 0.",
+      2
+    ],
+    [
+      "Makeup has no authored placement",
+      2
+    ],
+    [
+      "Referenced scene block 26 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Missing Item archive source: 11050036_C_ColorPinwheel",
+      2
+    ],
+    [
+      "Referenced scene block 18 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Referenced scene block 25 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Referenced scene block 33 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Referenced scene block 33 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Referenced scene block 35 (NiAmbientLight) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Active embedded NiMorphWeightsController on Editable Mesh requires controller support; animation was not frozen.",
+      2
+    ],
+    [
+      "Referenced scene block 49 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Referenced scene block 25 (NiBillboardNode) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Source user-rotation defaults require attachment control support: [{'axis': 'x', 'min': '-30', 'max': '30', 'default': '-20'}, {'axis': 'y', 'min': '-30', 'max': '30', 'default': '15'}, {'axis': 'z', 'min': '-180', 'max': '180', 'default': '20'}]",
+      2
+    ],
+    [
+      "Active embedded NiAlphaController on CP:1 requires controller support; animation was not frozen.",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/13/11301565_Umbrella01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/13/11301554_C_Wing01_A.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/13/11320369_C_CPSummer02_A.nif",
+      2
+    ],
+    [
+      "Referenced scene block 286 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Referenced scene block 304 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Internal converter failure (KeyNotFoundException): The given key '90' was not present in the dictionary.",
+      2
+    ],
+    [
+      "Missing Item archive source: urn:11820369_C_MTSummer02",
+      2
+    ],
+    [
+      "Referenced scene block 124 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      2
+    ],
+    [
+      "Clip Attack_Idle_A: expected one node named MT_Point01 NonAccum, found 0.",
+      2
+    ],
+    [
+      "1 animation(s) rejected; no glTF written:\nWardrobeSources/Item/1/18/11800263_c_mtmaid02_idle_a.kf: evaluator 22: TCB quaternion interpolation requires validation against a reference export.",
+      2
+    ],
+    [
+      "Missing Item archive source: 11820079_C_MTFairyTale03",
+      2
+    ],
+    [
+      "Expected one equipment selfnode PA, found 0.",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Npc/BG_Obj/co_fi_prop_stick_A05.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Npc/BG_Obj/co_fi_prop_stick_A02.nif",
+      2
+    ],
+    [
+      "Color override uses different base/control UV coordinates.",
+      2
+    ],
+    [
+      "Missing Item archive source: urn:15600523_DarkMelodyOrb",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_tree_A01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_tree_A02_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_signal_A01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_utilitypole_A01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/pe_liftup_totem_A01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/sf_liftup_pipe_A01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_shovel_A01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Test/putup/A04.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ks_lfitup_plants_C01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ks_lfitup_streetlamp_A01_Sa.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_dynamite_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_gascan_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_tire_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/he_liftup_egg_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_drum_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_trashcan_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/sw_liftup_bottlebox_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/pe_liftup_house_A01_L.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_bus_A01_L.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_phonebox_A01_L.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ke_liftup_truck_A01_L.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ic_liftup_house_A01_L.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_shower_A01_L.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data\\Resource\\Model\\Map\\Common\\Liftup\\lu_liftup_toyball_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/kr_liftup_pot_B01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/kr_liftup_stack_A01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/kr_liftup_stack_A02_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/kr_liftup_house_A01_L.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/co_liftup_drum_B01_M.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ks_lfitup_plants_B01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Interaction/Interaction_fragment_A02.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ks_lfitup_cart_A01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ks_lfitup_plants_A01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ks_lfitup_timebomb_A01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ry_liftup_toycushion_D01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ry_liftup_toycushion_B01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ry_liftup_toycushion_A01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ry_liftup_toycushion_C01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ry_liftup_toycushion_E01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/ry_liftup_toycushion_G01.nif",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Map/Common/Liftup/hv_liftup_redlapenta_A01.nif",
+      2
+    ],
+    [
+      "KFM asset ./19000016_fishingRod018_Fishrod_Point01_EMPTY_SEQUENCE_AT_0f.kf missing or ambiguous beside WardrobeSources/Item/1/90/19000016_fishingrod018.kfm.",
+      2
+    ],
+    [
+      "Active embedded NiTextureTransformController on 19000025_fishingRod01 requires controller support; animation was not frozen.",
+      2
+    ],
+    [
+      "Active embedded NiAlphaController on PolyMesh requires controller support; animation was not frozen.",
+      2
+    ],
+    [
+      "Active embedded NiAlphaController on eff_fishingRod01 requires controller support; animation was not frozen.",
+      2
+    ],
+    [
+      "Missing Item archive source: urn:19000066_fishingRod066",
+      2
+    ],
+    [
+      "Clip Fishing_Bore_A: expected one node named Fishrod_Bone03, found 0.",
+      2
+    ],
+    [
+      "Clip Fishing_Start_A: expected one node named Fishrod_Point01 NonAccum, found 0.",
+      2
+    ],
+    [
+      "Indexed source is not extracted: Effect/bg/perform/music_tronbone_b/eff_perform_trombone_b01.nif",
+      2
+    ],
+    [
+      "Expected one equipment selfnode vibraphone_01, found 0.",
+      2
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Effect/BG/Perform/Eff_perform_FrenchHorn_A.nif",
+      2
+    ],
+    [
+      "Clip 00200010_F_PiPi_P_A: expected one node named Point01 NonAccum, found 0.",
+      1
+    ],
+    [
+      "Missing Item archive source: urn:00200010_F_PiPi_P2_A",
+      1
+    ],
+    [
+      "Missing Item archive source: urn:00200011_F_PureTwinTail_P2_A",
+      1
+    ],
+    [
+      "Missing Item archive source: urn:00200012_F_CuteTwinTail_P2_A",
+      1
+    ],
+    [
+      "Clip 10200070_F_RollingPonyTail_A: expected one node named Point01 NonAccum, found 0.",
+      1
+    ],
+    [
+      "KFM asset ./10200159_F_StarCandyHair_A.kf missing or ambiguous beside WardrobeSources/Item/0/02/10200159_f_starcandyhair_a.kfm.",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/0/02/10200246_F_Hair_A.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/0/02/10200260_M_Hair_A.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/0/02/10200262_M_Hair_A.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/0/02/10200263_F_Hair_A.nif",
+      1
+    ],
+    [
+      "Makeup has a nonplanar source transform",
+      1
+    ],
+    [
+      "WardrobeSources/Item/0/10/11050016_f_fhwildbeard.nif: block 3 (11050016_F_FHWildBeard), submesh 0: Zero-length normal.",
+      1
+    ],
+    [
+      "WardrobeSources/Item/0/10/11050016_m_fhwildbeard.nif: block 3 (11050016_M_FHWildBeard), submesh 0: Zero-length normal.",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/12/11220369_M_EASummer02.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/12/11220370_F_EASummer02.nif",
+      1
+    ],
+    [
+      "Referenced scene block 208 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/14/11400040_F_Event011.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/14/11400040_M_Event011.nif",
+      1
+    ],
+    [
+      "No geometry declared for female",
+      1
+    ],
+    [
+      "Referenced scene block 189 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Referenced scene block 581 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Referenced scene block 579 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/16/11620369_M_GLSummer02.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/16/11620370_F_GLSummer02.nif",
+      1
+    ],
+    [
+      "Referenced scene block 145 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Referenced scene block 408 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Referenced scene block 406 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/17/11720369_M_SHSummer02.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/17/11720370_F_SHSummer02.nif",
+      1
+    ],
+    [
+      "Referenced scene block 214 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Mixed rigid/skinned equipment requires per-mesh attachment metadata.",
+      1
+    ],
+    [
+      "Referenced scene block 501 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Referenced scene block 509 (NiTextureEffect) is not supported. The unsupported member type is located on type 'System.Int32'. Path: $.",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/22/12220369_M_CLPASummer02.nif",
+      1
+    ],
+    [
+      "Missing Item archive source: Data/Resource/Model/Item/1/22/12220370_F_CLPASummer02.nif",
+      1
+    ]
+  ],
+  "evidence": [
+    {
+      "path": "NifToGltf/obj/wardrobe/family-review-14/results.json",
+      "bytes": 516899,
+      "sha256": "ca70144a408eee2c8dade800089762cc34fc4183a7e10faa3e2d1a6bf5cd3b2e"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/family-review-14/contact-female-1.png",
+      "bytes": 1016386,
+      "sha256": "2d99daef03b2bc2dd9fcb47a7421d01258edd90c766482a85d45694624fdd7de"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/family-review-14/contact-female-2.png",
+      "bytes": 827040,
+      "sha256": "2f61c6c03a0b40d0ac2b6c9351c15a4f41c48d979e71ed8ff1845066088a3b45"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/family-review-14/contact-female-3.png",
+      "bytes": 518513,
+      "sha256": "a785d9594658573e44078176de4907716acde3ae0923c261d37929d0eacad133"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/family-review-14/contact-male-1.png",
+      "bytes": 1032311,
+      "sha256": "72877b4b81142049991512b126e53f039b1ffbdd1a178b9d7778e1ea79dd0c0a"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/family-review-14/contact-male-2.png",
+      "bytes": 758151,
+      "sha256": "4849f57942af67db92e773467f4bc1920f637918a21aa9ed4288f49a096ffa89"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/family-review-14/contact-male-3.png",
+      "bytes": 539358,
+      "sha256": "69739e3cbaed5b1b6c8685089999f7367b4051fe2236491a54032c27cafb2ba1"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/results.json",
+      "bytes": 99102,
+      "sha256": "758482d5d3b622c8209d296d0bec99b1b338ad8b2015cedb1eb096082115f6a6"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/contact-female-1.png",
+      "bytes": 479884,
+      "sha256": "5cdc2dd1bb9a468e5081a2c142e806fae4792eb12996f4595f1c9f388cd70438"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/corrected-texture-review-14/contact-male-1.png",
+      "bytes": 486985,
+      "sha256": "3774e03cc720fd606c3002d81cbfa4b3dbb2f30eab1cde844bb983ac1665a4b6"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/crusader-palette-review-14/results.json",
+      "bytes": 27723,
+      "sha256": "22f5423ac936ca12badc0852b854c61fae9963ed32ffe3d21ef5b9c4c35f9219"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/results.json",
+      "bytes": 41949,
+      "sha256": "fbddbaa7f439f934dd428b40b01ae4259e748e30ebef947b51cc5d3a3086e14f"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/contact-female-1.png",
+      "bytes": 309552,
+      "sha256": "e7fdb63d9793ebd5235aac254c07ab58dd032a97f6ebe1299c07c2b8e28bbf53"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/hair-length-review-14-unhatted/contact-male-1.png",
+      "bytes": 311976,
+      "sha256": "974d2e04675445f2762a82e2417d36c3ab4e7ae11a5dd0f60e94f148489581bb"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/ui-built-14-adjustable/results.json",
+      "bytes": 4881,
+      "sha256": "418c4d0ee186cc73a2f755e35bd63e46ac599944837e1daca9b9dd5a5592f406"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/ui-workflows-14-complete/outfit-workflows.json",
+      "bytes": 84257,
+      "sha256": "94cd10effffe73aefae1029b1ab3f9e5f5bcd6e27376ca4b7a17d01806573034"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/preserved-baselines.json",
+      "bytes": 37,
+      "sha256": "6815e57153d10ea1cac9f8026e64916cc92b4102b62279e27ba6765ab157ed93"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/texture-provenance-audit.json",
+      "bytes": 4019,
+      "sha256": "f2b4bd2156723352c8884e5bfe29eabf231706b9a83666fec54b23d6d89b1316"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/source-label-audit.json",
+      "bytes": 4118153,
+      "sha256": "4775e62f46dc36602f9f3c064ad0b7238411a2a5b0e141d3ab8b40c6a7185458"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/gltf-validation-14.json",
+      "bytes": 70,
+      "sha256": "614284bf9336357f3bf195dc11f59e724cd0b844ad6876a6706ecabd891a4087"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/asset-tests-14/summary.json",
+      "bytes": 6189,
+      "sha256": "3f7a0598816ca59b0c8ea17bab9e78d02c617599ed739dd0c1701b13f466024b"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/packaged-files-14.json",
+      "bytes": 80,
+      "sha256": "d3b9187d3c86b4bc0840c78085786201a6f9844916bf467552af1ccebe2ae57c"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/private-public-isolation-14.json",
+      "bytes": 278,
+      "sha256": "4287bb068dbf95d3a7db0b04c30396f8d0b843f08cdbc4a160239df24b2fbbf5"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/frontend-source-14c.json",
+      "bytes": 3173,
+      "sha256": "c1efb61258a4a83f73c4cf1afb76cbe7b6cc22be8a5fdc7d7db347a833276745"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/frontend-tests-14-reset.log",
+      "bytes": 2027,
+      "sha256": "44f39896c0c5476139bf4bcf5d35446c6e8e981d12de3181b772e9e249cc07fc"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/frontend-check-14-reset.log",
+      "bytes": 285,
+      "sha256": "0c3c82ad7fbd8657f6d2ff1ee209bc8ee69965f918c20351e2d2d261b5f1a9f2"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/csharp-tests-09.log",
+      "bytes": 3248,
+      "sha256": "629be9fcc8326304221a0c11078e1d2fa4cb0d45338818a6451b05b4f639fbcf"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/python-tests-final.log",
+      "bytes": 116,
+      "sha256": "78bb3f7701df09ec916a2fd3add296463ed1d9d595652ae0cf4ce40fd2132af4"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/reference-crusader-equipped.json",
+      "bytes": 10408,
+      "sha256": "07c0d8348c5043ed09b6a3f460a852657f68b2129ff47ada7e91c939d5ded0aa"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/reference-crusader-equipped.png",
+      "bytes": 1227736,
+      "sha256": "503d551861d0ddadbd4922620bb507a14955df3681efa91f5cf27d2df8cdde5a"
+    },
+    {
+      "path": "NifToGltf/obj/wardrobe/build-14c/build-result.json",
+      "bytes": 121,
+      "sha256": "6225429adfa980e5a3c2a8181002f32629da9abd5274d5025292611ffee265c9"
+    }
+  ],
+  "releaseInventory": {
+    "path": "../MapleStory2-Handbook/static/gltf/simulator-release-14/release-inventory.json",
+    "bytes": 1794600,
+    "sha256": "c6fca6463865dd92fc5831fb2986b0ac47fa9697df9206be0379f046e1bc8127"
+  },
+  "buildDirectory": "NifToGltf/obj/wardrobe/build-14c",
+  "databaseWrites": 0,
+  "published": false,
+  "committed": false,
+  "pushed": false
+}

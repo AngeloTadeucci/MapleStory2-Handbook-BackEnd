@@ -11,8 +11,15 @@ internal sealed record ItemModelAttachment(string Slot, string SelfNode, string 
     [System.Text.Json.Serialization.JsonIgnore]
     public Matrix4x4 DummyTransform {
         get {
-            if (Rotation?.Any(value => value != 0) == true) throw new NotSupportedException("Nonzero item dummy rotations require verified client rotation order.");
-            return Translation is { } xyz ? Matrix4x4.CreateTranslation(xyz[0], xyz[1], xyz[2]) : Matrix4x4.Identity;
+            if (Rotation?.Count(value => value != 0) > 1) throw new NotSupportedException("Multi-axis item dummy rotations require verified client rotation order.");
+            Matrix4x4 rotation = Matrix4x4.Identity;
+            if (Rotation is { } angles) {
+                // A single authored Euler axis has no rotation-order ambiguity.
+                const float radians = MathF.PI / 180f;
+                rotation = Matrix4x4.CreateRotationX(angles[0] * radians) *
+                    Matrix4x4.CreateRotationY(angles[1] * radians) * Matrix4x4.CreateRotationZ(angles[2] * radians);
+            }
+            return rotation * (Translation is { } xyz ? Matrix4x4.CreateTranslation(xyz[0], xyz[1], xyz[2]) : Matrix4x4.Identity);
         }
     }
     public static ItemModelAttachment Read(string xml, string itemId, string source, string variant, string? slot = null) {

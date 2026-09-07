@@ -77,6 +77,15 @@ Test("missing selected KF remains a missing asset instead of a format failure", 
     }
     throw new Exception("Missing selected KF accepted");
 });
+Test("an authored empty KFM is static while a requested missing clip remains an error", () => {
+    string source = "Maple2Storage/Resources/WardrobeSources/Item/0/02/10200074_m_warriorhair_p_a.kfm";
+    KfmDocument kfm = File.Exists(source) ? KfmDocument.Read(source) : new("model.nif", "Scene Root", []);
+    Assert(kfm.Clips.Length == 0, "Source declares animations");
+    Assert(ClipSelection.Read("model.nif", kfm, null, "all").Count == 0, "Static source rejected");
+    try { ClipSelection.Read("model.nif", kfm, null, "Idle_A"); }
+    catch (FileNotFoundException) { return; }
+    throw new Exception("Missing explicit clip accepted");
+});
 Test("itemmodel attachment selection respects asset identity and body variant", () => {
     string path = Path.Combine(Path.GetTempPath(), $"native-itemmodel-{Guid.NewGuid():N}.xml");
     try {
@@ -323,7 +332,7 @@ if (args.Length > 0) {
         } finally { File.Delete(path); }
     });
     Test("duplicate named sequences are rejected without choosing a pose silently", () => {
-        string path = Path.Combine(models, "Npc/02/03/02030005/Attack_Idle_A.kf");
+        string path = Path.Combine(models, "Npc/02/03/02030005/attack_idle_a.kf");
         try { AnimationReader.Read(path, sequenceName: "Attack_Idle_A"); }
         catch (NotSupportedException error) {
             Assert(error.Message.Contains("found 2"), "Wrong ambiguity reason");
@@ -393,4 +402,100 @@ if (args.Length > 0) {
         Assert(clip.Tracks.Any(t => t.Node == "M_Wing_L" && t.Path == "rotation") && clip.Tracks.Any(t => t.Node == "M_Wing_R" && t.Path == "rotation"), "Lost wing animation");
     });
 }
+foreach (var (variant, filename) in new[] { ("male", "11600426_m_glfrillband.nif"), ("female", "11600254_f_glsaunakey.nif") }) {
+    string source = Path.Combine("Maple2Storage/Resources/WardrobeSources/Item/1/16", filename);
+    if (!File.Exists(source)) continue;
+    Test($"{variant} wrist slot retains GL_Wrist and GL_Skin without changing source positions", () => {
+        NifDocument gear = NifDocument.Load(source);
+        var before = gear.Nodes.Values.Where(n => n.Mesh is not null && n.Name.StartsWith("GL_", StringComparison.Ordinal))
+            .ToDictionary(n => n.Name, n => MeshDecoder.Decode(gear, n, 0).Attributes["POSITION"].Values);
+        Assert(before.Keys.Order().SequenceEqual(new[] { "GL_Skin", "GL_Wrist" }), "Unexpected source wrist family");
+        NifDocument body = NifDocument.Load($"Maple2Storage/Resources/Models/Character/{variant}/{variant[0]}_body.nif");
+        SkeletonGraft.Apply(gear, body, "GL", "GL", true);
+        var meshes = gear.Nodes.Values.Where(n => n.Mesh is not null).ToArray();
+        Assert(meshes.Length == 2, "Lost wrist geometry or retained another equipment slot");
+        foreach (var mesh in meshes) Assert(MeshDecoder.Decode(gear, mesh, 0).Attributes["POSITION"].Values.SequenceEqual(before[mesh.Name]), "Changed source wrist positions");
+    });
+}
+string rootHat = "Maple2Storage/Resources/WardrobeSources/Item/1/13/11300506_c_cpdancingsnake_f.nif";
+if (File.Exists(rootHat)) Test("animated Scene Root attachment becomes one head child with all source geometry", () => {
+    NifDocument gear = NifDocument.Load(rootHat);
+    int root = gear.Roots.Single();
+    var meshes = gear.Nodes.Values.Where(n => n.Mesh is not null).Select(n => n.Id).ToArray();
+    var sourceTransform = gear.Nodes[root].Transform;
+    NifDocument body = NifDocument.Load("Maple2Storage/Resources/Models/Character/female/f_body.nif");
+    SkeletonGraft.Apply(gear, body, "Bip01 Head", "Scene Root", false);
+    Assert(!gear.Roots.Contains(root), "Attachment still occurs as a second scene root");
+    Assert(gear.Nodes.Values.Single(n => n.Children.Contains(root)).Name == "Bip01 Head", "Not attached to source head target");
+    Assert(gear.Nodes[root].Transform == sourceTransform, "Changed source root transform");
+    Assert(gear.Nodes.Values.Where(n => n.Mesh is not null).Select(n => n.Id).SequenceEqual(meshes), "Lost source hat geometry");
+    Assert(gear.EquipmentBones.Contains(root), "Root is not retained as a private animation bone");
+});
+string embeddedSnake = "Maple2Storage/Resources/WardrobeSources/Item/1/13/11300506_c_cpdancingsnake_f.nif";
+if (File.Exists(embeddedSnake)) Test("embedded snake controllers preserve their authored 4/3-second joint motion", () => {
+    NifDocument gear = NifDocument.Load(embeddedSnake);
+    SkeletonGraft.Apply(gear, NifDocument.Load("Maple2Storage/Resources/Models/Character/female/f_body.nif"), "Bip01 Head", "Scene Root");
+    AnimationClip clip = EmbeddedAnimation.Read(gear) ?? throw new Exception("Embedded animation was frozen");
+    Assert(clip.Tracks.Any(t => t.Node == "Bone06" && t.Path == "rotation"), "Lost keyed private joint");
+    foreach (AnimationTrack track in clip.Tracks) Near(track.Times.Last(), 4.0 / 3, 1e-6);
+    AnimationTrack motion = clip.Tracks.Single(t => t.Node == "Bone06" && t.Path == "rotation");
+    Assert(motion.Values.Where((_, i) => i % 4 == 0).Max() - motion.Values.Where((_, i) => i % 4 == 0).Min() > .01, "Snake joint stopped moving");
+});
+string dinosaur = "Maple2Storage/Resources/WardrobeSources/Item/1/18/11800133_c_mtdoll_dinosaur01.nif";
+if (File.Exists(dinosaur)) Test("rigid dinosaur tail reserves body animation names for its deforming skeleton", () => {
+    NifDocument gear = NifDocument.Load(dinosaur);
+    SkeletonGraft.Apply(gear, NifDocument.Load("Maple2Storage/Resources/Models/Character/female/f_body.nif"), "Bip01 Pelvis", "MT_Point01");
+    foreach (string name in new[] { "Bip01", "Bip01 Pelvis", "Bip01 Head" })
+        Assert(gear.Nodes.Values.Count(n => n.Name == name) == 1, "Duplicate body animation target: " + name);
+});
+string morphHair = "Maple2Storage/Resources/WardrobeSources/Item/0/02/00200003_m_coolguy_a.nif";
+if (File.Exists(morphHair)) Test("authored hair-length morph controls remain interactive instead of becoming an idle clip", () => {
+    NifDocument gear = NifDocument.Load(morphHair);
+    Assert(gear.Nodes.Values.Where(n => n.Mesh is not null).SelectMany(n => n.Mesh!.Modifiers).Any(id => gear.Blocks[id].Type == "NiMorphMeshModifier"), "Missing source morph targets");
+    Assert(EmbeddedAnimation.Read(gear) is null, "Hair length was treated as time animation");
+});
+Test("single-axis attachment degrees rotate before source translation without scaling", () => {
+    var attachment = new ItemModelAttachment("LH", "Point01", "Weapon_Back_B_Point", false, []) {
+        Rotation = [32, 0, 0], Translation = [-6, 8, 1]
+    };
+    Vector3 origin = Vector3.Transform(Vector3.Zero, attachment.DummyTransform);
+    Vector3 y = Vector3.Transform(Vector3.UnitY, attachment.DummyTransform) - origin;
+    Near(origin.X, -6); Near(origin.Y, 8); Near(origin.Z, 1);
+    Near(y.Y, Math.Cos(32 * Math.PI / 180)); Near(y.Z, Math.Sin(32 * Math.PI / 180)); Near(y.Length(), 1);
+    bool rejected = false;
+    try { _ = (attachment with { Rotation = [7, 3, -8] }).DummyTransform; } catch (NotSupportedException) { rejected = true; }
+    Assert(rejected, "Unverified multi-axis order was accepted");
+});
+string privateHair = "Maple2Storage/Resources/WardrobeSources/Item/0/02/10200183_m_freeconcept01_c.nif";
+if (File.Exists(privateHair)) Test("private C-form hair retains its joint branch at the HR replacement parent", () => {
+    NifDocument gear = NifDocument.Load(privateHair);
+    gear.OmitParticles();
+    Matrix4x4 World(NifDocument d, int id) {
+        NifNode? parent = d.Nodes.Values.SingleOrDefault(n => n.Children.Contains(id));
+        return d.Nodes[id].Transform * (parent is null ? Matrix4x4.Identity : World(d, parent.Id));
+    }
+    var sourceWorlds = gear.Nodes.Values.Where(n => n.Mesh is null).ToDictionary(n => n.Id, n => World(gear, n.Id));
+    SkeletonGraft.Apply(gear, NifDocument.Load("Maple2Storage/Resources/Models/Character/male/m_body.nif"), "HR", "HR_Point01", true);
+    NifNode root = gear.Nodes.Values.Single(n => n.Name == "HR_Point01");
+    Assert(gear.EquipmentBones.Contains(root.Id), "Private hair joint was discarded");
+    NifNode bridge = gear.Nodes.Values.Single(n => n.Children.Contains(root.Id));
+    Assert(bridge.Name == "Equipment hair bind parent", "Missing source-space compensation");
+    Assert(gear.Nodes.Values.Single(n => n.Children.Contains(bridge.Id)).Name == "Bip01 Head", "Wrong hair replacement parent");
+    foreach (int id in gear.EquipmentBones.Where(sourceWorlds.ContainsKey)) {
+        Matrix4x4 expected = sourceWorlds[id], actual = World(gear, id);
+        foreach (Vector3 point in new[] { Vector3.Zero, Vector3.UnitX, Vector3.UnitY, Vector3.UnitZ })
+            Assert(Vector3.Distance(Vector3.Transform(point, expected), Vector3.Transform(point, actual)) < .001f, "Private hair bind pose moved");
+    }
+    Assert(gear.Nodes.Values.Any(n => n.Mesh is not null && n.Name == "HR"), "Hair geometry discarded");
+});
+string namedHairMesh = "Maple2Storage/Resources/WardrobeSources/Item/0/02/10200039_m_toben_d.nif";
+if (File.Exists(namedHairMesh)) Test("HR replacement retains a source mesh named HR colon zero", () => {
+    NifDocument gear = NifDocument.Load(namedHairMesh);
+    gear.OmitParticles();
+    NifNode mesh = gear.Nodes.Values.Single(n => n.Mesh is not null);
+    double[] positions = MeshDecoder.Decode(gear, mesh, 0).Attributes["POSITION"].Values;
+    SkeletonGraft.Apply(gear, NifDocument.Load("Maple2Storage/Resources/Models/Character/male/m_body.nif"), "HR", "HR", true);
+    Assert(gear.Nodes.Values.Count(n => n.Mesh is not null) == 1, "Lost or added hair geometry");
+    Assert(MeshDecoder.Decode(gear, gear.Nodes[mesh.Id], 0).Attributes["POSITION"].Values.SequenceEqual(positions), "Changed hair positions");
+});
 Console.WriteLine($"{tests} tests passed.");

@@ -4,12 +4,19 @@ using System.Text.RegularExpressions;
 using Maple2.File.IO;
 
 try {
-    if (args.Length is < 2 or > 3) throw new ArgumentException("Usage: NifToGltf.Archives archive.m2d regex [empty-output-directory]. Omit output to list only.");
+    if (args.Length is < 2 or > 3) throw new ArgumentException("Usage: NifToGltf.Archives archive.m2d regex [empty-output-directory|--hash]. Omit output to list only.");
     Regex pattern = new(args[1], RegexOptions.IgnoreCase | RegexOptions.CultureInvariant, TimeSpan.FromSeconds(2));
     using M2dReader reader = new(args[0]);
     var selected = reader.Files.Where(file => pattern.IsMatch(file.Name)).ToArray();
     if (args.Length == 2) {
         Console.WriteLine(JsonSerializer.Serialize(selected.Select(file => file.Name), new JsonSerializerOptions { WriteIndented = true }));
+        return;
+    }
+    if (args[2] == "--hash") {
+        Console.WriteLine(JsonSerializer.Serialize(selected.Select(file => {
+            byte[] bytes = reader.GetBytes(file);
+            return new { path = file.Name.Replace('\\', '/'), length = bytes.Length, sha256 = Convert.ToHexString(SHA256.HashData(bytes)) };
+        })));
         return;
     }
     string destination = Path.GetFullPath(args[2]);

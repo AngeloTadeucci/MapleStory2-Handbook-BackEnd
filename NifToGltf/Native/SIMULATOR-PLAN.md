@@ -1,8 +1,39 @@
 # Clothing simulator completion plan
 
+Current handoff, 2026-09-07: the user authorized committing and pushing candidate
+14 on the existing feature branches. Oracle preview servers on ports 4000, 4002
+and 4003 are stopped. No deployment is authorized. See backend STATUS.md for
+current testing instructions; server-running and no-commit statements below are
+historical checkpoints superseded by this handoff.
+
+Implementation checkpoint 2026-09-07: complete inventory/discovery is implemented,
+including previously omitted slots, missing DB/name records and explicit exclusions.
+All 10,464 model jobs were attempted. Candidate 14 contains 9,329 assets and 7,078
+usable source bundle families. Its 33,170 searchable pairs retain 80 inherited
+reviewed labels, 27,788 previews and 5,302 unavailable reasons. Source/default,
+material/texture provenance, fitting and ordinary animation repairs are implemented.
+Final asset suites, validators, build-14c and both-body public browser workflows
+pass. Contact sheets cover 77 inspected pairs across 42 cases, with no new visual
+promotions. The compiled candidate runs on Oracle at 127.0.0.1:4003/outfits.
+Read STATUS.md and Diagnostics/wardrobe-release-report.json for exact coverage,
+commands and unresolved source behaviors. This is a concrete review candidate;
+complete visual acceptance and the recorded compatibility blockers remain open.
+Publishing is unauthorized.
+
 Updated 2026-09-07. The wardrobe expansion below is the current implementation
 plan. It takes priority over save/load and sharing. Earlier implementation
 phases and release counts below are historical context, not unfinished basics.
+
+Oracle preparation completed on 2026-09-07. Both feature-branch checkouts, matching
+KMS2 sources, baseline releases, private Gelo snapshot, build tools and a loopback
+review build are staged under `/home/ubuntu/repos`. Read the first STATUS.md
+checkpoint and source backend NifToGltf/obj/oracle-prep/env.sh before work there.
+249 frontend, 35 C# and 14 Python tests pass; both complete outfit smoke flows were
+rendered. This is environment readiness only. That preparation checkpoint preceded the implementation recorded above. The existing database must remain read-only, and preview labels
+retain their current meaning. Windows/Linux PNG compression and tiny body float
+differences prevent byte-identical cross-platform reexports; retain source and
+platform provenance with every new review. No deployment or overnight agent was
+started by the preparation request.
 
 ## Current plan: complete clothing and decoration coverage
 

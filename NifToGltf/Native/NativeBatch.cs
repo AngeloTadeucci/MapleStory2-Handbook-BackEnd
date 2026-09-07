@@ -17,6 +17,7 @@ internal sealed record BatchModel(string Input) {
     public string? ExcludeEffect { get; init; }
     public string? ItemModel { get; init; }
     public string? ItemId { get; init; }
+    public string? AlternateOf { get; init; }
     public string? Hand { get; init; }
     public bool Drawn { get; init; }
 }
@@ -72,8 +73,19 @@ internal static class NativeBatch {
                     excluded.Add(new { input = relative, reason = "Particle systems without ordinary NiMesh geometry.", omitted = document.Omitted });
                     continue;
                 }
+                string attachmentSource = file;
+                if (model.AlternateOf is { } primary) {
+                    string primaryFile = Resolve(root, primary);
+                    string stem = Path.GetFileNameWithoutExtension(file), primaryStem = Path.GetFileNameWithoutExtension(primaryFile);
+                    if (model.Slot != "HR" || model.ItemModel is null || !File.Exists(primaryFile) ||
+                        !primaryStem.EndsWith("_a", StringComparison.OrdinalIgnoreCase) ||
+                        !(stem.EndsWith("_c", StringComparison.OrdinalIgnoreCase) || stem.EndsWith("_d", StringComparison.OrdinalIgnoreCase)) ||
+                        !stem[..^1].Equals(primaryStem[..^1], StringComparison.OrdinalIgnoreCase))
+                        throw new InvalidDataException("Alternate hair form must be the same source family's C/D form.");
+                    attachmentSource = primaryFile;
+                }
                 ItemModelAttachment? attachment = model.ItemModel is null ? null : ItemModelAttachment.Read(Resolve(root, model.ItemModel),
-                    model.ItemId ?? throw new InvalidDataException("ItemModel requires itemId."), file, model.BodyVariant ?? "", model.Slot);
+                    model.ItemId ?? throw new InvalidDataException("ItemModel requires itemId."), attachmentSource, model.BodyVariant ?? "", model.Slot);
                 if (attachment is not null && model.Skeleton is null) throw new InvalidDataException("ItemModel attachment requires a skeleton.");
                 if (attachment is not null && model.Attach is not null) throw new InvalidDataException("Use itemmodel attachment or an explicit attach, not both.");
                 if (model.Hand is { } hand) {
@@ -91,6 +103,11 @@ internal static class NativeBatch {
                 KfmDocument? kfm = model.Kfm is null ? null : KfmDocument.Read(Resolve(root, model.Kfm));
                 if (kfm is not null && !Path.GetFullPath(kfm.Model).Equals(file, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("KFM model does not match manifest input.");
                 List<AnimationClip> clips = ClipSelection.Read(file, kfm, model.Animations is null ? null : Resolve(root, model.Animations), model.Clips is null ? null : string.Join(',', model.Clips));
+                AnimationClip? embedded = EmbeddedAnimation.Read(document);
+                if (embedded is not null) {
+                    if (clips.Count > 0) throw new NotSupportedException("Both embedded controllers and external clips require verified playback selection.");
+                    clips.Add(embedded);
+                }
                 JsonNode report = JsonSerializer.SerializeToNode(new GltfWriter(document, textures, catalog).Write(Resolve(destination, targetRelative), clips), Options)!;
                 report["source"] = relative; report["output"] = targetRelative;
                 converted.Add(new { input = relative, report });
@@ -101,6 +118,10 @@ internal static class NativeBatch {
                 missing.Add(new { input = relative, error = PortableError(e.Message, root, destination) });
             } catch (Exception e) when (e is IOException or InvalidDataException or NotSupportedException or ArgumentException or OverflowException) {
                 failed.Add(new { input = relative, error = PortableError(e.Message, root, destination) });
+            } catch (Exception e) {
+                // A converter defect is a per-input failure, never a reason to
+                // lose every completed entry and checkpoint in a long batch.
+                failed.Add(new { input = relative, error = $"Internal converter failure ({e.GetType().Name}): {PortableError(e.Message, root, destination)}", detail = e.StackTrace });
             }
             if ((converted.Count + failed.Count + missing.Count + excluded.Count) % 100 == 0) Console.WriteLine($"{converted.Count} converted, {excluded.Count} excluded, {missing.Count} missing, {failed.Count} failed");
         }

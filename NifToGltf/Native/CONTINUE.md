@@ -1,14 +1,47 @@
 # Continuation prompt: replace Noesis for non-effect assets
 
+Current handoff, 2026-09-07: the user authorized committing and pushing candidate
+14 on the existing feature branches. Oracle preview servers on ports 4000, 4002
+and 4003 are stopped. No deployment is authorized. See backend STATUS.md for
+current testing instructions; server-running and no-commit statements below are
+historical checkpoints superseded by this handoff.
+
 ## Current priority, updated 2026-09-07
 
-Next priority is full clothing and wearable-decoration coverage before outfit
-save/load or sharing. The current user request is planning only. Follow the
-"Current plan: complete clothing and decoration coverage" section at the top of
-SIMULATOR-PLAN.md when implementation is requested. Start with a complete client
-inventory, then full discovery, family batches, compatibility fixes, visual
-review and a reproducible release. Badges remain excluded; preserve the current
-hair effects and shader. The total wardrobe denominator is not yet measured.
+The implemented expanded library is simulator-release-14: 19,268 scoped IDs,
+33,170 searchable body pairs, 9,329 model assets and 7,078 usable families.
+Labels remain 80 inherited reviewed pairs, 27,788 previews and 5,302 unavailable
+pairs. Read the top STATUS.md section and Diagnostics/wardrobe-release-report.json
+for source corrections, exact coverage, commands and evidence. All 9,327 equipment
+asset tests, 9,329 validators, 115 frontend tests, 45 C# tests and 17 Python tests
+pass. Build-14c and final compiled public UI workflows pass on both bodies.
+The detailed development workflow passes 17 states, including private Gelo.
+Contact sheets cover 77 inspected pairs in 42 cases. No new acceptance is granted.
+
+The concrete compiled candidate is http://127.0.0.1:4003/outfits, PID 2531003.
+Development preview is 127.0.0.1:4002, PID 2512871. The original port 4000 process
+is untouched. The 12,146 packaged files match release hashes; private snapshots
+are excluded and actual private URLs return 404. Source-family and appearance
+blockers remain explicitly recorded, including Crusader default colors, unsupported
+controllers and multi-axis anchors. Do not confuse this candidate with complete
+visual coverage or silently promote previews. No commit, push, merge or deployment
+is authorized. T3 reports no automation host; Oracle Chromium workflows passed.
+Release-05 and private Gelo-07 are preserved, with 1,273 unchanged file hashes.
+
+Oracle workspace: both repositories are in `/home/ubuntu/repos`, on the feature
+branches below. Read the first STATUS.md checkpoint for verified setup, staged
+assets, runtime evidence and limits. Source the backend's
+`NifToGltf/obj/oracle-prep/env.sh` before running tools. Use python3 on Oracle.
+The matching client root is `$KMS2_DATA`; do not use other Oracle archive sets.
+The review build listens on 127.0.0.1:4000 and does not hot reload or enable the
+private Gelo dev route. Its PID/log are in obj/oracle-prep. Do not stop other
+processes. The configured database belongs to the existing Handbook deployment:
+only SELECT reads are authorized, even though its account has write privileges.
+Do not run GameParser or tracking POST endpoints. Keep bounded batches and at
+least 8 GiB free. Preserve the uncommitted preparation/test fixes in both checkouts.
+
+Historical authorization and prior release context below are superseded by the
+current no-commit/no-push/no-deploy request.
 
 Review branch: `feat/clothing-simulator` in both repositories, based on the local
 master checkpoints and preserving the four earlier simulator commits. The user

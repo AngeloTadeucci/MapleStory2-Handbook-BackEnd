@@ -39,6 +39,9 @@ internal static class ClipSelection {
             if (onlyMissing) throw new FileNotFoundException(error);
             throw new InvalidDataException(error);
         }
+        // An explicitly empty KFM declares a static model. Missing requested clips
+        // and failed animation reads still fail above.
+        if (all && kfm is { Clips.Length: 0 }) return [];
         if (clips.Count == 0 || clips.Select(clip => clip.Name).Distinct(StringComparer.OrdinalIgnoreCase).Count() != clips.Count) throw new InvalidDataException("No clips or duplicate clip names.");
         return clips;
     }

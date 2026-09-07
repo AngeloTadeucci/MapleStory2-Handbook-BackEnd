@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "notes": [
+    {
+      "families": [
+        "98dbd4d64147b406aebfecbdb163e138b14a978d3b7858fb1062c3732fd6af5f",
+        "c5b864e18434f943b4aaf94e4302989ef8fb349b436f91d22a34d2fed070daa8"
+      ],
+      "limitation": "Default colors differ from the matching client icon in the Oracle capture; client dye-default comparison is unresolved",
+      "evidence": {
+        "itemId": 11400049,
+        "bodies": [
+          "female",
+          "male"
+        ],
+        "release": "simulator-release-11",
+        "pose": "fitting_idle_a",
+        "time": 0.65,
+        "captures": "obj/wardrobe/family-review-11/heavy-armor-{body}-{front,back}.png",
+        "source": "Item/1/14/11400049_{f,m}_clcrusadessergeant.nif; matching Textures.m2d 11400051_{f,m}_clgoldencrusadessergeant_c.dds; Image.m2d item/icon/11400049.png",
+        "textureHashes": "obj/wardrobe/crusader-archive-textures/extraction-report.json"
+      }
+    }
+  ]
+}
