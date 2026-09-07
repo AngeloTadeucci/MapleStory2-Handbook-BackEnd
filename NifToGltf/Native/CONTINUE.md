@@ -1,6 +1,30 @@
 # Continuation prompt: replace Noesis for non-effect assets
 
-## Current priority, updated 2026-09-06
+## Current priority, updated 2026-09-07
+
+Review branch: `feat/clothing-simulator` in both repositories, based on the local
+master checkpoints and preserving the four earlier simulator commits. The user
+authorized committing and pushing the complete source changes on 2026-09-07.
+Generated release libraries and Gelo's private snapshot remain local and ignored.
+Deployment remains unauthorized.
+
+The latest authorized correction is character surface shading. Source ambient
+and hair highlights plus authored rim parameters are implemented and visually
+checked on Gelo and a full male outfit. Read the first STATUS.md section for
+exact states, source evidence, eleven GPU checks and remaining scene/skin parity
+limits. Preserve the accepted sparkles and original dyes. This checkpoint
+includes both the shader correction and the prior hair-effects pilot.
+
+The previous request authorized cosmetic effects but excluded badges. The
+hair-twinkle pilot is implemented in release-05 and `/outfits?preview=gelo-07`.
+Read the first STATUS.md section for exact source IDs, limitations and evidence.
+It covers four shiny hairstyles on both bodies, two sparkle emitters and glow.
+211 focused frontend tests pass; 635 release files reproduce byte for byte.
+The three new hairs and effect appearance remain previews. Full client particle
+parity is not established. No badges are implemented. Prior simulator commits
+are backend9c066a2 and frontend0ada7d7.
+The release-04 checkpoint below is historical context. Its effects exclusion
+was superseded by the user's explicit request for this pilot.
 
 All four authorized follow-ups are implemented and locally verified: sign KF
 animation, star combat idle/run and draw/stow, broader clothing compatibility,

@@ -294,3 +294,30 @@ The review lists precise item/body states and unresolved appearance limits.
 Changing source data requires new visual review and hashes. Successful conversion
 does not promote preview items. The saved Gelo profile remains a separate local
 development preview. See Native/STATUS.md for direct T3 evidence and limitations.
+
+## Hair effects pilot
+
+The current effect family is `Item/Hair/Eff_Hair_Twinkle_a`, selected by client
+itemdata for 10200121/10200122 male and 10200123/10200124 female. Badges are
+excluded. `effects-review.json` records source hashes, exact outfit states and
+unverified client parity. The exporter rejects unreviewed NIF revisions.
+
+Source extracts live in `SimulatorEffects`: Definitions contains itemdata/102.xml
+and effect/item/hair/eff_hair_twinkle_a.xml from Xml.m2d; Models contains the NIF
+from Effect.m2d; EffectTextures/textures contains the four referenced DDS files
+from that archive; Hair contains the exact NIF hair forms from Item.m2d.
+Use the existing read-only archive helper and fresh extraction destinations.
+
+```powershell
+dotnet run --project NifToGltf -- --native --batch --input Maple2Storage/Resources --textures 'Maple2Storage/Resources/Models/Textures;Maple2Storage/Resources/SimulatorEffects/Hair' --manifest NifToGltf/Diagnostics/effects-hair-plan.json --output NifToGltf/obj/effects/new-models
+dotnet run --project NifToGltf -- --native --texture-batch --input Maple2Storage/Resources/SimulatorEffects/EffectTextures/textures --output NifToGltf/obj/effects/new-textures
+py -X utf8 NifToGltf/Diagnostics/build_effects_release.py --base ../MapleStory2-Handbook/static/gltf/simulator-release-04 --resources Maple2Storage/Resources --models NifToGltf/obj/effects/new-models --textures NifToGltf/obj/effects/new-textures --output NifToGltf/obj/effects/new-release
+py -X utf8 -m unittest discover -s NifToGltf/Diagnostics -p test_hair_effect.py
+```
+
+The builder verifies the base inventory and preserves the previous geometry
+review. It adds three preview hairs, the effect sidecar/textures and a separate
+effect-extension report. It never copies private character profiles. The selected
+frontend release is src/lib/outfits/simulator-release.json. For source-backed
+frontend effect tests, set SIMULATOR_EFFECT_FILE to the candidate's
+effects/hair-twinkle-a.json, then run tests/cosmeticEffect.test.ts with Vitest.

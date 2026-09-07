@@ -2,6 +2,19 @@
 
 Updated 2026-09-06 following the user's revised acceptance scope.
 
+The user-requested surface shading correction is implemented: source ambient
+coefficients, independent material ambient, authored rim parameters and hair
+direction-map highlights. Gelo and a complete male outfit passed direct angle,
+hat-fitting and dye checks. STATUS.md records exact items, source extracts,
+eleven GPU checks, PNG evidence and remaining running-client parity limits.
+The accepted hair effects are unchanged.
+
+The later effects request supersedes the previous blanket exclusion. The
+hair-twinkle pilot is implemented in release-05 for four source-selected hairs,
+with sparkles/glow, an effects toggle and tests on both bodies. Badges remain
+excluded. STATUS.md records source bindings, exact visual states and unverified
+client parity. This does not expand the release gate to all effects or NPC/maps.
+
 The four authorized follow-ups are implemented in `simulator-release-04`:
 source sign animation; star idle/run and explicit draw/stow; 24 more reviewed
 item/body combinations, cape recovery and corrected knuckle attachment; client

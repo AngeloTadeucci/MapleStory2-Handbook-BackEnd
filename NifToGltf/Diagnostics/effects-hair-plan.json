@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "10200123-female-a",
+      "input": "SimulatorEffects/Hair/0/02/10200086_f_verticalsettingperm_a.nif",
+      "output": "female/10200123/a.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/102.xml",
+      "itemId": "10200086"
+    },
+    {
+      "id": "10200123-female-c",
+      "input": "SimulatorEffects/Hair/0/02/10200086_f_verticalsettingperm_c.nif",
+      "output": "female/10200123/c.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "attach": "Bip01 Head"
+    },
+    {
+      "id": "10200123-female-d",
+      "input": "SimulatorEffects/Hair/0/02/10200086_f_verticalsettingperm_d.nif",
+      "output": "female/10200123/d.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "attach": "Bip01 Head"
+    },
+    {
+      "id": "10200122-male-a",
+      "input": "SimulatorEffects/Hair/0/02/10200101_m_charmingprincehair_a.nif",
+      "output": "male/10200122/a.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/102.xml",
+      "itemId": "10200101"
+    },
+    {
+      "id": "10200122-male-c",
+      "input": "SimulatorEffects/Hair/0/02/10200101_m_charmingprincehair_c.nif",
+      "output": "male/10200122/c.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "attach": "Bip01 Head"
+    },
+    {
+      "id": "10200122-male-d",
+      "input": "SimulatorEffects/Hair/0/02/10200101_m_charmingprincehair_d.nif",
+      "output": "male/10200122/d.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "attach": "Bip01 Head"
+    },
+    {
+      "id": "10200121-male-a",
+      "input": "SimulatorEffects/Hair/0/02/10200103_m_smartcut_a.nif",
+      "output": "male/10200121/a.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "itemModel": "SimulatorSources/Xml/itemmodel/102.xml",
+      "itemId": "10200103"
+    },
+    {
+      "id": "10200121-male-c",
+      "input": "SimulatorEffects/Hair/0/02/10200103_m_smartcut_c.nif",
+      "output": "male/10200121/c.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "attach": "Bip01 Head"
+    },
+    {
+      "id": "10200121-male-d",
+      "input": "SimulatorEffects/Hair/0/02/10200103_m_smartcut_d.nif",
+      "output": "male/10200121/d.gltf",
+      "bodyVariant": "male",
+      "slot": "HR",
+      "skeleton": "Models/Character/male/m_body.nif",
+      "attach": "Bip01 Head"
+    }
+  ]
+}

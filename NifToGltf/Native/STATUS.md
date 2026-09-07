@@ -1,5 +1,142 @@
 # Non-effect replacement status, 2026-09-06
 
+## Source review checkpoint, 2026-09-07
+
+The user authorized new `feat/clothing-simulator` branches from local master in
+both repositories, including the four earlier simulator commits and the effects
+and shader changes below. Source, tests and evidence records belong to this
+checkpoint. Generated client assets, captures and the private Gelo snapshot stay
+local and ignored. Deployment is not authorized. Verification below covers the
+implementation; this checkpoint changes branch/documentation state only.
+
+## Character shading correction, 2026-09-06
+
+The user identified the surface shader as the issue and authorized fixing it.
+The frontend now uses source material ambient independently of material diffuse,
+the authored Fresnel boost/exponent, and the hair Shader1 direction texture for
+the client's combined anisotropic and normal-based highlights. Gloss and hair
+direction maps remain linear data; dye and face textures are unchanged. The
+directional specular coefficient now uses the same irradiance conversion as
+diffuse. Three's physical indirect specular path is disabled for these materials.
+There was no environment map in Gelo's scene, so that indirect path was not the
+main cause of the observed dark shading. Ambient lighting and its material
+calculation account for the large visual correction.
+
+Read-only extraction of our Exported.m2d confirms character_spring2019 inherits
+MS2AmbientLight_Outside_ and MS2DirectionalLight_Outside_. Both presets have white
+light and Dimmer=0.8; directional AmbientColor is black. The studio replaces its
+dark hemisphere with uniform ambient and uses these coefficients, converted by
+PI to Three irradiance units. Material ambient is no longer multiplied by the
+diffuse factor a second time. The existing key direction (3,5,4) is retained;
+the new rim direction (0,-1,0) is a documented studio choice, not a recovered
+client global. No geometry, body scale, saved dyes or hair effects were changed.
+
+Extract manifests in obj/shader-comparison/sources and presets record SHA256.
+The spring xblock is 60633ae1ff503cd6ac432231263c1991a69b9511e4a638a9932fb5dc6ca07fa5;
+ambient preset is 3d5baf6e9037fc923e7ab2c7c928a6fae5110d849a20cd6b81b2abf6342ebb77;
+directional preset is 3ec8fa1ab1aad984218d849b5650a94783af01fbd4276fc2d184eb1fce5d7a73.
+
+Evidence is under ignored obj/shader-comparison: source extracts and five initial
+captures in evidence/. The before/after Gelo captures use fitting_idle_a at
+0.65 seconds, studio background, twelve saved instances and default expression.
+Final front/side/back checks retain all items. Happy expression with Henesys and
+star_attack_idle_a at 0.65 seconds exports a decoded 823x520 PNG with the effect
+enabled, particle counts 3/1. Male 10200121, face10300001, top11400002,
+pants11500004, gloves11600004, shoes11700004, earrings11200001 and cape11800001
+were checked from three angles. Hat11300001 selects C hair; explicit blue dye
+persists. Six remove/equip cycles with the hat kept 22 geometries/63 textures.
+No shader compilation errors were reported in either final rendered outfit.
+
+214 focused tests passed; the final material/effect tests were rerun, 15 passed.
+Svelte check reports zero errors/warnings. The frontend dev converter helper
+characterShaderAcceptance.ts runs nine numerical samples of the production GLSL
+on the GPU and two full-material render tests. Both pipelines match expected
+linear pixels 0.72 with specular disabled and 1.52 enabled, proving ambient is
+independent of diffuse and that diffuse/specular use consistent light units.
+All eleven GPU checks pass. The 30 hair materials in release-05 have Shader1
+direction maps. The 635 asset files are unchanged by this frontend correction.
+The final production build passes. All 635 packaged asset files match their
+inventory hashes, and only simulator-release-05 is packaged under gltf. Existing
+unused-import, optional client-hook export and chunk-size warnings remain.
+
+Limits: exact running-client parity remains unverified. The shader's skin
+subsurface term and the runtime character/rim directions require client global
+values; this change does not invent those as recovered data. The source spring
+scene coefficients are used for the studio across backgrounds, not per-map
+lighting. Hunya's inspected outfit/dyes differ from Gelo, and Odyssey was reviewed
+as code only. Neither was treated as an exact matched visual reference. No
+commits, deployment, database writes or existing-process stops occurred.
+
+## Hair effects pilot, 2026-09-06
+
+The user authorized cosmetic effects and explicitly excluded badges. The first
+supported family is Item/Hair/Eff_Hair_Twinkle_a: two source mesh emitters and
+the animated glow layer. Itemdata selects this exact effect for idle and battle
+idle on 10200121/10200122 male and 10200123/10200124 female. The effect XML
+attaches to Bip01 Head with applyNodeTransform=true and an identity offset.
+Gelo's current local preview is `/outfits?preview=gelo-07`, with all twelve saved
+instances and original dyes. The Hair effects checkbox hides/freezes this family.
+There is no badge loader, selector or badge particle simulation.
+
+`Diagnostics/export_hair_effect.py` reads the inspected NIF revision, fails on
+unknown bytes, and exports source emission meshes/normals, rates 5/3, capacities
+5/3, speeds 60/0, size/lifetime variations, grow/shrink times, material colors,
+glow texture transforms and quadratic alpha/scale keys. Source textures are
+hitlight_8-2, gradient_light_02, one_002 and alpha_0352. The source head's 0.01
+unit scale applies to positions, velocities and sizes. The first render omitted
+that scale on speed/size and was rejected. Corrected captures supersede it.
+
+`Diagnostics/build_effects_release.py` extends immutable release-04 using the
+nine converted A/C/D forms in effects-hair-plan.json. Default release-05 contains
+153 models and 127 entries: 82 previously reviewed geometry entries, 35 previews,
+10 unavailable. The three added hairs and particle appearance remain previews.
+The inherited appearance-review.json records base geometry only; the effect
+extension report identifies the separate scope. All 635 inventory files matched
+a repeat build. New glTF validation: nine models, zero errors and warnings.
+The four effect textures and nine new models use our client assets only.
+
+Verification: 211 focused frontend tests pass, including nine effect tests and
+152 actual-library binding tests. The effect tests also pass without local asset
+fixtures. Two Python effect-export tests and the three simulator packaging tests
+pass. Svelte check reports zero errors/warnings. Runtime verification in T3:
+
+The final `pnpm build` passes. All 635 files in build/client/gltf/simulator-release-05
+match their inventory hashes. Only the selected release is packaged under gltf;
+private character snapshots and research candidates remain excluded. Existing
+nonfatal dependency, optional-hook-export and chunk-size warnings remain.
+This verifies the package, not a deployed production runtime.
+
+- Female Gelo 10200124, fitting_idle_a at 0.65 seconds, twelve saved instances.
+  Source sparkle counts 3/1. Checkbox-off hides the effect and freezes its clock.
+  Thirteen remove/equip cycles left no attached effect after removal; the final
+  eight cycles stayed at 28 geometries/93 textures. Earlier counts rose from
+  90 to 93 textures before settling; no further growth was observed.
+  An intentional effect 404 preserved the previous effect object and all items.
+- Playback star_attack_idle_a: effect time 0.65 to 4.6667, counts 3/1 to 2/3,
+  body time 4.6667. Recording browser-recording-mtql2htn.webm under the local
+  T3 browser-artifacts directory. No particle pool growth beyond source capacity.
+- Male 10200121 with face10300001, top11400002, pants11500004, gloves11600004,
+  shoes11700004, earrings11200001, cape11800001. Hat11300001 selects C hair;
+  removing it restores A. Hair dyed RGB0.3,0.5,0.7 remains blue with the hat.
+  Replacing it with 10200122 was checked in star_run_a at 0.65 seconds.
+- Female 10200123 with face10300003, robe12200002, gloves11600004,
+  shoes11700004, earrings11200001 and cape11800001: front/side/back at 0.65
+  seconds and hat11300001 C form. Changing bodies clears the previous effect.
+- The final source UV/sampler implementation was rendered again with Gelo.
+  Henesys plus Happy expression and enabled effects produced a PNG that decoded
+  to 823x520, 690345 encoded bytes, with twelve equipment instances. This closes
+  the previously unverified Henesys/Happy export combination for this candidate.
+
+Limits: this is a preview of one cosmetic effect family, not a general particle
+engine. The seeded random sequence, face sampling, continuous drag integration,
+studio material lighting and billboard orientation have not been matched to the
+running client. Seeking rebuilds particles at the selected pose, not an invented
+prior body trajectory. Other effect families remain unsupported. Source schema
+cross-check: niftools NiPS format documentation; shader texture composition was
+checked against our MS2StandardMaterial/Shader0002-P.hlsl. No reference assets
+were copied. No commits, deployment, DB writes or existing-process stops in this
+effects follow-up. Generated libraries and the Gelo profile remain ignored.
+
 ## Motion, coverage and shaders implemented, 2026-09-06
 
 The user authorized all four follow-ups. The default local release is now

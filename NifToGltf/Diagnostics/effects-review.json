@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "date": "2026-09-06",
+  "release": "simulator-release-05",
+  "status": "preview",
+  "source": {
+    "eff_hair_twinkle_a.nif": "34a815539e159876cdee93cdaf19bf4dc9838bc58b33986253f08aee21072a97",
+    "eff_hair_twinkle_a.xml": "4fa05d1c4e3175ef9fcb7e03b0a2f85fc3933246a76fbfefefecdef959b57b5f",
+    "102.xml": "20db08b1b27cc9ce09f50ffdc87cd79ef4e4d84834bc6dee2d998c986f6f8f00"
+  },
+  "files": {
+    "effects/alpha_0352.png": "c5b9c89c95e3ee7a4934e3d3654011bb2c08d53eef640da9143699e7781deb14",
+    "effects/gradient_light_02.png": "283aecd3a8868c94069f2c45dcbb3b7862ee3616302d0e931d6d99902310c2b6",
+    "effects/hair-twinkle-a.json": "38fb80bacd0577e9afa566bf4734aba91f7516ff40db7d1d58a389c9778d30b5",
+    "effects/hitlight_8-2.png": "4e482efaa62f79a93e7c4ba72475352ecd3ecf9a32ffa9f7aa278d7423d47898",
+    "effects/one_002.png": "8f02b88ed1dc8dfe4a1eaa132ff0f75a041e77d694aaa8104e6a55f15210f7f6"
+  },
+  "modelHashes": {
+    "10200123-female-a": "7b66ad5f02f81081d393d67fb69a49baccd37a1048dde62cc87b683ad10af772",
+    "10200123-female-c": "4f4f38122306a0454ff5d16e39ebff7bcedc51954d67b30781dd2de2cc70c418",
+    "10200123-female-d": "54eb45de13b13e5371b17d1cc444e70aefe0b84afe0fdccb2a03e2791015ceea",
+    "10200122-male-a": "75ee99d42d0dbf41170d1edfaee92b00f364a0712a85b13a85b8d8e5f14916d7",
+    "10200122-male-c": "22e5b8a43ca92e333f24f1f6fd044592c02e15421764324a765beb24c391628b",
+    "10200122-male-d": "9e0dbc6bf3d05d94455ee4caaa12023a59226788cc6799bb47eecf0551583b5d",
+    "10200121-male-a": "e4ef46e479fc24bb483e5739e1fd00c0b090b4d1a8cfa25b2095d170d5f33d14",
+    "10200121-male-c": "705c1d7be730071cab54de4568f425404c878d066559299ace012d984cc1f159",
+    "10200121-male-d": "4f52bb8466ff35588c1404c21048832d9b72a826fd6b5bc83aba96b8ddb50fb9"
+  },
+  "states": [
+    "Gelo twelve saved instances: 10200124 female, fitting_idle_a 0.65, effects toggle, 13 remove/equip cycles, failed effect load rollback",
+    "Male 10200121 with 10300001,11400002,11500004,11600004,11700004,11200001,11800001; 11300001 C form and restored A",
+    "Male 10200122 same complete outfit, star_run_a 0.65",
+    "Female 10200123 with 10300003,12200002,11600004,11700004,11200001,11800001; front/side/back and 11300001 C form"
+  ],
+  "recording": "C:/Users/atade/.t3/userdata/browser-artifacts/browser-recording-mtql2htn.webm",
+  "tests": {
+    "frontend": 211,
+    "pythonEffect": 2,
+    "pythonPackaging": 3,
+    "newGltf": 9
+  },
+  "limits": [
+    "Preview: particle random sequence, drag integration and glow material parity have not been matched to the running client.",
+    "Billboard orientation and source face selection distribution remain unverified against the running client.",
+    "Badge effects are excluded."
+  ]
+}
