@@ -163,6 +163,18 @@ if (File.Exists(sassySource)) Test("Sassy source retains Point01 channels and le
     Assert(clip.Tracks.Except(unbound).All(track => track.Node == "Point01" && counts[track.Node] == 1), "Root tracks lost");
 });
 else Console.WriteLine("SKIP local Sassy source binding regression: existing extraction is required.");
+string curlySource = "NifToGltf/obj/hair-investigation/source/0/02/10200070_f_rollingponytail_p_a.nif";
+if (File.Exists(curlySource)) Test("Curly Ponytail source retains Point01 channels and leaves only its absent posed NonAccum unbound", () => {
+    NifDocument source = NifDocument.Load(curlySource);
+    AnimationClip clip = AnimationReader.Read(Path.ChangeExtension(curlySource, ".kf"));
+    Assert(clip.AccumulationRoot == "Point01", "Wrong accumulation root");
+    Assert(clip.Tracks.Length == 6 && clip.Tracks.All(track => track.Posed), "Unexpected source animation data");
+    var counts = source.Nodes.Values.GroupBy(node => node.Name).ToDictionary(group => group.Key, group => group.Count());
+    AnimationTrack[] unbound = clip.Tracks.Where(track => AnimationBinding.IsUnboundPosedAccumulationTrack(clip, track, counts)).ToArray();
+    Assert(unbound.Length == 3 && unbound.All(track => track.Node == "Point01 NonAccum"), "Incorrect unbound tracks");
+    Assert(clip.Tracks.Except(unbound).All(track => track.Node == "Point01" && counts[track.Node] == 1), "Root tracks lost");
+});
+else Console.WriteLine("SKIP local Curly Ponytail source binding regression: existing extraction is required.");
 Test("cubic B-spline reduces to a known Bezier polynomial with four controls", () => {
     foreach (double t in new[] { 0, 0.25, 0.5, 0.75, 1 }) Near(AnimationReader.BSpline([0, 1, 4, 9], 1, t)[0], 3 * t + 6 * t * t);
 });

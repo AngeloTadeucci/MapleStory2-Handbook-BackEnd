@@ -1,0 +1,630 @@
+{
+  "version": 1,
+  "scope": "Existing release-14 unavailable HR entries; exact local Item archive reopened for named missing sources. No claim about other client versions.",
+  "originalUnavailableCount": 35,
+  "remainingUnavailableCount": 6,
+  "items": [
+    {
+      "itemId": 10200008,
+      "name": "Flower-knotted Hair",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200008"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/00200008_F_BasicHair01_A.nif",
+        "urn:00200008_F_FlowerUp"
+      ]
+    },
+    {
+      "itemId": 10200010,
+      "name": "Sassy Pigtails",
+      "body": "female",
+      "status": "preview",
+      "category": "alias",
+      "detail": "Separate attachments use explicit second-tail KFM model references. Browser motion is optional for Sassy only.",
+      "itemPresets": [
+        "10200010"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/00200010_F_BasicHair02_A.nif",
+        "urn:00200010_F_PiPi_P_A",
+        "urn:00200010_F_PiPi_P2_A"
+      ]
+    },
+    {
+      "itemId": 10200011,
+      "name": "Banded Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "alias",
+      "detail": "Separate attachments use explicit second-tail KFM model references. Browser motion is optional for Sassy only.",
+      "itemPresets": [
+        "10200011"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/00200010_F_BasicHair02_A.nif",
+        "urn:00200011_F_PureTwinTail_P_A",
+        "urn:00200011_F_PureTwinTail_P2_A"
+      ]
+    },
+    {
+      "itemId": 10200012,
+      "name": "Cutesy Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "alias",
+      "detail": "Separate attachments use explicit second-tail KFM model references. Browser motion is optional for Sassy only.",
+      "itemPresets": [
+        "10200012"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/00200012_F_BasicHair03_A.nif",
+        "urn:00200012_F_CuteTwinTail_P_A",
+        "urn:00200012_F_CuteTwinTail_P2_A"
+      ]
+    },
+    {
+      "itemId": 10200016,
+      "name": "Samurai Hair",
+      "body": "male",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200016"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/00200016_M_BasicHair01_A.nif",
+        "urn:00200016_M_Samurai_P_A"
+      ]
+    },
+    {
+      "itemId": 10200031,
+      "name": "Curled Pigtails",
+      "body": "female",
+      "status": "unavailable",
+      "category": "material",
+      "detail": "Both raw tail material properties lack shader1 direction binding. No substitute assigned.",
+      "itemPresets": [
+        "10200031"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200031_F_BasicHair01_A.nif",
+        "urn:10200031_F_IronRollHair_P",
+        "urn:10200031_F_IronRollHair_P2"
+      ]
+    },
+    {
+      "itemId": 10200038,
+      "name": "Warrior's Mane",
+      "body": "male",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200038"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200037_M_ClearMoon_A.nif",
+        "urn:10200037_M_ClearMoon_P_A"
+      ]
+    },
+    {
+      "itemId": 10200052,
+      "name": "Classic Wave",
+      "body": "male",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200052"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200052_M_BasicHair01_A.nif",
+        "urn:10200052_M_ClassicWave_P_A"
+      ]
+    },
+    {
+      "itemId": 10200055,
+      "name": "Big Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200055"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200055_F_BasicHair01_A.nif",
+        "urn:10200055_F_BigPonyTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200058,
+      "name": "Fairy Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200058"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200058_F_BasicHair01_A.nif",
+        "urn:10200058_F_FairyPonyTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200064,
+      "name": "Bubbly Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200064"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200064_F_BasicHair04_A.nif",
+        "urn:10200064_F_LivelyPonyTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200070,
+      "name": "Curly Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "animation target",
+      "detail": "Separate export succeeds with only three absent posed Point01 NonAccum channels unbound. Four-bone physics is omitted.",
+      "itemPresets": [
+        "10200070"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200070_F_BasicHair01_A.nif",
+        "urn:10200070_F_RollingPonyTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200074,
+      "name": "Warrior Ponytail",
+      "body": "male",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200074"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200074_M_WarriorHair_A.nif",
+        "urn:10200074_M_WarriorHair_P_A"
+      ]
+    },
+    {
+      "itemId": 10200083,
+      "name": "Innocent Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200083"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200083_F_PurePonyTail_A.nif",
+        "urn:10200083_F_PurePonyTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200095,
+      "name": "Bubbly Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200095"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200095_F_LivelyTwinTail_A.nif",
+        "urn:10200095_F_LivelyTwinTail_P2_A",
+        "urn:10200095_F_LivelyTwinTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200097,
+      "name": "Liontail",
+      "body": "male",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200097"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200097_M_LionHair_A.nif",
+        "urn:10200097_M_LionHair_P_A"
+      ]
+    },
+    {
+      "itemId": 10200110,
+      "name": "Lush Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200110"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200110_F_BasicHair01_A.nif",
+        "urn:10200110_F_LongSettingTwinTail_P_A",
+        "urn:10200110_F_LongSettingTwinTail_P2_A"
+      ]
+    },
+    {
+      "itemId": 10200111,
+      "name": "Dual Spirit Hair",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200111"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200111_F_DualSpiritHair_A.nif",
+        "urn:10200111_F_DualSpiritHair_P2_A",
+        "urn:10200111_F_DualSpiritHair_P_A"
+      ]
+    },
+    {
+      "itemId": 10200125,
+      "name": "Streaked Ponytail",
+      "body": "male",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200125"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200125_M_HighlightPonytailHair_A.nif",
+        "urn:10200125_M_HighlightPonytailHair_P_A"
+      ]
+    },
+    {
+      "itemId": 10200126,
+      "name": "Streaked Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200126"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200126_F_HighlightPonytailHair_A.nif",
+        "urn:10200126_F_HighlightPonytailHair_P_A"
+      ]
+    },
+    {
+      "itemId": 10200137,
+      "name": "Floral Braided Ponytails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200137"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200137_F_FlowerPrincessHair_A.nif",
+        "urn:10200137_F_FlowerPrincessHair_P_A",
+        "urn:10200137_F_FlowerPrincessHair_P2_A"
+      ]
+    },
+    {
+      "itemId": 10200138,
+      "name": "Pure Ribbon Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200138"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200138_F_RibbonTwinTail_A.nif",
+        "urn:10200138_F_RibbonTwinTail_P2_A",
+        "urn:10200138_F_RibbonTwinTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200147,
+      "name": "Wavy Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200147"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200147_F_WavyHighTwinTail_A.nif",
+        "urn:10200147_F_WavyHighTwinTail_P2_A",
+        "urn:10200147_F_WavyHighTwinTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200156,
+      "name": "Shiny Flower Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200156"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200156_F_FloraTwinTail_A.nif",
+        "urn:10200156_F_FloraTwinTail_P2_A",
+        "urn:10200156_F_FloraTwinTail_P_A"
+      ]
+    },
+    {
+      "itemId": 10200157,
+      "name": "Tussled Side Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200157"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200157_F_UnbalanceLongPonyTail_A.nif",
+        "urn:10200157_F_UnbalanceLongPonyTail_P"
+      ]
+    },
+    {
+      "itemId": 10200159,
+      "name": "Star Candy Hair",
+      "body": "female",
+      "status": "unavailable",
+      "category": "source",
+      "detail": "A/C/D KFMs each name an absent matching KF. No alternate clip inferred from EMPTY_SEQUENCE name.",
+      "itemPresets": [
+        "10200159"
+      ],
+      "models": [
+        "urn:10200159_F_StarCandyHair_A"
+      ]
+    },
+    {
+      "itemId": 10200180,
+      "name": "Twin Bun Ponytails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200180"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200180_F_NewYearHair02_A.nif",
+        "urn:10200180_F_NewYearHair02_P2",
+        "urn:10200180_F_NewYearHair02_P"
+      ]
+    },
+    {
+      "itemId": 10200221,
+      "name": "Cute Twin Tails",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200221"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200221_F_FreeConcept008_A.nif",
+        "urn:10200221_F_FreeConcept008_P2",
+        "urn:10200221_F_FreeConcept008_P"
+      ]
+    },
+    {
+      "itemId": 10200244,
+      "name": "Evelyn's Hair",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200244"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200244_F_HouseKeeper13_A.nif",
+        "urn:10200244_F_HouseKeeper13_P2",
+        "urn:10200244_F_HouseKeeper13_P"
+      ]
+    },
+    {
+      "itemId": 10200246,
+      "name": "ITEMNAME_10200246_NAME:[F]Develop",
+      "body": "female",
+      "status": "unavailable",
+      "category": "source",
+      "detail": "Explicit self itemPreset and itemmodel entry exist, but requested NIF is absent in the local Item archive. Development label is not proof of usability.",
+      "itemPresets": [
+        "10200246"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200246_F_Hair_A.nif"
+      ]
+    },
+    {
+      "itemId": 10200259,
+      "name": "Lovely Half-up Ponytail",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200259"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200259_F_Hair_A.nif",
+        "urn:10200259_F_Hair_P2",
+        "urn:10200259_F_Hair_P"
+      ]
+    },
+    {
+      "itemId": 10200260,
+      "name": "ITEMNAME_10200260_NAME:[F]Develop",
+      "body": "male",
+      "status": "unavailable",
+      "category": "source",
+      "detail": "Explicit self itemPreset and itemmodel entry exist, but requested NIF is absent in the local Item archive. Development label is not proof of usability.",
+      "itemPresets": [
+        "10200260"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200260_M_Hair_A.nif"
+      ]
+    },
+    {
+      "itemId": 10200262,
+      "name": "ITEMNAME_10200262_NAME:[F]Develop",
+      "body": "male",
+      "status": "unavailable",
+      "category": "source",
+      "detail": "Explicit self itemPreset and itemmodel entry exist, but requested NIF is absent in the local Item archive. Development label is not proof of usability.",
+      "itemPresets": [
+        "10200262"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200262_M_Hair_A.nif"
+      ]
+    },
+    {
+      "itemId": 10200263,
+      "name": "ITEMNAME_10200263_NAME:[F]Develop",
+      "body": "female",
+      "status": "unavailable",
+      "category": "source",
+      "detail": "Explicit self itemPreset and itemmodel entry exist, but requested NIF is absent in the local Item archive. Development label is not proof of usability.",
+      "itemPresets": [
+        "10200263"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200263_F_Hair_A.nif"
+      ]
+    },
+    {
+      "itemId": 10200265,
+      "name": "ITEMNAME_10200265_NAME:[F]Develop",
+      "body": "female",
+      "status": "preview",
+      "category": "placement",
+      "detail": "Existing geometry with source-authored placement. Source physics is not simulated.",
+      "itemPresets": [
+        "10200265"
+      ],
+      "models": [
+        "Data/Resource/Model/Item/0/02/10200265_F_Hair_A.nif",
+        "urn:10200265_F_Hair_P_A"
+      ]
+    }
+  ],
+  "curledTailMaterials": {
+    "10200031_f_ironrollhair_p.nif": [
+      {
+        "block": 30,
+        "bindings": {
+          "slot0": "10200031_F_IronRollHair_P_D.dds",
+          "slot3": "10200031_F_IronRollHair_P_S.dds",
+          "slot6": "10200031_F_IronRollHair_P_N.dds",
+          "shader0": "10200031_F_IronRollHair_P_C.dds"
+        }
+      }
+    ],
+    "10200031_f_ironrollhair_p2.nif": [
+      {
+        "block": 30,
+        "bindings": {
+          "slot0": "10200031_F_IronRollHair_P_D.dds",
+          "slot3": "10200031_F_IronRollHair_P_S.dds",
+          "slot6": "10200031_F_IronRollHair_P_N.dds",
+          "shader0": "10200031_F_IronRollHair_P_C.dds"
+        }
+      }
+    ]
+  },
+  "starCandyKfms": {
+    "10200159_f_starcandyhair_d.kfm": {
+      "model": ".\\10200159_F_StarCandyHair_D.nif",
+      "master": "HR_Point01",
+      "clips": [
+        {
+          "event": 0,
+          "file": ".\\10200159_F_StarCandyHair_D.kf",
+          "name": "EMPTY_SEQUENCE_AT_0f"
+        }
+      ]
+    },
+    "10200159_f_starcandyhair_a.kfm": {
+      "model": ".\\10200159_F_StarCandyHair_A.nif",
+      "master": "HR_Point01",
+      "clips": [
+        {
+          "event": 0,
+          "file": ".\\10200159_F_StarCandyHair_A.kf",
+          "name": "EMPTY_SEQUENCE_AT_0f"
+        }
+      ]
+    },
+    "10200159_f_starcandyhair_c.kfm": {
+      "model": ".\\10200159_F_StarCandyHair_C.nif",
+      "master": "HR_Point01",
+      "clips": [
+        {
+          "event": 0,
+          "file": ".\\10200159_F_StarCandyHair_C.kf",
+          "name": "EMPTY_SEQUENCE_AT_0f"
+        }
+      ]
+    }
+  },
+  "archiveMatches": [
+    "0/02/10200031_f_basichair01_a.nif",
+    "0/02/10200031_f_basichair01_c.nif",
+    "0/02/10200031_f_basichair01_d.nif",
+    "0/02/10200031_f_ironrollhair_p.kf",
+    "0/02/10200031_f_ironrollhair_p.kfm",
+    "0/02/10200031_f_ironrollhair_p.nif",
+    "0/02/10200031_f_ironrollhair_p2.kf",
+    "0/02/10200031_f_ironrollhair_p2.kfm",
+    "0/02/10200031_f_ironrollhair_p2.nif",
+    "0/02/10200070_f_basichair01_a.nif",
+    "0/02/10200070_f_basichair01_c.nif",
+    "0/02/10200070_f_basichair01_d.nif",
+    "0/02/10200070_f_rollingponytail_a.kf",
+    "0/02/10200070_f_rollingponytail_p_a.kf",
+    "0/02/10200070_f_rollingponytail_p_a.kfm",
+    "0/02/10200070_f_rollingponytail_p_a.nif",
+    "0/02/10200159_f_starcandyhair_a.kfm",
+    "0/02/10200159_f_starcandyhair_a.nif",
+    "0/02/10200159_f_starcandyhair_c.kfm",
+    "0/02/10200159_f_starcandyhair_c.nif",
+    "0/02/10200159_f_starcandyhair_d.kfm",
+    "0/02/10200159_f_starcandyhair_d.nif"
+  ],
+  "sourceHashes": {
+    "NifToGltf/obj/wardrobe/xml/itemmodel/102.xml": "8db65b944ad4253bc716ee25ae60e52acdfefd2b24e41df9d772820fd4698dba",
+    "NifToGltf/obj/wardrobe/xml/itemdata/102.xml": "20db08b1b27cc9ce09f50ffdc87cd79ef4e4d84834bc6dee2d998c986f6f8f00"
+  }
+}

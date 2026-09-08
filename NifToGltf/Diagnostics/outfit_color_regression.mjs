@@ -1,0 +1,77 @@
+// Exercises the named swatches and custom picker on the authorized review server.
+import { createRequire } from 'node:module';
+import { mkdirSync,writeFileSync } from 'node:fs';
+const { chromium,expect: baseExpect } = createRequire('/home/ubuntu/repos/MapleStory2-Handbook/package.json')('@playwright/test');
+const expect=baseExpect.configure({ timeout: 90000 });
+const evidence='NifToGltf/obj/outfit-studio-20260908/color-regression'; mkdirSync(evidence,{recursive:true});
+const browser=await chromium.launch({executablePath:'/home/ubuntu/.cache/ms-playwright/chromium-1243/chrome-linux-arm64/chrome',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const page=await browser.newPage({viewport:{width:1440,height:1100}}); page.setDefaultTimeout(90000);
+const errors=[],checks=[];
+page.on('pageerror',e=>errors.push(e.message));
+await page.route('**/*',r=>['GET','HEAD'].includes(r.request().method())?r.continue():r.abort());
+const scene=()=>page.locator('[aria-label="Outfit preview"]');
+const colors=()=>scene().evaluate(el=>el.outfitViewer.itemColorControls('10200124')[0].colors.map(c=>[...c]));
+const ready=()=>expect(page.getByRole('button',{name:'Save image',exact:true})).toBeEnabled();
+async function check(name,result){expect(result,name).toBeTruthy();checks.push(name);console.log('PASS',name);}
+async function hair(){await page.getByRole('button',{name:/^Hair:/}).click();await page.locator('.customize summary').click();}
+const picker=()=>page.locator('.customize .dye-control').first();
+try {
+ await page.goto('http://100.118.72.53:4000/outfits',{waitUntil:'domcontentloaded'});await ready();
+ await page.getByRole('searchbox',{name:''}).fill('10200124');
+ const equip=page.getByRole('button',{name:/^Equip /}).first();await expect(equip).toBeEnabled();await equip.click();await ready();
+ await page.locator('.customize summary').click();
+ await check('basic colors shows 20 source colors plus 220 named Handbook dyes',await picker().locator('.swatch-grid button').count()===240);
+ await check('two-tone dyes use split swatches',await picker().getByRole('button',{name:"Dancin' Bean Pink",exact:true}).getAttribute('style').then(s=>s.includes('linear-gradient')));
+ await picker().scrollIntoViewIfNeeded();await page.screenshot({path:evidence+'/basic-desktop.png'});
+ const before=await colors();
+ await picker().getByRole('searchbox').fill('Strawberry Milk');
+ await expect(picker().locator('.swatch-grid button')).toHaveCount(1);
+ await picker().getByRole('button',{name:'Strawberry Milk',exact:true}).click();
+ await check('named dye selection marks the swatch and preserves the accent',await picker().getByRole('button',{name:'Strawberry Milk',exact:true}).getAttribute('aria-pressed')==='true'&&JSON.stringify((await colors())[1])===JSON.stringify(before[1]));
+ await picker().getByRole('radio',{name:'Custom',exact:true}).check();
+ await picker().getByLabel('Shiny Long Velvet Hair Primary R',{exact:true}).fill('242');await picker().getByLabel('Shiny Long Velvet Hair Primary R',{exact:true}).press('Tab');
+ await picker().getByLabel('Shiny Long Velvet Hair Primary G',{exact:true}).fill('137');await picker().getByLabel('Shiny Long Velvet Hair Primary G',{exact:true}).press('Tab');
+ await picker().getByLabel('Shiny Long Velvet Hair Primary B',{exact:true}).fill('186');await picker().getByLabel('Shiny Long Velvet Hair Primary B',{exact:true}).press('Tab');
+ await check('RGB fields apply the reference pink exactly',JSON.stringify((await colors())[0])===JSON.stringify([242/255,137/255,186/255]));
+ const pink=await colors();
+ await picker().getByRole('button',{name:'Shiny Long Velvet Hair Accent channel',exact:true}).click();
+ await picker().getByLabel('Shiny Long Velvet Hair Accent R',{exact:true}).fill('45');await picker().getByLabel('Shiny Long Velvet Hair Accent R',{exact:true}).press('Tab');
+ await check('editing accent preserves primary and shade',JSON.stringify((await colors())[0])===JSON.stringify(pink[0])&&JSON.stringify((await colors())[2])===JSON.stringify(pink[2])&&(await colors())[1][0]===45/255);
+ await picker().getByRole('button',{name:'Shiny Long Velvet Hair Primary channel',exact:true}).click();
+ const plane=picker().getByRole('slider',{name:'Shiny Long Velvet Hair Primary hue and saturation',exact:true});await plane.scrollIntoViewIfNeeded();const box=await plane.boundingBox();
+ await page.mouse.move(box.x+box.width*0.15,box.y+box.height*0.2);await page.mouse.down();await page.mouse.move(box.x+box.width*0.7,box.y+box.height*0.4,{steps:8});await page.mouse.up();
+ await check('dragging the spectrum updates the color continuously',JSON.stringify((await colors())[0])!==JSON.stringify(pink[0]));
+ await plane.focus();const previous=await colors();await plane.press('ArrowRight');
+ await check('spectrum supports keyboard hue changes',JSON.stringify((await colors())[0])!==JSON.stringify(previous[0]));
+ const brightness=picker().getByRole('slider',{name:'Shiny Long Velvet Hair Primary brightness',exact:true});
+ await brightness.fill('0.6');
+ await check('brightness slider changes value',Math.abs(Math.max(...(await colors())[0])-0.6)<1e-6);
+ await picker().getByLabel('Shiny Long Velvet Hair Primary R',{exact:true}).fill('999');await picker().getByLabel('Shiny Long Velvet Hair Primary R',{exact:true}).press('Tab');
+ await check('RGB values are bounded to 255', (await colors())[0][0]===1);
+ await picker().scrollIntoViewIfNeeded();await page.screenshot({path:evidence+'/custom-desktop.png'});
+ await page.getByRole('button',{name:'Import / export',exact:true}).click();await page.getByRole('button',{name:'Export current outfit',exact:true}).click();
+ const code=await page.getByLabel('Outfit code',{exact:true}).inputValue();
+ await page.locator('.studio-settings summary').click();await page.getByRole('button',{name:'Clear outfit',exact:true}).click();await ready();
+ await page.getByRole('button',{name:'Import outfit',exact:true}).click();await ready();
+ await expect(page.getByText('Outfit imported. All items and saved appearance settings restored.',{exact:true})).toBeVisible();
+ await page.getByRole('button',{name:'Export current outfit',exact:true}).click();
+ await check('custom colors survive an exact export/import round trip',await page.getByLabel('Outfit code',{exact:true}).inputValue()===code);
+ await page.getByRole('button',{name:'Close sharing',exact:true}).click();await hair();
+ await picker().getByRole('radio',{name:'Custom',exact:true}).check();
+ await check('custom picker displays the imported RGB',await picker().getByLabel('Shiny Long Velvet Hair Primary R',{exact:true}).inputValue()==='255');
+ await page.setViewportSize({width:390,height:844});await picker().scrollIntoViewIfNeeded();await page.screenshot({path:evidence+'/custom-mobile.png'});
+ await picker().getByRole('radio',{name:'Basic colors',exact:true}).check();await picker().getByRole('searchbox').fill('');await picker().scrollIntoViewIfNeeded();await page.screenshot({path:evidence+'/basic-mobile.png'});
+ await picker().getByRole('searchbox').fill('Royal Purple');await picker().getByRole('button',{name:'Royal Purple',exact:true}).click();
+ await check('mobile swatch selection works without overflow',await picker().getByRole('button',{name:'Royal Purple',exact:true}).getAttribute('aria-pressed')==='true'&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await picker().getByRole('button',{name:'Reset colors',exact:true}).click();
+ await check('reset restores the authored color channels',JSON.stringify(await colors())===JSON.stringify(before));
+ await page.getByRole('button',{name:/^Hair:/}).click();
+ await page.getByRole('searchbox', {name:'Find an item',exact:true}).fill('10200070');
+ const curly=page.getByRole('button',{name:/^Equip /}).first();await expect(curly).toBeEnabled();await curly.click();await ready();await page.locator('.customize summary').click();
+ await picker().getByRole('radio',{name:'Custom',exact:true}).check();
+ await expect(picker().getByRole('button',{name:'Curly Ponytail Accent channel',exact:true})).toBeDisabled();
+ await check('zero-use Accent is disabled and explained for Curly Ponytail',await picker().getByText('Accent is not used by this item.',{exact:true}).isVisible());
+ await picker().scrollIntoViewIfNeeded();await page.screenshot({path:evidence+'/unused-accent.png'});
+ await check('no browser errors',errors.length===0);
+} catch(e){errors.push(e.stack??String(e));process.exitCode=1;await page.screenshot({path:evidence+'/failure.png',timeout:10000}).catch(()=>{});}
+finally {writeFileSync(evidence+'/report.json',JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({checks:checks.length,errors},null,2));await browser.close();}
