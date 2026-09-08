@@ -12,6 +12,12 @@ existing Handbook projects, rather than producing only a proposal.
   Preserve local work. Do not reset, auto-stash, or switch branches to discard it.
 - Use pnpm and Linux `python3`. Existing pnpm is under
   `/home/ubuntu/.local/share/pnpm`; add that directory to the shell PATH if needed.
+- Oracle has .NET 9/10 runtimes but no .NET 8 runtime. The converter targets
+  net8.0 and compiles with the installed SDK. Use command-scoped
+  `DOTNET_ROLL_FORWARD=Major dotnet run --project NifToGltf.Tests` for its tests
+  and the same prefix when invoking the converter. This was verified with 33
+  native tests passing. Do not install a runtime or change machine configuration
+  just to reproduce this checked setup.
 - Read STATUS.md, HAIR-PLACEMENT.md, HAIR-FOLLOWUP.md, SASSY-PIGTAILS.md,
   BROWSER-HAIR.md, HAIR-MOTION.md, HAT-PLACEMENT.md and ASTHORIA-DRESS.md here.
 - UI references are `ui-reference-1.png` and `ui-reference-2.png` beside this file.
@@ -155,3 +161,15 @@ database, account requirement, backend writes or cloud persistence for this.
 
 Report implemented results, runtime evidence, remaining unavailable hairs and
 specific visual limitations. Do not claim game-client parity from tests alone.
+
+## Setup verification on Oracle
+
+Both checkouts were fast-forwarded after the local hair commits were pushed.
+The copied preview/source/evidence/snapshot set contains 141 files, all verified
+against local SHA-256 hashes. The checksum list is at backend
+`NifToGltf/obj/oracle-handoff-hashes.sha256`, relative to `/home/ubuntu/repos`.
+Oracle frontend tests passed 155 with 15 skipped, and `pnpm check` reported zero
+errors/warnings. Native converter tests passed 33 using the roll-forward above;
+five KFM-reference tests also passed. Release-14 manifest/catalog hashes match
+the recorded Windows baseline. No Handbook servers were started. An existing
+GenGame preview uses port 4173; do not stop it or assume it is the Handbook.
