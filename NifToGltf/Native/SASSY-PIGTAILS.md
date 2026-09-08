@@ -5,8 +5,10 @@ at `http://localhost:5173/outfits?hairPreview=sassy`. After explicit authorizati
 both tail attachments were exported into `static/gltf/sassy-pigtails-preview-01/`
 in the frontend. Release 14 supplies the existing A/C/D base hair and remains
 unchanged, including its inventories and review hashes. The normal catalog still
-marks this hair unavailable. Physics motion remains unimplemented: the preview
-tails hold their rigid rest pose, without gravity, bending or sway.
+marks this hair unavailable. The subsequent [browser motion](BROWSER-HAIR.md)
+adds optional approximate gravity and sway, with exact authored-pose restoration
+when disabled. The earlier [motion experiment](HAIR-MOTION.md) provides separate
+client-solver sample playback. Full client motion remains unimplemented.
 
 ## Explicit second-tail reference
 
@@ -126,6 +128,13 @@ Export provenance is in the separate preview's `preview-provenance.json`.
 Runtime checks and captures are in `obj/hair-investigation/sassy/renders/`.
 Before-framing captures are preserved there under `before-framing/`.
 The remaining appearance gap is substantial: rest-pose tails can point upward
-or sideways and intersect hats. Client PhysX scene settings, solver stepping and
-destination updates still need implementation and running-client comparison.
-No approximate browser physics or game-client visual parity is claimed.
+or sideways and intersect hats. The optional native motion sample also retains
+the upward starting orientation. Its successful solver/playback checks do not
+resolve this gap. The ponytail attachment controller performs additional
+orientation calculations, but reviewed KMS code gates that body on the
+`Equip_Change_Idle_A` animation. It is not a verified general idle-gravity fix.
+The XML-to-runtime loading connection remains untraced; see the bounded
+follow-up in [HAIR-MOTION.md](HAIR-MOTION.md). Client PhysX scene settings and
+controller integration still need verification and running-client comparison.
+The later browser approximation is documented in [BROWSER-HAIR.md](BROWSER-HAIR.md).
+Game-client visual parity is not claimed.

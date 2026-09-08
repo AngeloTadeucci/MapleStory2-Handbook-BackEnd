@@ -57,6 +57,7 @@ public:
     void print(const char* message) override { std::fputs(message, stderr); }
 };
 
+#ifndef PHYSX284_NO_PROBE_MAIN
 int wmain(int argc, wchar_t** argv) {
     if (argc < 2) {
         std::fputs("Usage: probe_physx284 <client DLL directory> [cooked convex blobs...]\n", stderr);
@@ -124,3 +125,4 @@ int wmain(int argc, wchar_t** argv) {
     FreeLibrary(core);
     return success ? 0 : 1;
 }
+#endif

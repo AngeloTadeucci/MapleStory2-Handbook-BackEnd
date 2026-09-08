@@ -79,9 +79,9 @@ No guessed second tail or texture substitution was enabled.
 
 | Hair | Remaining evidence |
 |---|---|
-| 10200010 Sassy Pigtails | Both KFM identities explicitly reference the existing P_A model. A separate authorized local preview now enables both tails at `/outfits?hairPreview=sassy`, with 59 runtime checks and 18 inspected captures. Release 14 still lacks tail geometry. See [Sassy details](SASSY-PIGTAILS.md). Physics remains absent. |
-| 10200011 Banded Twin Tails | P2_A source absent. P_A contains physics. |
-| 10200012 Cutesy Twin Tails | P2_A source absent. P_A has no physics blocks. |
+| 10200010 Sassy Pigtails | Both KFM identities explicitly reference the existing P_A model. The separate preview has both tails and optional approximate [browser motion](BROWSER-HAIR.md). Release 14 still lacks tail geometry. |
+| 10200011 Banded Twin Tails | P2_A KFM explicitly references the existing P_A NIF. Both tails now render in the separate [twin-tail preview](BROWSER-HAIR.md). P_A contains physics; browser motion is not enabled for this hair. |
+| 10200012 Cutesy Twin Tails | P2_A KFM explicitly references the existing P_A NIF. Both tails now render in the separate [twin-tail preview](BROWSER-HAIR.md). P_A has one skin bone and no physics blocks; its tails remain static. |
 | 10200031 Curled Pigtails | Both ponytail material records lack the required direction-texture binding. |
 | 10200070 Curly Ponytail | KF expects absent Point01 NonAccum. Raw P_A has physics. |
 | 10200159 Star Candy Hair | KFM references absent A.kf; raw A/C/D NIFs contain physics. |

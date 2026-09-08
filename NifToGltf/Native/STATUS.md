@@ -13,8 +13,24 @@ reference and adds narrow posed NonAccum target handling. A separately authorize
 local export now enables both tails at `/outfits?hairPreview=sassy`, using the
 existing release-14 base hair. Both glTFs validate and all 59 runtime checks pass;
 18 Sassy captures and 20 refreshed snapshot-outfit captures were inspected in T3.
-Tails remain rigid in their rest pose. Physics is absent and client visual parity
-is not established. Release 14 and the normal catalog remain unchanged.
+Tails use their rest pose by default. The subsequent [local motion sample](HAIR-MOTION.md)
+replays actual client-solver output with explicitly experimental scene settings.
+The tails still point upward in that preset-1 sample. A new T3 comparison verifies
+that authored preset 3 points downward, with six front/side captures and saved dye
+preserved. The local KMS executable supplied more attachment-transform evidence
+without Ghidra. Ghidra now has the matching KMS program open. Reviewed code gates
+the investigated ponytail customization controller on `Equip_Change_Idle_A`, so
+it does not establish a missing general idle-gravity step. The final client
+loading path remains unresolved. Playback checks do not establish correct client
+hair orientation.
+A subsequent user-authorized [browser approximation](BROWSER-HAIR.md) adds
+interactive gravity and sway for Sassy, with a simple head collider and bounded
+swing. Banded and Cutesy Twin Tails are also available as separate static previews
+at `/outfits?hairPreview=twins`, using explicit second-tail KFM references.
+The latest full frontend suite passes 155 tests with 15 skipped; typecheck is
+clean. The 27 motion checks and 53 twin-tail checks pass, with 32 captures reviewed.
+Exact client physics and visual parity remain unimplemented.
+Release 14 and the normal catalog remain unchanged.
 
 Local follow-up: [authored hair placement and client evidence](HAIR-PLACEMENT.md)
 adds source placement presets for 25 preview hairstyles without changing release

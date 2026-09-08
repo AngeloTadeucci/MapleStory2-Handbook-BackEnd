@@ -245,9 +245,10 @@ ordering and the flag selecting the destination priority remain unknown.
 `0x14143fe10` supplies group 0 and four zero mask words to the existing-prop
 helper. `0x141689d00` forwards the group and mask to each actor. This does not
 establish the scene's filter operations or the resulting collision policy.
-`0x14168a5a0` caches default and item scenes at indices 0 and 1. Hair helpers
-lock index 0, which suggests the default scene but does not prove the prop's
-scene assignment. The actual scene-name write for hair remains unconfirmed.
+`0x14168a5a0` caches default and item scenes at indices 0 and 1. A later inspection
+of `0x14168a540` shows it forwards only the SDK-manager pointer to a global lock;
+the extra call-site argument is not a scene index. The earlier inference from
+that argument is withdrawn. The actual scene-name write for hair is unconfirmed.
 
 The SDK parameter writes in `0x142063180` are debug visualization settings.
 Nxp.h identifies parameter 9 as NX_VISUALIZATION_SCALE, and the other nine as
@@ -318,3 +319,95 @@ The reviewed generic binder and setup evidence is retained in
 `evidence/material-final-hop-queries.json` under the PrivateMaple2 scratch folder.
 The focused-pass audit found one out-of-allowlist inspection request,
 list_tool_groups, which was denied. No mutation call was found in these runs.
+
+## Sassy motion follow-up
+
+Claude Opus session `a2e642e0-aba3-47d1-9641-6c63b2dea911` ran from PrivateMaple2
+through the explicit CLI inspection allowlist. The audit records 62 calls, with
+zero permission denials and no mutation calls. The raw report claims 33 queries;
+that count does not match the recorded calls. Evidence is in
+`.scratch/handbook-hair-ghidra/evidence/sassy-motion-queries.json`.
+
+The parent checked returned decompilation for `0x1414d7990`: it constructs an
+instance prefix and appends the scene identifier. This supports treating
+PhysXDefaultSceneName and PhysXItemSceneName as scene names. It does not prove
+that no entity data can override scene properties. The report's summary says
+settings are never overridden, while its uncertainty section admits property
+writers were not enumerated. That stronger absence claim is not adopted.
+
+The parent also checked `0x14168a540` and `0x14168b270`: these forward the SDK
+manager and lock its critical section. Their extra caller argument is not scene
+selection. The earlier default-scene inference is withdrawn above.
+
+Returned `0x141ef8550` reads actor global poses. With a parent actor, it reads
+both poses, scales translations, and calls `0x141ef8a20` to form the destination
+transform. Rotation entries are copied separately. This supports a world-to-local
+playback adapter, but does not establish the complete client task schedule.
+
+The matched-joint path in `0x1416962d0` builds normal/axis from rotated canonical
+X/Z vectors and replaces actor 0's frame. The parent checked the relevant returned
+calls. However, local Sassy XML contains no jointangle records at all. The prompt
+and returned Sassy-specific recommendation were wrong on that point. No joint
+frame or soft-limit override is applied to the Sassy motion experiment.
+
+The local [motion sample](HAIR-MOTION.md) uses the actual client DLL, source hulls,
+actors and D6 joints. Its fixed-step timing and gravity are explicitly experimental.
+Scene assignment, actual property overrides, scheduler order, the simulate extra
+second, source buffering, filtering, and running-client comparison remain open.
+
+## KMS reopened: placement review
+
+Opus session `797821b0-8884-41f3-9d56-c6fc05b29d21` ran from PrivateMaple2
+against the existing `/KMS2x64/KMS2x64` program. The listing and 32 inspected
+bytes at `0x141202480` identify the checked KMS location. They do not establish
+whole-image equality with the local executable. Three passes recorded 23, 12
+and 2 inspection calls, with no permission denials or mutation calls. Their
+query audits are `evidence/sassy-kms-loading-20260908-queries.json`,
+`evidence/sassy-kms-loading-review-20260908-queries.json` and
+`evidence/sassy-kms-exact-20260908-queries.json`. Decompilations and raw reports
+are in `evidence/sassy-kms-loading/` under the same ignored scratch directory.
+
+The parent reviewed raw code and local PE instructions. These findings survive
+that review:
+
+- RTTI for vtable `0x142f4e310` identifies `CPonyTailController`, derived from
+  `CItemCustomizeController`. Function `0x141693210` occupies slot `+0x100`.
+- That function's body requires equality with animation name
+  `Equip_Change_Idle_A`. The wrapper `0x1402a5b40` returns Compare != 0 and the
+  caller enters on false. The parent traced imported MFC ordinal 2899 in the
+  local `mfc140.dll` to `_mbscmp`, independently confirming equality semantics.
+  This body is not an unconditional idle-gravity step. Other dispatch and the
+  complete normal hair update schedule remain untraced.
+- Asset parser `0x140543ca0` reads `zalign` at `+0x28`, `placeable` at `+0x50`
+  and a per-asset custom list at `+0x58`. Constructor `0x140543a90` initializes
+  `zalign` to zero. Custom parser `0x140266aa0` reads position at `+0x18`,
+  rotation at `+0x24` and the icon string at `+0x30`. Each Sassy tail has three
+  placement choices; the first two list entries are not the two tails.
+- The saved-transform branch in `0x141422b30` requires the separate query
+  `0x14053c620` to return 13. That query obtains a different item object through
+  `0x1411dc7f0`, `CItem::GetData` and `0x140527840`. Equal numeric offsets do not
+  make it the asset parser's `zalign` field. Do not use this conditional branch
+  as evidence of general saved hair transforms. Group 1/type 13 is hat in the
+  repository's ItemType model; completing the client metadata producer trace
+  would establish that interpretation independently.
+- Function `0x141b6dea0` unpacks integer bytes and multiplies them by 1/255.
+  The values supplied through `0x14143e3e0` are packed colors, not hair lengths
+  or placement vectors. Its three-entry loop does not establish tail count.
+- The source NIF's Scene Root is identity and Point01 is nearly identity. A
+  discarded 180-degree parent rotation is not present in these inspected nodes.
+
+The reports require explicit corrections. Bytes `00 00 b4 42` represent 90.0,
+not 180.0. The first report inverted the animation guard in prose. The second
+report conflated asset and item objects, color and length data, and custom-list
+entries and tails. Its CHairExtraData offsets are relative to a decompiler
+substructure, not verified absolute object offsets. The parent requested exact
+functions after repeated interpretation errors and adopted no transform patch
+from those reports.
+
+The remaining placement gap is the transfer from the selected XML custom record
+or saved hair appearance into the model's initial transforms. The inspected
+Point01 lookup `0x1411dd700` establishes a node search, not that transfer.
+Neither these parser functions nor the customization controller establish the
+final normal-idle pose. No frontend behavior, release asset or motion bake
+changed in this pass. The preceding T3 three-preset comparison remains the
+visual evidence, with its limitations recorded in [HAIR-MOTION.md](HAIR-MOTION.md).
