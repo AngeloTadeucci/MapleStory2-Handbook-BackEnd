@@ -71,3 +71,36 @@ and lacks full game-client appearance acceptance.
 
 No R2 upload, deletion, CDN purge, or application deployment was performed by
 this preparation. The compiled local preview remains on port 4011.
+
+## Publication completed, 2026-09-09
+
+The prepared delta was uploaded to `r2:handbook-gltfs/` after a fresh remote
+inventory comparison found no content drift. All 16,144 objects, totaling
+16,509,925,554 bytes, are published. No objects were deleted. The 8,751 rollback
+objects and their captured metadata remain in the package.
+
+Seven model uploads initially received R2 HTTP 500 responses. A targeted retry
+succeeded for all seven before the catalogs were published. A subsequent S3 HEAD
+check verified the size, MD5, MIME type, cache policy, and absence of unexpected
+content encoding for every uploaded object.
+
+Public GET checks verified SHA-256, MIME, and CORS for ten objects: all seven root
+metadata files, the new glasses model, one dependency JSON, and one PNG. Both
+11120100 and 11150058 appear in the published simulator catalog and reference
+`wardrobe-11516df22de324616a39de19`. The live outfits page responds with HTTP 200;
+its published JavaScript includes native manifest support and `sceneAmbient`.
+An exact deployed Git revision and a post-upload browser equip flow were not
+verified in this publication step.
+
+The sampled PNG GET response uses `public, max-age=14400, must-revalidate` at
+Cloudflare, despite the verified zero-age origin policy. Its bytes match the
+package. The other nine public samples use the expected revalidation policy.
+Cache statuses were DYNAMIC or REVALIDATED. No Cloudflare cache purge or cache
+configuration change was performed; CDN behavior outside these samples remains
+unverified.
+
+The package contains `upload-receipt.json` for all 16,144 origin checks and
+`public-verification.json` for the public GET checks. The Windows audit directory
+`NifToGltf/obj/pc-handoff-audit/` retains those receipts, the fresh pre-upload
+inventory, the actual upload log, and the targeted retry list. No application
+was deployed or restarted during this upload.
