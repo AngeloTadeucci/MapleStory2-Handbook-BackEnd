@@ -37,6 +37,9 @@ bytes and captured serving metadata for replacements. The complete R2 listing,
 source revisions, and CDN preflight evidence are retained beside the plan.
 
 `preview-upload.ps1` rehearses the ordered copies with `--dry-run` always enabled.
+Windows blocks unsigned scripts launched directly from the WSL network path.
+A local copy is available at `NifToGltf/obj/pc-handoff-audit/preview-upload.ps1`.
+Run that copy with `-PackageRoot` set to the full Windows package path above.
 The plan uses `rclone copy`, never sync or purge. Dependencies precede models,
 then auxiliary metadata, the native manifest, simulator catalog, and inventory.
 All uploaded mutable objects use `public, max-age=0, must-revalidate` and explicit

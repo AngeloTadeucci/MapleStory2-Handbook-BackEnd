@@ -157,11 +157,12 @@ def finalize(output, metadata):
                 remoteListingSha256=hashlib.sha256((output / 'remote-listing.json').read_bytes()).hexdigest(), prepared=True)
     write(output / 'publish-plan.json', plan)
     (output / 'preview-upload.ps1').write_text('''# Read-only upload rehearsal. This script always uses --dry-run.
+param([string]$PackageRoot = $PSScriptRoot)
 $ErrorActionPreference = 'Stop'
-$plan = Get-Content (Join-Path $PSScriptRoot 'publish-plan.json') -Raw | ConvertFrom-Json
+$plan = Get-Content (Join-Path $PackageRoot 'publish-plan.json') -Raw | ConvertFrom-Json
 if (-not $plan.prepared -or $plan.remote -ne 'r2:handbook-gltfs/') { throw 'Unprepared or unexpected destination' }
 foreach ($group in $plan.groups | Sort-Object phase, files) {
-    & rclone copy (Join-Path $PSScriptRoot 'assets') $plan.remote --dry-run --ignore-times --no-traverse --s3-no-check-bucket --files-from-raw (Join-Path $PSScriptRoot $group.files) --metadata --metadata-set "content-type=$($group.contentType)" --metadata-set "cache-control=$($plan.cacheControl)"
+    & rclone copy (Join-Path $PackageRoot 'assets') $plan.remote --dry-run --ignore-times --no-traverse --s3-no-check-bucket --files-from-raw (Join-Path $PackageRoot $group.files) --metadata --metadata-set "content-type=$($group.contentType)" --metadata-set "cache-control=$($plan.cacheControl)"
     if ($LASTEXITCODE -ne 0) { throw "Rehearsal failed for $($group.files)" }
 }
 ''')
@@ -183,6 +184,8 @@ bytes and current serving metadata. Revalidate remote hashes and metadata immedi
 before cutover because this is a preparation snapshot.
 
 Run `preview-upload.ps1` from Windows for a dry run. It always passes `--dry-run`.
+When the package is accessed through the WSL network path, copy the script to a
+local Windows folder and pass `-PackageRoot` with the full WSL package path.
 When publication is authorized, use the same ordered groups and rclone copy options
 without that flag. Do not use sync or purge. Correct MIME types and
 `{CACHE_CONTROL}` are explicit for every upload. Rclone's S3
