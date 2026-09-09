@@ -1,0 +1,180 @@
+{
+  "sources": [
+    "LithMS2-XML/Xml/emotion/common/femalecustom.xml",
+    "LithMS2-XML/Xml/emotion/common/malecustom.xml",
+    "LithMS2-XML/Xml/skill/90/*.xml",
+    "LithMS2-XML/Xml/string/en/skillname.xml"
+  ],
+  "emotes": {
+    "emotion_angry_a": {
+      "skillId": 90200001,
+      "name": "Anger",
+      "emotion": "angry"
+    },
+    "emotion_happy_a": {
+      "skillId": 90200006,
+      "name": "Like",
+      "emotion": "happy"
+    },
+    "emotion_calm_a": {
+      "skillId": 90200007,
+      "name": "Don't Ask Me",
+      "emotion": "calm"
+    },
+    "emotion_rest_idle_a": {
+      "skillId": 90200010,
+      "name": "Dreamy",
+      "emotion": "rest"
+    },
+    "emotion_hello_a": {
+      "skillId": 90200011,
+      "name": "Greet",
+      "emotion": "hello"
+    },
+    "emotion_laugh_a": {
+      "skillId": 90200012,
+      "name": "Mock",
+      "emotion": "Laugh_A"
+    },
+    "emotion_dance_a": {
+      "skillId": 90200013,
+      "name": "Crazy Dance",
+      "emotion": "Dance_A"
+    },
+    "emotion_sleep_idle_a": {
+      "skillId": 90200016,
+      "name": "Sleep",
+      "emotion": "Sleep_A"
+    },
+    "emotion_dance_b": {
+      "skillId": 90200017,
+      "name": "Para Para Dance",
+      "emotion": "Dance_B"
+    },
+    "emotion_suprise_a": {
+      "skillId": 90200023,
+      "name": "Surprise",
+      "emotion": "suprise_A"
+    },
+    "emotion_refusal_a": {
+      "skillId": 90200024,
+      "name": "Reject",
+      "emotion": "refusal_A"
+    },
+    "emotion_provoke_a": {
+      "skillId": 90200025,
+      "name": "Taunt",
+      "emotion": "provoke_A"
+    },
+    "emotion_sulk_a": {
+      "skillId": 90200026,
+      "name": "Sulk",
+      "emotion": "sulk_A"
+    },
+    "emotion_handkiss_a": {
+      "skillId": 90200027,
+      "name": "Blow Kiss",
+      "emotion": "handkiss_A"
+    },
+    "emotion_dance_c": {
+      "skillId": 90200029,
+      "name": "Tap Dance",
+      "emotion": "dance_C"
+    },
+    "emotion_dance_d": {
+      "skillId": 90200030,
+      "name": "Shimmy",
+      "emotion": "dance_D"
+    },
+    "emotion_cry_a": {
+      "skillId": 90200031,
+      "name": "Cry",
+      "emotion": "cry_A"
+    },
+    "sit_ground_idle_a": {
+      "skillId": 90200041,
+      "name": "Sit",
+      "emotion": "Sit_Ground_A"
+    },
+    "emotion_eureka_a": {
+      "skillId": 90200043,
+      "name": "Epiphany",
+      "emotion": "Eureka_A"
+    },
+    "emotion_think_a": {
+      "skillId": 90200044,
+      "name": "Worry",
+      "emotion": "Think_A"
+    },
+    "emotion_point_a": {
+      "skillId": 90200045,
+      "name": "Big Meanie",
+      "emotion": "Point_A"
+    },
+    "emotion_dance_e": {
+      "skillId": 90200046,
+      "name": "Wave Dance",
+      "emotion": "dance_E"
+    },
+    "emotion_dance_f": {
+      "skillId": 90200047,
+      "name": "Spin Dance",
+      "emotion": "dance_F"
+    },
+    "emotion_dance_g": {
+      "skillId": 90200048,
+      "name": "Bunny Dance",
+      "emotion": "dance_G"
+    },
+    "emotion_dance_h": {
+      "skillId": 90200049,
+      "name": "Shuffle Dance",
+      "emotion": "dance_H"
+    },
+    "emotion_bow_a": {
+      "skillId": 90200053,
+      "name": "Kowtow",
+      "emotion": "Bow_A"
+    },
+    "emotion_yeah_a": {
+      "skillId": 90200092,
+      "name": "High Five",
+      "emotion": "Yeah_A"
+    },
+    "emotion_dance_t": {
+      "skillId": 90200093,
+      "name": "Hop Shuffle Boogie",
+      "emotion": "Dance_T"
+    },
+    "emotion_cheer01_a": {
+      "skillId": 90200098,
+      "name": "Cheer Up",
+      "emotion": "Cheer01_A"
+    },
+    "emotion_dance_v": {
+      "skillId": 90200115,
+      "name": "Monkey Dance",
+      "emotion": "Dance_V"
+    },
+    "emotion_gymnastics_a": {
+      "skillId": 90200145,
+      "name": "Warm Up",
+      "emotion": "Gymnastics_A"
+    },
+    "emotion_clapping_a": {
+      "skillId": 90210001,
+      "name": "Applause",
+      "emotion": "Clapping_A"
+    },
+    "emotion_happy_b": {
+      "skillId": 90200186,
+      "name": "Shall We Fly?",
+      "emotion": "Happy_B"
+    },
+    "emotion_choice_a": {
+      "skillId": 90200008,
+      "name": "Dynamic Pose",
+      "emotion": "pretty"
+    }
+  }
+}

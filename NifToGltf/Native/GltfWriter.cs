@@ -221,14 +221,17 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
         JsonObject pbr = new() { ["metallicFactor"] = 0, ["roughnessFactor"] = 1 };
         JsonObject material = new() { ["name"] = node.Name, ["pbrMetallicRoughness"] = pbr };
         JsonObject lighting = new() { ["specularEnabled"] = false };
+        JsonObject renderState = new();
         HashSet<string> seen = [];
         foreach (int property in properties) {
             NifReader r = document.Reader(property);
             string type = document.Blocks[property].Type;
             if (!seen.Add(type)) continue;
-            if (type is not ("NiMaterialProperty" or "NiTexturingProperty" or "NiAlphaProperty" or "NiSpecularProperty")) continue;
+            if (type is not ("NiMaterialProperty" or "NiTexturingProperty" or "NiAlphaProperty" or "NiSpecularProperty" or "NiZBufferProperty")) continue;
             document.ObjectNet(r);
-            if (type == "NiSpecularProperty") {
+            if (type == "NiZBufferProperty") {
+                renderState["depthFlags"] = r.U16();
+            } else if (type == "NiSpecularProperty") {
                 lighting["specularEnabled"] = (r.U16() & 1) != 0;
             } else if (type == "NiMaterialProperty") {
                 Vector3 ambient = r.Vector();
@@ -245,6 +248,9 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             } else if (type == "NiAlphaProperty") {
                 ushort flags = r.U16();
                 byte cutoff = r.Byte();
+                // glTF BLEND cannot also express the source alpha test or depth writes.
+                renderState["alphaFlags"] = flags;
+                renderState["alphaThreshold"] = cutoff;
                 // The face uses alpha testing AND source-alpha blending. Mask alone makes
                 // every zero-alpha texel opaque when its source threshold is zero.
                 if ((flags & 1) != 0) material["alphaMode"] = "BLEND";
@@ -280,6 +286,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             r.Finish();
         }
         ApplyMaterialColors(node, material, pbr);
+        if (renderState.Count > 0) material["extras"]!["nifRenderState"] = renderState;
         foreach (int extra in node.ExtraData.Where(id => document.Blocks[id].Type == "NiFloatExtraData")) {
             NifReader r = document.Reader(extra);
             string name = document.Name(r);

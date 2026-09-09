@@ -1,0 +1,61 @@
+{
+  "release": "simulator-release-15",
+  "date": "2026-09-09",
+  "frontendCommit": "d7995a5f42903e151c9611ad93d139bfb4e9ddd4",
+  "assets": {
+    "remote": "r2:handbook-gltfs/simulator-release-15",
+    "publicUrl": "https://cdn.tadeucci.dev/simulator-release-15/",
+    "contentFiles": 12171,
+    "contentBytes": 5520642415,
+    "inventorySha256": "daa2afc931a11e0ff59c0341bb9bb4c810628408aa6e9462740e3720fa7f3317",
+    "remoteMatchingFilesIncludingInventory": 12172,
+    "remoteDifferences": 0,
+    "cleanRebuildMatchesCandidate": true,
+    "cdnInventoryMatches": true,
+    "cdnCors": "*",
+    "cacheControl": "public, max-age=31536000, immutable",
+    "mimeTypes": {
+      "gltf": "model/gltf+json",
+      "json": "application/json",
+      "png": "image/png"
+    }
+  },
+  "database": {
+    "schemaChanged": false,
+    "parserChanged": false,
+    "readOnlyQuerySucceeded": true,
+    "itemRows": 39553,
+    "rebuildRequired": false,
+    "writesPerformed": false,
+    "backupCreated": false
+  },
+  "verification": {
+    "productionBuild": "passed",
+    "svelteCheck": "0 errors, 0 warnings",
+    "frontendUnitTests": 209,
+    "modelBindingTests": 9328,
+    "converterTests": 34,
+    "packagingTests": 4,
+    "browserChecks": [
+      "Equipped 10200047: Casual Bun",
+      "Equipped 11300750: Scarlet Rosy Hairpin (F)",
+      "Equipped 11400367: Spectral Rage Top",
+      "Equipped 11500004: Distinct Leather Leg Guard",
+      "female: 40 poses, expressions, backgrounds, outfit code round-trip, PNG export",
+      "Equipped 10200001: Outlandish Locks",
+      "Equipped 11304790: Illusionist Feather Hat (M)",
+      "Equipped 11400367: Spectral Rage Top",
+      "Equipped 11500004: Distinct Leather Leg Guard",
+      "male: 40 poses, expressions, backgrounds, outfit code round-trip, PNG export",
+      "Mobile: 12 items per page, no horizontal overflow"
+    ],
+    "browserErrors": [],
+    "cdnAssetsRequestedInBrowser": 55
+  },
+  "limitations": [
+    "Experimental Sassy, twin-tail and Curly Ponytail preview bundles remain local and are excluded from production.",
+    "Source render-state metadata was updated for Casual Bun only.",
+    "The live Handbook app has not been deployed by this preparation."
+  ],
+  "mergeTarget": "master"
+}

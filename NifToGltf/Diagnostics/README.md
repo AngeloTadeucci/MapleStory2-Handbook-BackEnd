@@ -321,3 +321,139 @@ effect-extension report. It never copies private character profiles. The selecte
 frontend release is src/lib/outfits/simulator-release.json. For source-backed
 frontend effect tests, set SIMULATOR_EFFECT_FILE to the candidate's
 effects/hair-twinkle-a.json, then run tests/cosmeticEffect.test.ts with Vitest.
+
+### Character animation extension
+
+`character-animation-plan.json` selects 40 source clips for each player body,
+including 32 additions to release 14. `character-animation-names.json` records
+34 localized emote names and skill IDs. Names are joined from the client skill
+`basic/kinds@emotion`, the male/female emotion animation definitions, and English
+`skillname.xml`. Locomotion and fitting-room clips have descriptive UI labels.
+
+From the backend root on Linux, extract only the selected clips into a fresh
+`SimulatorAnimations` directory:
+
+```bash
+python3 - <<'PY'
+import json, os, re, subprocess
+plan = json.load(open('NifToGltf/Diagnostics/character-animation-plan.json'))
+clips = plan['models'][0]['clips']
+pattern = r'^(female|male)/(' + '|'.join(map(re.escape, clips)) + r')\.kf$'
+subprocess.run(['dotnet', 'run', '--project', 'NifToGltf.Archives', '--',
+    'Maple2Storage/Resources/KMS2-Data/Resource/Model/Character.m2d', pattern,
+    'Maple2Storage/Resources/SimulatorAnimations'], check=True,
+    env={**os.environ, 'DOTNET_ROLL_FORWARD': 'Major'})
+PY
+DOTNET_ROLL_FORWARD=Major dotnet run --project NifToGltf -- --native --batch --input Maple2Storage/Resources --textures Maple2Storage/Resources/Models/Textures --manifest NifToGltf/Diagnostics/character-animation-plan.json --output NifToGltf/obj/character-animations/models
+python3 NifToGltf/Diagnostics/package_character_animations.py --base ../MapleStory2-Handbook/static/gltf/simulator-release-14 --converted NifToGltf/obj/character-animations/models --output ../MapleStory2-Handbook/static/gltf/simulator-release-15
+```
+
+Use fresh conversion and release directories. Packaging verifies the base
+inventory, preserves the reviewed body textures, and writes a new inventory.
+The animation packager also preserves the base body materials when the converter
+adds render-state metadata. Separate render-state updates require their own review.
+Assets under `static/gltf` are ignored by Git and must accompany deployment;
+changing the frontend release pointer alone does not publish them.
+
+From the frontend root, verify all clips numerically:
+
+```bash
+CHARACTER_ANIMATION_DIR=static/gltf/simulator-release-15 pnpm exec vitest run tests/characterAnimations.test.ts tests/nativeCharacterAnimations.test.ts
+pnpm check
+```
+
+With the existing `/outfits` dev server running, execute
+`node NifToGltf/Diagnostics/outfit_character_animations.mjs` from the backend.
+It exercises both bodies, equipped clothing, all poses, pause/resume, and the
+mobile selector. `OUTFIT_URL` overrides the local URL and `ANIMATION_EVIDENCE`
+overrides the screenshot/report directory. Numerical tests verify skeleton
+motion and finite skin deformation, not visual appearance or client parity.
+
+Pose face playback uses the same client's emotion definitions and face textures.
+After packaging release 15, add the face extension before publishing the assets:
+
+```bash
+DOTNET_ROLL_FORWARD=Major dotnet run --no-build --project NifToGltf.Archives -- Maple2Storage/Resources/KMS2-Data/Xml.m2d 'emotion/common/(female|male)custom.xml$' NifToGltf/obj/character-animations/name-sources
+DOTNET_ROLL_FORWARD=Major dotnet run --no-build --project NifToGltf.Archives -- Maple2Storage/Resources/KMS2-Data/Resource/Model/Textures.m2d '^item_face/(fc|mc)_face_.*\.dds$' NifToGltf/obj/character-animations/all-face-textures
+DOTNET_ROLL_FORWARD=Major dotnet run --no-build --project NifToGltf -- --native --texture-batch --input NifToGltf/obj/character-animations/all-face-textures --output NifToGltf/obj/character-animations/all-converted-faces
+python3 NifToGltf/Diagnostics/export_pose_faces.py --xml Maple2Storage/Resources/SimulatorSources/Xml --common NifToGltf/obj/character-animations/name-sources/emotion/common --textures NifToGltf/obj/character-animations/all-converted-faces --release ../MapleStory2-Handbook/static/gltf/simulator-release-15
+```
+
+The exporter retains manual expressions and adds a separate `poseExpressions`
+map keyed by animation clip. It preserves client frame delays, loop flags,
+face-specific image substitutions, and color masks. The current data covers
+all 34 selected emotes for 186 faces; five GM presets define only 26 of them.
+For a pose without a face sequence, the viewer uses that face's default blink.
+`Follow pose` is the default and follows the body action clock for seek, pause,
+and loop boundaries. A manual expression overrides it until another pose is
+selected. Outfit codes preserve either choice.
+
+Run `pnpm exec vitest run tests/poseFaceAnimation.test.ts tests/outfitCatalog.test.ts tests/outfitCode.test.ts`
+from the frontend, then `pnpm check`. After those finish, run
+`node NifToGltf/Diagnostics/outfit_pose_faces.mjs` from the backend against the
+existing dev server. Avoid SvelteKit sync/typecheck during browser tests because
+sync may reload the page and reset the outfit being exercised.
+
+### Casual Bun depth regression
+
+Casual Bun (`10200047`, `10200047_f_dambihair_a.nif`) inherits
+`NiZBufferProperty` flags 15 and has `NiAlphaProperty` flags 4845, threshold 0.
+The source therefore writes depth and tests alpha strictly above zero while
+blending. The previous glTF export represented only BLEND; GLTFLoader disables
+depth writes for that mode. This let rear hair triangles appear over nearer ones.
+
+`GltfWriter` now preserves these source flags in `extras.nifRenderState`.
+The outfit viewer restores depth state and performs the exact source alpha
+comparison before writing depth. Assets without metadata retain their existing
+loader settings. The flag layout is documented in
+[NIF XML](https://github.com/niftools/nifxml/blob/develop/nif.xml).
+
+Rebuild and update this local candidate from the backend root:
+
+```bash
+DOTNET_ROLL_FORWARD=Major dotnet run --project NifToGltf -- --native --batch --input Maple2Storage/Resources --textures Maple2Storage/Resources/Models/Textures --manifest NifToGltf/Diagnostics/casual-bun-plan.json --output NifToGltf/obj/casual-bun-depth/rebuilt
+python3 NifToGltf/Diagnostics/update_source_render_state.py --release ../MapleStory2-Handbook/static/gltf/simulator-release-15 --converted NifToGltf/obj/casual-bun-depth/rebuilt
+```
+
+Choose a fresh conversion directory. The update verifies unchanged geometry and
+material identities, copies only render-state metadata, and refreshes the asset
+inventory hash. Other hair assets are not rebuilt by this focused plan.
+
+Frontend regression tests: `pnpm exec vitest run tests/sourceRenderState.test.ts tests/characterMaterials.test.ts`.
+After typecheck finishes, run `node NifToGltf/Diagnostics/casual_bun_depth.mjs`
+against the existing dev server. It checks the loaded render state, captures
+front/side/back views at default and extreme hair-length settings, re-equips
+the item, and checks a dance on mobile.
+
+### Release 15 publishing
+
+The public destination is `r2:handbook-gltfs/simulator-release-15`, served at
+`https://cdn.tadeucci.dev/simulator-release-15/`. The application production build
+uses `PUBLIC_NODE_ENV=production` and `PUBLIC_MODELS_URL=https://cdn.tadeucci.dev/`.
+The database schema and GameParser are unchanged from the default branch. No
+database rebuild is required for this release.
+
+For a fresh versioned prefix, use `rclone copy` with `--immutable --checksum`,
+`--metadata`, and `--metadata-set 'cache-control=public, max-age=31536000, immutable'`.
+Upload each extension separately with its explicit `content-type` metadata:
+`model/gltf+json` for glTF, `application/json` for JSON, and `image/png` for PNG.
+The `--metadata` flag is required; `--metadata-set` alone does not apply these headers.
+Exclude `release-inventory.json` until all content has passed `rclone check`.
+Upload that inventory last, then check the complete prefix. Do not modify a
+published release's content. Confirm CORS and cache headers through the CDN URL.
+
+The clean rebuild is under `obj/release-15-prep/simulator-release-15`. Its inventory
+matches the local candidate, including both bodies, pose faces, and Casual Bun.
+The three experimental hair-preview directories and private character snapshots
+are not part of this release. Production does not request their local URLs.
+
+Run the compiled-app smoke check against a running production build:
+
+```bash
+HANDBOOK_FRONTEND=/home/ubuntu/repos/MapleStory2-Handbook OUTFIT_URL=http://127.0.0.1:4003/outfits PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/path/to/chromium node NifToGltf/Diagnostics/outfit_release_smoke.mjs
+```
+
+Set `HANDBOOK_FRONTEND` to an absolute path when running this script. It verifies
+both bodies, equipment, pose selection, expressions, backgrounds, outfit-code
+round trips, PNG exports, and mobile layout without development viewer hooks.
+Screenshots and its report go to `obj/release-15-prep/browser` by default.

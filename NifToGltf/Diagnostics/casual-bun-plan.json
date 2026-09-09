@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "wardrobe-0016da878ffd26a9244b43bf",
+      "input": "WardrobeSources/Item/0/02/10200047_f_dambihair_a.nif",
+      "output": "wardrobe/wardrobe-0016da878ffd26a9244b43bf.gltf",
+      "bodyVariant": "female",
+      "slot": "HR",
+      "skeleton": "Models/Character/female/f_body.nif",
+      "itemId": "10200047",
+      "itemModel": "SimulatorSources/Xml/itemmodel/102.xml"
+    }
+  ]
+}
