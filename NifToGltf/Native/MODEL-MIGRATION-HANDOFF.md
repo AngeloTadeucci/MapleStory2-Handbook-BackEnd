@@ -216,3 +216,13 @@ superseded package attempts are removed only after commits and handoff creation.
 The final candidate, baseline release, sources, recovery collection, checkpoint
 history and browser evidence remain on the VM for transfer. Do not infer reclaimed
 space from `du` alone: many large folders share hardlinked files.
+
+Cleanup completed after the handoff commits. Removed these disposable directories
+under `NifToGltf/obj/model-migration/`: `build-app-seek`, `build-kit-seek`,
+`canonical-all-build-staging`, `canonical-build-staging`, `canonical-final`,
+`canonical-complete`, and `canonical-candidate-3`. The measured free-space increase
+was 853,991,424 bytes, about 814 MiB; the VM then had about 6.5 GiB free.
+The post-cleanup check found all 114,034 allowlisted candidate files present at
+expected sizes. `handoff-transfer/post-cleanup-check.json` records the check.
+Earlier byte-hash validation remains documented in the run report; cleanup did
+not rewrite retained assets. Git working trees were clean after the commits.
