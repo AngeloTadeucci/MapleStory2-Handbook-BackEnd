@@ -73,6 +73,14 @@ async function checkHairColor(hair) {
   for (const [index, value] of ['18', '52', '86'].entries()) await expect(fields[index]).toHaveValue(value);
 }
 try {
+  for (const [body, ids] of [['male', [11820357, 11850133]], ['female', [11820358, 11850134]]]) {
+    const query = new URLSearchParams({ body, search: 'Olympus Divinity Wings', availability: 'preview' });
+    const response = await page.request.get(base + '/api/outfits?' + query);
+    expect(response.status()).toBe(200);
+    const result = await response.json();
+    for (const id of ids) expect(result.items.some(item => item.id === id && item.library.availability === 'preview')).toBe(true);
+    states.push({ body, wingsSearch: true, itemIds: ids });
+  }
   const manifest = await (await page.request.get(base + '/gltf/native-manifest.json')).json();
   const npcAsset = manifest.assets.find(asset => asset.id === '21000174_m_rabbitdollcymbalsgrey');
   const clipDuration = npcAsset.clipMetadata.find(clip => clip.name === 'Attack_01_A').duration;
@@ -124,6 +132,10 @@ try {
     const download = page.waitForEvent('download'); await save.click();
     await (await download).saveAs(resolve(output, body + '-export.png'));
     states.push({ body, hair, hat, alternateRequests, dyePreserved: true, pngExport: true });
+    const wingsId = body === 'male' ? 11850133 : 11850134;
+    const wings = await equip('Back', wingsId);
+    await capture(body + '-olympus-wings');
+    states.push({ body, wings, itemId: wingsId, availableInPicker: true, equipped: true });
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await ready();

@@ -1,6 +1,24 @@
 namespace NifToGltf.Native;
 
 internal static class ClipSelection {
+    internal static string? CompleteDuplicateIdle(IReadOnlyList<AnimationClip> clips) {
+        AnimationClip[] idle = clips.Where(clip => string.Equals(clip.SourceSequence, "Idle_A", StringComparison.OrdinalIgnoreCase)).ToArray();
+        if (idle.Length < 2 || idle.Any(clip => clip.SourceSequenceBlock is null) ||
+            idle.Select(clip => clip.SourceEvent).Distinct().Count() != 1 ||
+            idle.Select(clip => clip.AccumulationRoot).Distinct().Count() != 1) return null;
+        double Duration(AnimationClip clip) => clip.Tracks.SelectMany(track => track.Times).DefaultIfEmpty().Max();
+        bool Contains(AnimationClip complete, AnimationClip subset) => Duration(complete) == Duration(subset) &&
+            subset.Tracks.All(track => complete.Tracks.Count(candidate =>
+                candidate.Node == track.Node && candidate.Path == track.Path && candidate.Width == track.Width &&
+                candidate.Interpolation == track.Interpolation && candidate.Posed == track.Posed &&
+                candidate.Times.SequenceEqual(track.Times) && candidate.Values.SequenceEqual(track.Values)) == 1);
+        // Preserve every authored clip. A unique strict superset supplies a preview
+        // default without discarding motion or guessing between conflicting tracks.
+        AnimationClip[] complete = idle.Where(candidate => idle.All(other =>
+            ReferenceEquals(candidate, other) || candidate.Tracks.Length > other.Tracks.Length && Contains(candidate, other))).ToArray();
+        return complete.Length == 1 ? complete[0].Name : null;
+    }
+
     public static List<AnimationClip> Read(string input, KfmDocument? kfm, string? directory, string? selection) {
         if (selection is null) {
             if (kfm is not null || directory is not null) throw new ArgumentException("Animation sources require an explicit clip selection.");

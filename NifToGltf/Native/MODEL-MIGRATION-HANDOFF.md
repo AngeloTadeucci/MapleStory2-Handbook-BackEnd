@@ -1,5 +1,9 @@
 # Model migration handoff to the PC
 
+PC continuation: [MODEL-MIGRATION-PC-RUN.md](MODEL-MIGRATION-PC-RUN.md) records
+the local input audit, WSL move, fresh wardrobe retries, and verification.
+The original VM checkpoint below remains the transfer baseline.
+
 ## Start here
 
 The VM run is stopped. The user authorized commits and pushes to a new branch in both repositories:

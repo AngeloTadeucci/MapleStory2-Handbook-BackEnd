@@ -69,7 +69,10 @@ internal sealed record NifNode(int Id, string Name, ushort Flags, Matrix4x4 Tran
     public int[] Effects { get; init; } = [];
     public uint? SortingMode { get; init; }
     public string? MaterialName { get; init; }
+    public NifAmbientLight? AmbientLight { get; init; }
+    public int[]? TextureEffectTargets { get; init; }
 }
+internal sealed record NifAmbientLight(bool Enabled, int[] Affected, float Dimmer, Vector3 Ambient);
 internal sealed record OmittedContent(int Block, string Type, string Reason);
 internal sealed record NifSkin(int Root, Matrix4x4 Transform, int[] Bones, Matrix4x4[] BindTransforms, ushort Flags = 0);
 internal sealed record NifMorph(byte Flags, int Targets, Semantic[] Semantics);
@@ -224,7 +227,7 @@ internal sealed class NifDocument {
         r.Finish();
         NifDocument document = new() { Path = System.IO.Path.GetFullPath(path), Strings = strings, Blocks = blocks, Roots = roots };
         for (int i = 0; i < blocks.Length; i++) {
-            if (blocks[i].Type is not ("NiNode" or "NiMesh" or "NiSortAdjustNode")) continue;
+            if (blocks[i].Type is not ("NiNode" or "NiMesh" or "NiSortAdjustNode" or "NiAmbientLight" or "NiTextureEffect")) continue;
             try {
                 document.Nodes[i] = document.ReadNode(i);
             } catch (Exception e) when (e is InvalidDataException or OverflowException or NotSupportedException) {
@@ -261,7 +264,30 @@ internal sealed class NifDocument {
         string? materialName = null;
         uint? sortingMode = null;
         int[] effects = [];
-        if (Blocks[id].Type is "NiNode" or "NiSortAdjustNode") {
+        NifAmbientLight? ambientLight = null;
+        int[]? textureEffectTargets = null;
+        if (Blocks[id].Type == "NiAmbientLight") {
+            // NiDynamicEffect followed by NiLight, NIF 30.x. See niftools/nifxml.
+            bool enabled = r.Bool();
+            int[] affected = r.Refs();
+            float dimmer = r.Float();
+            Vector3 ambient = r.Vector();
+            r.Vector(); r.Vector(); // Diffuse/specular do not contribute for NiAmbientLight.
+            if (controller != -1) throw new NotSupportedException("Animated ambient lights require controller evaluation.");
+            if (dimmer < 0 || ambient.X < 0 || ambient.Y < 0 || ambient.Z < 0 ||
+                affected.Any(target => target < -1 || target >= Blocks.Length))
+                throw new InvalidDataException("Invalid ambient light intensity or affected node.");
+            ambientLight = new(enabled, affected, dimmer, ambient);
+        } else if (Blocks[id].Type == "NiTextureEffect") {
+            r.Bool();
+            textureEffectTargets = r.Refs();
+            for (int i = 0; i < 12; i++) r.Float();
+            r.U32(); r.U16(); r.U32(); r.U32(); r.U32(); r.I32();
+            r.Byte(); r.Vector(); r.Float();
+            if (controller != -1) throw new NotSupportedException("Animated texture effects require controller evaluation.");
+            if (textureEffectTargets.Any(target => target < -1 || target >= Blocks.Length))
+                throw new InvalidDataException("Invalid texture effect target.");
+        } else if (Blocks[id].Type is "NiNode" or "NiSortAdjustNode") {
             children = r.Refs().Where(child => child >= 0).ToArray();
             effects = r.Refs();
             if (Blocks[id].Type == "NiSortAdjustNode") sortingMode = r.U32();
@@ -287,7 +313,8 @@ internal sealed class NifDocument {
         }
         r.Finish();
         return new NifNode(id, name, flags, transform, properties, children, mesh) {
-            ExtraData = extras, Controller = controller, SortingMode = sortingMode, Effects = effects, MaterialName = materialName
+            ExtraData = extras, Controller = controller, SortingMode = sortingMode, Effects = effects, MaterialName = materialName,
+            AmbientLight = ambientLight, TextureEffectTargets = textureEffectTargets
         };
     }
 

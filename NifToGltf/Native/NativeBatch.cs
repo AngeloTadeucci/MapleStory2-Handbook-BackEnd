@@ -117,7 +117,8 @@ internal static class NativeBatch {
                 report["source"] = relative; report["output"] = targetRelative;
                 converted.Add(new { input = relative, report });
                 assets.Add(JsonSerializer.SerializeToNode(new { id = model.Id ?? Path.GetFileNameWithoutExtension(relative), input = relative,
-                    uri = targetRelative, clips = clips.Select(clip => clip.Name), skeleton = model.Skeleton, attach = model.Attach,
+                    uri = targetRelative, clips = clips.Select(clip => clip.Name), defaultEquipmentClip = ClipSelection.CompleteDuplicateIdle(clips),
+                    skeleton = model.Skeleton, attach = model.Attach,
                     slot = attachment?.Slot ?? model.Slot, bodyVariant = model.BodyVariant, itemId = model.ItemId,
                     attachmentSource = Path.GetRelativePath(root, attachmentSource).Replace('\\', '/'), attachment,
                     unboundAnimationTargets = report["unboundAnimationTargets"], omitted = document.Omitted }, Options));

@@ -24,6 +24,57 @@ double[] Decode(uint format, byte[] payload) => new NifStream {
     Formats = [format], Regions = [new StreamRegion(0, 1)], Data = payload
 }.ReadComponent(0, 0);
 
+Test("ambient lights follow subtree scope, deduplicate references and honor disabled lights", () => {
+    NifDocument document = new() { Path = "synthetic", Strings = [], Blocks = [], Roots = [0, 3] };
+    document.Nodes[0] = new(0, "Lit root", 0, Matrix4x4.Identity, [], [1, 2], null) { Effects = [2] };
+    document.Nodes[1] = new(1, "Glasses", 0, Matrix4x4.Identity, [], [], null);
+    document.Nodes[2] = new(2, "Ambient", 0, Matrix4x4.Identity, [], [], null) {
+        AmbientLight = new(true, [0], 2, new Vector3(0.5f, 0.25f, 0.125f))
+    };
+    document.Nodes[3] = new(3, "Unrelated body", 0, Matrix4x4.Identity, [], [], null);
+    Dictionary<int, int> parents = new() { [1] = 0, [2] = 0 };
+    Assert(SceneLighting.Ambient(document, 1, parents) == new Vector3(1, 0.5f, 0.25f), "Light counted twice or wrong intensity");
+    Assert(SceneLighting.Ambient(document, 3, parents) == Vector3.Zero, "Light leaked to unrelated body");
+    document.Nodes[0] = document.Nodes[0] with { Effects = [] };
+    Assert(SceneLighting.Ambient(document, 1, parents).X == 1, "Affected-node scope lost");
+    document.Nodes[2] = document.Nodes[2] with { AmbientLight = document.Nodes[2].AmbientLight! with { Enabled = false } };
+    Assert(SceneLighting.Ambient(document, 1, parents) == Vector3.Zero, "Disabled light contributed");
+    document.Nodes[4] = new(4, "Unused reflection", 0, Matrix4x4.Identity, [], [], null) { TextureEffectTargets = [] };
+    Assert(SceneLighting.Ambient(document, 1, parents) == Vector3.Zero, "Unbound texture effect blocked geometry");
+    document.Nodes[4] = document.Nodes[4] with { TextureEffectTargets = [0] };
+    try { SceneLighting.Ambient(document, 1, parents); throw new Exception("Bound texture effect accepted"); }
+    catch (NotSupportedException) { }
+    document.Nodes[4] = document.Nodes[4] with { TextureEffectTargets = [] };
+    document.Nodes[0] = document.Nodes[0] with { Effects = [99] };
+    try { SceneLighting.Ambient(document, 1, parents); throw new Exception("Unknown effect accepted"); }
+    catch (NotSupportedException) { }
+});
+
+string glassesSource = "Maple2Storage/Resources/WardrobeSources/Item/0/11/11150058_f_eyvalentine03.nif";
+if (File.Exists(glassesSource)) Test("Chilly glasses parse their authored ambient and unbound reflection", () => {
+    NifDocument glasses = NifDocument.Load(glassesSource);
+    NifNode light = glasses.Nodes[23];
+    Assert(light.AmbientLight is { Enabled: true, Dimmer: 1 } && light.AmbientLight.Ambient == Vector3.One, "Authored light changed");
+    Assert(glasses.Nodes[0].Effects.SequenceEqual(new[] { 23 }), "Light scope changed");
+    Assert(glasses.Nodes[4].TextureEffectTargets is { Length: 0 }, "Reflection targets changed");
+    Dictionary<int, int> parents = glasses.Nodes.Values.SelectMany(n => n.Children.Select(child => (child, n.Id))).ToDictionary(p => p.child, p => p.Id);
+    Assert(SceneLighting.Ambient(glasses, 6, parents) == Vector3.One, "Glasses did not inherit ambient");
+});
+
+Test("duplicate idle default requires a unique complete track set and identical shared motion", () => {
+    AnimationTrack wing = new("Wing", "translation", [0, 1], [0, 0, 0, 1, 0, 0], 3, "LINEAR");
+    AnimationTrack tail = wing with { Node = "Tail" };
+    AnimationClip full = new("Idle_A [sequence 0]", [wing, tail]) { SourceSequence = "Idle_A", SourceSequenceBlock = 0, SourceEvent = 0 };
+    AnimationClip subset = full with { Name = "Idle_A [sequence 28]", Tracks = [wing], SourceSequenceBlock = 28 };
+    Assert(ClipSelection.CompleteDuplicateIdle([subset, full]) == full.Name, "default depends on ordering");
+    Assert(ClipSelection.CompleteDuplicateIdle([full, subset]) == full.Name, "complete motion not selected");
+    Assert(ClipSelection.CompleteDuplicateIdle([full, subset with { Tracks = [wing with { Values = [0, 0, 0, 2, 0, 0] }] }]) is null, "conflicting motion accepted");
+    Assert(ClipSelection.CompleteDuplicateIdle([full, subset with { Tracks = [wing with { Times = [0, 2] }] }]) is null, "different timing accepted");
+    Assert(ClipSelection.CompleteDuplicateIdle([full, subset with { SourceEvent = 1 }]) is null, "distinct authored events collapsed");
+    Assert(ClipSelection.CompleteDuplicateIdle([full, subset with { Tracks = [wing, tail] }]) is null, "non-unique complete sequence selected");
+    Assert(ClipSelection.CompleteDuplicateIdle([full, subset with { Tracks = [wing with { Node = "Other" }] }]) is null, "disjoint motion accepted");
+});
+
 Test("MS2 KFM transition pairs preserve the following authored clip", () => {
     string directory = Path.Combine(Path.GetTempPath(), $"native-transition-{Guid.NewGuid():N}");
     Directory.CreateDirectory(directory);
@@ -334,6 +385,14 @@ Test("batch paths reject output traversal", () => {
 
 if (args.Length > 0) {
     NifDocument body = NifDocument.Load(args[0]);
+    string wingsKfm = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(args[0])!, "../../../WardrobeSources/Item/1/18/11850133_c_mtolympos01.kfm"));
+    if (File.Exists(wingsKfm)) Test("Olympus Wings retain both authored sequences with the complete idle as preview default", () => {
+        KfmDocument kfm = KfmDocument.Read(wingsKfm);
+        List<AnimationClip> clips = ClipSelection.Read(kfm.Model, kfm, null, "all");
+        Assert(clips.Count == 2 && clips[0].Tracks.Length == 27 && clips[1].Tracks.Length == 13, "authored tracks changed");
+        Assert(ClipSelection.CompleteDuplicateIdle(clips) == "Idle_A [sequence 0]", "complete wing motion not selected");
+        Assert(clips.All(clip => clip.SourceEvent == 0), "KFM event identity changed");
+    });
     string alonClip = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(args[0])!, "../../../NpcSources/02/01/02010034/attack_01_c.kf"));
     string mannequinDirectory = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(args[0])!, "../../../WardrobeSources/Item/dropicon/body"));
     if (Directory.Exists(mannequinDirectory)) Test("original 30.1 mannequin geometry matches the published vertex and triangle inventories", () => {

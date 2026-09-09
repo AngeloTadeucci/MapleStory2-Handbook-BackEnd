@@ -38,6 +38,9 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             nodes.Add(Json(new { name = node.Name, translation = new[] { translation.X, translation.Y, translation.Z },
                 rotation = new[] { rotation.X, rotation.Y, rotation.Z, rotation.W }, scale = new[] { scale.X, scale.Y, scale.Z } }));
             if (node.SortingMode is { } sorting) nodes[^1]!["extras"] = Json(new { nifSortingMode = sorting });
+            if (node.TextureEffectTargets is { Length: 0 } && !document.Nodes.Values.Any(owner => owner.Effects.Contains(node.Id))) {
+                nodes[^1]!["extras"] = Json(new { nifUnboundTextureEffect = true });
+            }
             if (document.EquipmentBones.Contains(node.Id)) {
                 nodes[^1]!["extras"] ??= new JsonObject();
                 nodes[^1]!["extras"]!["equipmentBone"] = true;
@@ -59,12 +62,6 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             int ancestor = node.Id;
             while (parents.TryGetValue(ancestor, out ancestor)) hidden |= (document.Nodes[ancestor].Flags & 1) != 0;
             if (hidden) { hiddenMeshes.Add(node.Name); continue; }
-            int effectAncestor = node.Id;
-            do {
-                foreach (int effect in document.Nodes[effectAncestor].Effects.Where(id => id >= 0)) {
-                    throw new NotSupportedException($"Visible mesh {node.Name} uses scene effect block {effect} ({document.Blocks[effect].Type}); appearance requires an explicit material implementation.");
-                }
-            } while (parents.TryGetValue(effectAncestor, out effectAncestor));
             JsonArray primitives = [];
             int material = Material(node);
             int? skinIndex = null;
@@ -172,6 +169,11 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
         };
         if (skins.Count > 0) gltf["skins"] = skins;
         if (animations.Count > 0) gltf["animations"] = animations;
+        if (clips is not null && ClipSelection.CompleteDuplicateIdle(clips) is { } defaultClip) {
+            gltf["scenes"]![0]!["extras"] = Json(new {
+                defaultEquipmentClip = defaultClip, defaultEquipmentClipReason = "identical-track-subset"
+            });
+        }
         if (images.Count > 0) { gltf["images"] = images; gltf["textures"] = textures; gltf["samplers"] = samplers; }
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
         string temporary = output + $".{Guid.NewGuid():N}.tmp";
@@ -225,6 +227,8 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
         JsonObject pbr = new() { ["metallicFactor"] = 0, ["roughnessFactor"] = 1 };
         JsonObject material = new() { ["name"] = node.Name, ["pbrMetallicRoughness"] = pbr };
         JsonObject lighting = new() { ["specularEnabled"] = false };
+        Vector3 sceneAmbient = SceneLighting.Ambient(document, node.Id, parents);
+        if (sceneAmbient != Vector3.Zero) lighting["sceneAmbient"] = Json(new[] { sceneAmbient.X, sceneAmbient.Y, sceneAmbient.Z });
         JsonObject renderState = new();
         HashSet<string> seen = [];
         foreach (int property in properties) {
@@ -290,6 +294,9 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             r.Finish();
         }
         ApplyMaterialColors(node, material, pbr);
+        if (sceneAmbient != Vector3.Zero && material["extras"]?["nifShader"]?.GetValue<string>() is not
+            ("MS2CharacterMaterial" or "MS2CharacterSkinMaterial" or "MS2CharacterHairMaterial"))
+            throw new NotSupportedException("Scene ambient lighting requires a supported character material.");
         if (renderState.Count > 0) material["extras"]!["nifRenderState"] = renderState;
         foreach (int extra in node.ExtraData.Where(id => document.Blocks[id].Type == "NiFloatExtraData")) {
             NifReader r = document.Reader(extra);

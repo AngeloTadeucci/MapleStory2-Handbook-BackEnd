@@ -218,12 +218,44 @@ def run(args):
                 list(pool.map(convert, batches[offset:offset + args.workers]))
 
 
+def equipment_animation_issue(asset, gltf):
+    invalid = sorted({gltf['nodes'][channel['target']['node']]['name']
+                      for clip in gltf.get('animations', []) for channel in clip['channels']
+                      if not gltf['nodes'][channel['target']['node']].get('extras', {}).get('equipmentBone')})
+    if invalid:
+        return 'Source animation targets require attachment support: ' + ', '.join(invalid)
+    names = asset['clips']
+    idle = [name for name in names if name.lower() == 'idle_a']
+    if not idle:
+        idle = [name for name in names if name.lower().endswith('_idle_a') and
+                name.lower() != 'attack_idle_a' and not name.lower().endswith('_attack_idle_a')]
+    preferred = asset.get('defaultEquipmentClip')
+    exported = gltf.get('scenes', [{}])[gltf.get('scene', 0)].get('extras', {}).get('defaultEquipmentClip')
+    if preferred is not None and (names.count(preferred) != 1 or exported != preferred):
+        return 'Source default animation metadata does not match the exported scene'
+    if len(names) > 1 and len(idle) != 1 and preferred is None:
+        return 'Source animations have no unambiguous default idle sequence'
+    return None
+
+
+def retain_unselected_entries(baseline, retried):
+    selected = {(entry['itemId'], entry['bodyVariant']): entry for entry in retried}
+    if len(selected) != len(retried):
+        raise ValueError('Duplicate retry item/body identity')
+    baseline_keys = {(entry['itemId'], entry['bodyVariant']) for entry in baseline}
+    return [copy.deepcopy(selected.get((entry['itemId'], entry['bodyVariant']), entry)) for entry in baseline] + [
+        copy.deepcopy(entry) for entry in retried if (entry['itemId'], entry['bodyVariant']) not in baseline_keys]
+
+
 def assemble(args):
     if args.output.exists(): raise ValueError('Choose a fresh candidate path')
     check_disk(args.output.parent, 256 * 1024**2)
     for record in read(args.base / 'release-inventory.json')['files']:
         if sha(args.base / record['path']) != record['sha256']: raise ValueError('Baseline changed: ' + record['path'])
     shutil.copytree(args.base, args.output)
+    if getattr(args, 'retain_unselected', False):
+        for name in ['wardrobe-provenance.json', 'failure-families.json', 'animation-compatibility.json']:
+            shutil.copy2(args.base / name, args.output / ('inherited-' + name))
     base_catalog = read(args.base / 'simulator-catalog.json')
     base_entries = {(i['itemId'], i['bodyVariant']): i for i in base_catalog['items']}
     entries = read(args.work / 'entries.json')
@@ -279,16 +311,9 @@ def assemble(args):
     for identity, asset in assets.items():
         if not identity.startswith('wardrobe-') or not asset.get('clips'): continue
         gltf = read(asset_sources[identity])
-        invalid = sorted({gltf['nodes'][channel['target']['node']]['name']
-                          for clip in gltf.get('animations', []) for channel in clip['channels']
-                          if not gltf['nodes'][channel['target']['node']].get('extras', {}).get('equipmentBone')})
-        names = asset['clips']
-        idle = [name for name in names if name.lower() == 'idle_a']
-        if not idle: idle = [name for name in names if name.lower().endswith('_idle_a') and name.lower() != 'attack_idle_a' and not name.lower().endswith('_attack_idle_a')]
-        if invalid:
-            animation_issues[identity] = 'Source animation targets require attachment support: ' + ', '.join(invalid)
-        elif len(names) > 1 and len(idle) != 1:
-            animation_issues[identity] = 'Source animations have no unambiguous default idle sequence'
+        issue = equipment_animation_issue(asset, gltf)
+        if issue:
+            animation_issues[identity] = issue
     baseline_missing = [list(k) for k in base_entries if k not in known]
     for entry in entries:
         key = (entry['itemId'], entry['bodyVariant'])
@@ -355,6 +380,8 @@ def assemble(args):
             # Discovery records do not need unusable or half-converted model IDs.
             entry['parts'] = []
             for field in ['handParts', 'hairForms', 'stowedParts']: entry.pop(field, None)
+    if getattr(args, 'retain_unselected', False):
+        entries = retain_unselected_entries(base_catalog['items'], entries)
     manifest['assets'] = list(assets.values())
     write(args.output / 'native-manifest.json', manifest)
     write(args.output / 'simulator-catalog.json', {'version': 1, 'nativeManifestVersion': 1, 'items': entries})
@@ -371,7 +398,8 @@ def assemble(args):
         compiler_records.append(record)
     write(args.output / 'wardrobe-provenance.json', {
         **read(args.work / 'provenance.json'),
-        'baseline': {'directory': args.base.name, 'inventoryHash': sha(args.base / 'release-inventory.json')},
+        'baseline': {'directory': args.base.name, 'inventoryHash': sha(args.base / 'release-inventory.json'),
+                     'retainedUnselectedEntries': getattr(args, 'retain_unselected', False)},
         'checkpoints': [{'directory': str(p.parent), 'sha256': sha(p), 'record': read(p)} for p in checkpoints],
         'customizationHash': sha(args.customization / 'metadata.json') if args.customization else None,
         'assemblySourceHash': sha(Path(__file__)),
@@ -399,6 +427,8 @@ if __name__ == '__main__':
     parser.add_argument('--customization', type=Path)
     parser.add_argument('--converter', type=Path)
     parser.add_argument('--patches', type=Path)
+    parser.add_argument('--retain-unselected', action='store_true',
+                        help='During subset assembly, preserve all unselected baseline catalog entries and their metadata')
     parser.add_argument('--batches', type=int, default=1)
     parser.add_argument('--batch-size', type=int, default=40)
     parser.add_argument('--workers', type=int, choices=[1, 2], default=1)

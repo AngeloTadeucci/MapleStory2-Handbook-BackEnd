@@ -6,7 +6,7 @@ import json
 import subprocess
 from unittest.mock import patch
 from pathlib import Path
-from expand_wardrobe import recover_baseline_hair_forms
+from expand_wardrobe import recover_baseline_hair_forms, equipment_animation_issue, retain_unselected_entries
 from migration_inventory import model_references, safe_path, sha, write
 from migration_recovery import restore
 from package_models import layout, retain_legacy
@@ -16,6 +16,33 @@ from migration_inventory_jobs import prepare as prepare_inventory
 
 
 class MigrationTests(unittest.TestCase):
+    def test_subset_retry_preserves_other_bodies_hair_forms_and_failure_evidence(self):
+        baseline = [
+            {'itemId': 1, 'bodyVariant': 'male', 'availability': 'unavailable', 'reason': 'old failure'},
+            {'itemId': 1, 'bodyVariant': 'female', 'availability': 'unavailable', 'reason': 'different failure'},
+            {'itemId': 2, 'bodyVariant': 'male', 'hairForms': {'c': ['recovered']}, 'customize': {'color': '1'}}]
+        retry = [{'itemId': 1, 'bodyVariant': 'male', 'availability': 'preview', 'parts': [{'assetId': 'new'}]}]
+        result = retain_unselected_entries(baseline, retry)
+        self.assertEqual(result[0], retry[0])
+        self.assertEqual(result[1:], baseline[1:])
+        result[2]['hairForms']['c'].append('changed')
+        self.assertEqual(baseline[2]['hairForms']['c'], ['recovered'])
+        self.assertEqual(baseline[0]['reason'], 'old failure')
+        with self.assertRaisesRegex(ValueError, 'Duplicate retry'):
+            retain_unselected_entries(baseline, retry + retry)
+
+    def test_duplicate_idle_requires_matching_default_and_owned_animation_targets(self):
+        names = ['Idle_A [sequence 0]', 'Idle_A [sequence 28]']
+        asset = {'clips': names, 'defaultEquipmentClip': names[0]}
+        gltf = {'scenes': [{'extras': {'defaultEquipmentClip': names[0]}}],
+                'nodes': [{'name': 'Wing', 'extras': {'equipmentBone': True}}],
+                'animations': [{'channels': [{'target': {'node': 0}}]}]}
+        self.assertIsNone(equipment_animation_issue(asset, gltf))
+        self.assertIn('unambiguous', equipment_animation_issue({'clips': names}, gltf))
+        self.assertIn('does not match', equipment_animation_issue({**asset, 'defaultEquipmentClip': names[1]}, gltf))
+        gltf['nodes'][0]['extras'] = {}
+        self.assertIn('attachment support', equipment_animation_issue(asset, gltf))
+
     def test_collection_rejects_a_batch_stopped_at_its_disk_reserve(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -180,6 +207,22 @@ class MigrationTests(unittest.TestCase):
     def test_case_insensitive_duplicate_asset_ids_are_rejected(self):
         with self.assertRaisesRegex(ValueError, 'Duplicate native asset identity'):
             layout([{'id': 'Model', 'input': 'male.nif'}, {'id': 'MODEL', 'input': 'female.nif'}])
+
+    def test_build_rejects_unverified_asset_reuse(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'models').mkdir()
+            (root / 'prior').mkdir()
+            write(root / 'models/model-files.json', {'version': 1, 'files': []})
+            write(root / 'prior/build-input.json', {'inventorySha256': sha(root / 'models/model-files.json')})
+            write(root / 'prior/build-result.json', {'hashesVerified': False, 'physicalFiles': True})
+            env = dict(os.environ, HANDBOOK_FRONTEND=str(root / 'frontend'), HANDBOOK_MODELS_DIR=str(root / 'models'))
+            result = subprocess.run(['node', str(Path(__file__).with_name('build_wardrobe.mjs')),
+                                     str(root / 'build'), '--assets-from=' + str(root / 'prior')],
+                                    env=env, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('requires a verified physical build', result.stderr)
+            self.assertFalse((root / 'build').exists())
 
     def test_unattached_source_identity_is_canonical_beside_equipment_variants(self):
         assets = [{'id': 'f_body', 'input': 'female/f_body.nif', 'bodyVariant': 'female'},
