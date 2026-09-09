@@ -317,10 +317,45 @@ py -X utf8 -m unittest discover -s NifToGltf/Diagnostics -p test_hair_effect.py
 
 The builder verifies the base inventory and preserves the previous geometry
 review. It adds three preview hairs, the effect sidecar/textures and a separate
-effect-extension report. It never copies private character profiles. The selected
-frontend release is src/lib/outfits/simulator-release.json. For source-backed
+effect-extension report. It never copies private character profiles. These commands
+produce historical conversion inputs. The current frontend reads the canonical
+root manifests described in the model migration run. For source-backed
 frontend effect tests, set SIMULATOR_EFFECT_FILE to the candidate's
 effects/hair-twinkle-a.json, then run tests/cosmeticEffect.test.ts with Vitest.
+
+### Canonical model migration
+
+See [the migration run](../Native/MODEL-MIGRATION-RUN.md) for current coverage,
+recovery evidence, and remaining acceptance gates. `package_models.py` stages
+unversioned model folders, explicit variants, auxiliary resources, and the
+`model-files.json` allowlist. It requires a fresh output directory and never
+publishes. Do not replace working legacy models with failed or unreviewed output.
+Use `--legacy <verified-mirror> --database <readonly-snapshot>` to retain working
+legacy models, per-animation files, and their dependencies in the candidate.
+
+`migration_standalone.py` prepares whole original NIF previews for ambiguous
+equipment-part groups. It rejects distinct source variants, face-preset choices,
+and unresolved external animations. `migration_npcs.py run` executes either
+these jobs or prepared NPC KFM jobs with source hashes and resumable checkpoints.
+`migration_collect.py --work <oldest-work> <newest-work> --output <fresh-output>`
+collects successful outputs, preserves failed retry history, and reports the
+latest remaining failures. Pass that collection as `package_models.py --npc`.
+The option accepts both NPC and standalone item assets.
+`migration_inventory_jobs.py` prepares the remaining published and database
+model references, including models absent from the database. It preserves KFM
+aliases and refuses to choose between distinct original source revisions.
+Collections reject incomplete batches. A workspace's `invalidates.json` maps
+model names to reasons that prior exports must be discarded from the candidate,
+even if the corrected converter subsequently fails on a different feature.
+
+`build_wardrobe.mjs <fresh-work-directory>` verifies every allowlisted source hash,
+stages only those model files, and builds an isolated application. Set
+`HANDBOOK_FRONTEND` to the frontend checkout. `--stage-only` verifies and stages
+the inputs without running the application build. A full build checks available
+space for both output copies and verifies packaged model hashes afterward.
+Set `HANDBOOK_MODELS_DIR` to a candidate directory to check it without replacing
+the frontend checkout's current model files.
+The old numbered release selector is no longer part of runtime configuration.
 
 ### Character animation extension
 

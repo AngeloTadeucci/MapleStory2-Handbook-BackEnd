@@ -200,13 +200,13 @@ internal sealed class NifDocument {
         byte[] data = File.ReadAllBytes(path);
         int line = Array.IndexOf(data, (byte) '\n');
         string header = line < 0 ? "" : Encoding.ASCII.GetString(data, 0, line);
-        bool olderAnimation = header == "Gamebryo File Format, Version 30.1.0.3" && System.IO.Path.GetExtension(path).Equals(".kf", StringComparison.OrdinalIgnoreCase);
-        if (header != "Gamebryo File Format, Version 30.2.0.3" && !olderAnimation) {
-            throw new NotSupportedException($"{path}: expected NIF 30.2.0.3 or KF 30.1.0.3.");
+        bool olderVersion = header == "Gamebryo File Format, Version 30.1.0.3";
+        if (header != "Gamebryo File Format, Version 30.2.0.3" && !olderVersion) {
+            throw new NotSupportedException($"{path}: expected NIF 30.2.0.3 or 30.1.0.3.");
         }
         NifReader r = new(data);
         r.Take(line + 1);
-        if (r.U32() != (olderAnimation ? 0x1E010003u : 0x1E020003u) || r.Byte() != 1) throw new NotSupportedException("Unsupported NIF version/endian.");
+        if (r.U32() != (olderVersion ? 0x1E010003u : 0x1E020003u) || r.Byte() != 1) throw new NotSupportedException("Unsupported NIF version/endian.");
         r.U32();
         int blockCount = r.Count();
         r.Take(r.Count());

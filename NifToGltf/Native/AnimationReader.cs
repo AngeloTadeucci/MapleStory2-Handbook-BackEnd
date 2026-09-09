@@ -7,19 +7,32 @@ internal sealed record AnimationTrack(string Node, string Path, double[] Times, 
 }
 internal sealed record AnimationClip(string Name, AnimationTrack[] Tracks) {
     public string? AccumulationRoot { get; init; }
+    public string? SourceSequence { get; init; }
+    public int? SourceSequenceBlock { get; init; }
+    public int? SourceEvent { get; init; }
 }
 internal sealed record AnimationCurve(Func<double, double[]> Evaluate, double[] KeyTimes, bool Sample = false, bool Step = false);
 internal sealed record AnimationKey(double Time, double[] Value, double[] Forward, double[] Backward, double[] Tbc);
 
 internal static class AnimationReader {
     public static AnimationClip Read(string path, int framesPerSecond = 60, string? sequenceName = null) {
+        AnimationClip[] clips = ReadAll(path, framesPerSecond, sequenceName);
+        if (clips.Length != 1) throw new NotSupportedException($"{path}: expected one NiSequenceData, found {clips.Length}.");
+        return clips[0];
+    }
+
+    public static AnimationClip[] ReadAll(string path, int framesPerSecond = 60, string? sequenceName = null) {
         NifDocument document = NifDocument.Load(path);
         int[] sequenceIds = document.Roots.Where(id => id >= 0 && document.Blocks[id].Type == "NiSequenceData").ToArray();
-        if (sequenceIds.Length > 1 && sequenceName is not null) {
+        if (sequenceIds.Length > 1 && !string.IsNullOrWhiteSpace(sequenceName)) {
             sequenceIds = sequenceIds.Where(id => string.Equals(document.Name(document.Reader(id)), sequenceName, StringComparison.OrdinalIgnoreCase)).ToArray();
         }
-        if (sequenceIds.Length != 1) throw new NotSupportedException($"{path}: expected one NiSequenceData{(sequenceName is null ? "" : $" matching {sequenceName}")}, found {sequenceIds.Length}.");
-        NifReader sequence = document.Reader(sequenceIds[0]);
+        if (sequenceIds.Length == 0) throw new NotSupportedException($"{path}: expected NiSequenceData matching {sequenceName}, found 0.");
+        return sequenceIds.Select(id => ReadSequence(document, id, path, framesPerSecond)).ToArray();
+    }
+
+    private static AnimationClip ReadSequence(NifDocument document, int sequenceId, string path, int framesPerSecond) {
+        NifReader sequence = document.Reader(sequenceId);
         string name = document.Name(sequence);
         int[] evaluators = sequence.Refs();
         sequence.I32();
@@ -39,7 +52,7 @@ internal static class AnimationReader {
         }
         if (tracks.Count == 0) throw new InvalidDataException($"{path}: no transform animation tracks.");
         return new AnimationClip(string.IsNullOrWhiteSpace(name) ? System.IO.Path.GetFileNameWithoutExtension(path) : name, tracks.ToArray()) {
-            AccumulationRoot = accumulationRoot
+            AccumulationRoot = accumulationRoot, SourceSequence = name, SourceSequenceBlock = sequenceId
         };
     }
 
@@ -159,7 +172,9 @@ internal static class AnimationReader {
                 }
             }
             if (split) {
-                if (depth >= 16) throw new InvalidDataException("Animation curve exceeds sampling tolerance after 16 subdivisions.");
+                if (depth >= 16) throw new InvalidDataException(
+                    $"Animation curve exceeds sampling tolerance after 16 subdivisions. Channel {channel}, interval [{start:R}, {end:R}], " +
+                    $"start [{string.Join(", ", a)}], middle [{string.Join(", ", evaluate((start + end) / 2))}], end [{string.Join(", ", b)}].");
                 double middle = (start + end) / 2;
                 Interval(start, middle, depth + 1); Interval(middle, end, depth + 1);
             } else output.Add(end);
@@ -184,8 +199,7 @@ internal static class AnimationReader {
             AnimationKey[] keys = ReadKeys(r, rotationCount, 4, rotationType, true);
             if (rotationType is not (1 or 2 or 3 or 5)) throw new NotSupportedException($"Rotation interpolation {rotationType}.");
             if (rotationType == 2 && keys.Length > 1) throw new NotSupportedException("Quadratic quaternion interpolation requires validation against a reference export.");
-            if (rotationType == 3 && keys.Length > 1) throw new NotSupportedException("TCB quaternion interpolation requires validation against a reference export.");
-            rotation = new AnimationCurve(time => {
+            rotation = rotationType == 3 && keys.Length > 1 ? TcbInterpolation.Rotation(keys) : new AnimationCurve(time => {
                 (AnimationKey a, AnimationKey b, double u) = Interval(keys, time);
                 return Wxyz(rotationType == 5 ? QuaternionValue(a.Value) : Quaternion.Slerp(QuaternionValue(a.Value), QuaternionValue(b.Value), (float) u));
             }, keys.Select(key => key.Time).ToArray(), false, rotationType == 5);
@@ -200,7 +214,7 @@ internal static class AnimationReader {
         uint interpolation = r.U32();
         AnimationKey[] keys = ReadKeys(r, count, width, interpolation, false);
         if (interpolation is not (1 or 2 or 3 or 5)) throw new NotSupportedException($"Key interpolation {interpolation}.");
-        if (interpolation == 3 && keys.Length > 1) throw new NotSupportedException("TCB vector interpolation requires validation against a reference export.");
+        if (interpolation == 3 && keys.Length > 1) return TcbInterpolation.Vector(keys, width);
         return new AnimationCurve(time => {
             (AnimationKey a, AnimationKey b, double u) = Interval(keys, time);
             return Enumerable.Range(0, width).Select(c => interpolation switch {

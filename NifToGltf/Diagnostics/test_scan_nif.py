@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from scan_nif import scan_file, scan_stream, survey
+from inspect_nif import read_document
 
 
 def u32(*values):
@@ -28,6 +29,20 @@ def nif(block=None, metadata=b"", type_index=0, footer=None):
 
 
 class ScanTests(unittest.TestCase):
+    def test_inspection_accepts_both_supported_headers_and_rejects_mismatched_binary_version(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            data = nif().replace(b'30.2.0.3', b'30.1.0.3').replace(u32(0x1E020003), u32(0x1E010003))
+            (root / 'clip.kf').write_bytes(data)
+            _, blocks, roots = read_document(root / 'clip.kf')
+            self.assertEqual(roots, [0])
+            self.assertEqual(blocks[0][0], 'NiDataStream\x011\x0118')
+            (root / 'model.nif').write_bytes(data)
+            self.assertEqual(read_document(root / 'model.nif')[2], [0])
+            (root / 'model.nif').write_bytes(data.replace(u32(0x1E010003), u32(0x1E020003)))
+            with self.assertRaisesRegex(ValueError, 'version/endian'):
+                read_document(root / 'model.nif')
+
     def test_nonempty_metadata_and_masked_type_index(self):
         formats, _, count, metadata = scan_file(nif(metadata=b"abc", type_index=0x8000))
         self.assertEqual(dict(formats), {0x00030437: 1})

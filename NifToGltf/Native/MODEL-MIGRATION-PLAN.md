@@ -1,6 +1,6 @@
 # Unified item and NPC model migration
 
-Status: planning only. No conversion, upload, replacement, database write, or deployment is authorized by this document alone.
+Status: all prepared local conversion batches finished on 2026-09-09. Cleanup, recovery, shared rendering, and the isolated canonical package are implemented. The package contains 13,249 native assets, with 575 unresolved model records. The plan is not complete: coverage and client-parity gates prevent native-only cutover and Noesis removal. Results and remaining gates are in [MODEL-MIGRATION-RUN.md](MODEL-MIGRATION-RUN.md). Commits, pushes to new handoff branches, and a PC handoff were subsequently authorized. Nothing has been deployed. No remote assets or database rows have been changed.
 
 ## Intended result
 

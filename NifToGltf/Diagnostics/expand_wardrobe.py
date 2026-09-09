@@ -139,6 +139,38 @@ def priority(slots):
     return 2
 
 
+def recover_baseline_hair_forms(entry, discovered, assets, errors, animation_issues):
+    """Keep usable baseline geometry without erasing newly discovered hair forms.
+
+    Conversion is not visual acceptance. New forms downgrade the bundle to preview;
+    a failed alternate leaves loose hair usable and records the exact failure.
+    """
+    if entry['slots'] != ['HR']:
+        return
+    forms = entry.setdefault('hairForms', {})
+    failures = {}
+    recovered = []
+    for form, identities in discovered.items():
+        if forms.get(form):
+            continue
+        problems = [errors.get(identity, 'Source family has not been converted in this checkpoint')
+                    for identity in identities if identity not in assets]
+        problems += [animation_issues[identity] for identity in identities if identity in animation_issues]
+        if not identities:
+            problems.append('Discovery contains no alternate mesh')
+        if problems:
+            failures[form] = sorted(set(problems))
+        else:
+            forms[form] = list(identities)
+            recovered.append(form)
+    if failures:
+        entry['hairFormFailures'] = failures
+    if recovered:
+        entry.update(availability='preview', visualReview='unreviewed',
+                     reason='Loose hair reused; recovered alternate forms require appearance review: ' + ', '.join(recovered))
+        entry['conversion'] = 'baseline-with-recovered-hair-forms'
+
+
 def run(args):
     with (args.work / 'runner.lock').open('w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -294,6 +326,7 @@ def assemble(args):
             entry['blockers'].append(extra['failures'][item_id])
         old = base_entries.get(key)
         alias = inherited.get(entry['family'])
+        discovered_forms = copy.deepcopy(entry.get('hairForms', {}))
         if (old and old['availability'] != 'unavailable') or (alias and not entry['blockers']):
             source = old if old and old['availability'] != 'unavailable' else alias
             identity = {k: entry[k] for k in ['itemId', 'bodyVariant', 'sourceName', 'sourceIcon', 'isOutfit', 'classification', 'family', 'presetId']}
@@ -303,6 +336,7 @@ def assemble(args):
                 entry.update(availability='preview', reason='Shared source bundle; this item identity has not been visually reviewed')
             entry['conversion'] = 'baseline-reused'
             entry['blockers'] = []
+            recover_baseline_hair_forms(entry, discovered_forms, assets, errors, animation_issues)
         else:
             required = [p['assetId'] for p in entry['parts']] + entry.get('stowedParts', [])
             required += [v for group in [entry.get('handParts', {}), entry.get('hairForms', {})] for ids in group.values() for v in ids]

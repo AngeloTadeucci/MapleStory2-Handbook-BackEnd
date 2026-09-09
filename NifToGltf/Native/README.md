@@ -1,10 +1,14 @@
 # Native NIF converter
 
-The opt-in `--native` path reads MS2 NIF 30.2.0.3 directly and writes glTF 2.0.
+The opt-in `--native` path reads MS2 NIF 30.2.0.3 and 30.1.0.3 directly and writes glTF 2.0.
+Older mannequin geometry is checked against the published vertex and triangle
+inventories. Unsupported block types still fail explicitly.
 The existing Noesis command remains the default because the non-effect
 acceptance gate is not complete. `--noesis` explicitly selects that fallback.
 No production assets or database records have been replaced. See
 [current status and blockers](STATUS.md) before treating an export as verified.
+The [model migration run](MODEL-MIGRATION-RUN.md) records the current shared
+viewer, canonical packaging, source coverage, and verified recovery mirror.
 
 ## Run
 
@@ -50,6 +54,9 @@ an exact body bone name. Unverified slot mappings are not inferred.
   world transforms drive their deformation.
 - Each selected animation is a named entry in `animations`. Meshes and
   materials are emitted once. Animation targets bind to unique exact names.
+  Multiple authored sequence roots receive explicit sequence labels. Colliding
+  KFM names retain their event IDs. Animation extras preserve source sequence
+  names, root block IDs, and KFM event IDs instead of silently choosing a root.
 - Diffuse, normal, emissive and alpha properties map to basic glTF materials.
   Client default override colors are baked using the observed ColorOverride
   shader formula. Both diffuse and control resolution are retained. Original
@@ -166,9 +173,10 @@ dotnet run --project NifToGltf.Tests -- Maple2Storage/Resources/Models/Character
 py -B -m unittest discover -s NifToGltf/Diagnostics -p 'test_*.py' -v
 ```
 
-The C# runner has 30 tests, including real body/gear fixtures, all thirteen
-rabbit clips, palette handling, numerical interpolation and ambiguous sequence
-rejection. Without the body argument it runs only the synthetic unit cases.
+The full C# runner currently passes 59 tests with the available source fixtures,
+including body/gear geometry, thirteen rabbit clips, palette handling, TCB
+interpolation, older mannequin files, and sequence/event identities. Without
+the body argument it runs only the synthetic unit cases.
 See [diagnostic instructions](../Diagnostics/README.md) for the full validator
 and reference comparison commands. The converter has no new runtime packages.
 

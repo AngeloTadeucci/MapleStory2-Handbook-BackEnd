@@ -74,7 +74,7 @@ internal static class NativeBatch {
                     continue;
                 }
                 string attachmentSource = file;
-                KfmDocument? kfm = model.Kfm is null ? null : KfmDocument.Read(Resolve(root, model.Kfm));
+                KfmDocument? kfm = model.Kfm is null ? null : KfmDocument.Read(Resolve(root, model.Kfm), root);
                 if (kfm is not null) {
                     if (!Path.GetFullPath(kfm.Model).Equals(file, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("KFM model does not match manifest input.");
                     // Distinct XML URNs can have KFM files that reference one NIF.

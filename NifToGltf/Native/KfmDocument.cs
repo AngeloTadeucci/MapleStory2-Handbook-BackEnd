@@ -4,7 +4,7 @@ namespace NifToGltf.Native;
 
 internal sealed record KfmClip(int Event, string File, string Name);
 internal sealed record KfmDocument(string Model, string Master, KfmClip[] Clips) {
-    public static KfmDocument Read(string path) {
+    public static KfmDocument Read(string path, string? sourceRoot = null) {
         byte[] data = System.IO.File.ReadAllBytes(path);
         int line = Array.IndexOf(data, (byte) '\n');
         if (line < 0 || Encoding.ASCII.GetString(data, 0, line) != ";Gamebryo KFM File Version 30.2.0.3b") {
@@ -27,26 +27,32 @@ internal sealed record KfmDocument(string Model, string Master, KfmClip[] Clips)
                 if (type == 5) continue;
                 r.Float();
                 int intermediate = r.Count();
-                for (int j = 0; j < intermediate; j++) { r.I32(); r.SizedString(); }
-                if (r.U32() != 0) throw new NotSupportedException("KFM transition text-key pairs.");
+                for (int j = 0; j < intermediate; j++) { r.SizedString(); r.SizedString(); }
+                // Observed MS2 transition records contain int32/float32 pairs.
+                // Clip export does not reproduce the controller transition graph.
+                int pairs = r.Count();
+                for (int j = 0; j < pairs; j++) { r.I32(); r.Float(); }
             }
-            return new KfmClip(eventId, Resolve(path, file), name);
+            return new KfmClip(eventId, Resolve(path, file, sourceRoot), name);
         }).ToArray();
         r.I32();
         r.Finish();
-        return new KfmDocument(Resolve(path, model), master, clips);
+        return new KfmDocument(Resolve(path, model, sourceRoot), master, clips);
     }
-    private static string Resolve(string kfm, string asset) {
+    private static string Resolve(string kfm, string asset, string? sourceRoot) {
         string directory = Path.GetDirectoryName(Path.GetFullPath(kfm))!;
+        string root = Path.GetFullPath(sourceRoot ?? directory).TrimEnd(Path.DirectorySeparatorChar);
         string normalized = asset.Replace('\\', Path.DirectorySeparatorChar).Replace('/', Path.DirectorySeparatorChar);
+        if (string.IsNullOrWhiteSpace(asset) || Path.IsPathRooted(normalized) || normalized.Contains(':'))
+            throw new InvalidDataException("Invalid KFM asset reference.");
         string path = Path.GetFullPath(Path.Combine(directory, normalized));
-        if (!path.StartsWith(directory + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
-            throw new InvalidDataException("KFM asset path escapes its directory.");
+        if (!path.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) {
+            throw new InvalidDataException("KFM asset path escapes its source root.");
         }
         if (System.IO.File.Exists(path)) return path;
         // MS2 paths are case-insensitive, including on a Linux converter host.
-        string current = directory;
-        foreach (string part in Path.GetRelativePath(directory, path).Split(Path.DirectorySeparatorChar)) {
+        string current = root;
+        foreach (string part in Path.GetRelativePath(root, path).Split(Path.DirectorySeparatorChar)) {
             string[] matches = Directory.EnumerateFileSystemEntries(current).Where(candidate => string.Equals(Path.GetFileName(candidate), part, StringComparison.OrdinalIgnoreCase)).ToArray();
             if (matches.Length != 1) throw new FileNotFoundException($"KFM asset {asset} missing or ambiguous beside {kfm}.");
             current = matches[0];

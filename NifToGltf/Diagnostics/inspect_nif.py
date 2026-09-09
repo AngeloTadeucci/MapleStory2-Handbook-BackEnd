@@ -8,9 +8,12 @@ from scan_nif import Reader
 def read_document(path):
     data = Path(path).read_bytes()
     r = Reader(data)
-    r.take(data.index(b'\n') + 1)
-    if r.number() != 0x1E020003 or r.number('B') != 1:
-        raise ValueError('Expected little-endian NIF 30.2.0.3')
+    header = bytes(r.take(data.index(b'\n') + 1)).rstrip(b'\n')
+    older_version = header == b'Gamebryo File Format, Version 30.1.0.3'
+    if header != b'Gamebryo File Format, Version 30.2.0.3' and not older_version:
+        raise ValueError('Expected NIF 30.2.0.3 or 30.1.0.3')
+    if r.number() != (0x1E010003 if older_version else 0x1E020003) or r.number('B') != 1:
+        raise ValueError('Unsupported NIF version/endian')
     r.number()
     count = r.number()
     r.take(r.number())

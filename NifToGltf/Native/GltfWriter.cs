@@ -157,7 +157,11 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
                 animationChannels.Add(Json(new { sampler = animationSamplers.Count - 1, target = new { node = matches[0], path = track.Path } }));
             }
             if (animationChannels.Count == 0) throw new InvalidDataException($"Clip {clip.Name}: no bound animation tracks.");
-            animations.Add(new JsonObject { ["name"] = clip.Name, ["samplers"] = animationSamplers, ["channels"] = animationChannels });
+            JsonObject animation = new() { ["name"] = clip.Name, ["samplers"] = animationSamplers, ["channels"] = animationChannels };
+            if (clip.SourceSequenceBlock is not null) animation["extras"] = Json(new {
+                sourceSequence = clip.SourceSequence, sourceSequenceBlock = clip.SourceSequenceBlock, sourceEvent = clip.SourceEvent
+            });
+            animations.Add(animation);
         }
         JsonObject gltf = new() {
             ["asset"] = Json(new { version = "2.0", generator = "MapleStory2 native NIF converter" }),

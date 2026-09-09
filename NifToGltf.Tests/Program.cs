@@ -24,6 +24,45 @@ double[] Decode(uint format, byte[] payload) => new NifStream {
     Formats = [format], Regions = [new StreamRegion(0, 1)], Data = payload
 }.ReadComponent(0, 0);
 
+Test("MS2 KFM transition pairs preserve the following authored clip", () => {
+    string directory = Path.Combine(Path.GetTempPath(), $"native-transition-{Guid.NewGuid():N}");
+    Directory.CreateDirectory(directory);
+    try {
+        File.WriteAllBytes(Path.Combine(directory, "model.nif"), []);
+        File.WriteAllBytes(Path.Combine(directory, "idle.kf"), []);
+        byte[] data = Bytes(w => {
+            void Text(string text) { byte[] bytes = System.Text.Encoding.ASCII.GetBytes(text); w.Write(bytes.Length); w.Write(bytes); }
+            w.Write(System.Text.Encoding.ASCII.GetBytes(";Gamebryo KFM File Version 30.2.0.3b\n")); w.Write((byte) 1);
+            Text("model.nif"); Text("Bip01"); w.Write(0); w.Write(0); w.Write(0f); w.Write(0f); w.Write(2);
+            w.Write(1); Text("idle.kf"); Text("Idle_A"); w.Write(1);
+            w.Write(2); w.Write(3); w.Write(0.1f); w.Write(1); Text("end"); Text("start"); w.Write(1); w.Write(7); w.Write(-1f);
+            w.Write(2); Text("idle.kf"); Text("Idle_B"); w.Write(0); w.Write(0);
+        });
+        string path = Path.Combine(directory, "model.kfm");
+        File.WriteAllBytes(path, data);
+        KfmDocument document = KfmDocument.Read(path);
+        Assert(document.Clips.Select(clip => clip.Name).SequenceEqual(new[] { "Idle_A", "Idle_B" }), "Transition changed clip alignment");
+        File.WriteAllBytes(path, data[..^3]);
+        Reject(() => KfmDocument.Read(path));
+    } finally { Directory.Delete(directory, true); }
+});
+
+Test("duplicate clip names retain distinct authored events", () => {
+    AnimationClip first = new("Idle_A", []) { SourceEvent = 7, SourceSequence = "Idle_A", SourceSequenceBlock = 0 };
+    AnimationClip second = first with { SourceEvent = 9 };
+    List<AnimationClip> clips = ClipSelection.Disambiguate([first, second]);
+    Assert(clips.Select(clip => clip.Name).SequenceEqual(new[] { "Idle_A [event 7]", "Idle_A [event 9]" }), "Lost event identity");
+    Assert(clips.All(clip => clip.SourceSequence == "Idle_A"), "Lost authored sequence name");
+    Reject(() => ClipSelection.Disambiguate([first, first]));
+});
+string duplicateSequenceSource = "Maple2Storage/Resources/NpcSources/02/02/02020006/attack_01_a.kf";
+if (File.Exists(duplicateSequenceSource)) Test("duplicate source sequences retain separate timing and root identities", () => {
+    AnimationClip[] clips = AnimationReader.ReadAll(duplicateSequenceSource, sequenceName: "Attack_01_A");
+    Assert(clips.Length == 2, "Lost an authored sequence");
+    Assert(clips.Select(clip => clip.SourceSequenceBlock).Distinct().Count() == 2, "Collapsed sequence roots");
+    Assert(clips.Select(clip => clip.Tracks.Max(track => track.Times[^1])).Distinct().Count() == 2, "Collapsed distinct clip timing");
+});
+
 Test("all nine formats preserve signed, unsigned and normalized values", () => {
     Near(Decode(0x00010215, Bytes(w => w.Write((ushort) 65535)))[0], 65535);
     Near(Decode(0x00010425, Bytes(w => w.Write(uint.MaxValue)))[0], uint.MaxValue);
@@ -182,12 +221,54 @@ Test("Hermite interpolation respects endpoint tangents", () => {
     Near(AnimationReader.Hermite(0, 1, 1, 1, 0.3), 0.3);
     Near(AnimationReader.Hermite(0, 1, 0, 0, 0.25), 0.15625);
 });
+Test("TCB controls retain the oriented spherical arc instead of reversing it", () => {
+    Quaternion end = Quaternion.CreateFromAxisAngle(Vector3.UnitZ, 3 * MathF.PI / 2);
+    Quaternion middle = TcbInterpolation.DirectedSlerp(Quaternion.Identity, end, 0.5f);
+    Near(middle.W, Math.Cos(3 * Math.PI / 8), 1e-6);
+    Near(middle.Z, Math.Sin(3 * Math.PI / 8), 1e-6);
+});
+Test("nearly opposed TCB controls retain a finite authored arc", () => {
+    Quaternion end = Quaternion.CreateFromAxisAngle(Vector3.UnitZ, 2 * MathF.PI - 0.001f);
+    Quaternion middle = TcbInterpolation.DirectedSlerp(Quaternion.Identity, end, 0.5f);
+    Near(middle.W, Math.Cos((2 * Math.PI - 0.001) / 4), 1e-6);
+    Near(middle.Z, Math.Sin((2 * Math.PI - 0.001) / 4), 1e-6);
+});
+Test("TCB quaternion endpoints ease with the independently computed smoothstep angle", () => {
+    AnimationKey Key(double time, double angle, bool negate = false) {
+        Quaternion q = Quaternion.CreateFromAxisAngle(Vector3.UnitZ, (float) angle);
+        if (negate) q = -q;
+        return new(time, [q.W, q.X, q.Y, q.Z], [], [], [0, 0, 0]);
+    }
+    AnimationCurve curve = TcbInterpolation.Rotation([Key(0, 0), Key(1, Math.PI / 2, true)]);
+    foreach (double t in new[] { 0, 0.25, 0.5, 0.75, 1 }) {
+        double angle = Math.PI / 2 * (3 * t * t - 2 * t * t * t);
+        Quaternion expected = Quaternion.CreateFromAxisAngle(Vector3.UnitZ, (float) angle);
+        Quaternion actual = AnimationReader.QuaternionValue(curve.Evaluate(t));
+        Near(Math.Abs(Quaternion.Dot(expected, actual)), 1, 1e-6);
+    }
+});
+Test("TCB vector tangents retain nonuniform timing and explicit tension", () => {
+    AnimationKey Key(double time, double value, double tension = 0) => new(time, [value], [], [], [tension, 0, 0]);
+    AnimationCurve linear = TcbInterpolation.Vector([Key(0, 0), Key(1, 1), Key(3, 3)], 1);
+    Near(linear.Evaluate(0.5)[0], 0.5);
+    Near(linear.Evaluate(2)[0], 2);
+    AnimationCurve eased = TcbInterpolation.Vector([Key(0, 0, 1), Key(1, 1, 1)], 1);
+    Near(eased.Evaluate(0.25)[0], 0.15625);
+});
 Test("adaptive sampling resolves curvature between uniform keys", () => {
     double[] times = AnimationReader.Refine(t => [t * t], [0, 1], 0);
     Assert(times.Length > 2, "Curvature must introduce keys");
     for (int i = 1; i < times.Length; i++) {
         double middle = (times[i - 1] + times[i]) / 2;
         Near((times[i - 1] * times[i - 1] + times[i] * times[i]) / 2, middle * middle, 0.001);
+    }
+});
+Test("unresolved sampling discontinuities report their channel and interval", () => {
+    try {
+        AnimationReader.Refine(t => [t < 0.5 ? 0 : 1], [0, 1], 0);
+        throw new Exception("Discontinuous source unexpectedly passed linear sampling");
+    } catch (InvalidDataException error) {
+        Assert(error.Message.Contains("Channel 0, interval [") && error.Message.Contains("middle ["), "Sampling failure lacks diagnostic values");
     }
 });
 Test("triangle strips alternate winding and keep parity across degenerates", () => {
@@ -253,6 +334,28 @@ Test("batch paths reject output traversal", () => {
 
 if (args.Length > 0) {
     NifDocument body = NifDocument.Load(args[0]);
+    string alonClip = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(args[0])!, "../../../NpcSources/02/01/02010034/attack_01_c.kf"));
+    string mannequinDirectory = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(args[0])!, "../../../WardrobeSources/Item/dropicon/body"));
+    if (Directory.Exists(mannequinDirectory)) Test("original 30.1 mannequin geometry matches the published vertex and triangle inventories", () => {
+        (string Name, int Vertices, int Triangles)[] expected = [
+            ("f_mannequin_body", 337, 670), ("f_mannequin_cl", 205, 406), ("f_mannequin_pa", 223, 344),
+            ("m_mannequin_body", 309, 532), ("m_mannequin_cl", 200, 360), ("m_mannequin_pa", 145, 240)];
+        foreach (var item in expected) {
+            NifDocument mannequin = NifDocument.Load(Path.Combine(mannequinDirectory, item.Name + ".nif"));
+            DecodedPrimitive[] geometry = mannequin.Nodes.Values.Where(node => node.Mesh is not null)
+                .SelectMany(node => Enumerable.Range(0, node.Mesh!.Submeshes).Select(index => MeshDecoder.Decode(mannequin, node, index))).ToArray();
+            Assert(geometry.Sum(mesh => mesh.Attributes["POSITION"].Values.Length / 3) == item.Vertices, item.Name + " vertex count");
+            Assert(geometry.Sum(mesh => mesh.Indices.Length / 3) == item.Triangles, item.Name + " triangle count");
+        }
+    });
+    if (File.Exists(alonClip)) Test("Alon authored TCB hair rotation remains continuous at the former hemisphere flip", () => {
+        NifDocument clip = NifDocument.Load(alonClip);
+        AnimationCurve curve = AnimationReader.KeyData(clip.Reader(14, "NiTransformData"))[1]!;
+        Quaternion before = AnimationReader.QuaternionValue(curve.Evaluate(1.4822874));
+        Quaternion after = AnimationReader.QuaternionValue(curve.Evaluate(1.482288));
+        Assert(Math.Abs(Quaternion.Dot(before, after)) > 0.999999f, "TCB rotation still jumps");
+        Assert(AnimationReader.Read(alonClip).Tracks.Any(track => track.Node == "Hair_Bone00"), "Hair animation was omitted");
+    });
     Test("female source mesh counts and named skinning", () => {
         int vertices = 0, triangles = 0;
         foreach (NifNode node in body.Nodes.Values.Where(node => node.Mesh is not null)) {

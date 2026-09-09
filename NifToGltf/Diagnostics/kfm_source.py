@@ -21,10 +21,13 @@ def read_kfm(data):
                 continue
             r.number('f')
             for _ in range(r.number()):
-                r.number('i')
                 r.string()
-            if r.number() != 0:
-                raise ValueError('Unsupported KFM transition text-key pairs')
+                r.string()
+            # MS2 transition pairs are fixed int32/float32 records. Their
+            # playback semantics are not needed to enumerate authored clips.
+            for _ in range(r.number()):
+                r.number('i')
+                r.number('f')
         clips.append(dict(event=event, file=file, name=name))
     r.number('i')
     r.finish()
@@ -38,9 +41,19 @@ def beside(kfm, reference):
     return (PurePosixPath(kfm).parent / relative).as_posix()
 
 
-def referenced_file(kfm, reference):
-    relative = PurePosixPath(beside(kfm.name, reference))
-    current = kfm.parent
+def referenced_file(kfm, reference, root=None):
+    if root is None:
+        relative = PurePosixPath(beside(kfm.name, reference))
+        current = kfm.parent
+    else:
+        normalized = reference.replace('\\', '/')
+        if not normalized or normalized.startswith('/') or ':' in normalized:
+            raise ValueError('Invalid KFM asset reference')
+        current = root.resolve()
+        target = (kfm.parent / normalized).resolve()
+        if not target.is_relative_to(current):
+            raise ValueError('KFM reference escapes the source root')
+        relative = target.relative_to(current)
     for part in relative.parts:
         matches = [p for p in current.iterdir() if p.name.lower() == part.lower()]
         if len(matches) != 1:

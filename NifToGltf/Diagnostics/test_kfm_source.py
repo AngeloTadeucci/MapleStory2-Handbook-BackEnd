@@ -3,7 +3,7 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
-from kfm_source import animation_inputs, beside, read_kfm
+from kfm_source import animation_inputs, beside, read_kfm, referenced_file
 from wardrobe_inventory import ArchiveIndex
 
 
@@ -17,6 +17,18 @@ def fixture(model='.\\tail.nif', clip='.\\tail.kf'):
 
 
 class KfmSourceTests(unittest.TestCase):
+    def test_shared_references_stay_within_explicit_source_root(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'alias').mkdir()
+            (root / 'shared').mkdir()
+            target = root / 'shared' / 'Idle.kf'
+            target.touch()
+            kfm = root / 'alias' / 'model.kfm'
+            self.assertEqual(referenced_file(kfm, '../shared/idle.kf', root), target)
+            with self.assertRaisesRegex(ValueError, 'escapes'):
+                referenced_file(kfm, '../../outside.kf', root)
+
     def test_explicit_model_reference_preserves_the_second_tail_identity(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -64,6 +76,20 @@ class KfmSourceTests(unittest.TestCase):
         for data in [fixture()[:-1], fixture() + b'x', b'wrong header' + fixture()[12:]]:
             with self.assertRaises(ValueError):
                 read_kfm(data)
+
+    def test_ms2_transition_pairs_preserve_clip_alignment(self):
+        # One type-3 transition, one pair (7, -1), then the file trailer.
+        transition = struct.pack('<Iii f II if i', 1, 6, 3, 0.1, 0, 1, 7, -1.0, 0)
+        payload = fixture()[:-8] + transition
+        self.assertEqual(read_kfm(payload)['clips'][0]['name'], 'TailIdle')
+        with self.assertRaises(ValueError):
+            read_kfm(payload[:-5])
+
+    def test_transition_text_keys_are_two_strings(self):
+        transition = (struct.pack('<IiifI', 1, 6, 3, 0.5, 1)
+                      + struct.pack('<I', 3) + b'end' + struct.pack('<I', 5) + b'start'
+                      + struct.pack('<Iifi', 1, 7, -1.0, 0))
+        self.assertEqual(read_kfm(fixture()[:-8] + transition)['clips'][0]['name'], 'TailIdle')
 
     def test_real_sassy_kfms_resolve_one_model_and_clip(self):
         root = Path(__file__).resolve().parents[1] / 'obj/hair-investigation/source'
