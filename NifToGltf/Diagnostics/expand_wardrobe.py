@@ -262,7 +262,9 @@ def assemble(args):
     sources = {(i['itemId'], i['bodyVariant']): i for i in read(args.inventory)['items']}
     known = {(i['itemId'], i['bodyVariant']): i for i in entries}
     visual_notes = read(Path('NifToGltf/Diagnostics/wardrobe-visual-notes.json'))['notes']
-    inherited = {known[k]['family']: v for k, v in base_entries.items() if k in known and v['availability'] != 'unavailable'}
+    # Reuse a baseline bundle only for the same source family. An item ID can map to a different
+    # model when the source data changes, and reusing by ID would restore the old model.
+    inherited = {v['family']: v for v in base_entries.values() if v.get('family') and v['availability'] != 'unavailable'}
     customization = read(args.base / 'customization.json')
     extra = read(args.customization / 'metadata.json') if args.customization else {'faces': {}, 'makeup': {}, 'failures': {}}
     for key, value in extra['faces'].items():
@@ -350,6 +352,8 @@ def assemble(args):
             entry['blockers'] = [b for b in entry['blockers'] if not b.endswith('conversion pending')]
             entry['blockers'].append(extra['failures'][item_id])
         old = base_entries.get(key)
+        if old and old.get('family') != entry['family']:
+            old = None
         alias = inherited.get(entry['family'])
         discovered_forms = copy.deepcopy(entry.get('hairForms', {}))
         if (old and old['availability'] != 'unavailable') or (alias and not entry['blockers']):
