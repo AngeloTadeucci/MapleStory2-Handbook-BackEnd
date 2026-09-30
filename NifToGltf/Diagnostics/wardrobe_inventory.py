@@ -31,12 +31,12 @@ def tree(element):
             'children': [tree(child) for child in element]}
 
 
-def select_environment(item, features, level):
+def select_environment(item, features, level, locale='KR'):
     eligible = []
     for order, env in enumerate(item.findall('environment')):
         feature = env.get('feature')
         version = features.get(feature) if feature else 0
-        if version is not None and version <= level and env.get('locale', 'KR') == 'KR':
+        if version is not None and version <= level and env.get('locale', locale) == locale:
             eligible.append((version, order, env))
     # Feature environments in this revision are complete overrides, as in the
     # client parser's highest enabled feature selection. Retain all in the audit.
@@ -83,10 +83,10 @@ class ArchiveIndex:
         return resolved, [resolved], dict(path=kfm, sha256=hashlib.sha256(payload).hexdigest(), **record)
 
 
-def reconcile(xml, paths, sources=None):
-    features = {e.get('name'): int(e.get('KR', '999'))
+def reconcile(xml, paths, sources=None, language='kr', locale='KR'):
+    features = {e.get('name'): int(e.get(locale, '999'))
                 for e in ET.parse(xml / 'table/feature.xml').getroot()}
-    level = int(ET.parse(xml / 'table/feature_setting.xml').getroot().find("setting[@type='Live']").get('KR'))
+    level = int(ET.parse(xml / 'table/feature_setting.xml').getroot().find("setting[@type='Live']").get(locale))
     index = ArchiveIndex(paths)
     models = {}
     provenance = []
@@ -99,7 +99,7 @@ def reconcile(xml, paths, sources=None):
                 raise ValueError(f'Duplicate model {identity}')
             models[identity] = (model, path.relative_to(xml).as_posix())
     names = {int(e.get('id')): e.get('name', '').strip()
-             for e in ET.parse(xml / 'string/kr/itemname.xml').getroot()}
+             for e in ET.parse(xml / f'string/{language}/itemname.xml').getroot()}
     items, excluded, seen, used = [], [], set(), set()
     for path in sorted((xml / 'itemdata').glob('*.xml')):
         for raw in ET.parse(path).getroot():
@@ -107,11 +107,11 @@ def reconcile(xml, paths, sources=None):
             if identity in seen:
                 raise ValueError(f'Duplicate itemdata {identity}')
             seen.add(identity)
-            env = select_environment(raw, features, level)
+            env = select_environment(raw, features, level, locale)
             audit = {'itemId': identity, 'itemData': path.relative_to(xml).as_posix(),
                      'environments': [tree(e) for e in raw.findall('environment')]}
             if env is None:
-                excluded.append({**audit, 'reason': 'No KR Live environment', 'classification': 'inactive'})
+                excluded.append({**audit, 'reason': f'No {locale} Live environment', 'classification': 'inactive'})
                 continue
             attributes = {e.tag: dict(e.attrib) for e in env}
             prop, limit, tool = (attributes.get(k, {}) for k in ['property', 'limit', 'tool'])
@@ -185,7 +185,7 @@ def reconcile(xml, paths, sources=None):
                                           'parts': parts, 'cutting': cutting})
                 items.append(entry)
     items.sort(key=lambda i: (i['itemId'], i['bodyVariant']))
-    return {'version': 1, 'selection': {'locale': 'KR', 'environment': 'Live', 'featureLevel': level},
+    return {'version': 1, 'selection': {'locale': locale, 'environment': 'Live', 'featureLevel': level},
             'sourceFiles': provenance, 'archiveIndexHash': digest(paths), 'sourceItemCount': len(seen),
             'items': items, 'excluded': excluded,
             'unreferencedModels': [{'presetId': k, 'source': v[1], 'record': tree(v[0])}
@@ -210,8 +210,10 @@ if __name__ == '__main__':
     parser.add_argument('--index', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--sources', type=Path, help='Existing extracted archive root, for explicit KFM references')
+    parser.add_argument('--language', default='kr', help="Item name table under string/, 'en' for lith_sources.py output")
+    parser.add_argument('--locale', default='KR', help="Feature and environment locale, 'NA' for lith_sources.py output")
     args = parser.parse_args()
-    inventory = reconcile(args.xml, json.loads(args.index.read_text()), args.sources)
+    inventory = reconcile(args.xml, json.loads(args.index.read_text()), args.sources, args.language, args.locale)
     write(args.output / 'wardrobe-inventory.json', inventory)
     report = summary(inventory)
     write(args.output / 'coverage-by-slot-body.json', report)
