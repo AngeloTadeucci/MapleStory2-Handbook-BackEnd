@@ -48,6 +48,11 @@ def export(xml, textures, release):
         imp = ET.parse(xml / f'emotion/item/{item["itemId"]}.xml').getroot().find('import')
         if imp is None:
             continue
+        if not imp.get('itemCode'):
+            # GM faces such as 10300059 import a named set with no per-item texture code.
+            item['availability'] = 'unavailable'
+            item['reason'] = 'Face import has no itemCode, so its textures cannot be resolved'
+            continue
         emotions = ET.parse(xml / f'emotion/common/{imp.get("name").lower()}.xml').getroot()
         sequences = {}
         for name in ['default', 'happy', 'angry', 'sad']:
