@@ -51,12 +51,14 @@ class BuildTests(unittest.TestCase):
                 # Two items share preset 11300001 but carry different slots, as 334 Lith presets do.
                 'item/1/13/11300001.xml': '''<ms2><environment feature="" locale="">
                     <slots><slot name="CP"><asset name="Data/Resource/Model/Item/1/13/cap.nif" gender="2"/></slot></slots>
-                    <limit genderLimit="2"/><property category="CP"/><customize colorPalette="5"/><cutting/>
+                    <limit genderLimit="2"/><property category="CP"/><cutting/>
+                    <customize colorPalette="5"><HR scale="1"/><FD translation="1" rotation="0" scale="1"/>
+                    <CP xrotation="1" scale="0" attach="1"><transform position="52.78, 3.0, 18.5" rotation="0.44, -0.87, 0.02"/></CP></customize>
                     <tool itemPreset="11300001"/></environment>
                     <environment feature="Late" locale=""><slots/><tool itemPreset="1"/></environment></ms2>''',
                 'item/1/13/11300002.xml': '''<ms2><environment feature="" locale="">
                     <slots><slot name="CP"><asset name="Data/Resource/Model/Item/1/13/other.nif" gender="1"/>
-                    <asset name="urn:gamebryo-animation:urn:wing" gender="1"/><dummy gender="2" translation="0,1,0"/></slot></slots>
+                    <asset name="urn:gamebryo-animation:urn:gamebryo-animation:urn:wing" gender="1"/><dummy gender="2" translation="0,1,0"/></slot></slots>
                     <limit genderLimit="1"/><property category="CP"/><tool itemPreset="11300001"/></environment></ms2>''',
                 'item/1/13/11300003.xml': '<ms2><environment locale="KR"><tool itemPreset="3"/></environment></ms2>',
                 # Furniture carries its model in an unnamed slot. It is not equipment.
@@ -75,7 +77,12 @@ class BuildTests(unittest.TestCase):
             self.assertEqual((tool.get('itemPreset'), tool.get('lithItemPreset')), ('11300002', '11300001'))
             model = ET.parse(output / 'itemmodel/113.xml').getroot().find("ItemModel[@id='11300001']")
             self.assertIsNone(model.find('slots/slot/asset').get('gender'))
-            self.assertEqual(model.find('customize').get('colorPalette'), '5')
+            customize = model.find('customize')
+            self.assertEqual(customize.get('colorPalette'), '5')
+            # A CP-only item takes CP's flags: scale 0 is omitted, rotation comes from xrotation.
+            self.assertEqual({k: customize.get(k) for k in ['scale', 'rotation', 'translation', 'capAttach']},
+                             {'scale': None, 'rotation': '1', 'translation': '1', 'capAttach': '1'})
+            self.assertEqual(customize.find('capTransform').attrib, {'position': '52.78, 3.0, 18.5', 'rotation': '0.44, -0.87, 0.02'})
             other = ET.parse(output / 'itemmodel/113.xml').getroot().find("ItemModel[@id='11300002']")
             self.assertEqual([a.get('name') for a in other.iter('asset')][1], 'urn:wing')
             self.assertIsNone(other.find('slots/slot/dummy').get('gender'))

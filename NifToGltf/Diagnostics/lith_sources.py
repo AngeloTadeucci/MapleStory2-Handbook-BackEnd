@@ -18,6 +18,16 @@ itemPreset 0 with no itemmodel entry, so those items get exactly that.
 
 The environment is resolved exactly as Maple2.File.Parser's FeatureLocaleFilter
 does for the server, so the build sees the item the client and server see.
+
+Customize fields are nested per slot here, as <HR scale>, <FD translation rotation
+scale> and <CP xrotation attach><transform/></CP>. KMS2 flattens them onto
+<customize> and names the cap offset <capTransform>. Readers such as
+hat_placement_metadata.py and simulator_customization.py expect the KMS2 names,
+so they are added alongside the originals. The mapping was measured on the 6,264
+models both sources share: HR/CP/FD scale agree 100/100/98.9 percent, FD
+translation 95.8, FD rotation 98.9, CP xrotation 94.4, CP attach 95.5, and the
+CP transform 89.4 and 95.7 for position and rotation. KMS2 omits a flag that is
+zero, and Lith has zero wherever KMS2 omits one, so zeros are not written.
 """
 import argparse
 import hashlib
@@ -64,6 +74,25 @@ def has_equipment(environment):
     return any(slot.get('name') for slot in environment.findall('slots/slot'))
 
 
+def flatten_customize(customize, slots):
+    def value(path, attribute):
+        element = customize.find(path)
+        return element.get(attribute, '0') if element is not None else '0'
+    flags = {
+        'scale': next((value(slot, 'scale') for slot in ('HR', 'CP', 'FD') if slot in slots), '0'),
+        'rotation': value('FD', 'rotation') if 'FD' in slots else value('CP', 'xrotation') if 'CP' in slots else '0',
+        'translation': value('FD', 'translation'),
+        'capAttach': value('CP', 'attach'),
+    }
+    for attribute, flag in flags.items():
+        if flag not in ('0', '') and attribute not in customize.attrib:
+            customize.set(attribute, flag)
+    transform = customize.find('CP/transform')
+    if transform is not None and transform.get('position') and customize.find('capTransform') is None:
+        ET.SubElement(customize, 'capTransform', position=transform.get('position'),
+                      rotation=transform.get('rotation', '0,0,0'))
+
+
 def item_model(identity, environment, name):
     model = ET.Element('ItemModel', id=str(identity), desc=name)
     for tag in MODEL_CHILDREN:
@@ -74,6 +103,8 @@ def item_model(identity, environment, name):
         if tag == 'slots':
             for slot in [s for s in child if not s.get('name')]:
                 child.remove(slot)
+        if tag == 'customize':
+            flatten_customize(child, {slot.get('name') for slot in environment.findall('slots/slot')})
         for element in child.iter():
             # gender="2" is unisex in this XML. The KMS2 layout omits the attribute instead,
             # and both wardrobe_inventory and ItemModelAttachment read absence as unisex.
@@ -81,9 +112,12 @@ def item_model(identity, environment, name):
                 del element.attrib['gender']
             # The same animated asset is urn:gamebryo-animation:urn:X here and urn:X in KMS2.
             # Neither the inventory's archive index nor the converter reads the long form.
-            name = element.get('name', '') if element.tag == 'asset' else ''
-            if name.startswith(ANIMATION_URN):
-                element.set('name', 'urn:' + name[len(ANIMATION_URN):])
+            # Some assets repeat the prefix several times; KMS2 names the same asset once.
+            declared = element.get('name', '') if element.tag == 'asset' else ''
+            if declared.startswith(ANIMATION_URN):
+                while declared.startswith(ANIMATION_URN):
+                    declared = 'urn:' + declared[len(ANIMATION_URN):]
+                element.set('name', declared)
         model.append(child)
     return model
 
