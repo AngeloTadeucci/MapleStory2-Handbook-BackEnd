@@ -52,7 +52,7 @@ class BuildTests(unittest.TestCase):
                 'item/1/13/11300001.xml': '''<ms2><environment feature="" locale="">
                     <slots><slot name="CP"><asset name="Data/Resource/Model/Item/1/13/cap.nif" gender="2"/></slot></slots>
                     <limit genderLimit="2"/><property category="CP"/><cutting/>
-                    <customize colorPalette="5"><HR scale="1"/><FD translation="1" rotation="0" scale="1"/>
+                    <customize colorPalette="5" defaultColorIndex="-1"><HR scale="1"/><FD translation="1" rotation="0" scale="1"/>
                     <CP xrotation="1" scale="0" attach="1"><transform position="52.78, 3.0, 18.5" rotation="0.44, -0.87, 0.02"/></CP></customize>
                     <tool itemPreset="11300001"/></environment>
                     <environment feature="Late" locale=""><slots/><tool itemPreset="1"/></environment></ms2>''',
@@ -79,6 +79,7 @@ class BuildTests(unittest.TestCase):
             self.assertIsNone(model.find('slots/slot/asset').get('gender'))
             customize = model.find('customize')
             self.assertEqual(customize.get('colorPalette'), '5')
+            self.assertIsNone(customize.get('defaultColorIndex'))
             # A CP-only item takes CP's flags: scale 0 is omitted, rotation comes from xrotation.
             self.assertEqual({k: customize.get(k) for k in ['scale', 'rotation', 'translation', 'capAttach']},
                              {'scale': None, 'rotation': '1', 'translation': '1', 'capAttach': '1'})
@@ -95,6 +96,7 @@ class BuildTests(unittest.TestCase):
             self.assertEqual(pairs[(11300001, 'male')]['parts'][0]['source'], '1/13/cap.nif')
             self.assertEqual(sorted(p['source'] for p in pairs[(11300002, 'female')]['parts']), ['1/13/other.nif', '1/18/wing.nif'])
             self.assertEqual(pairs[(11300001, 'male')]['sourceName'], 'Cap')
+            self.assertNotIn('defaultColorIndex', pairs[(11300001, 'male')]['customize'])
             self.assertEqual(sorted((e['itemId'], e['classification']) for e in inventory['excluded']),
                              [(11300003, 'inactive'), (50100002, 'nonwearable')])
 

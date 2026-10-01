@@ -74,6 +74,14 @@ def has_equipment(environment):
     return any(slot.get('name') for slot in environment.findall('slots/slot'))
 
 
+def drop_no_default_dye(customize):
+    # defaultColorIndex="-1" means no default dye here, as in the server's ItemDropManager.
+    # KMS2 omits the attribute instead, and the simulator reads any value it finds as a palette index.
+    # The inventory merges itemdata's customize over itemmodel's, so both copies need this.
+    if customize.get('defaultColorIndex', '').startswith('-'):
+        del customize.attrib['defaultColorIndex']
+
+
 def flatten_customize(customize, slots):
     def value(path, attribute):
         element = customize.find(path)
@@ -87,6 +95,7 @@ def flatten_customize(customize, slots):
     for attribute, flag in flags.items():
         if flag not in ('0', '') and attribute not in customize.attrib:
             customize.set(attribute, flag)
+    drop_no_default_dye(customize)
     transform = customize.find('CP/transform')
     if transform is not None and transform.get('position') and customize.find('capTransform') is None:
         ET.SubElement(customize, 'capTransform', position=transform.get('position'),
@@ -131,6 +140,8 @@ def item_data(identity, environment):
         if child.tag == 'slots':
             continue
         child = ET.fromstring(ET.tostring(child))
+        if child.tag == 'customize':
+            drop_no_default_dye(child)
         if child.tag == 'tool':
             child.set('lithItemPreset', child.get('itemPreset', '0'))
             child.set('itemPreset', str(identity) if has_equipment(environment) else '0')
