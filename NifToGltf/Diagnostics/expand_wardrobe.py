@@ -247,6 +247,24 @@ def retain_unselected_entries(baseline, retried):
         copy.deepcopy(entry) for entry in retried if (entry['itemId'], entry['bodyVariant']) not in baseline_keys]
 
 
+def model_role(asset):
+    """The model, body and placement an asset renders, independent of its content-hash identity."""
+    return (Path(asset.get('input', '')).name.lower(), asset.get('bodyVariant'), asset.get('slot'),
+            asset.get('attach'), asset.get('hand'), bool(asset.get('drawn')),
+            Path(asset['alternateOf']).name.lower() if asset.get('alternateOf') else None)
+
+
+def superseded_baseline(baseline_ids, assets, referenced):
+    """Baseline wardrobe assets that a newer conversion reproduces and no entry still uses.
+
+    A rebuild from changed source data converts the same model under a new identity. Keeping both
+    leaves two equal variants per model, and the packager can no longer pick a default for it.
+    """
+    fresh = {model_role(a) for i, a in assets.items() if i.startswith('wardrobe-') and i not in baseline_ids}
+    return sorted(i for i in baseline_ids if i.startswith('wardrobe-') and i in assets
+                  and i not in referenced and model_role(assets[i]) in fresh)
+
+
 def assemble(args):
     if args.output.exists(): raise ValueError('Choose a fresh candidate path')
     check_disk(args.output.parent, 256 * 1024**2)
@@ -281,6 +299,7 @@ def assemble(args):
     write(args.output / 'customization.json', customization)
     manifest = read(args.base / 'native-manifest.json')
     assets = {a['id']: a for a in manifest['assets']}
+    baseline_ids = set(assets)
     errors = {}
     checkpoints = sorted(args.work.glob('batches/*/checkpoint.json'))
     if args.patches: checkpoints += sorted(args.patches.glob('*/checkpoint.json'), key=lambda p: (read(p).get('generation', 1 if read(p).get('selectionHash') else 0), p.parent.name))
@@ -386,6 +405,14 @@ def assemble(args):
             for field in ['handParts', 'hairForms', 'stowedParts']: entry.pop(field, None)
     if getattr(args, 'retain_unselected', False):
         entries = retain_unselected_entries(base_catalog['items'], entries)
+    referenced = {i for e in entries for i in [p['assetId'] for p in e.get('parts', [])] + e.get('stowedParts', [])
+                  + [v for group in [e.get('handParts', {}), e.get('hairForms', {})] for ids in group.values() for v in ids]}
+    superseded = superseded_baseline(baseline_ids, assets, referenced)
+    kept_uris = {a['uri'] for i, a in assets.items() if i not in superseded}
+    for identity in superseded:
+        uri = assets.pop(identity)['uri']
+        if uri not in kept_uris:
+            (args.output / uri).unlink(missing_ok=True)
     manifest['assets'] = list(assets.values())
     write(args.output / 'native-manifest.json', manifest)
     write(args.output / 'simulator-catalog.json', {'version': 1, 'nativeManifestVersion': 1, 'items': entries})
