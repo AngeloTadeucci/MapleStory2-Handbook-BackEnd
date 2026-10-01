@@ -254,15 +254,67 @@ def model_role(asset):
             Path(asset['alternateOf']).name.lower() if asset.get('alternateOf') else None)
 
 
-def superseded_baseline(baseline_ids, assets, referenced):
-    """Baseline wardrobe assets that a newer conversion reproduces and no entry still uses.
+def duplicate_wardrobe_assets(baseline_ids, assets, referenced):
+    """Wardrobe assets that no entry uses and that another asset already renders.
 
     A rebuild from changed source data converts the same model under a new identity. Keeping both
-    leaves two equal variants per model, and the packager can no longer pick a default for it.
+    leaves two variants per model, and the packager can no longer pick a default for it. An unused
+    baseline asset gives way to the new conversion, and an unused new conversion gives way to a
+    baseline asset that a reused entry still renders.
     """
     fresh = {model_role(a) for i, a in assets.items() if i.startswith('wardrobe-') and i not in baseline_ids}
-    return sorted(i for i in baseline_ids if i.startswith('wardrobe-') and i in assets
-                  and i not in referenced and model_role(assets[i]) in fresh)
+    used = {model_role(assets[i]) for i in referenced if i in assets}
+    return sorted(i for i, a in assets.items() if i.startswith('wardrobe-') and i not in referenced
+                  and (model_role(a) in fresh if i in baseline_ids else model_role(a) in used))
+
+
+def prefer_baseline_assets(entries, baseline_ids, assets):
+    """Point entries at the baseline asset when a new conversion renders the same model.
+
+    Reused entries keep the reviewed baseline asset, while entries converted fresh get a new
+    asset for the same model file. Two copies in use leave the packager without a default for
+    that model, so the fresh copy gives way to the baseline one. Returns the rewritten count.
+    """
+    in_use = {i for e in entries for i in entry_asset_ids(e)}
+    preferred = {model_role(assets[i]): i for i in sorted(in_use) if i in baseline_ids and i in assets}
+    swap = lambda i: preferred.get(model_role(assets[i]), i) if i in assets and i not in baseline_ids else i
+    rewritten = 0
+    for entry in entries:
+        for part in entry.get('parts', []):
+            if swap(part['assetId']) != part['assetId']:
+                part['assetId'] = swap(part['assetId']); rewritten += 1
+        for field in ['handParts', 'hairForms']:
+            for key, ids in entry.get(field, {}).items():
+                entry[field][key] = [swap(i) for i in ids]
+                rewritten += sum(a != b for a, b in zip(ids, entry[field][key]))
+        if entry.get('stowedParts'):
+            swapped = [swap(i) for i in entry['stowedParts']]
+            rewritten += sum(a != b for a, b in zip(entry['stowedParts'], swapped))
+            entry['stowedParts'] = swapped
+    return rewritten
+
+
+def entry_asset_ids(entry):
+    return ([p['assetId'] for p in entry.get('parts', [])] + entry.get('stowedParts', [])
+            + [v for group in [entry.get('handParts', {}), entry.get('hairForms', {})] for ids in group.values() for v in ids])
+
+
+def model_path(path):
+    """The archive-relative tail of a model path, such as 0/02/hair_a.nif, whatever root it was read from."""
+    return '/'.join(path.replace('\\', '/').lower().split('/')[-3:])
+
+
+def declares_baseline_models(baseline, source, assets):
+    """True when the source still declares every model file the baseline entry was converted from.
+
+    A family digest covers the whole item model record, so data from another XML layout never
+    matches it even for an unchanged model. What makes a baseline wrong for an item is a
+    different model file.
+    """
+    used = {model_path(assets[p['assetId']]['input']) for p in baseline.get('parts', [])
+            if assets.get(p['assetId'], {}).get('input')}
+    declared = {model_path(p['source']) for p in source['parts'] if (p.get('source') or '').lower().endswith('.nif')}
+    return bool(used) and used <= declared
 
 
 def assemble(args):
@@ -371,7 +423,7 @@ def assemble(args):
             entry['blockers'] = [b for b in entry['blockers'] if not b.endswith('conversion pending')]
             entry['blockers'].append(extra['failures'][item_id])
         old = base_entries.get(key)
-        if old and old.get('family') != entry['family']:
+        if old and old.get('family') != entry['family'] and not declares_baseline_models(old, sources[key], assets):
             old = None
         alias = inherited.get(entry['family'])
         discovered_forms = copy.deepcopy(entry.get('hairForms', {}))
@@ -405,9 +457,9 @@ def assemble(args):
             for field in ['handParts', 'hairForms', 'stowedParts']: entry.pop(field, None)
     if getattr(args, 'retain_unselected', False):
         entries = retain_unselected_entries(base_catalog['items'], entries)
-    referenced = {i for e in entries for i in [p['assetId'] for p in e.get('parts', [])] + e.get('stowedParts', [])
-                  + [v for group in [e.get('handParts', {}), e.get('hairForms', {})] for ids in group.values() for v in ids]}
-    superseded = superseded_baseline(baseline_ids, assets, referenced)
+    print(json.dumps({'referencesMovedToBaseline': prefer_baseline_assets(entries, baseline_ids, assets)}))
+    referenced = {i for e in entries for i in entry_asset_ids(e)}
+    superseded = duplicate_wardrobe_assets(baseline_ids, assets, referenced)
     kept_uris = {a['uri'] for i, a in assets.items() if i not in superseded}
     for identity in superseded:
         uri = assets.pop(identity)['uri']
