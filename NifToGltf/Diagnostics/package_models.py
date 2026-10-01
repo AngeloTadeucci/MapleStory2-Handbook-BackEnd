@@ -22,7 +22,7 @@ def slug(value):
     return result
 
 
-def layout(assets, primary_ids=None):
+def layout(assets, primary_ids=None, digests=None):
     if len({asset['id'].lower() for asset in assets}) != len(assets):
         raise ValueError('Duplicate native asset identity')
     groups = defaultdict(list)
@@ -35,6 +35,13 @@ def layout(assets, primary_ids=None):
         bodies = defaultdict(list)
         for asset in candidates:
             bodies[asset.get('bodyVariant') or 'standalone'].append(asset)
+        # Items whose source XML differs only in ways the converter ignores export byte-identical
+        # glTF under different identities. Those are one model, not variants needing review.
+        if digests:
+            for body, same in bodies.items():
+                if len(same) > 1 and len({digests[a['id']] for a in same}) == 1:
+                    bodies[body] = [min(same, key=lambda a: a['id'])]
+            candidates = [a for same in bodies.values() for a in same]
         # A unique authored body is canonical. For a simple unisex pair, use
         # male explicitly, retaining female beside it. More placements need review.
         canonical = candidates[0] if len(candidates) == 1 else (
@@ -132,7 +139,7 @@ def package(release, output, discovery, npc=None, legacy=None, database=None):
             sources[asset['id']] = npc / asset['uri']
     catalog = read(release / 'simulator-catalog.json')
     primary_ids = {p['assetId'] for i in catalog['items'] if i['availability'] != 'unavailable' for p in i['parts']}
-    assets, choices = layout(manifest['assets'], primary_ids)
+    assets, choices = layout(manifest['assets'], primary_ids, {i: sha(path) for i, path in sources.items()})
     faces = read(release / 'customization.json')['faces']
     for asset in assets:
         preset = ('10300001' if asset.get('bodyVariant') == 'male' else '10300003') if asset['id'] in {'f_body', 'm_body'} else asset.get('itemId') if asset.get('slot') == 'FA' else None

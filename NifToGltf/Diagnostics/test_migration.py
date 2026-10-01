@@ -270,6 +270,14 @@ class MigrationTests(unittest.TestCase):
         self.assertEqual(len({a['uri'] for a in result}), 2)
         self.assertTrue(all(not a['standalone'] for a in result))
 
+    def test_byte_identical_variants_collapse_to_one_default(self):
+        assets = [{'id': name, 'input': 'Item/tee.nif', 'bodyVariant': 'male', 'slot': 'CL', 'attach': 'Bip01'}
+                  for name in ['b-item', 'a-item']]
+        _, choices = layout(assets, {'a-item', 'b-item'}, {'a-item': 'same', 'b-item': 'same'})
+        self.assertEqual(choices[0]['defaultAssetId'], 'a-item')
+        _, choices = layout(assets, {'a-item', 'b-item'}, {'a-item': 'one', 'b-item': 'other'})
+        self.assertIsNone(choices[0]['defaultAssetId'])
+
     def test_primary_catalog_geometry_wins_over_unused_baseline_duplicate(self):
         assets = [{'id': name, 'input': 'Item/hair_a.nif', 'bodyVariant': 'male'} for name in ['unused', 'equipped']]
         result, choices = layout(assets, {'equipped'})
