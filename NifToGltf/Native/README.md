@@ -80,6 +80,19 @@ an exact body bone name. Unverified slot mappings are not inferred.
   resources are omitted from the visual scene and reported. Reflection effects
   and billboards are not silently discarded. Effect folder names are not a
   reliable exclusion rule: instruments, lift-up props and capes occur there.
+- `NiBillboardNode` keeps its children and authored transform. Its mode is in
+  node `extras.nifBillboardMode`. Camera-facing rotation is not reproduced, and
+  the node is listed in `omitted`.
+- KF `NiAlphaController` tracks on `NiMaterialProperty` are written to
+  `animations[].extras.nifMaterialTracks`. Each track lists every glTF material
+  that shares the animated property block. The Handbook viewer plays them as
+  material opacity. Keyed and B-spline float evaluators are supported.
+- KF tracks for omitted particle systems and animated UV transforms are listed in
+  `skippedAnimationTracks`. A particle track whose target is not an omitted
+  particle system fails. UV transform tracks are matched to their exact
+  controller by Gamebryo controller ID, for example `0-6-TT_TRANSLATE_V`.
+- An embedded property controller that a selected clip binds to is driven by that
+  clip and is not read as embedded animation. Unbound active controllers still fail.
 
 ## Selected batches and Handbook integration
 

@@ -3,10 +3,14 @@ namespace NifToGltf.Native;
 // Ordinary looping NiTransformController chains embedded in an equipped NIF.
 // Other active controllers fail visibly instead of becoming a frozen preview.
 internal static class EmbeddedAnimation {
-    public static AnimationClip? Read(NifDocument document) {
+    public static AnimationClip? Read(NifDocument document, IReadOnlyList<AnimationClip>? clips = null) {
         List<AnimationTrack> tracks = [];
         double? period = null;
         HashSet<int> visited = [];
+        // External sequences bind their evaluators to these exact controllers by node,
+        // property and controller type, so the controllers do not run on their own.
+        HashSet<int> sequenceDriven = (clips ?? []).SelectMany(clip => clip.PropertyBindings).Distinct()
+            .Select(document.PropertyController).ToHashSet();
         foreach (NifNode node in document.Nodes.Values.Where(n => n.Mesh is not null || document.EquipmentBones.Contains(n.Id))) {
             ReadChain(node.Controller, node);
             foreach (int property in node.Properties) {
@@ -25,8 +29,9 @@ internal static class EmbeddedAnimation {
                 ushort flags = reader.U16();
                 double frequency = reader.Float(), phase = reader.Float(), start = reader.Float(), stop = reader.Float();
                 int target = reader.I32();
+                bool driven = sequenceDriven.Contains(controller);
                 controller = next;
-                if ((flags & 8) == 0) continue;
+                if ((flags & 8) == 0 || driven) continue;
                 // Player hair length is an authored, clamped morph control. Its
                 // targets and default weights are exported by MeshDecoder and
                 // selected through the simulator's hair-length controls.

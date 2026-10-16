@@ -10,7 +10,16 @@ internal sealed record AnimationClip(string Name, AnimationTrack[] Tracks) {
     public string? SourceSequence { get; init; }
     public int? SourceSequenceBlock { get; init; }
     public int? SourceEvent { get; init; }
+    // Keyed by the node that owns the NiMaterialProperty, as the evaluator names it.
+    public AnimationTrack[] MaterialTracks { get; init; } = [];
+    public SkippedTrack[] SkippedTracks { get; init; } = [];
+    public IEnumerable<PropertyBinding> PropertyBindings => MaterialTracks
+        .Select(track => new PropertyBinding(track.Node, "NiMaterialProperty", "NiAlphaController", ""))
+        .Concat(SkippedTracks.Where(track => track.Property.Length > 0)
+            .Select(track => new PropertyBinding(track.Node, track.Property, track.Controller, track.ControllerId)));
 }
+internal sealed record PropertyBinding(string Node, string Property, string Controller, string ControllerId);
+internal sealed record SkippedTrack(string Node, string Property, string Controller, string ControllerId, string Reason);
 internal sealed record AnimationCurve(Func<double, double[]> Evaluate, double[] KeyTimes, bool Sample = false, bool Step = false);
 internal sealed record AnimationKey(double Time, double[] Value, double[] Forward, double[] Backward, double[] Tbc);
 
@@ -43,16 +52,83 @@ internal static class AnimationReader {
         sequence.U32();
         sequence.Finish();
         if (duration <= 0 || duration > 3600 || frequency <= 0) throw new InvalidDataException("Invalid animation duration/frequency.");
-        List<AnimationTrack> tracks = [];
+        List<AnimationTrack> tracks = [], materialTracks = [];
+        List<SkippedTrack> skipped = [];
         foreach (int block in evaluators) {
-            try { tracks.AddRange(ReadEvaluator(document, block, duration, frequency, framesPerSecond)); }
-            catch (Exception e) when (e is InvalidDataException or NotSupportedException) {
+            try {
+                NifReader target = document.Reader(block);
+                string node = document.Name(target), property = document.Name(target), controller = document.Name(target);
+                string controllerId = document.Name(target);
+                if (property.Length == 0 && controller == "NiTransformController") {
+                    tracks.AddRange(ReadEvaluator(document, block, duration, frequency, framesPerSecond));
+                } else if (property == "NiMaterialProperty" && controller == "NiAlphaController" && controllerId.Length == 0) {
+                    materialTracks.Add(ReadFloatEvaluator(document, block, "alpha", duration, frequency, framesPerSecond));
+                } else if (property.Length == 0 && controller is "NiPSEmitParticlesCtlr" or "NiPSForceActiveCtlr") {
+                    skipped.Add(new(node, property, controller, controllerId, "Controls a particle system, and particle systems are omitted."));
+                } else if (property == "NiTexturingProperty" && controller == "NiTextureTransformController") {
+                    skipped.Add(new(node, property, controller, controllerId, "Animated UV transforms are not exported yet."));
+                } else throw new NotSupportedException($"Non-transform evaluator {node}/{property}/{controller}.");
+            } catch (Exception e) when (e is InvalidDataException or NotSupportedException) {
                 throw new InvalidDataException($"{path}: evaluator {block}: {e.Message}", e);
             }
         }
         if (tracks.Count == 0) throw new InvalidDataException($"{path}: no transform animation tracks.");
         return new AnimationClip(string.IsNullOrWhiteSpace(name) ? System.IO.Path.GetFileNameWithoutExtension(path) : name, tracks.ToArray()) {
-            AccumulationRoot = accumulationRoot, SourceSequence = name, SourceSequenceBlock = sequenceId
+            AccumulationRoot = accumulationRoot, SourceSequence = name, SourceSequenceBlock = sequenceId,
+            MaterialTracks = materialTracks.ToArray(), SkippedTracks = skipped.ToArray()
+        };
+    }
+
+    private static AnimationTrack ReadFloatEvaluator(NifDocument document, int block, string path, double duration, double frequency, int fps) {
+        NifReader r = document.Reader(block);
+        string type = document.Blocks[block].Type;
+        string node = document.Name(r);
+        for (int i = 0; i < 4; i++) document.Name(r);
+        byte[] channels = r.Take(4).ToArray();
+        if ((channels[0] & 63) == 0) throw new InvalidDataException("Inactive float channel.");
+        AnimationCurve curve;
+        if (type == "NiFloatEvaluator") {
+            int data = r.I32();
+            if (data < 0) throw new InvalidDataException("Float evaluator without data.");
+            NifReader keys = document.Reader(data, "NiFloatData");
+            curve = KeyGroup(keys, 1) ?? throw new InvalidDataException("Float evaluator without keys.");
+            keys.Finish();
+        } else if (type == "NiConstFloatEvaluator") {
+            double value = r.Float();
+            curve = new AnimationCurve(_ => [value], []);
+        } else if (type is "NiBSplineCompFloatEvaluator" or "NiBSplineFloatEvaluator") {
+            double start = r.Float(), end = r.Float();
+            int dataId = r.I32(), basisId = r.I32();
+            uint handle = r.U32();
+            bool compact = type == "NiBSplineCompFloatEvaluator";
+            double offset = compact ? r.Float() : 0, range = compact ? r.Float() : 1;
+            if (handle is 65535 or uint.MaxValue) throw new InvalidDataException("B-spline float evaluator without control data.");
+            NifReader basis = document.Reader(basisId, "NiBSplineBasisData");
+            int controlCount = checked((int) basis.U32()); basis.Finish();
+            NifReader data = document.Reader(dataId, "NiBSplineData");
+            float[] floats = Enumerable.Range(0, data.Count(4)).Select(_ => data.Float()).ToArray();
+            short[] shorts = Enumerable.Range(0, data.Count(2)).Select(_ => unchecked((short) data.U16())).ToArray();
+            data.Finish();
+            if (end <= start || controlCount < 4) throw new InvalidDataException("Invalid B-spline basis or interval.");
+            if ((long) handle + controlCount > (compact ? shorts.Length : floats.Length)) throw new InvalidDataException("B-spline handle outside control data.");
+            double[] values = Enumerable.Range(0, controlCount).Select(c => compact
+                ? shorts[(int) handle + c] / 32767.0 * range + offset : floats[(int) handle + c]).ToArray();
+            curve = new AnimationCurve(time => BSpline(values, 1, Math.Clamp((time - start) / (end - start), 0, 1)), [start, end], true);
+        } else throw new NotSupportedException($"Float evaluator type {type}.");
+        r.Finish();
+        IEnumerable<double> times = new[] { 0.0, duration }.Concat(curve.KeyTimes.Where(t => t >= 0 && t <= duration));
+        if (curve.Sample) {
+            int samples = checked((int) Math.Ceiling(duration / frequency * fps));
+            times = times.Concat(Enumerable.Range(0, samples + 1).Select(i => Math.Min(duration, (double) i * frequency / fps)));
+        }
+        double[] keyTimes = times.Distinct().Order().ToArray();
+        // 0.001 is a quarter of one 8-bit alpha step.
+        if (curve.Sample) keyTimes = Refine(curve.Evaluate, keyTimes, 2, 0.001);
+        keyTimes = keyTimes.GroupBy(time => (float) (time / frequency)).Select(group => group.Last()).ToArray();
+        double[] output = keyTimes.Select(time => curve.Evaluate(time)[0]).ToArray();
+        if (output.All(value => Math.Abs(value - output[0]) < 1e-7)) { output = [output[0], output[0]]; keyTimes = [0, duration]; }
+        return new AnimationTrack(node, path, keyTimes.Select(t => t / frequency).ToArray(), output, 1, curve.Step ? "STEP" : "LINEAR") {
+            Posed = (channels[0] & 64) != 0
         };
     }
 
@@ -153,7 +229,7 @@ internal static class AnimationReader {
     }
     private static double[] Wxyz(Quaternion q) => [q.W, q.X, q.Y, q.Z];
 
-    public static double[] Refine(Func<double, double[]> evaluate, double[] times, int channel) {
+    public static double[] Refine(Func<double, double[]> evaluate, double[] times, int channel, double? scalarTolerance = null) {
         List<double> output = [times[0]];
         void Interval(double start, double end, int depth) {
             double[] a = evaluate(start), b = evaluate(end);
@@ -167,7 +243,7 @@ internal static class AnimationReader {
                     // Quaternion chord distance corresponding to 0.05 degrees of rotation.
                     split |= (q - linear).LengthSquared() > Math.Pow(2 * Math.Sin(0.05 * Math.PI / 720), 2);
                 } else {
-                    double tolerance = channel == 0 ? 0.001 : 0.00001;
+                    double tolerance = scalarTolerance ?? (channel == 0 ? 0.001 : 0.00001);
                     split |= exact.Where((v, i) => Math.Abs(v - (a[i] + fraction * (b[i] - a[i]))) > tolerance).Any();
                 }
             }

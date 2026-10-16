@@ -17,6 +17,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
     private readonly JsonArray samplers = [];
     private readonly Dictionary<ushort, int> samplerMap = [];
     private readonly Dictionary<int, List<TextureTransform>> uvTransforms = [];
+    private readonly Dictionary<int, List<int>> materialsByProperty = [];
     private int nextUv;
     public static JsonNode Json<T>(T value) => JsonSerializer.SerializeToNode(value)!;
     public static float[] MatrixValues(Matrix4x4 m) => [m.M11, m.M12, m.M13, m.M14, m.M21, m.M22, m.M23, m.M24,
@@ -38,6 +39,11 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             nodes.Add(Json(new { name = node.Name, translation = new[] { translation.X, translation.Y, translation.Z },
                 rotation = new[] { rotation.X, rotation.Y, rotation.Z, rotation.W }, scale = new[] { scale.X, scale.Y, scale.Z } }));
             if (node.SortingMode is { } sorting) nodes[^1]!["extras"] = Json(new { nifSortingMode = sorting });
+            if (node.BillboardMode is { } billboard) {
+                nodes[^1]!["extras"] = Json(new { nifBillboardMode = billboard });
+                if (!document.Omitted.Any(entry => entry.Block == node.Id)) document.Omitted.Add(new(node.Id, "NiBillboardNode",
+                    "Camera-facing rotation is not reproduced. The node keeps its authored transform."));
+            }
             if (node.TextureEffectTargets is { Length: 0 } && !document.Nodes.Values.Any(owner => owner.Effects.Contains(node.Id))) {
                 nodes[^1]!["extras"] = Json(new { nifUnboundTextureEffect = true });
             }
@@ -128,7 +134,9 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             foreach (string property in new[] { "translation", "rotation", "scale" }) nodes[index]!.AsObject().Remove(property);
         }
         JsonArray animations = [];
-        List<object> unboundAnimationTargets = [];
+        List<object> unboundAnimationTargets = [], skippedAnimationTracks = [];
+        HashSet<string> omittedParticles = document.Omitted.Where(entry => entry.Type is "NiPSParticleSystem" or "NiPSMeshParticleSystem")
+            .Select(entry => document.Name(document.Reader(entry.Block))).ToHashSet();
         foreach (AnimationClip clip in clips ?? []) {
             JsonArray animationSamplers = [], animationChannels = [];
             Dictionary<string, int[]> targets = document.Nodes.Values.GroupBy(node => node.Name)
@@ -154,10 +162,35 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
                 animationChannels.Add(Json(new { sampler = animationSamplers.Count - 1, target = new { node = matches[0], path = track.Path } }));
             }
             if (animationChannels.Count == 0) throw new InvalidDataException($"Clip {clip.Name}: no bound animation tracks.");
+            JsonArray materialTracks = [];
+            HashSet<int> animatedProperties = [];
+            foreach (AnimationTrack track in clip.MaterialTracks) {
+                document.PropertyController(new(track.Node, "NiMaterialProperty", "NiAlphaController", ""));
+                int property = document.PropertyBlock(track.Node, "NiMaterialProperty");
+                if (!animatedProperties.Add(property)) throw new InvalidDataException($"Duplicate material track {clip.Name}/{track.Node}/{track.Path}.");
+                if (!materialsByProperty.TryGetValue(property, out List<int>? targetMaterials)) {
+                    unboundAnimationTargets.Add(new { clip = clip.Name, node = track.Node, path = $"material.{track.Path}",
+                        reason = "The material property is used only by hidden meshes." });
+                    continue;
+                }
+                materialTracks.Add(Json(new { node = track.Node, property = track.Path, materials = targetMaterials,
+                    times = track.Times.Select(time => (float) time), values = track.Values.Select(value => (float) value), interpolation = track.Interpolation }));
+            }
+            foreach (SkippedTrack track in clip.SkippedTracks) {
+                if (track.Property.Length > 0) document.PropertyController(new(track.Node, track.Property, track.Controller, track.ControllerId));
+                else if (!omittedParticles.Contains(track.Node))
+                    throw new InvalidDataException($"Clip {clip.Name}: {track.Controller} targets {track.Node}, which is not an omitted particle system.");
+                skippedAnimationTracks.Add(new { clip = clip.Name, node = track.Node, property = track.Property, controller = track.Controller,
+                    controllerId = track.ControllerId, reason = track.Reason });
+            }
             JsonObject animation = new() { ["name"] = clip.Name, ["samplers"] = animationSamplers, ["channels"] = animationChannels };
             if (clip.SourceSequenceBlock is not null) animation["extras"] = Json(new {
                 sourceSequence = clip.SourceSequence, sourceSequenceBlock = clip.SourceSequenceBlock, sourceEvent = clip.SourceEvent
             });
+            if (materialTracks.Count > 0) {
+                animation["extras"] ??= new JsonObject();
+                animation["extras"]!["nifMaterialTracks"] = materialTracks;
+            }
             animations.Add(animation);
         }
         JsonObject gltf = new() {
@@ -185,7 +218,7 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
         }
         return new { source = document.Path, output = Path.GetFullPath(output), nodes = nodes.Count, meshes = meshes.Count,
             skins = skins.Count, textures = textures.Count, animations = animations.Count, hiddenMeshes,
-            unboundAnimationTargets, omitted = document.Omitted, primitives = primitiveReports };
+            unboundAnimationTargets, skippedAnimationTracks, omitted = document.Omitted, primitives = primitiveReports };
     }
     private int NodeIndex(int block) => nodeMap.TryGetValue(block, out int index) ? index :
         throw new NotSupportedException($"Referenced scene block {block} ({document.Blocks[block].Type}) is not supported.");
@@ -231,11 +264,13 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
         if (sceneAmbient != Vector3.Zero) lighting["sceneAmbient"] = Json(new[] { sceneAmbient.X, sceneAmbient.Y, sceneAmbient.Z });
         JsonObject renderState = new();
         HashSet<string> seen = [];
+        int? materialProperty = null;
         foreach (int property in properties) {
             NifReader r = document.Reader(property);
             string type = document.Blocks[property].Type;
             if (!seen.Add(type)) continue;
             if (type is not ("NiMaterialProperty" or "NiTexturingProperty" or "NiAlphaProperty" or "NiSpecularProperty" or "NiZBufferProperty")) continue;
+            if (type == "NiMaterialProperty") materialProperty = property;
             document.ObjectNet(r);
             if (type == "NiZBufferProperty") {
                 renderState["depthFlags"] = r.U16();
@@ -306,6 +341,10 @@ internal sealed class GltfWriter(NifDocument document, string? textureRoot, Text
             }
         }
         if (lighting.Count > 0) material["extras"]!["nifLighting"] = lighting;
+        if (materialProperty is { } block) {
+            if (!materialsByProperty.TryGetValue(block, out List<int>? shared)) materialsByProperty[block] = shared = [];
+            shared.Add(materials.Count);
+        }
         materials.Add(material);
         return materials.Count - 1;
     }

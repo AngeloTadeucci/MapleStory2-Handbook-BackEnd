@@ -589,6 +589,72 @@ if (args.Length > 0) {
             throw new Exception("Null sequence root accepted");
         } finally { File.Delete(path); }
     });
+    string pumkyDirectory = Path.Combine(models, "Npc/50/50400309");
+    if (Directory.Exists(pumkyDirectory)) {
+        KfmDocument pumkyKfm = KfmDocument.Read(Directory.GetFiles(pumkyDirectory, "*.kfm").Single());
+        AnimationClip[] pumkyClips = pumkyKfm.Clips.Select(clip => AnimationReader.Read(clip.File, sequenceName: clip.Name) with { Name = clip.Name }).ToArray();
+        AnimationClip Clip(string name) => pumkyClips.Single(clip => clip.Name == name);
+        Test("Pumky billboard node keeps its child and source mode", () => {
+            NifDocument pumky = NifDocument.Load(pumkyKfm.Model);
+            NifNode billboard = pumky.Nodes[163];
+            Assert(billboard.Name == "P03" && billboard.BillboardMode == 8, "Billboard node or mode changed");
+            Assert(billboard.Children.SequenceEqual(new[] { 165 }), "Billboard child lost");
+        });
+        Test("Pumky clips split alpha, deferred UV and omitted particle tracks", () => {
+            AnimationClip eat = Clip("Eat_A");
+            Assert(eat.MaterialTracks.Length == 11, "Alpha track count");
+            Assert(eat.MaterialTracks.All(track => track.Path == "alpha" && track.Values.All(value => value == 0)), "Eat_A should keep every effect transparent");
+            Assert(eat.SkippedTracks.Count(track => track.Controller == "NiTextureTransformController") == 16, "UV track count");
+            Assert(eat.SkippedTracks.Count(track => track.Controller is "NiPSEmitParticlesCtlr" or "NiPSForceActiveCtlr") == 22, "Particle track count");
+            Assert(Clip("Idle_A").MaterialTracks.Length == 0 && Clip("Idle_A").SkippedTracks.Length == 0, "Idle gained non-transform tracks");
+            AnimationTrack fade = Clip("Grow_A").MaterialTracks.Single(track => track.Node == "P04");
+            Assert(fade.Values.Max() > 1 && fade.Values.Min() < 0, "Authored B-spline overshoot was altered");
+            Assert(fade.Times.Length < 200, "Alpha curve oversampled");
+            for (int i = 1; i < fade.Times.Length; i++) Assert((float) fade.Times[i] > (float) fade.Times[i - 1], "Alpha times collapse after float32 serialization");
+        });
+        Test("Pumky UV tracks resolve to distinct controllers by controller ID", () => {
+            NifDocument pumky = NifDocument.Load(pumkyKfm.Model);
+            int[] controllers = Clip("Eat_A").PropertyBindings.Where(binding => binding.Node == "Editable Poly" && binding.Controller == "NiTextureTransformController")
+                .Select(pumky.PropertyController).ToArray();
+            Assert(controllers.Order().SequenceEqual(new[] { 52, 53 }), "UV controllers not matched by ID");
+            Reject(() => pumky.PropertyController(new("Editable Poly", "NiTexturingProperty", "NiTextureTransformController", "0-6-TT_ROTATE")));
+        });
+        Test("sequence-driven embedded controllers do not block Pumky, unbound ones still fail", () => {
+            NifDocument pumky = NifDocument.Load(pumkyKfm.Model);
+            pumky.OmitParticles();
+            Assert(EmbeddedAnimation.Read(pumky, pumkyClips) is null, "Sequence-driven controllers became an embedded clip");
+            try { EmbeddedAnimation.Read(pumky); throw new Exception("Unbound active property controller accepted"); }
+            catch (NotSupportedException) { }
+        });
+        Test("Pumky alpha tracks reach every material sharing the animated property", () => {
+            NifDocument pumky = NifDocument.Load(pumkyKfm.Model);
+            pumky.OmitParticles();
+            string path = Path.Combine(Path.GetTempPath(), $"native-pumky-{Guid.NewGuid():N}.gltf");
+            try {
+                new GltfWriter(pumky, Path.Combine(models, "Textures")).Write(path, pumkyClips);
+                using JsonDocument output = JsonDocument.Parse(File.ReadAllText(path));
+                JsonElement root = output.RootElement;
+                JsonElement materials = root.GetProperty("materials");
+                JsonElement grow = root.GetProperty("animations").EnumerateArray().Single(animation => animation.GetProperty("name").GetString() == "Grow_A");
+                JsonElement[] tracks = grow.GetProperty("extras").GetProperty("nifMaterialTracks").EnumerateArray().ToArray();
+                Assert(tracks.Length == 11, "Material track count");
+                JsonElement shared = tracks.Single(track => track.GetProperty("node").GetString() == "Editable Poly@#5");
+                string[] names = shared.GetProperty("materials").EnumerateArray().Select(index => materials[index.GetInt32()].GetProperty("name").GetString()!).ToArray();
+                Assert(names.SequenceEqual(new[] { "Editable Poly@#5", "Editable Poly@#8" }), "Shared NiMaterialProperty lost a material");
+                foreach (JsonElement track in tracks) {
+                    foreach (JsonElement index in track.GetProperty("materials").EnumerateArray()) {
+                        JsonElement material = materials[index.GetInt32()];
+                        Assert(material.GetProperty("alphaMode").GetString() == "BLEND", "Animated alpha needs blending");
+                        Near(material.GetProperty("pbrMetallicRoughness").GetProperty("baseColorFactor")[3].GetDouble(), 0);
+                    }
+                }
+                Assert(!root.GetProperty("animations").EnumerateArray().Single(animation => animation.GetProperty("name").GetString() == "Idle_A")
+                    .TryGetProperty("extras", out JsonElement idleExtras) || !idleExtras.TryGetProperty("nifMaterialTracks", out _), "Idle gained material tracks");
+                AnimationClip stray = Clip("Eat_A") with { SkippedTracks = [new("FA", "", "NiPSEmitParticlesCtlr", "", "test")] };
+                Reject(() => new GltfWriter(NifDocument.Load(pumkyKfm.Model), Path.Combine(models, "Textures")).Write(path, [stray], true));
+            } finally { File.Delete(path); }
+        });
+    } else Console.WriteLine("SKIP Pumky effect regression: Models/Npc/50/50400309 is missing.");
 }
 if (args.Length > 0) {
     string resources = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(args[0])!, "../../.."));

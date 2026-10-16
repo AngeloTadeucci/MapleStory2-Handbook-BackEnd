@@ -68,6 +68,7 @@ internal sealed record NifNode(int Id, string Name, ushort Flags, Matrix4x4 Tran
     public int[] ExtraData { get; init; } = [];
     public int[] Effects { get; init; } = [];
     public uint? SortingMode { get; init; }
+    public ushort? BillboardMode { get; init; }
     public string? MaterialName { get; init; }
     public NifAmbientLight? AmbientLight { get; init; }
     public int[]? TextureEffectTargets { get; init; }
@@ -149,6 +150,40 @@ internal sealed class NifDocument {
         r.I32();
         return name;
     }
+    // A KF evaluator names the node that owns the property, not the meshes that inherit it.
+    public int PropertyBlock(string node, string type) {
+        NifNode[] owners = Nodes.Values.Where(candidate => candidate.Name == node).ToArray();
+        if (owners.Length != 1) throw new InvalidDataException($"Expected one node named {node}, found {owners.Length}.");
+        int[] properties = owners[0].Properties.Where(id => (uint) id < Blocks.Length && Blocks[id].Type == type).ToArray();
+        if (properties.Length != 1) throw new InvalidDataException($"Expected one {type} on {node}, found {properties.Length}.");
+        return properties[0];
+    }
+    public int PropertyController(PropertyBinding binding) {
+        NifReader r = Reader(PropertyBlock(binding.Node, binding.Property));
+        Name(r); r.Refs();
+        HashSet<int> visited = [];
+        List<int> matches = [];
+        for (int controller = r.I32(); controller >= 0 && visited.Add(controller); controller = Reader(controller).I32()) {
+            if (Blocks[controller].Type != binding.Controller) continue;
+            if (binding.ControllerId.Length > 0 && binding.Controller == "NiTextureTransformController" &&
+                TextureTransformControllerId(controller) != binding.ControllerId) continue;
+            matches.Add(controller);
+        }
+        if (matches.Count != 1) throw new InvalidDataException(
+            $"{binding.Node}/{binding.Property} has {matches.Count} {binding.Controller} matching '{binding.ControllerId}' for its animation track.");
+        return matches[0];
+    }
+    // Gamebryo names these "{shader map}-{texture slot}-{operation}", e.g. 0-6-TT_TRANSLATE_V.
+    private string TextureTransformControllerId(int controller) {
+        NifReader r = Reader(controller, "NiTextureTransformController");
+        r.I32(); r.U16(); r.Take(16); r.I32(); r.I32();
+        bool shaderMap = r.Bool();
+        uint slot = r.U32(), operation = r.U32();
+        r.Finish();
+        string[] operations = ["TT_TRANSLATE_U", "TT_TRANSLATE_V", "TT_ROTATE", "TT_SCALE_U", "TT_SCALE_V"];
+        if (operation >= operations.Length) throw new InvalidDataException($"Unknown texture transform operation {operation}.");
+        return $"{(shaderMap ? 1 : 0)}-{slot}-{operations[operation]}";
+    }
     public NifReader Reader(int block, string? type = null) {
         if ((uint) block >= Blocks.Length || type is not null && Blocks[block].Type != type) {
             throw new InvalidDataException($"Invalid {type ?? "block"} reference {block}.");
@@ -227,7 +262,7 @@ internal sealed class NifDocument {
         r.Finish();
         NifDocument document = new() { Path = System.IO.Path.GetFullPath(path), Strings = strings, Blocks = blocks, Roots = roots };
         for (int i = 0; i < blocks.Length; i++) {
-            if (blocks[i].Type is not ("NiNode" or "NiMesh" or "NiSortAdjustNode" or "NiAmbientLight" or "NiTextureEffect")) continue;
+            if (blocks[i].Type is not ("NiNode" or "NiMesh" or "NiSortAdjustNode" or "NiBillboardNode" or "NiAmbientLight" or "NiTextureEffect")) continue;
             try {
                 document.Nodes[i] = document.ReadNode(i);
             } catch (Exception e) when (e is InvalidDataException or OverflowException or NotSupportedException) {
@@ -263,6 +298,7 @@ internal sealed class NifDocument {
         NifMesh? mesh = null;
         string? materialName = null;
         uint? sortingMode = null;
+        ushort? billboardMode = null;
         int[] effects = [];
         NifAmbientLight? ambientLight = null;
         int[]? textureEffectTargets = null;
@@ -287,10 +323,11 @@ internal sealed class NifDocument {
             if (controller != -1) throw new NotSupportedException("Animated texture effects require controller evaluation.");
             if (textureEffectTargets.Any(target => target < -1 || target >= Blocks.Length))
                 throw new InvalidDataException("Invalid texture effect target.");
-        } else if (Blocks[id].Type is "NiNode" or "NiSortAdjustNode") {
+        } else if (Blocks[id].Type is "NiNode" or "NiSortAdjustNode" or "NiBillboardNode") {
             children = r.Refs().Where(child => child >= 0).ToArray();
             effects = r.Refs();
             if (Blocks[id].Type == "NiSortAdjustNode") sortingMode = r.U32();
+            if (Blocks[id].Type == "NiBillboardNode") billboardMode = r.U16();
         } else {
             int materials = r.Count(8);
             string[] materialNames = Enumerable.Range(0, materials).Select(_ => Name(r)).ToArray();
@@ -313,7 +350,7 @@ internal sealed class NifDocument {
         }
         r.Finish();
         return new NifNode(id, name, flags, transform, properties, children, mesh) {
-            ExtraData = extras, Controller = controller, SortingMode = sortingMode, Effects = effects, MaterialName = materialName,
+            ExtraData = extras, Controller = controller, SortingMode = sortingMode, BillboardMode = billboardMode, Effects = effects, MaterialName = materialName,
             AmbientLight = ambientLight, TextureEffectTargets = textureEffectTargets
         };
     }

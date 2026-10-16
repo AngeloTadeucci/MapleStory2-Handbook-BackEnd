@@ -108,7 +108,7 @@ internal static class NativeBatch {
                 }
                 if (model.Skeleton is { } skeleton) SkeletonGraft.Apply(document, NifDocument.Load(Resolve(root, skeleton)), attachment?.TargetNode ?? model.Attach, attachment?.SelfNode, attachment?.Replace ?? false, attachment?.DummyTransform);
                 List<AnimationClip> clips = ClipSelection.Read(file, kfm, model.Animations is null ? null : Resolve(root, model.Animations), model.Clips is null ? null : string.Join(',', model.Clips));
-                AnimationClip? embedded = EmbeddedAnimation.Read(document);
+                AnimationClip? embedded = EmbeddedAnimation.Read(document, clips);
                 if (embedded is not null) {
                     if (clips.Count > 0) throw new NotSupportedException("Both embedded controllers and external clips require verified playback selection.");
                     clips.Add(embedded);
@@ -121,7 +121,8 @@ internal static class NativeBatch {
                     skeleton = model.Skeleton, attach = model.Attach,
                     slot = attachment?.Slot ?? model.Slot, bodyVariant = model.BodyVariant, itemId = model.ItemId,
                     attachmentSource = Path.GetRelativePath(root, attachmentSource).Replace('\\', '/'), attachment,
-                    unboundAnimationTargets = report["unboundAnimationTargets"], omitted = document.Omitted }, Options));
+                    unboundAnimationTargets = report["unboundAnimationTargets"], skippedAnimationTracks = report["skippedAnimationTracks"],
+                    omitted = document.Omitted }, Options));
             } catch (IOException e) when (e is FileNotFoundException or DirectoryNotFoundException) {
                 missing.Add(new { input = relative, error = PortableError(e.Message, root, destination) });
             } catch (Exception e) when (e is IOException or InvalidDataException or NotSupportedException or ArgumentException or OverflowException) {
