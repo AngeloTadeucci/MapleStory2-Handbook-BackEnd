@@ -268,18 +268,42 @@ def duplicate_wardrobe_assets(baseline_ids, assets, referenced):
                   and (model_role(a) in fresh if i in baseline_ids else model_role(a) in used))
 
 
+def omitted_meshes(asset):
+    return {o['block'] for o in asset.get('omitted') or [] if o.get('type') == 'NiMesh'}
+
+
+def stale_baseline_assets(baseline_ids, assets):
+    """Baseline assets that a new conversion of the same model renders more of, mapped to it.
+
+    A baseline converted by an older exporter can lack meshes the current one keeps, such as the
+    GL_Skin hands of 11620024 before GL siblings were kept. The new copy omits a strict subset of
+    the baseline's meshes.
+    """
+    fresh = {}
+    for i in sorted(assets):
+        if i not in baseline_ids: fresh.setdefault(model_role(assets[i]), []).append(i)
+    stale = {}
+    for i in sorted(baseline_ids & assets.keys()):
+        better = [f for f in fresh.get(model_role(assets[i]), []) if omitted_meshes(assets[f]) < omitted_meshes(assets[i])]
+        if better: stale[i] = min(better, key=lambda f: (len(omitted_meshes(assets[f])), f))
+    return stale
+
+
 def prefer_baseline_assets(entries, baseline_ids, assets):
     """Point entries at the baseline asset when a new conversion renders the same model.
 
     Reused entries keep the reviewed baseline asset, while entries converted fresh get a new
     asset for the same model file. Two copies in use leave the packager without a default for
-    that model, so the fresh copy gives way to the baseline one. Returns the rewritten count.
+    that model, so the fresh copy gives way to the baseline one. A stale baseline instead gives
+    way to the new copy, and its review no longer covers the entry. Returns the rewritten count.
     """
     in_use = {i for e in entries for i in entry_asset_ids(e)}
-    preferred = {model_role(assets[i]): i for i in sorted(in_use) if i in baseline_ids and i in assets}
-    swap = lambda i: preferred.get(model_role(assets[i]), i) if i in assets and i not in baseline_ids else i
+    stale = stale_baseline_assets(baseline_ids, assets)
+    preferred = {model_role(assets[i]): i for i in sorted(in_use) if i in baseline_ids and i in assets and i not in stale}
+    swap = lambda i: stale.get(i, preferred.get(model_role(assets[i]), i) if i in assets and i not in baseline_ids else i)
     rewritten = 0
     for entry in entries:
+        before = entry_asset_ids(entry)
         for part in entry.get('parts', []):
             if swap(part['assetId']) != part['assetId']:
                 part['assetId'] = swap(part['assetId']); rewritten += 1
@@ -291,6 +315,9 @@ def prefer_baseline_assets(entries, baseline_ids, assets):
             swapped = [swap(i) for i in entry['stowedParts']]
             rewritten += sum(a != b for a, b in zip(entry['stowedParts'], swapped))
             entry['stowedParts'] = swapped
+        if entry.get('availability') == 'verified' and any(i in stale for i in before):
+            entry.update(availability='preview', visualReview='unreviewed',
+                         reason='Reconverted: the reviewed baseline omitted meshes the current exporter keeps')
     return rewritten
 
 

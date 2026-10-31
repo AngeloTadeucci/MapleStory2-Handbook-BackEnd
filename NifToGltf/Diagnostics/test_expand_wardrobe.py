@@ -62,6 +62,46 @@ class PreferBaselineAssetsTests(unittest.TestCase):
         self.assertEqual((entries[1]['hairForms']['c'], entries[1]['handParts']['RH']), (['10300001-male-0'], ['10300001-male-0']))
 
 
+class StaleBaselineAssetsTests(unittest.TestCase):
+    # 11620024-female-0 was converted before GL_Skin and GL_Wrist were kept beside GL, so its
+    # hands were omitted. The fresh conversion of the same file keeps them.
+    def assets(self, fresh_omitted=()):
+        omitted = lambda *blocks: [{'block': b, 'type': 'NiMesh', 'reason': 'Outside itemmodel selfnode GL.'} for b in blocks]
+        return {a['id']: a for a in [asset('11620024-female-0', 'glvalentine04', body='female', slot='GL', omitted=omitted(643, 664)),
+                                     asset('wardrobe-new', 'glvalentine04', body='female', slot='GL', omitted=omitted(*fresh_omitted))]}
+
+    def entry(self):
+        return {'availability': 'verified', 'visualReview': 'baseline-reviewed', 'reason': 'Reviewed on Gelo',
+                'parts': [{'assetId': '11620024-female-0'}]}
+
+    def test_fresh_copy_that_keeps_omitted_meshes_replaces_the_baseline(self):
+        entries = [self.entry()]
+        self.assertEqual(prefer_baseline_assets(entries, {'11620024-female-0'}, self.assets()), 1)
+        self.assertEqual(entries[0]['parts'][0]['assetId'], 'wardrobe-new')
+
+    def test_replaced_review_no_longer_counts_as_verified(self):
+        entries = [self.entry()]
+        prefer_baseline_assets(entries, {'11620024-female-0'}, self.assets())
+        self.assertEqual((entries[0]['availability'], entries[0]['visualReview']), ('preview', 'unreviewed'))
+
+    def test_baseline_is_kept_when_the_fresh_copy_omits_as_much(self):
+        entries = [self.entry()]
+        self.assertEqual(prefer_baseline_assets(entries, {'11620024-female-0'}, self.assets(fresh_omitted=(643, 664))), 0)
+        self.assertEqual((entries[0]['parts'][0]['assetId'], entries[0]['availability']), ('11620024-female-0', 'verified'))
+
+    def test_baseline_is_kept_when_the_fresh_copy_omits_other_meshes(self):
+        entries = [self.entry()]
+        self.assertEqual(prefer_baseline_assets(entries, {'11620024-female-0'}, self.assets(fresh_omitted=(643, 700))), 0)
+        self.assertEqual(entries[0]['parts'][0]['assetId'], '11620024-female-0')
+
+    def test_stale_baseline_is_then_dropped_as_a_duplicate(self):
+        assets = {a['id']: a for a in [asset('wardrobe-old', 'glsigmund', slot='GL', omitted=[{'block': 5, 'type': 'NiMesh'}]),
+                                       asset('wardrobe-new', 'glsigmund', slot='GL', omitted=[])]}
+        entries = [{'parts': [{'assetId': 'wardrobe-old'}]}]
+        prefer_baseline_assets(entries, {'wardrobe-old'}, assets)
+        self.assertEqual(duplicate_wardrobe_assets({'wardrobe-old'}, assets, {'wardrobe-new'}), ['wardrobe-old'])
+
+
 class DeclaresBaselineModelsTests(unittest.TestCase):
     assets = {'cap-0': {'input': 'GeloSources/Item/1/13/11300002_c_casualcap.nif'},
               'hair-0': {'input': 'SimulatorEffects/Hair/0/02/10200006_f_bubblywave_a.nif'},
