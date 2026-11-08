@@ -1,5 +1,6 @@
-﻿// Native conversion is selected with --native. --noesis explicitly selects the
-// legacy workflow, which remains the default until non-effect acceptance passes.
+﻿// Native conversion is the default. --noesis selects the legacy Noesis workflow,
+// which some models still need because the native converter rejects them.
+// --native is still accepted so existing commands keep working.
 
 using System.Diagnostics;
 using System.Globalization;
@@ -15,7 +16,15 @@ if (args.Contains("--native") && args.Contains("--noesis")) {
     Environment.ExitCode = 1;
     return;
 }
-if (args.Contains("--native")) {
+if (!args.Contains("--noesis")) {
+    string[] legacyOptions = ["--filter-ids", "--output-dir", "--dry-run", "--post-process-existing", "--repair-only"];
+    string? legacyOption = legacyOptions.FirstOrDefault(option => args.Any(arg =>
+        arg.Equals(option, StringComparison.OrdinalIgnoreCase) || arg.StartsWith(option + "=", StringComparison.OrdinalIgnoreCase)));
+    if (legacyOption is not null) {
+        Console.Error.WriteLine($"{legacyOption} belongs to the legacy Noesis workflow. Add --noesis to use it.");
+        Environment.ExitCode = 1;
+        return;
+    }
     Environment.ExitCode = NativeCommand.Run(args);
     return;
 }

@@ -132,8 +132,10 @@ Read first:
 
 ## Starting point
 
-Native conversion is opt-in through `--native`. The existing Noesis command is
-still the default. Native code handles the nine observed stream formats,
+Update, 2026-11-08: native conversion is now the default, and `--noesis`
+selects the legacy Noesis workflow. See
+[Default mode and production state](README.md#default-mode-and-production-state).
+The rest of this section is the 2026-09-07 starting point. Native code handles the nine observed stream formats,
 NiNode/NiMesh hierarchy, palettes and skins, DXT1/3/5 textures, basic materials,
 full named skeleton grafts, KF/KFM selection and merged transform clips.
 Batch conversion currently produces static models only.
@@ -229,6 +231,8 @@ Local ignored assets and QA outputs:
    the existing path prematurely. Update the documentation and plan to explain
    the resulting default, fallback selection, supported scope and remaining
    asset gaps. Production deployment is a separate step requiring authorization.
+   Update, 2026-11-08: the default is now native, with Noesis kept behind
+   `--noesis`. The remaining asset gaps are still open.
 
 ## Verification and completion criteria
 

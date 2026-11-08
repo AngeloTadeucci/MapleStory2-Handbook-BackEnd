@@ -3,8 +3,11 @@
 The scan on 2026-09-06 disproved the original four-format assumption. The user
 authorized continuing with the corrected nine-format inventory. Native body
 conversion, skeleton grafting, merged animation and a static batch are now
-implemented. Noesis remains the default. See the [native converter](../Native/README.md)
-for commands, verification results and the remaining fidelity requirements.
+implemented. Native conversion became the default on 2026-11-08, and `--noesis`
+selects the legacy workflow. The `--native` flag in the commands below is optional.
+See the [native converter](../Native/README.md#default-mode-and-production-state)
+for commands, the production state, verification results and the remaining
+fidelity requirements.
 
 ## Reproduce
 

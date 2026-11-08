@@ -4,7 +4,7 @@ MapleStory 2 Handbook is a searchable database of items and NPCs in the popular 
 
 This project is the backend where it parses the data from the game, creates the database and populates your database. 
 
-Also has a project to transform NIF into GLTF using [Noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91).
+Also has a project, `NifToGltf`, that converts NIF models to glTF. Its native converter is the default. The older [Noesis](https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) workflow is still available with `--noesis` for models the native converter cannot convert yet. See [NifToGltf/Native/README.md](NifToGltf/Native/README.md#default-mode-and-production-state).
 
 ## Required Technology
 

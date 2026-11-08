@@ -1,14 +1,62 @@
 # Native NIF converter
 
-The opt-in `--native` path reads MS2 NIF 30.2.0.3 and 30.1.0.3 directly and writes glTF 2.0.
-Older mannequin geometry is checked against the published vertex and triangle
-inventories. Unsupported block types still fail explicitly.
-The existing Noesis command remains the default because the non-effect
-acceptance gate is not complete. `--noesis` explicitly selects that fallback.
-No production assets or database records have been replaced. See
-[current status and blockers](STATUS.md) before treating an export as verified.
-The [model migration run](MODEL-MIGRATION-RUN.md) records the current shared
-viewer, canonical packaging, source coverage, and verified recovery mirror.
+The native converter reads MS2 NIF 30.2.0.3 and 30.1.0.3 directly and writes glTF 2.0.
+It is the default mode of `NifToGltf`. Older mannequin geometry is checked
+against the published vertex and triangle inventories. Unsupported block types
+still fail explicitly. See [current status and blockers](STATUS.md) before
+treating an export as verified. The [model migration run](MODEL-MIGRATION-RUN.md)
+records the shared viewer, canonical packaging, source coverage, and verified
+recovery mirror.
+
+## Default mode and production state
+
+Checked on 2026-11-08.
+
+A run without a mode flag uses the native converter. `--native` is still
+accepted, so older commands and the Diagnostics scripts keep working.
+`--noesis` selects the legacy Noesis batch, which walks
+`Maple2Storage/Resources/Models` and writes `Maple2Storage/Resources/GLTF`
+unless `--output-dir` is given. Its options `--filter-ids`, `--output-dir`,
+`--dry-run`, `--post-process-existing` and `--repair-only` are rejected without
+`--noesis`. `--native` and `--noesis` together are rejected.
+
+Noesis is still needed. Some models fail native conversion: the
+[migration run](MODEL-MIGRATION-RUN.md#remaining-acceptance-gates) counted 575
+unresolved model records on 2026-09-09, mostly texture-effect models, embedded
+material controllers and missing animation binding targets. Later commits
+converted some of those families. The current unresolved count is unknown.
+`noesis.exe` must be on `PATH` for `--noesis`.
+
+The native path does not need Noesis for textures. It decodes DDS and embedded
+pixel data itself, in `DdsTexture.cs` and `EmbeddedTexture.cs`, and launches no
+external process. Three native conversions, an equipment item, the rabbit NPC
+with all 13 clips and an effect model, ran with `noesis.exe` removed from
+`PATH`. `NifToGltf/DdsToPng.cs` is a separate one-off that calls
+`noesis.exe ?cmode` over hardcoded map background paths in the frontend
+checkout. Nothing calls it on any branch of this repository.
+
+Production serves both converters' output. Read-only GETs of the glTF
+`asset.generator` on `https://cdn.tadeucci.dev/` on 2026-11-08 found:
+
+| Sample | Result |
+| --- | --- |
+| 80 base glTFs listed in the live `native-manifest.json`, three per source group: wardrobe items and effects, every NPC source group, pets, recovered map props, hair forms, bodies | all native |
+| 43 base glTFs for local `Models/` basenames absent from the manifest: 15 NPC, 9 item, 12 map, 7 effect | all present, all `Noesis` |
+| 30 per-animation files, `<model>/<clip>.gltf` with lowercase clip names, under 15 NPC folders that the manifest lists | all `Noesis` |
+
+The Handbook item and NPC viewers load a model's native-manifest entry when one
+exists. Without an entry they fall back to the legacy `<model>/<model>.gltf` and
+probe the per-animation files, which is where the remaining Noesis output is
+still used. The per-animation files under folders that have a native entry are
+not requested by that viewer code. The live manifest has 13,538 assets and
+`Last-Modified: Sun, 01 Nov 2026 00:07:05 GMT`.
+
+When native output reached production: [R2-PUBLISH-PREP.md](R2-PUBLISH-PREP.md)
+records the first native upload to R2 on 2026-09-09, 16,144 objects with no
+deletions. Sampled native objects carry `Last-Modified` times of 2026-09-09
+and 2026-10-01, consistent with that record and with a later Lith republish.
+Unknown: which frontend revision is deployed, when production first preferred
+native-manifest entries, and what the 2026-11-01 manifest upload changed.
 
 ## Run
 
@@ -17,17 +65,20 @@ are ignored game resources. Existing single outputs require `--overwrite`.
 Batch destinations must be empty. A failed conversion exits 1.
 
 ```powershell
-dotnet run --project NifToGltf -- --native --help
+dotnet run --project NifToGltf -- --help
 
-dotnet run --project NifToGltf -- --native --input Maple2Storage/Resources/Models/Character/female/f_body.nif --output Maple2Storage/Resources/NativeProof/f_body.gltf
+dotnet run --project NifToGltf -- --input Maple2Storage/Resources/Models/Character/female/f_body.nif --output Maple2Storage/Resources/NativeProof/f_body.gltf
 
-dotnet run --project NifToGltf -- --native --input Maple2Storage/Resources/Models/Item/1/13/11300212_c_duckyballcap01_c.nif --skeleton Maple2Storage/Resources/Models/Character/female/f_body.nif --textures Maple2Storage/Resources/Models/Textures --output Maple2Storage/Resources/NativeProof/hat.gltf
+dotnet run --project NifToGltf -- --input Maple2Storage/Resources/Models/Item/1/13/11300212_c_duckyballcap01_c.nif --skeleton Maple2Storage/Resources/Models/Character/female/f_body.nif --textures Maple2Storage/Resources/Models/Textures --output Maple2Storage/Resources/NativeProof/hat.gltf
 
-dotnet run --project NifToGltf -- --native --kfm Maple2Storage/Resources/Models/Npc/21/21000174/21000174_m_rabbitdollcymbalsgrey.kfm --clips all --textures Maple2Storage/Resources/Models/Textures --output Maple2Storage/Resources/NativeProof/rabbit.gltf
+dotnet run --project NifToGltf -- --kfm Maple2Storage/Resources/Models/Npc/21/21000174/21000174_m_rabbitdollcymbalsgrey.kfm --clips all --textures Maple2Storage/Resources/Models/Textures --output Maple2Storage/Resources/NativeProof/rabbit.gltf
 
-dotnet run --project NifToGltf -- --native --input Maple2Storage/Resources/Models/Character/female/f_body.nif --animations Maple2Storage/Resources/Models/Npc/11/11000148 --clips fitting_idle_a --output Maple2Storage/Resources/NativeProof/body-fitting.gltf
+dotnet run --project NifToGltf -- --input Maple2Storage/Resources/Models/Character/female/f_body.nif --animations Maple2Storage/Resources/Models/Npc/11/11000148 --clips fitting_idle_a --output Maple2Storage/Resources/NativeProof/body-fitting.gltf
 
-dotnet run --project NifToGltf -- --native --batch --input Maple2Storage/Resources/Models --output Maple2Storage/Resources/NativeBatch --textures Maple2Storage/Resources/Models/Textures
+dotnet run --project NifToGltf -- --batch --input Maple2Storage/Resources/Models --output Maple2Storage/Resources/NativeBatch --textures Maple2Storage/Resources/Models/Textures
+
+# Legacy Noesis batch, for models the native converter rejects
+dotnet run --project NifToGltf -- --noesis --filter-ids 21000174 --output-dir Maple2Storage/Resources/GLTF
 ```
 
 `--clips` selects KFM sequence names or KF basenames when using `--animations`.
@@ -173,10 +224,13 @@ reference comparison is not proof of all client animation behavior.
 
 ## Remaining work before replacing Noesis
 
-See [STATUS.md](STATUS.md) for current evidence, remaining failures and the
-acceptance gaps. Reflection materials, billboards, face/material animation,
-TCB interpolation, ambiguous sequences, private equipment bones and visual
-verification must be resolved before switching the default.
+Native is already the default; see
+[Default mode and production state](#default-mode-and-production-state).
+Removing the Noesis path is a separate step. It needs every model the native
+converter still rejects to convert, the Noesis-served CDN files to be replaced,
+and the legacy viewer fallback to be retired. See [STATUS.md](STATUS.md) and the
+[migration plan](MODEL-MIGRATION-PLAN.md#7-remove-noesis-after-native-coverage-is-verified)
+for the remaining evidence and acceptance gaps.
 
 ## Verification commands
 

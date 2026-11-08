@@ -1,5 +1,7 @@
 # Unified item and NPC model migration
 
+Status update, 2026-11-08: the native package has been on the production CDN since an R2 upload on 2026-09-09, recorded in [R2-PUBLISH-PREP.md](R2-PUBLISH-PREP.md). Production is mixed: models with a native-manifest entry serve native output, while models without one, and the per-animation NPC files, still serve Noesis output through the legacy viewer fallback. Native conversion is now the converter's default; step 7.1 is done, steps 7.2 to 7.4 are not. Sampling evidence and what remains unknown are in [Default mode and production state](README.md#default-mode-and-production-state). The 2026-09-09 status below is kept as written, and its "nothing has been deployed" statement predates that upload.
+
 Status: all prepared local conversion batches finished on 2026-09-09. Cleanup, recovery, shared rendering, and the isolated canonical package are implemented. The package contains 13,249 native assets, with 575 unresolved model records. The plan is not complete: coverage and client-parity gates prevent native-only cutover and Noesis removal. Results and remaining gates are in [MODEL-MIGRATION-RUN.md](MODEL-MIGRATION-RUN.md). Commits, pushes to new handoff branches, and a PC handoff were subsequently authorized. Nothing has been deployed. No remote assets or database rows have been changed.
 
 ## Intended result

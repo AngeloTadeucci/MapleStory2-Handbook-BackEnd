@@ -1,5 +1,12 @@
 # Local migration run, 2026-09-09
 
+Update, 2026-11-08: this record predates the R2 upload later on 2026-09-09,
+recorded in [R2-PUBLISH-PREP.md](R2-PUBLISH-PREP.md). Native output is now live
+for models with a native-manifest entry, and native conversion is the
+converter's default. Noesis output is still served for the rest. See
+[Default mode and production state](README.md#default-mode-and-production-state).
+The statements below about deployment and the Noesis default are historical.
+
 Local implementation and all prepared conversion batches have finished. The final
 package contains 13,249 native assets: 9,329 retained wardrobe assets and 3,920
 additional conversions. There are 575 unresolved model records. The user subsequently authorized commits, pushes to new handoff branches, and
@@ -295,7 +302,8 @@ browser fixtures do not establish whole-inventory client parity. Two standalone
 face choices remain ambiguous. Existing catalog availability and omission
 metadata are retained, including 5,302 unavailable item/body entries; these
 entries are not interchangeable with the 575 unresolved source-model records. Full geometry, materials, animation, and hair/hat acceptance
-remain required before changing the native-only default or removing Noesis.
+remain required before removing Noesis. The default itself changed to native on
+2026-11-08, with Noesis kept behind `--noesis`.
 
 `canonical-all/` is the final isolated review package, including 97,952 retained
 legacy files. Its allowlist covers 114,034 files before the allowlist itself.

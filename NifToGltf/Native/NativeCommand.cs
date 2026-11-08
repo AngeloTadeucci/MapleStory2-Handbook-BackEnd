@@ -7,20 +7,22 @@ internal static class NativeCommand {
         try {
             if (args.Contains("--help")) {
                 Console.WriteLine("""
-                    Native NIF 30.2.0.3 converter
-                      --native --input model.nif --output model.gltf [--textures directory]
-                      --native --kfm model.kfm --clips all --output model.gltf [--textures directory]
-                      --native --input gear.nif --skeleton body.nif --output gear.gltf [--attach "bone name"]
-                      --native --input body.nif --animations directory --clips idle_a,walk_a --output body.gltf
-                      --native --batch --input model-directory --output empty-directory [--textures directory]
-                      --native --texture-batch --input dds-directory --output empty-directory
+                    Native NIF 30.2.0.3 converter, the default mode
+                      --input model.nif --output model.gltf [--textures directory]
+                      --kfm model.kfm --clips all --output model.gltf [--textures directory]
+                      --input gear.nif --skeleton body.nif --output gear.gltf [--attach "bone name"]
+                      --input body.nif --animations directory --clips idle_a,walk_a --output body.gltf
+                      --batch --input model-directory --output empty-directory [--textures directory]
+                      --texture-batch --input dds-directory --output empty-directory
 
                     --overwrite explicitly replaces one output. Batch always requires an empty destination.
                     CP attachments infer Bip01 Head. Other rigid slots require --attach.
                     Batch accepts --manifest plan.json for per-model clips, skeletons and exclusions.
                     Batch writes batch-report.json and portable native-manifest.json.
                     Nonlinear animation curves are sampled with adaptive error checks.
-                    Unsupported data fails explicitly. Noesis remains the default mode without --native.
+                    Unsupported data fails explicitly. --native is optional and kept for older commands.
+                    --noesis runs the legacy Noesis batch over Maple2Storage/Resources/Models instead,
+                    with its own options: --filter-ids, --output-dir, --dry-run, --post-process-existing, --repair-only.
                     """);
                 return 0;
             }
@@ -32,14 +34,14 @@ internal static class NativeCommand {
                 if (args[i] == "--texture-batch") { textureBatch = true; continue; }
                 if (args[i] == "--overwrite") { overwrite = true; continue; }
                 if (args[i] is not ("--input" or "--output" or "--textures" or "--skeleton" or "--attach" or "--animations" or "--clips" or "--kfm" or "--manifest") || i + 1 >= args.Length) {
-                    throw new ArgumentException("Usage: --native --input model.nif --output model.gltf [--textures directory] [--skeleton body.nif] [--attach bone]");
+                    throw new ArgumentException("Usage: --input model.nif --output model.gltf [--textures directory] [--skeleton body.nif] [--attach bone]. Run with --help for all modes.");
                 }
                 options.Add(args[i], args[++i]);
             }
             KfmDocument? kfm = options.TryGetValue("--kfm", out string? kfmPath) ? KfmDocument.Read(kfmPath) : null;
             if (kfm is not null && !options.ContainsKey("--input")) options["--input"] = kfm.Model;
             if (!options.TryGetValue("--input", out string? input) || !options.TryGetValue("--output", out string? output)) {
-                throw new ArgumentException("--native requires --input and --output.");
+                throw new ArgumentException("The native converter requires --input and --output. Run with --help for all modes, or add --noesis for the legacy batch.");
             }
             if (textureBatch) return TextureBatch.Run(input, output);
             if (batch) {

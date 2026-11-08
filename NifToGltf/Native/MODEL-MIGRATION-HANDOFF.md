@@ -1,5 +1,11 @@
 # Model migration handoff to the PC
 
+Update, 2026-11-08: this handoff predates the 2026-09-09 R2 upload recorded in
+[R2-PUBLISH-PREP.md](R2-PUBLISH-PREP.md). Native output is live for models with
+a native-manifest entry, and native conversion is now the converter's default.
+Noesis and the legacy viewer fallback are still required for the rest. See
+[Default mode and production state](README.md#default-mode-and-production-state).
+
 PC continuation: [MODEL-MIGRATION-PC-RUN.md](MODEL-MIGRATION-PC-RUN.md) records
 the local input audit, WSL move, fresh wardrobe retries, and verification.
 The original VM checkpoint below remains the transfer baseline.
